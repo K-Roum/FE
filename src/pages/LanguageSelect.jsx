@@ -23,20 +23,20 @@ const LanguageSelect = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-white px-4">
-      <div className="bg-white rounded-2xl shadow-2xl w-[1000px] h-[600px] flex items-center justify-center">
-        <div className="bg-gray-200 rounded-xl shadow-md p-6 w-full max-w-xs">
-          <p className="text-lg font-semibold text-center mb-4">
-            {t('currentLanguage')} : {LANGUAGES[currentLang].label}
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="bg-white rounded-2xl shadow-2xl w-[1100px] h-[1000px] flex items-center justify-center">
+        <div className="bg-gray-200 rounded-xl shadow-md p-8 w-full max-w-[400px]">
+          <p className="text-2xl font-medium text-center mb-6">
+            현재 언어 : 한국어
           </p>
-          <hr className="mb-4 border-gray-400" />
-          <ul className="space-y-3 text-center text-lg">
+          <hr className="mb-6 border-gray-300" />
+          <ul className="space-y-5 text-center text-lg">
             {Object.entries(LANGUAGES).map(([code, { label, name }]) =>
               code !== currentLang ? (
                 <li
                   key={code}
                   onClick={() => changeLang(code)}
-                  className="cursor-pointer hover:text-blue-600 transition"
+                  className="cursor-pointer hover:text-blue-600 transition py-1"
                 >
                   {`${label} (${name})`}
                 </li>
