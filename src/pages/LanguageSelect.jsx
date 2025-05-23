@@ -21,7 +21,7 @@ const LanguageSelect = () => {
     localStorage.setItem('lang', code);
     window.location.href = '/home';
   };
-
+//UI 개선
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white rounded-2xl shadow-2xl w-[1100px] h-[1000px] flex items-center justify-center">
