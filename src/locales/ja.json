@@ -12,5 +12,51 @@
   "amusementpark": "遊園地",
   "cherryblossom": "桜",
   "movie": "映画",
-  "searchPrompt": "検索語を入力してください。"
-}
+  "searchPrompt": "検索語を入力してください。",
+
+  "loginPage": {
+    "title": "ログイン",
+    "idPlaceholder": "ユーザーID",
+    "pwPlaceholder": "パスワード",
+    "rememberMe": "ログイン状態を保持する",
+    "findAccount": "ID/パスワードをお忘れですか？",
+    "loginButton": "ログイン",
+    "signupButton": "新規登録",
+    "errorEmpty": "IDとパスワードを入力してください。",
+    "errorInvalid": "ログインに失敗しました。IDまたはパスワードを確認してください。",
+    "success": "{{nickname}}さん、ようこそ！"
+  },
+
+  "findAccount": {
+    "title": "ID・パスワードの検索",
+    "idTitle": "IDを探す",
+    "idDesc": "メール認証でIDを見つけましょう。",
+    "idButton": "IDを探す",
+    "pwTitle": "パスワードのリセット",
+    "pwDesc": "IDとメールアドレスを入力してパスワードをリセットします。",
+    "pwButton": "パスワードをリセット"
+  },
+
+  "findId": {
+    "title": "IDを探す",
+    "emailPlaceholder": "メールアドレスを入力してください。",
+    "findButton": "IDを探す",
+    "success": "入力したメールアドレスにIDを送信しました。",
+    "goLogin": "ログインページへ",
+    "errorEmpty": "メールアドレスを入力してください。",
+    "errorNotFound": "そのメールアドレスで登録されたIDは見つかりません。",
+    "errorServer": "サーバーエラーが発生しました。再度お試しください。"
+  },
+
+  "resetPassword": {
+    "title": "パスワード再設定",
+    "idPlaceholder": "IDを入力してください。",
+    "emailPlaceholder": "メールアドレスを入力してください。",
+    "resetButton": "パスワードを再設定する",
+    "success": "仮パスワードをメールに送信しました。ログイン後、必ずパスワードを変更してください。",
+    "goLogin": "ログインページへ",
+    "errorEmpty": "IDとメールアドレスを両方入力してください。",
+    "errorNotFound": "一致する情報が見つかりませんでした。",
+    "errorServer": "サーバーエラーが発生しました。もう一度お試しください。"
+  }
+  }

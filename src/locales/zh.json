@@ -12,5 +12,51 @@
     "amusementpark": "游乐园",
     "cherryblossom": "樱花",
     "movie": "电影",
-   "searchPrompt": "请输入搜索词"
+    "searchPrompt": "请输入搜索词",
+
+    "loginPage": {
+    "title": "登录",
+    "idPlaceholder": "用户名",
+    "pwPlaceholder": "密码",
+    "rememberMe": "保持登录状态",
+    "findAccount": "找回用户名/密码",
+    "loginButton": "登录",
+    "signupButton": "注册",
+    "errorEmpty": "请输入用户名和密码。",
+    "errorInvalid": "登录失败。请检查您的用户名和密码。",
+    "success": "欢迎，{{nickname}}！"
+    },
+
+    "findAccount": {
+        "title": "找回账号/重置密码",
+        "idTitle": "找回账号",
+        "idDesc": "通过邮箱验证找回您的账号。",
+        "idButton": "找回账号",
+        "pwTitle": "重置密码",
+        "pwDesc": "输入账号和邮箱以重置密码。",
+        "pwButton": "重置密码"
+    },
+
+    "findId": {
+    "title": "找回账号",
+    "emailPlaceholder": "请输入您的邮箱地址。",
+    "findButton": "找回账号",
+    "success": "账号已发送至您输入的邮箱。",
+    "goLogin": "前往登录",
+    "errorEmpty": "请输入邮箱地址。",
+    "errorNotFound": "该邮箱没有注册的账号。",
+    "errorServer": "服务器错误，请稍后再试。"
+    },
+
+    "resetPassword": {
+    "title": "重置密码",
+    "idPlaceholder": "请输入您的账号。",
+    "emailPlaceholder": "请输入您的邮箱。",
+    "resetButton": "重置密码",
+    "success": "临时密码已发送至您的邮箱。登录后请尽快修改密码。",
+    "goLogin": "前往登录",
+    "errorEmpty": "请同时输入账号和邮箱。",
+    "errorNotFound": "未找到匹配的信息。",
+    "errorServer": "服务器错误，请稍后重试。"
+    }
 }
