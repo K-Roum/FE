@@ -15,7 +15,7 @@ const SearchSection = () => {
       return;
     }
 
-    const currentLang = i18n.language.toUpperCase(); // ex) "ko" → "KO"
+    const currentLang = i18n.language.toLowerCase(); // ex) "ko" → "KO"
 
     try {
       const response = await fetch('http://localhost:8080/places/search', {
