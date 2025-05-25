@@ -1,23 +1,39 @@
 import { useLocation } from 'react-router-dom';
-import SearchResultCard from '../../components/ui/SearchResultCard';
-
+import { useState } from 'react'; 
+import SearchResultCard from '../../components/ui/searchPage/SearchResultCard';
+import DetailModal from '../../components/ui/searchPage/DetailModal';
 const SearchPage = () => {
   const location = useLocation();
   const { query, results } = location.state || {};
   
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
+
+  const handleCardClick = (item) => {
+    setSelectedItem(item);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedItem(null);
+  };
+
   return (
     <div className="flex h-screen">
       <div className="w-1/2 bg-gray-100">
         {/* 왼쪽 패널 내용 */}
       </div>
-
+      
       <div className="w-1/2 p-8 overflow-y-auto">
-        {/* <h1 className="text-2xl font-bold mb-4">"{query}"에 대한 검색 결과</h1> */}
         {results && results.length > 0 ? (
           <ul className="space-y-6">
             {results.map((item, index) => (
               <li key={index}>
-                <SearchResultCard item={item} />
+                <SearchResultCard 
+                  item={item} 
+                  onCardClick={handleCardClick}
+                />
               </li>
             ))}
           </ul>
@@ -27,6 +43,11 @@ const SearchPage = () => {
           </div>
         )}
       </div>
+      <DetailModal
+        isOpen={isModalOpen}
+        item={selectedItem}
+        onClose={handleCloseModal}
+      />
     </div>
   );
 };
