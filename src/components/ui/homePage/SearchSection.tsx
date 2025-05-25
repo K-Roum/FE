@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { SearchResultModel } from '../../../model/SearchResultModel'; 
 
-const SearchSection = () => {
+const SearchSection: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
 
-  const handleSearch = async (e) => {
+  const handleSearch = async (e: FormEvent) => {
     e.preventDefault();
 
     if (!searchQuery.trim()) {
@@ -15,7 +16,7 @@ const SearchSection = () => {
       return;
     }
 
-    const currentLang = i18n.language.toLowerCase(); // ex) "ko" → "KO"
+    const currentLang = i18n.language.toLowerCase(); 
 
     try {
       const response = await fetch('http://localhost:8080/places/search', {
@@ -34,7 +35,7 @@ const SearchSection = () => {
         throw new Error(`서버 오류: ${response.status}`);
       }
 
-      const data = await response.json();
+      const data: SearchResultModel[] = await response.json(); 
 
       console.log('Response:', response);
       console.log('Data:', data);
@@ -54,7 +55,20 @@ const SearchSection = () => {
         <form onSubmit={handleSearch} className="w-full">
           <div className="flex items-center h-[80px] w-full bg-white rounded-[40px] shadow-[0px_4px_30px_rgba(0,0,0,0.25)]">
             <div className="flex items-center pl-6">
-              {/* 돋보기 아이콘 여기에 넣기 */}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#919191"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
             </div>
             <input
               type="text"

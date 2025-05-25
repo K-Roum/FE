@@ -48,7 +48,7 @@ const DetailModal = ({ isOpen, item, onClose }) => {
         {/* 본문 */}
         <div className="p-6">
           
-          {/* 제목과 찜 버튼 */}
+          {/* 제목&찜 */}
           <div className="flex justify-between items-start mb-4">
             <h1 className="text-2xl font-bold text-gray-900 flex-1">
               {item.placeName || "제목 없음"}
@@ -93,7 +93,7 @@ const DetailModal = ({ isOpen, item, onClose }) => {
           <div className="mb-6">
             <h3 className="font-semibold text-lg mb-3 text-gray-900">상세 정보</h3>
             <p className="text-gray-600 leading-relaxed">
-              {item.description || "이곳은 아름다운 자연경관과 함께 다양한 문화 체험을 할 수 있는 특별한 장소입니다. 많은 방문객들이 이곳에서 소중한 추억을 만들어가고 있습니다."}
+              {item.description || "설명 정보가 없습니다."}
             </p>
           </div>
 
