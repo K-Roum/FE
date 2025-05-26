@@ -1,17 +1,63 @@
 {
-    "language.select": "Choisir la langue",
-    "login": "Connexion",
-    "signup": "Créer un compte",
-    "search": "Recherche",
-    "currentLanguage": "Langue actuelle",
-    "close": "Fermer",
-    "tteokbokki": "Tteokbokki",
-    "kpop": "K-pop",
-    "bts": "BTS",
-    "bibimbap": "Bibimbap",
-    "amusementpark": "Parc d'attractions",
-    "cherryblossom": "Fleur de cerisier",
-    "movie": "Film",
-    "searchPrompt": "Veuillez entrer un mot-clé de recherche."
+  "language.select": "Choisir la langue",
+  "login": "Connexion",
+  "signup": "Créer un compte",
+  "search": "Recherche",
+  "currentLanguage": "Langue actuelle",
+  "close": "Fermer",
+  "tteokbokki": "Tteokbokki",
+  "kpop": "K-pop",
+  "bts": "BTS",
+  "bibimbap": "Bibimbap",
+  "amusementpark": "Parc d'attractions",
+  "cherryblossom": "Fleur de cerisier",
+  "movie": "Film",
+  "searchPrompt": "Veuillez entrer un mot-clé de recherche.",
+
+  "loginPage": {
+    "title": "Connexion",
+    "idPlaceholder": "Identifiant",
+    "pwPlaceholder": "Mot de passe",
+    "rememberMe": "Rester connecté",
+    "findAccount": "Identifiant/Mot de passe oublié",
+    "loginButton": "Se connecter",
+    "signupButton": "Créer un compte",
+    "errorEmpty": "Veuillez saisir votre identifiant et votre mot de passe.",
+    "errorInvalid": "Échec de la connexion. Vérifiez vos identifiants.",
+    "success": "Bienvenue, {{nickname}} !"
+  },
+
+  "findAccount": {
+    "title": "Trouver un identifiant / Réinitialiser le mot de passe",
+    "idTitle": "Trouver votre identifiant",
+    "idDesc": "Trouvez votre identifiant via la vérification par e-mail.",
+    "idButton": "Trouver l'identifiant",
+    "pwTitle": "Réinitialiser le mot de passe",
+    "pwDesc": "Entrez votre identifiant et votre e-mail pour réinitialiser le mot de passe.",
+    "pwButton": "Réinitialiser le mot de passe"
+  },
+
+  "findId": {
+    "title": "Trouver un identifiant",
+    "emailPlaceholder": "Entrez votre adresse e-mail.",
+    "findButton": "Trouver l'identifiant",
+    "success": "Votre identifiant a été envoyé à l'adresse e-mail saisie.",
+    "goLogin": "Aller à la connexion",
+    "errorEmpty": "Veuillez entrer votre adresse e-mail.",
+    "errorNotFound": "Aucun identifiant n’est associé à cette adresse e-mail.",
+    "errorServer": "Une erreur serveur s'est produite. Veuillez réessayer."
+  },
+
+  "resetPassword": {
+    "title": "Réinitialiser le mot de passe",
+    "idPlaceholder": "Entrez votre identifiant.",
+    "emailPlaceholder": "Entrez votre adresse e-mail.",
+    "resetButton": "Réinitialiser le mot de passe",
+    "success": "Un mot de passe temporaire a été envoyé à votre e-mail. Veuillez le modifier après connexion.",
+    "goLogin": "Aller à la connexion",
+    "errorEmpty": "Veuillez saisir à la fois l'identifiant et l'e-mail.",
+    "errorNotFound": "Aucune information correspondante trouvée.",
+    "errorServer": "Une erreur serveur s'est produite. Veuillez réessayer."
   }
+}
 

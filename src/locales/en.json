@@ -1,17 +1,63 @@
 {
-    "language.select": "Select Language",
-    "login": "Login",
-    "signup": "Sign Up",
-    "search": "Search",
-    "currentLanguage": "Current Language",
-    "close": "Close",
-    "searchPrompt": "Please enter a search term.",
-    "tteokbokki": "Tteokbokki",
-    "kpop": "K-pop",
-    "bts": "BTS",
-    "bibimbap": "Bibimbap",
-    "amusementpark": "amusementpark",
-    "cherryblossom": "cherryblossom",
-    "movie": "movie"
+  "language.select": "Select Language",
+  "login": "Login",
+  "signup": "Sign Up",
+  "search": "Search",
+  "currentLanguage": "Current Language",
+  "close": "Close",
+  "searchPrompt": "Please enter a search term.",
+  "tteokbokki": "Tteokbokki",
+  "kpop": "K-pop",
+  "bts": "BTS",
+  "bibimbap": "Bibimbap",
+  "amusementpark": "amusementpark",
+  "cherryblossom": "cherryblossom",
+  "movie": "movie",
+
+  "loginPage": {
+    "title": "Login",
+    "idPlaceholder": "Username",
+    "pwPlaceholder": "Password",
+    "rememberMe": "Keep me logged in",
+    "findAccount": "Forgot ID or Password?",
+    "loginButton": "Log In",
+    "signupButton": "Sign Up",
+    "errorEmpty": "Please enter both username and password.",
+    "errorInvalid": "Login failed. Please check your credentials.",
+    "success": "Welcome, {{nickname}}!"
+  },
+
+  "findAccount": {
+    "title": "Find ID / Reset Password",
+    "idTitle": "Find Your ID",
+    "idDesc": "Find your ID via email verification.",
+    "idButton": "Find ID",
+    "pwTitle": "Reset Password",
+    "pwDesc": "Enter your ID and email to reset your password.",
+    "pwButton": "Reset Password"
+  },
+
+  "findId": {
+    "title": "Find ID",
+    "emailPlaceholder": "Enter your email.",
+    "findButton": "Find ID",
+    "success": "Your ID has been sent to the entered email.",
+    "goLogin": "Go to Login",
+    "errorEmpty": "Please enter your email.",
+    "errorNotFound": "No ID is registered with that email.",
+    "errorServer": "A server error occurred. Please try again."
+  },
+
+  "resetPassword": {
+    "title": "Reset Password",
+    "idPlaceholder": "Enter your ID.",
+    "emailPlaceholder": "Enter your email.",
+    "resetButton": "Reset Password",
+    "success": "A temporary password has been sent to your email. Please change it after logging in.",
+    "goLogin": "Go to Login",
+    "errorEmpty": "Please enter both ID and email.",
+    "errorNotFound": "No matching information found.",
+    "errorServer": "A server error occurred. Please try again."
   }
+}
   

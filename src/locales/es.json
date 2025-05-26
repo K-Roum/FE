@@ -1,17 +1,63 @@
 {
-    "language.select": "Seleccionar idioma",
-    "login": "Iniciar sesión",
-    "signup": "Registrarse",
-    "search": "Buscar",
-    "currentLanguage": "Idioma actual",
-    "close": "Cerrar",
-    "tteokbokki": "Tteokbokki",
-    "kpop": "K-pop",
-    "bts": "BTS",
-    "bibimbap": "Bibimbap",
-    "amusementpark": "Parque de atracciones",
-    "cherryblossom": "Flor de cerezo",
-    "movie": "Película",
-    "searchPrompt": "Por favor, introduzca una palabra clave."
+  "language.select": "Seleccionar idioma",
+  "login": "Iniciar sesión",
+  "signup": "Registrarse",
+  "search": "Buscar",
+  "currentLanguage": "Idioma actual",
+  "close": "Cerrar",
+  "tteokbokki": "Tteokbokki",
+  "kpop": "K-pop",
+  "bts": "BTS",
+  "bibimbap": "Bibimbap",
+  "amusementpark": "Parque de atracciones",
+  "cherryblossom": "Flor de cerezo",
+  "movie": "Película",
+  "searchPrompt": "Por favor, introduzca una palabra clave.",
+
+  "loginPage": {
+    "title": "Iniciar sesión",
+    "idPlaceholder": "Usuario",
+    "pwPlaceholder": "Contraseña",
+    "rememberMe": "Mantener sesión iniciada",
+    "findAccount": "¿Olvidaste tu usuario o contraseña?",
+    "loginButton": "Entrar",
+    "signupButton": "Registrarse",
+    "errorEmpty": "Por favor, introduce usuario y contraseña.",
+    "errorInvalid": "Error al iniciar sesión. Verifica tus credenciales.",
+    "success": "¡Bienvenido, {{nickname}}!"
+  },
+
+  "findAccount": {
+    "title": "Buscar ID / Restablecer contraseña",
+    "idTitle": "Buscar tu ID",
+    "idDesc": "Encuentra tu ID mediante verificación por correo electrónico.",
+    "idButton": "Buscar ID",
+    "pwTitle": "Restablecer contraseña",
+    "pwDesc": "Ingresa tu ID y correo electrónico para restablecer tu contraseña.",
+    "pwButton": "Restablecer contraseña"
+  },
+
+  "findId": {
+    "title": "Buscar ID",
+    "emailPlaceholder": "Introduce tu correo electrónico.",
+    "findButton": "Buscar ID",
+    "success": "Tu ID ha sido enviada al correo electrónico proporcionado.",
+    "goLogin": "Ir a iniciar sesión",
+    "errorEmpty": "Por favor, introduce tu correo electrónico.",
+    "errorNotFound": "No se encontró ninguna ID asociada a ese correo.",
+    "errorServer": "Se produjo un error en el servidor. Inténtalo de nuevo."
+  },
+
+  "resetPassword": {
+    "title": "Restablecer la contraseña",
+    "idPlaceholder": "Introduce tu ID.",
+    "emailPlaceholder": "Introduce tu correo electrónico.",
+    "resetButton": "Restablecer contraseña",
+    "success": "Se ha enviado una contraseña temporal a tu correo electrónico. Cámbiala después de iniciar sesión.",
+    "goLogin": "Ir a iniciar sesión",
+    "errorEmpty": "Introduce tanto el ID como el correo electrónico.",
+    "errorNotFound": "No se encontró información coincidente.",
+    "errorServer": "Ocurrió un error en el servidor. Inténtalo de nuevo."
   }
+}
 

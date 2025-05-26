@@ -1,16 +1,62 @@
 {
-    "language.select": "Sprache auswählen",
-    "login": "Anmelden",
-    "signup": "Registrieren",
-    "search": "Suche",
-    "currentLanguage": "Aktuelle Sprache",
-    "close": "Schließen",
-    "tteokbokki": "Tteokbokki",
-    "kpop": "K-Pop",
-    "bts": "BTS",
-    "bibimbap": "Bibimbap",
-    "amusementpark": "Freizeitpark",
-    "cherryblossom": "Kirschblüte",
-    "movie": "Film",
-    "searchPrompt": "Bitte geben Sie ein Suchwort ein."
+  "language.select": "Sprache auswählen",
+  "login": "Anmelden",
+  "signup": "Registrieren",
+  "search": "Suche",
+  "currentLanguage": "Aktuelle Sprache",
+  "close": "Schließen",
+  "tteokbokki": "Tteokbokki",
+  "kpop": "K-Pop",
+  "bts": "BTS",
+  "bibimbap": "Bibimbap",
+  "amusementpark": "Freizeitpark",
+  "cherryblossom": "Kirschblüte",
+  "movie": "Film",
+  "searchPrompt": "Bitte geben Sie ein Suchwort ein.",
+
+  "loginPage": {
+    "title": "Anmeldung",
+    "idPlaceholder": "Benutzername",
+    "pwPlaceholder": "Passwort",
+    "rememberMe": "Angemeldet bleiben",
+    "findAccount": "Benutzername/Passwort vergessen?",
+    "loginButton": "Einloggen",
+    "signupButton": "Registrieren",
+    "errorEmpty": "Bitte geben Sie Benutzername und Passwort ein.",
+    "errorInvalid": "Anmeldung fehlgeschlagen. Bitte überprüfen Sie Ihre Angaben.",
+    "success": "Willkommen, {{nickname}}!"
+  },
+
+  "findAccount": {
+    "title": "Benutzer-ID finden / Passwort zurücksetzen",
+    "idTitle": "Benutzer-ID finden",
+    "idDesc": "Finden Sie Ihre Benutzer-ID per E-Mail-Verifizierung.",
+    "idButton": "ID finden",
+    "pwTitle": "Passwort zurücksetzen",
+    "pwDesc": "Geben Sie Ihre ID und E-Mail-Adresse ein, um Ihr Passwort zurückzusetzen.",
+    "pwButton": "Passwort zurücksetzen"
+  },
+
+  "findId": {
+    "title": "Benutzer-ID finden",
+    "emailPlaceholder": "Bitte geben Sie Ihre E-Mail-Adresse ein.",
+    "findButton": "ID finden",
+    "success": "Ihre ID wurde an die eingegebene E-Mail-Adresse gesendet.",
+    "goLogin": "Zum Login",
+    "errorEmpty": "Bitte geben Sie Ihre E-Mail-Adresse ein.",
+    "errorNotFound": "Keine ID unter dieser E-Mail-Adresse gefunden.",
+    "errorServer": "Ein Serverfehler ist aufgetreten. Bitte versuchen Sie es erneut."
+  },
+
+  "resetPassword": {
+    "title": "Passwort zurücksetzen",
+    "idPlaceholder": "Geben Sie Ihre Benutzer-ID ein.",
+    "emailPlaceholder": "Geben Sie Ihre E-Mail-Adresse ein.",
+    "resetButton": "Passwort zurücksetzen",
+    "success": "Ein temporäres Passwort wurde an Ihre E-Mail gesendet. Bitte ändern Sie es nach dem Login.",
+    "goLogin": "Zum Login",
+    "errorEmpty": "Bitte geben Sie sowohl ID als auch E-Mail ein.",
+    "errorNotFound": "Keine übereinstimmenden Informationen gefunden.",
+    "errorServer": "Ein Serverfehler ist aufgetreten. Bitte versuchen Sie es erneut."
   }
+}
