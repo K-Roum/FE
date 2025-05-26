@@ -6,6 +6,13 @@
   "currentLanguage": "Current Language",
   "close": "Close",
   "searchPrompt": "Please enter a search term.",
+  "tteokbokki": "Tteokbokki",
+  "kpop": "K-pop",
+  "bts": "BTS",
+  "bibimbap": "Bibimbap",
+  "amusementpark": "amusementpark",
+  "cherryblossom": "cherryblossom",
+  "movie": "movie",
 
   "loginPage": {
     "title": "Login",

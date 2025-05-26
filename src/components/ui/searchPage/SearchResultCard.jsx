@@ -1,12 +1,22 @@
 import React, { useState } from "react";
 
-const SearchResultCard = ({ item }) => {
+const SearchResultCard = ({ item, onCardClick }) => {
   const [isBookmarked, setisBookmarked] = useState(false);
 
-  console.log("Card item:", item);
+  const handleCardClick = () => {
+    onCardClick(item);
+  };
+
+  const handleBookmarkClick = (e) => {
+    e.stopPropagation(); // 부모 클릭 방지
+    setisBookmarked(!isBookmarked);
+  };
 
   return (
-    <div className="bg-white border rounded-lg shadow-md overflow-hidden h-40">
+    <div
+      className="bg-white border rounded-lg shadow-md overflow-hidden h-40 cursor-pointer"
+      onClick={handleCardClick}
+    >
       <div className="flex flex-col md:flex-row h-full">
         {/* 이미지 영역 */}
         <div className="w-full md:w-2/5 h-40 md:h-full">
@@ -34,7 +44,7 @@ const SearchResultCard = ({ item }) => {
               {/* 찜 버튼 */}
               <div className="flex space-x-2 ml-2">
                 <button
-                  onClick={() => setisBookmarked(!isBookmarked)}
+                  onClick={handleBookmarkClick}
                   className={`p-2 rounded-full hover:bg-gray-100 transition-colors 
                     ${isBookmarked ? "text-red-500" : "text-gray-400"} 
                     focus:outline-none focus:ring-0`}
