@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { resetPasswordRequest } from '../../components/ui/loginPage/resetPasswordApi';
+import { resetPasswordRequest } from '../../components/ui/loginPage/resetPasswordApi.ts';
 
 export default function ResetPasswordPage() {
   const { t } = useTranslation();
@@ -57,7 +57,7 @@ export default function ResetPasswordPage() {
                 placeholder={t('resetPassword.idPlaceholder')}
                 value={loginId}
                 onChange={(e) => setLoginId(e.target.value)}
-                className="w-full px-4 py-3 border-2 border-red-400 rounded-md mb-4 placeholder-gray-400 focus:outline-none"
+                className="w-full px-4 py-3 border-2 border-gray-400 rounded-md mb-4 placeholder-gray-400 focus:outline-none"
             />
             
             <input
@@ -65,10 +65,10 @@ export default function ResetPasswordPage() {
                 placeholder={t('resetPassword.emailPlaceholder')}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-3 border-2 border-red-400 rounded-md mb-4 placeholder-gray-400 focus:outline-none"
+                className="w-full px-4 py-3 border-2 border-gray-400 rounded-md mb-4 placeholder-gray-400 focus:outline-none"
             />
 
-            <button type="submit" className="w-full py-3 bg-red-500 text-white font-semibold rounded-md">
+            <button type="submit" className="w-full py-3 bg-gray-500 text-white font-semibold rounded-md">
                 {t('resetPassword.resetButton')}
             </button>
         </form>

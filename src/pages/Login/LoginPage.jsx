@@ -1,4 +1,4 @@
-import { loginUser } from '../../components/ui/loginPage/loginApi';
+import { loginUser } from '../../components/ui/loginPage/loginApi.ts';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import React, { useState, useEffect } from 'react';
@@ -79,14 +79,14 @@ export default function LoginPage() {
               placeholder={t('loginPage.idPlaceholder')}
               value={loginId}
               onChange={(e) => setLoginId(e.target.value)}
-              className="w-full mb-6 px-5 py-4 text-lg border-2 border-red-400 rounded-md placeholder-gray-400 focus:outline-none"
+              className="w-full mb-6 px-5 py-4 text-lg border-2 border-gray-400 rounded-md placeholder-gray-400 focus:outline-none"
             />
             <input
               type="password"
               placeholder={t('loginPage.pwPlaceholder')}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full mb-4 px-5 py-4 text-lg border-2 border-red-400 rounded-md placeholder-gray-400 focus:outline-none"
+              className="w-full mb-4 px-5 py-4 text-lg border-2 border-gray-400 rounded-md placeholder-gray-400 focus:outline-none"
             />
 
             {/* 상태 유지 & 찾기 */}
@@ -116,10 +116,10 @@ export default function LoginPage() {
               type="submit"
               className="w-full py-4 mb-6 text-white font-bold rounded-md text-xl"
               style={{
-                background: 'linear-gradient(to right, #D60000, #0038A8)',
+                background: 'linear-gradient(to right, #D60000, #000000, #0038A8)',
               }}
             >
-              {t('loginPage.loginButton')}
+             {t('loginPage.loginButton')}
             </button>
 
             {/* 에러 메시지 시각적 표시 */}

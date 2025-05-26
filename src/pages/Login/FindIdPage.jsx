@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { findUserIdByEmail } from '../../components/ui/loginPage/findIdApi';
+import { findUserIdByEmail } from '../../components/ui/loginPage/findIdApi.ts';
 import { useNavigate } from 'react-router-dom';
 
 export default function FindIdPage() {
@@ -55,10 +55,10 @@ export default function FindIdPage() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder={t('findId.emailPlaceholder')}
-                    className="w-full px-4 py-3 border-2 border-blue-400 rounded-md mb-4 placeholder-gray-400 focus:outline-none" 
+                    className="w-full px-4 py-3 border-2 border-gray-400 rounded-md mb-4 placeholder-gray-400 focus:outline-none" 
                 />
 
-                <button type="submit" className="w-full py-3 bg-blue-500 text-white rounded-md font-semibold">
+                <button type="submit" className="w-full py-3 bg-gray-500 text-white rounded-md font-semibold">
                     {t('findId.findButton')}
                 </button>
             </form>

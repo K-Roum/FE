@@ -30,7 +30,7 @@ export default function FindAccountPage() {
               <a href="/find-id">
                 <button
                     onClick={() => navigate('/find-id')}
-                    className="w-full py-3 bg-blue-500 text-white rounded-md font-semibold"
+                    className="w-full py-3 bg-gray-500 text-white rounded-md font-semibold"
                     >
                     {t('findAccount.idButton')}
                 </button>
@@ -42,7 +42,7 @@ export default function FindAccountPage() {
               <h3 className="text-xl font-semibold mb-2">{t('findAccount.pwTitle')}</h3>
               <p className="text-sm text-gray-600 mb-4">{t('findAccount.pwDesc')}</p>
               <a href="/reset-password">
-                <button className="w-full py-3 bg-red-500 text-white rounded-md font-semibold">
+                <button className="w-full py-3 bg-gray-500 text-white rounded-md font-semibold">
                   {t('findAccount.pwButton')}
                 </button>
               </a>
