@@ -1,11 +1,24 @@
 import React, { useState } from 'react';
+import { PlaceDetailModel } from '../../../model/PlaceDetailModel';
+import { SearchResultModel } from '../../../model/SearchResultModel';
 
-const DetailModal = ({ isOpen, item, onClose }) => {
+type DetailModalProps = {
+  isOpen: boolean;
+  item: {
+    detail: PlaceDetailModel;
+    summary: SearchResultModel;
+  } | null;
+  onClose: () => void;
+};
+
+const DetailModal = ({ isOpen, item, onClose }: DetailModalProps) => {
   const [isBookmarked, setIsBookmarked] = useState(false);
 
   if (!isOpen || !item) return null;
 
-  const handleOverlayClick = (e) => {
+  const { detail, summary } = item;
+
+  const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
       onClose();
     }
@@ -24,10 +37,10 @@ const DetailModal = ({ isOpen, item, onClose }) => {
         
         {/* 헤더 이미지 */}
         <div className="relative h-64 bg-gradient-to-br from-blue-400 to-purple-600 rounded-t-xl">
-          {item.firstImageUrl ? (
+          {summary.firstImageUrl ? (
             <img
-              src={item.firstImageUrl}
-              alt={item.placeName}
+              src={summary.firstImageUrl}
+              alt={summary.placeName}
               className="w-full h-full object-cover rounded-t-xl"
             />
           ) : (
@@ -51,7 +64,7 @@ const DetailModal = ({ isOpen, item, onClose }) => {
           {/* 제목&찜 */}
           <div className="flex justify-between items-start mb-4">
             <h1 className="text-2xl font-bold text-gray-900 flex-1">
-              {item.placeName || "제목 없음"}
+              {summary.placeName || "제목 없음"}
             </h1>
             <button
               onClick={handleBookmarkClick}
@@ -84,7 +97,7 @@ const DetailModal = ({ isOpen, item, onClose }) => {
               </svg>
               <div>
                 <span className="font-medium text-gray-700">주소</span>
-                <p className="text-gray-600 text-sm mt-1">{item.address || "주소 정보 없음"}</p>
+                <p className="text-gray-600 text-sm mt-1">{summary.address || "주소 정보 없음"}</p>
               </div>
             </div>
           </div>
@@ -93,7 +106,7 @@ const DetailModal = ({ isOpen, item, onClose }) => {
           <div className="mb-6">
             <h3 className="font-semibold text-lg mb-3 text-gray-900">상세 정보</h3>
             <p className="text-gray-600 leading-relaxed">
-              {item.description || "설명 정보가 없습니다."}
+              {summary.description || "설명 정보가 없습니다."}
             </p>
           </div>
 
