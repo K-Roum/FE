@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import SearchResultCard from '../../components/ui/searchPage/SearchResultCard';
-import DetailModal from '../../components/ui/searchPage/DetailModal';
-import { SearchResultModel } from '../../model/SearchResultModel';
-import { PlaceDetailModel } from '../../model/PlaceDetailModel.ts';
-import i18n from '../../i18n';
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import SearchResultCard from "../../components/ui/searchPage/SearchResultCard";
+import DetailModal from "../../components/ui/searchPage/DetailModal.tsx";
+import { SearchResultModel } from "../../model/SearchResultModel";
+import { PlaceDetailModel } from "../../model/PlaceDetailModel.ts";
+import i18n from "../../i18n";
 
 // Declare kakao property on the Window interface
 declare global {
@@ -13,34 +13,37 @@ declare global {
   }
 }
 
+// selectedItem 타입 정의 (detail + summary)
+type SelectedItemType = {
+  detail: PlaceDetailModel;
+  summary: SearchResultModel;
+} | null;
+
 const SearchPage = () => {
   const location = useLocation();
   const { results }: { results: SearchResultModel[] } = location.state || {};
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedItem, setSelectedItem] = useState<PlaceDetailModel | null>(null);
+  const [selectedItem, setSelectedItem] = useState<SelectedItemType>(null);
 
   useEffect(() => {
-    console.log("useEffect 실행됨");
-
     const initMap = () => {
       const container = document.getElementById("map");
-
       const options = {
         center: new window.kakao.maps.LatLng(36, 127.5),
         level: 13,
       };
-
       const map = new window.kakao.maps.Map(container, options);
 
       if (results && results.length > 0) {
         results.forEach((item) => {
-          const markerPosition = new window.kakao.maps.LatLng(item.latitude, item.longitude);
-
+          const markerPosition = new window.kakao.maps.LatLng(
+            item.latitude,
+            item.longitude
+          );
           const marker = new window.kakao.maps.Marker({
             position: markerPosition,
           });
-
           marker.setMap(map);
         });
       }
@@ -52,7 +55,8 @@ const SearchPage = () => {
     }
 
     const script = document.createElement("script");
-    script.src = "//dapi.kakao.com/v2/maps/sdk.js?appkey=c3600ddd05b590daebc467a042e53873&autoload=false";
+    script.src =
+      "//dapi.kakao.com/v2/maps/sdk.js?appkey=c3600ddd05b590daebc467a042e53873&autoload=false";
     script.async = true;
 
     script.onload = () => {
@@ -72,20 +76,27 @@ const SearchPage = () => {
     const currentLang = i18n.language.toLowerCase();
 
     try {
-      const response = await fetch(`http://localhost:8080/places/${item.placeId}/with-everything?languageCode=${currentLang}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          accept: '*/*',
-        },
-      });
-
+      const response = await fetch(
+        `http://localhost:8080/places/${item.placeId}/with-everything?languageCode=${currentLang}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            accept: "*/*",
+          },
+        }
+      );
+      const parsedResponse: PlaceDetailModel = await response.json();
       if (!response.ok) {
         throw new Error(`HTTP 오류, 상태 코드: ${response.status}`);
       }
 
-      const parsedResponse: PlaceDetailModel = await response.json();
-      setSelectedItem(parsedResponse);
+      // detail과 summary를 객체로 묶어서 상태에 저장
+      setSelectedItem({
+        detail: parsedResponse,
+        summary: item,
+      });
+
       setIsModalOpen(true);
     } catch (error) {
       console.error("장소 상세 정보 요청 실패:", error);
@@ -101,7 +112,7 @@ const SearchPage = () => {
     <div className="flex h-screen">
       {/* 지도 영역 */}
       <div className="w-1/2 bg-gray-100">
-        <div id="map" style={{ width: '100%', height: '100%' }}></div>
+        <div id="map" style={{ width: "100%", height: "100%" }}></div>
       </div>
 
       {/* 검색 결과 리스트 */}
@@ -122,7 +133,11 @@ const SearchPage = () => {
       </div>
 
       {/* 상세 모달 */}
-      <DetailModal isOpen={isModalOpen} item={selectedItem} onClose={handleCloseModal} />
+      <DetailModal
+        isOpen={isModalOpen}
+        item={selectedItem}
+        onClose={handleCloseModal}
+      />
     </div>
   );
 };
