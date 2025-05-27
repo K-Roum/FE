@@ -64,7 +64,7 @@ const DetailModal = ({ isOpen, item, onClose }: DetailModalProps) => {
           {/* 제목&찜 */}
           <div className="flex justify-between items-start mb-4">
             <h1 className="text-2xl font-bold text-gray-900 flex-1">
-              {summary.placeName || "제목 없음"}
+              {summary.placeName }
             </h1>
             <button
               onClick={handleBookmarkClick}
@@ -87,7 +87,10 @@ const DetailModal = ({ isOpen, item, onClose }: DetailModalProps) => {
               </svg>
             </button>
           </div>
-
+<div className="flex items-center text-sm text-gray-500 mb-4 space-x-4">
+  <div>❤️ 좋아요 {detail.details.bookmark.bookmarkCount}</div>
+  <div>📝 리뷰 {detail.details.reviews.totalCount}</div>
+</div>
           {/* 정보 카드 */}
           <div className="bg-gray-50 rounded-lg p-4 mb-6">
             <div className="flex items-start">
@@ -95,6 +98,7 @@ const DetailModal = ({ isOpen, item, onClose }: DetailModalProps) => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
+              
               <div>
                 <span className="font-medium text-gray-700">주소</span>
                 <p className="text-gray-600 text-sm mt-1">{summary.address || "주소 정보 없음"}</p>
