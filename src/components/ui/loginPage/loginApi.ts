@@ -1,12 +1,26 @@
-// components/ui/loginPage/loginApi.js
+// components/ui/loginPage/loginApi.ts
 
-/**
- * 로그인 요청 함수
- * @param {string} loginId - 사용자 로그인 ID
- * @param {string} password - 사용자 비밀번호
- * @returns {object|null} 로그인 성공 시 사용자 정보 반환, 실패 시 null
- */
-export async function loginUser({ loginId, password }) {
+export interface LoginRequest {
+    loginId: string;
+    password: string;
+  }
+  
+  export interface LoginResponse {
+    success: boolean;
+    message: string;
+    sessionId?: string;
+  }
+  
+  /**
+   * 로그인 요청 함수
+   * @param loginId - 사용자 로그인 ID
+   * @param password - 사용자 비밀번호
+   * @returns 로그인 성공 시 사용자 정보 반환, 실패 시 null
+   */
+  export async function loginUser({
+    loginId,
+    password,
+  }: LoginRequest): Promise<LoginResponse | null> {
     try {
       const response = await fetch('http://localhost:8080/users/login', {
         method: 'POST',
@@ -16,20 +30,35 @@ export async function loginUser({ loginId, password }) {
         body: JSON.stringify({ loginId, password }),
       });
   
-      if (!response.ok) {
-        console.error(`로그인 실패 (status: ${response.status})`);
+      const data = await response.json();
+      console.log('서버 응답:', data);
+
+      // 기본적인 응답 형식 확인
+      if (!data || typeof data !== 'object') {
+        console.error('잘못된 응답 데이터:', data);
         return null;
       }
-  
-      const data = await response.json();
-  
-      // 예시: 필요한 사용자 정보 저장
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('userId', data.userId);
-      localStorage.setItem('nickname', data.nickname);
-      localStorage.setItem('languageCode', data.languageCode);
-  
-      return data;
+
+      // success 필드 확인
+      if (data.success === undefined) {
+        console.error('success 필드 누락:', data);
+        return null;
+      }
+
+      // sessionId 추출 (메시지에서)
+      let sessionId = '';
+      if (data.success && data.message) {
+        const match = data.message.match(/세션 ID: (.+)/);
+        if (match) {
+          sessionId = match[1];
+        }
+      }
+
+      return {
+        success: data.success,
+        message: data.message || '',
+        sessionId: sessionId
+      };
     } catch (error) {
       console.error('로그인 요청 중 오류 발생:', error);
       return null;

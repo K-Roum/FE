@@ -1,62 +1,140 @@
 {
    "language.select": "Выбрать язык",
    "login": "Войти",
-   "signup": "Зарегистрироваться",
+   "signup": "Регистрация",
    "search": "Поиск",
+   "logout": "Выйти",
    "currentLanguage": "Текущий язык",
    "close": "Закрыть",
    "tteokbokki": "Ттокпокки",
-   "kpop": "К-поп",
+   "kpop": "K-pop",
    "bts": "BTS",
-   "bibimbap": "Пибимпаб",
-   "amusementpark": "Парк аттракционов",
-   "cherryblossom": "Цветение вишни",
+   "bibimbap": "Пибимпап",
+   "amusementpark": "Парк развлечений",
+   "cherryblossom": "Цветение сакуры",
    "movie": "Фильм",
-   "searchPrompt": "Пожалуйста, введите поисковый запрос.",
+   "searchPrompt": "Введите поисковый запрос",
 
   "loginPage": {
     "title": "Вход",
     "idPlaceholder": "Логин",
     "pwPlaceholder": "Пароль",
-    "rememberMe": "Оставаться в системе",
-    "findAccount": "Забыли логин или пароль?",
+    "rememberMe": "Запомнить меня",
+    "findAccount": "Найти логин/пароль",
     "loginButton": "Войти",
     "signupButton": "Регистрация",
-    "errorEmpty": "Пожалуйста, введите логин и пароль.",
-    "errorInvalid": "Ошибка входа. Проверьте правильность введённых данных.",
+    "errorEmpty": "Пожалуйста, введите логин и пароль",
+    "errorInvalid": "Ошибка входа. Проверьте логин и пароль",
     "success": "Добро пожаловать, {{nickname}}!"
   },
 
   "findAccount": {
-    "title": "Поиск ID / Сброс пароля",
-    "idTitle": "Найти ID",
-    "idDesc": "Найдите свой ID через подтверждение по электронной почте.",
-    "idButton": "Найти ID",
-    "pwTitle": "Сброс пароля",
-    "pwDesc": "Введите свой ID и адрес электронной почты для сброса пароля.",
-    "pwButton": "Сбросить пароль"
+    "title": "Найти логин/пароль",
+    "idTitle": "Найти логин",
+    "idDesc": "Найдите свой логин через подтверждение по email",
+    "idButton": "Найти логин",
+    "pwTitle": "Сбросить пароль",
+    "pwDesc": "Сбросьте пароль, указав логин и email",
+    "pwButton": "Сбросить"
   },
 
   "findId": {
-    "title": "Поиск ID",
-    "emailPlaceholder": "Введите свой адрес электронной почты.",
-    "findButton": "Найти ID",
-    "success": "ID отправлен на указанный вами адрес электронной почты.",
-    "goLogin": "Перейти ко входу",
-    "errorEmpty": "Пожалуйста, введите адрес электронной почты.",
-    "errorNotFound": "Для этой электронной почты ID не найден.",
-    "errorServer": "Произошла ошибка сервера. Попробуйте позже."
+    "title": "Найти логин",
+    "emailPlaceholder": "Введите email",
+    "findButton": "Найти логин",
+    "success": "Ваш логин отправлен на email",
+    "goLogin": "Перейти к входу",
+    "errorEmpty": "Пожалуйста, введите email",
+    "errorNotFound": "Логин для этого email не найден",
+    "errorServer": "Ошибка сервера. Попробуйте позже"
   },
 
   "resetPassword": {
     "title": "Сброс пароля",
-    "idPlaceholder": "Введите ваш логин.",
-    "emailPlaceholder": "Введите вашу электронную почту.",
-    "resetButton": "Сбросить пароль",
-    "success": "Временный пароль отправлен на вашу почту. Пожалуйста, смените его после входа.",
-    "goLogin": "Перейти ко входу",
-    "errorEmpty": "Пожалуйста, введите логин и почту.",
-    "errorNotFound": "Совпадений не найдено.",
-    "errorServer": "Произошла ошибка сервера. Повторите попытку позже."
+    "idPlaceholder": "Введите логин",
+    "emailPlaceholder": "Введите email",
+    "resetButton": "Сбросить",
+    "submitting": "Обработка...",
+    "success": "Временный пароль отправлен на ваш email. Пожалуйста, измените его после входа",
+    "goLogin": "Перейти к входу",
+    "errorEmpty": "Пожалуйста, введите логин и email",
+    "errorInvalidId": "Логин должен содержать от 4 до 20 буквенно-цифровых символов",
+    "errorInvalidEmail": "Неверный формат email",
+    "errorNotFound": "Пользователь с указанными данными не найден",
+    "errorEmailSend": "Ошибка отправки email. Попробуйте позже",
+    "errorServer": "Ошибка сервера. Попробуйте позже"
+  },
+
+  "signupPage": {
+    "title": "Регистрация",
+    "id": "Логин",
+    "idPlaceholder": "Введите логин",
+    "email": "Email",
+    "emailPlaceholder": "Введите email",
+    "password": "Пароль",
+    "passwordPlaceholder": "Введите пароль",
+    "confirmPassword": "Подтверждение пароля",
+    "confirmPasswordPlaceholder": "Введите пароль ещё раз",
+    "nickname": "Никнейм",
+    "nicknamePlaceholder": "Введите никнейм",
+    "checkDuplicate": "Проверить",
+    "getVerificationCode": "Получить код",
+    "verifyEmail": "Подтверждение email",
+    "verifyEmailDesc": "Пожалуйста, введите код подтверждения, отправленный на ваш email",
+    "verificationCodePlaceholder": "Введите код подтверждения",
+    "cancel": "Отмена",
+    "confirm": "Подтвердить",
+    "signupButton": "Зарегистрироваться",
+    
+    "errorEmpty": {
+      "id": "Пожалуйста, введите логин",
+      "email": "Пожалуйста, введите email",
+      "nickname": "Пожалуйста, введите никнейм"
+    },
+    "errorInvalid": {
+      "id": "Логин не может содержать пробелы",
+      "nickname": "Никнейм не может содержать пробелы",
+      "email": "Неверный формат email"
+    },
+    "errorDuplicate": {
+      "id": "Этот логин уже используется",
+      "email": "Этот email уже используется",
+      "nickname": "Этот никнейм уже используется"
+    },
+    "success": {
+      "id": "Этот логин доступен",
+      "email": "Этот email доступен",
+      "nickname": "Этот никнейм доступен",
+      "emailVerification": "Email подтверждён"
+    },
+    "passwordValidation": {
+      "valid": "Пароль подходит",
+      "invalid": "8-20 символов, должен включать буквы (с заглавными) + цифры + специальные символы (!@^*), без пробелов/корейского",
+      "match": "Пароли совпадают",
+      "mismatch": "Пароли не совпадают"
+    },
+    "verification": {
+      "sendSuccess": "Код подтверждения отправлен",
+      "sendError": "Ошибка отправки кода",
+      "invalidCode": "Неверный код подтверждения",
+      "error": "Произошла ошибка при подтверждении"
+    },
+    "submit": {
+      "missingItems": "Пожалуйста, выполните следующие пункты:",
+      "idCheck": "Проверка логина",
+      "emailCheck": "Проверка email",
+      "emailVerification": "Подтверждение email",
+      "passwordCheck": "Проверка формата пароля",
+      "passwordMatch": "Проверка совпадения паролей",
+      "nicknameCheck": "Проверка никнейма",
+      "success": "Регистрация завершена!",
+      "error": "Произошла ошибка при регистрации. Попробуйте позже"
+    }
+  },
+
+  "signupComplete": {
+    "title": "ДОБРО ПОЖАЛОВАТЬ!",
+    "message": "Регистрация успешно завершена",
+    "loginButton": "Войти"
   }
 }

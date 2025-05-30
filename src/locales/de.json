@@ -2,61 +2,139 @@
   "language.select": "Sprache auswählen",
   "login": "Anmelden",
   "signup": "Registrieren",
-  "search": "Suche",
+  "search": "Suchen",
+  "logout": "Abmelden",
   "currentLanguage": "Aktuelle Sprache",
   "close": "Schließen",
   "tteokbokki": "Tteokbokki",
-  "kpop": "K-Pop",
+  "kpop": "K-pop",
   "bts": "BTS",
   "bibimbap": "Bibimbap",
   "amusementpark": "Freizeitpark",
   "cherryblossom": "Kirschblüte",
   "movie": "Film",
-  "searchPrompt": "Bitte geben Sie ein Suchwort ein.",
+  "searchPrompt": "Suchbegriff eingeben",
 
   "loginPage": {
-    "title": "Anmeldung",
+    "title": "Anmelden",
     "idPlaceholder": "Benutzername",
     "pwPlaceholder": "Passwort",
     "rememberMe": "Angemeldet bleiben",
-    "findAccount": "Benutzername/Passwort vergessen?",
-    "loginButton": "Einloggen",
+    "findAccount": "Benutzername/Passwort finden",
+    "loginButton": "Anmelden",
     "signupButton": "Registrieren",
-    "errorEmpty": "Bitte geben Sie Benutzername und Passwort ein.",
-    "errorInvalid": "Anmeldung fehlgeschlagen. Bitte überprüfen Sie Ihre Angaben.",
+    "errorEmpty": "Bitte geben Sie Benutzername und Passwort ein",
+    "errorInvalid": "Anmeldung fehlgeschlagen. Überprüfen Sie Benutzername und Passwort",
     "success": "Willkommen, {{nickname}}!"
   },
 
   "findAccount": {
-    "title": "Benutzer-ID finden / Passwort zurücksetzen",
-    "idTitle": "Benutzer-ID finden",
-    "idDesc": "Finden Sie Ihre Benutzer-ID per E-Mail-Verifizierung.",
-    "idButton": "ID finden",
+    "title": "Benutzername/Passwort finden",
+    "idTitle": "Benutzername finden",
+    "idDesc": "Finden Sie Ihren Benutzernamen per E-Mail-Verifizierung",
+    "idButton": "Benutzername finden",
     "pwTitle": "Passwort zurücksetzen",
-    "pwDesc": "Geben Sie Ihre ID und E-Mail-Adresse ein, um Ihr Passwort zurückzusetzen.",
-    "pwButton": "Passwort zurücksetzen"
+    "pwDesc": "Setzen Sie Ihr Passwort zurück, indem Sie Benutzername und E-Mail eingeben",
+    "pwButton": "Zurücksetzen"
   },
 
   "findId": {
-    "title": "Benutzer-ID finden",
-    "emailPlaceholder": "Bitte geben Sie Ihre E-Mail-Adresse ein.",
-    "findButton": "ID finden",
-    "success": "Ihre ID wurde an die eingegebene E-Mail-Adresse gesendet.",
-    "goLogin": "Zum Login",
-    "errorEmpty": "Bitte geben Sie Ihre E-Mail-Adresse ein.",
-    "errorNotFound": "Keine ID unter dieser E-Mail-Adresse gefunden.",
-    "errorServer": "Ein Serverfehler ist aufgetreten. Bitte versuchen Sie es erneut."
+    "title": "Benutzername finden",
+    "emailPlaceholder": "E-Mail eingeben",
+    "findButton": "Benutzername finden",
+    "success": "Ihr Benutzername wurde an Ihre E-Mail gesendet",
+    "goLogin": "Zur Anmeldung",
+    "errorEmpty": "Bitte geben Sie Ihre E-Mail ein",
+    "errorNotFound": "Kein Benutzername für diese E-Mail gefunden",
+    "errorServer": "Serverfehler aufgetreten. Bitte versuchen Sie es später erneut"
   },
 
   "resetPassword": {
     "title": "Passwort zurücksetzen",
-    "idPlaceholder": "Geben Sie Ihre Benutzer-ID ein.",
-    "emailPlaceholder": "Geben Sie Ihre E-Mail-Adresse ein.",
-    "resetButton": "Passwort zurücksetzen",
-    "success": "Ein temporäres Passwort wurde an Ihre E-Mail gesendet. Bitte ändern Sie es nach dem Login.",
-    "goLogin": "Zum Login",
-    "errorEmpty": "Bitte geben Sie sowohl ID als auch E-Mail ein.",
-    "errorNotFound": "Keine übereinstimmenden Informationen gefunden.",
-    "errorServer": "Ein Serverfehler ist aufgetreten. Bitte versuchen Sie es erneut."
+    "idPlaceholder": "Benutzername eingeben",
+    "emailPlaceholder": "E-Mail eingeben",
+    "resetButton": "Zurücksetzen",
+    "submitting": "Wird verarbeitet...",
+    "success": "Ein temporäres Passwort wurde an Ihre E-Mail gesendet. Bitte ändern Sie es nach der Anmeldung",
+    "goLogin": "Zur Anmeldung",
+    "errorEmpty": "Bitte geben Sie Benutzername und E-Mail ein",
+    "errorInvalidId": "Der Benutzername muss 4-20 alphanumerische Zeichen enthalten",
+    "errorInvalidEmail": "Ungültiges E-Mail-Format",
+    "errorNotFound": "Kein Benutzer mit den angegebenen Daten gefunden",
+    "errorEmailSend": "E-Mail konnte nicht gesendet werden. Bitte versuchen Sie es später erneut",
+    "errorServer": "Serverfehler aufgetreten. Bitte versuchen Sie es später erneut"
+  },
+
+  "signupPage": {
+    "title": "Registrierung",
+    "id": "Benutzername",
+    "idPlaceholder": "Benutzername eingeben",
+    "email": "E-Mail",
+    "emailPlaceholder": "E-Mail eingeben",
+    "password": "Passwort",
+    "passwordPlaceholder": "Passwort eingeben",
+    "confirmPassword": "Passwort bestätigen",
+    "confirmPasswordPlaceholder": "Passwort erneut eingeben",
+    "nickname": "Nickname",
+    "nicknamePlaceholder": "Nickname eingeben",
+    "checkDuplicate": "Überprüfen",
+    "getVerificationCode": "Code anfordern",
+    "verifyEmail": "E-Mail-Verifizierung",
+    "verifyEmailDesc": "Bitte geben Sie den an Ihre E-Mail gesendeten Verifizierungscode ein",
+    "verificationCodePlaceholder": "Verifizierungscode eingeben",
+    "cancel": "Abbrechen",
+    "confirm": "Bestätigen",
+    "signupButton": "Registrieren",
+    
+    "errorEmpty": {
+      "id": "Bitte geben Sie einen Benutzernamen ein",
+      "email": "Bitte geben Sie eine E-Mail ein",
+      "nickname": "Bitte geben Sie einen Nickname ein"
+    },
+    "errorInvalid": {
+      "id": "Der Benutzername darf keine Leerzeichen enthalten",
+      "nickname": "Der Nickname darf keine Leerzeichen enthalten",
+      "email": "Ungültiges E-Mail-Format"
+    },
+    "errorDuplicate": {
+      "id": "Dieser Benutzername ist bereits vergeben",
+      "email": "Diese E-Mail ist bereits registriert",
+      "nickname": "Dieser Nickname ist bereits vergeben"
+    },
+    "success": {
+      "id": "Dieser Benutzername ist verfügbar",
+      "email": "Diese E-Mail ist verfügbar",
+      "nickname": "Dieser Nickname ist verfügbar",
+      "emailVerification": "E-Mail-Verifizierung abgeschlossen"
+    },
+    "passwordValidation": {
+      "valid": "Passwort ist gültig",
+      "invalid": "8-20 Zeichen, muss Buchstaben (mit Großbuchstaben) + Zahlen + Sonderzeichen (!@^*) enthalten, keine Leerzeichen/Koreanisch erlaubt",
+      "match": "Passwörter stimmen überein",
+      "mismatch": "Passwörter stimmen nicht überein"
+    },
+    "verification": {
+      "sendSuccess": "Verifizierungscode gesendet",
+      "sendError": "Fehler beim Senden des Codes",
+      "invalidCode": "Ungültiger Verifizierungscode",
+      "error": "Fehler bei der Verifizierung"
+    },
+    "submit": {
+      "missingItems": "Bitte vervollständigen Sie folgende Punkte:",
+      "idCheck": "Benutzername-Überprüfung",
+      "emailCheck": "E-Mail-Überprüfung",
+      "emailVerification": "E-Mail-Verifizierung",
+      "passwordCheck": "Passwortformat-Überprüfung",
+      "passwordMatch": "Passwort-Übereinstimmung",
+      "nicknameCheck": "Nickname-Überprüfung",
+      "success": "Registrierung abgeschlossen!",
+      "error": "Fehler bei der Registrierung. Bitte versuchen Sie es später erneut"
+    }
+  },
+
+  "signupComplete": {
+    "title": "WILLKOMMEN!",
+    "message": "Registrierung erfolgreich abgeschlossen",
+    "loginButton": "Anmelden"
   }
 }

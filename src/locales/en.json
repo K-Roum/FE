@@ -3,61 +3,139 @@
   "login": "Login",
   "signup": "Sign Up",
   "search": "Search",
+  "logout": "Logout",
   "currentLanguage": "Current Language",
   "close": "Close",
-  "searchPrompt": "Please enter a search term.",
+  "searchPrompt": "Enter search term",
   "tteokbokki": "Tteokbokki",
   "kpop": "K-pop",
   "bts": "BTS",
   "bibimbap": "Bibimbap",
-  "amusementpark": "amusementpark",
-  "cherryblossom": "cherryblossom",
-  "movie": "movie",
+  "amusementpark": "Amusement Park",
+  "cherryblossom": "Cherry Blossom",
+  "movie": "Movie",
 
   "loginPage": {
     "title": "Login",
-    "idPlaceholder": "Username",
+    "idPlaceholder": "ID",
     "pwPlaceholder": "Password",
-    "rememberMe": "Keep me logged in",
-    "findAccount": "Forgot ID or Password?",
-    "loginButton": "Log In",
+    "rememberMe": "Remember Me",
+    "findAccount": "Find ID/Password",
+    "loginButton": "Login",
     "signupButton": "Sign Up",
-    "errorEmpty": "Please enter both username and password.",
-    "errorInvalid": "Login failed. Please check your credentials.",
+    "errorEmpty": "Please enter both ID and password.",
+    "errorInvalid": "Login failed. Please check your ID and password.",
     "success": "Welcome, {{nickname}}!"
   },
 
   "findAccount": {
-    "title": "Find ID / Reset Password",
-    "idTitle": "Find Your ID",
-    "idDesc": "Find your ID via email verification.",
+    "title": "Find ID/Password",
+    "idTitle": "Find ID",
+    "idDesc": "Find your ID through email verification.",
     "idButton": "Find ID",
     "pwTitle": "Reset Password",
-    "pwDesc": "Enter your ID and email to reset your password.",
+    "pwDesc": "Reset your password by entering your ID and email.",
     "pwButton": "Reset Password"
   },
 
   "findId": {
     "title": "Find ID",
-    "emailPlaceholder": "Enter your email.",
+    "emailPlaceholder": "Enter your email",
     "findButton": "Find ID",
-    "success": "Your ID has been sent to the entered email.",
+    "success": "Your ID has been sent to your email.",
     "goLogin": "Go to Login",
     "errorEmpty": "Please enter your email.",
-    "errorNotFound": "No ID is registered with that email.",
-    "errorServer": "A server error occurred. Please try again."
+    "errorNotFound": "No ID found for this email.",
+    "errorServer": "Server error occurred. Please try again."
   },
 
   "resetPassword": {
     "title": "Reset Password",
-    "idPlaceholder": "Enter your ID.",
-    "emailPlaceholder": "Enter your email.",
+    "idPlaceholder": "Enter your ID",
+    "emailPlaceholder": "Enter your email",
     "resetButton": "Reset Password",
-    "success": "A temporary password has been sent to your email. Please change it after logging in.",
+    "submitting": "Processing...",
+    "success": "A temporary password has been sent to your email. Please change your password after logging in.",
     "goLogin": "Go to Login",
     "errorEmpty": "Please enter both ID and email.",
-    "errorNotFound": "No matching information found.",
-    "errorServer": "A server error occurred. Please try again."
+    "errorInvalidId": "ID must be 4-20 characters long with alphanumeric characters.",
+    "errorInvalidEmail": "Invalid email format.",
+    "errorNotFound": "No user found with the provided ID and email.",
+    "errorEmailSend": "Failed to send email. Please try again later.",
+    "errorServer": "Server error occurred. Please try again later."
+  },
+
+  "signupPage": {
+    "title": "Sign Up",
+    "id": "ID",
+    "idPlaceholder": "Enter your ID",
+    "email": "Email",
+    "emailPlaceholder": "Enter your email",
+    "password": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "confirmPassword": "Confirm Password",
+    "confirmPasswordPlaceholder": "Enter your password again",
+    "nickname": "Nickname",
+    "nicknamePlaceholder": "Enter your nickname",
+    "checkDuplicate": "Check Duplicate",
+    "getVerificationCode": "Get Verification Code",
+    "verifyEmail": "Email Verification",
+    "verifyEmailDesc": "Please enter the verification code sent to your email",
+    "verificationCodePlaceholder": "Enter verification code",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "signupButton": "Sign Up",
+    
+    "errorEmpty": {
+      "id": "Please enter your ID.",
+      "email": "Please enter your email.",
+      "nickname": "Please enter your nickname."
+    },
+    "errorInvalid": {
+      "id": "ID cannot contain spaces.",
+      "nickname": "Nickname cannot contain spaces.",
+      "email": "Invalid email format."
+    },
+    "errorDuplicate": {
+      "id": "This ID is already in use.",
+      "email": "This email is already in use.",
+      "nickname": "This nickname is already in use."
+    },
+    "success": {
+      "id": "This ID is available.",
+      "email": "This email is available.",
+      "nickname": "This nickname is available.",
+      "emailVerification": "Email verification completed."
+    },
+    "passwordValidation": {
+      "valid": "Password is valid.",
+      "invalid": "8-20 characters, must include English(with uppercase) + numbers + special characters(!@^*), no spaces/Korean allowed.",
+      "match": "Passwords match.",
+      "mismatch": "Passwords do not match."
+    },
+    "verification": {
+      "sendSuccess": "Verification code sent successfully",
+      "sendError": "Failed to send verification code",
+      "invalidCode": "Invalid verification code.",
+      "error": "An error occurred during verification."
+    },
+    "submit": {
+      "missingItems": "Please complete the following items:",
+      "idCheck": "ID duplicate check",
+      "emailCheck": "Email duplicate check",
+      "emailVerification": "Email verification",
+      "passwordCheck": "Password format check",
+      "passwordMatch": "Password match check",
+      "nicknameCheck": "Nickname duplicate check",
+      "success": "Sign up completed!",
+      "error": "An error occurred during sign up. Please try again later."
+    }
+  },
+
+  "signupComplete": {
+    "title": "WELCOME!",
+    "message": "Sign up completed successfully.",
+    "loginButton": "Login"
   }
 }
   

@@ -3,6 +3,7 @@
   "login": "로그인",
   "signup": "회원가입",
   "search": "검색",
+  "logout": "로그아웃",
   "currentLanguage": "현재 언어",
   "close": "닫기",
   "tteokbokki": "떡볶이",
@@ -55,11 +56,88 @@
     "idPlaceholder": "아이디를 입력하세요.",
     "emailPlaceholder": "이메일을 입력하세요.",
     "resetButton": "비밀번호 재설정",
+    "submitting": "처리 중...",
     "success": "입력하신 이메일로 임시 비밀번호를 전송했습니다. 로그인 후 반드시 비밀번호를 변경해주세요.",
     "goLogin": "로그인하러 가기",
     "errorEmpty": "아이디와 이메일을 모두 입력해주세요.",
-    "errorNotFound": "일치하는 정보가 없습니다.",
-    "errorServer": "서버 오류가 발생했습니다. 다시 시도해주세요."
+    "errorInvalidId": "아이디는 영문과 숫자 조합으로 4~20자 이내로 입력해주세요.",
+    "errorInvalidEmail": "올바른 이메일 형식이 아닙니다.",
+    "errorNotFound": "입력하신 아이디와 이메일이 일치하는 사용자를 찾을 수 없습니다.",
+    "errorEmailSend": "이메일 전송에 실패했습니다. 잠시 후 다시 시도해주세요.",
+    "errorServer": "서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요."
+  },
+
+  "signupPage": {
+    "title": "회원 가입",
+    "id": "아이디",
+    "idPlaceholder": "아이디를 입력하세요.",
+    "email": "이메일",
+    "emailPlaceholder": "이메일을 입력하세요.",
+    "password": "비밀번호",
+    "passwordPlaceholder": "비밀번호를 입력하세요.",
+    "confirmPassword": "비밀번호 확인",
+    "confirmPasswordPlaceholder": "비밀번호를 한번 더 입력하세요.",
+    "nickname": "닉네임",
+    "nicknamePlaceholder": "닉네임을 입력하세요.",
+    "checkDuplicate": "중복 확인",
+    "getVerificationCode": "인증 코드 받기",
+    "verifyEmail": "이메일 인증",
+    "verifyEmailDesc": "입력하신 이메일로 전송된 인증 코드를 입력해주세요.",
+    "verificationCodePlaceholder": "인증 코드 입력",
+    "cancel": "취소",
+    "confirm": "확인",
+    "signupButton": "회원 가입",
+    
+    "errorEmpty": {
+      "id": "아이디를 입력해주세요.",
+      "email": "이메일을 입력해주세요.",
+      "nickname": "닉네임을 입력해주세요."
+    },
+    "errorInvalid": {
+      "id": "아이디에는 공백을 포함할 수 없습니다.",
+      "nickname": "닉네임에는 공백을 포함할 수 없습니다.",
+      "email": "올바른 이메일 형식이 아닙니다."
+    },
+    "errorDuplicate": {
+      "id": "이미 사용 중인 아이디입니다.",
+      "email": "이미 사용 중인 이메일입니다.",
+      "nickname": "이미 사용 중인 닉네임입니다."
+    },
+    "success": {
+      "id": "사용 가능한 아이디입니다.",
+      "email": "사용 가능한 이메일입니다.",
+      "nickname": "사용 가능한 닉네임입니다.",
+      "emailVerification": "이메일 인증이 완료되었습니다."
+    },
+    "passwordValidation": {
+      "valid": "사용 가능한 비밀번호입니다.",
+      "invalid": "8~20자, 영문(대문자 포함) + 숫자 + 특수문자(!@^*)를 포함해야 하며 공백/한글은 사용할 수 없습니다.",
+      "match": "비밀번호가 일치합니다.",
+      "mismatch": "비밀번호가 일치하지 않습니다."
+    },
+    "verification": {
+      "sendSuccess": "인증 코드 전송 성공",
+      "sendError": "이메일 인증 코드 전송 실패",
+      "invalidCode": "인증 코드가 올바르지 않습니다.",
+      "error": "인증 과정에서 오류가 발생했습니다."
+    },
+    "submit": {
+      "missingItems": "다음 항목을 완료해주세요:",
+      "idCheck": "아이디 중복 확인",
+      "emailCheck": "이메일 중복 확인",
+      "emailVerification": "이메일 인증",
+      "passwordCheck": "비밀번호 형식 확인",
+      "passwordMatch": "비밀번호 일치 확인",
+      "nicknameCheck": "닉네임 중복 확인",
+      "success": "회원가입이 완료되었습니다!",
+      "error": "회원가입 처리 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요."
+    }
+  },
+
+  "signupComplete": {
+    "title": "WELCOME!",
+    "message": "회원가입이 완료되었습니다.",
+    "loginButton": "로그인"
   }
 }
 
