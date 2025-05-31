@@ -2,6 +2,7 @@ import { loginUser } from '../../components/ui/loginPage/loginApi.ts';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import React, { useState, useEffect } from 'react';
+import { loginStatusChange } from '../../components/common/Header';
 
 export default function LoginPage() {
 
@@ -23,12 +24,11 @@ export default function LoginPage() {
 
     const result = await loginUser({ loginId, password });
 
-    if (result) {
-      // 로컬스토리지 저장
-      localStorage.setItem('token', result.token);
-      localStorage.setItem('userId', result.userId);
-      localStorage.setItem('nickname', result.nickname);
-      localStorage.setItem('languageCode', result.languageCode);
+    if (result && result.success) {
+      // sessionId를 토큰으로 저장
+      if (result.sessionId) {
+        localStorage.setItem('token', result.sessionId);
+      }
 
       // 로그인 상태 유지 여부 저장
       if (rememberMe) {
@@ -37,9 +37,14 @@ export default function LoginPage() {
         localStorage.removeItem('rememberMe');
       }
 
+      // 로그인 상태 변경 이벤트 발생
+      window.dispatchEvent(loginStatusChange);
+
       // 환영 메시지 및 이동
-      alert(t('loginPage.success', { nickname: result.nickname }));
-      navigate('/main');
+      alert(t('loginPage.success', { nickname: loginId }));
+      
+      // 페이지 이동
+      navigate('/home');
     } else {
       setErrorMessage('loginPage.errorInvalid');
     }
@@ -53,7 +58,7 @@ export default function LoginPage() {
     const token = localStorage.getItem('token');
   
     if (remembered === 'true' && token) {
-      navigate('/main');
+      navigate('/home');
     }
   }, []);
 
@@ -132,8 +137,8 @@ export default function LoginPage() {
 
             {/* 회원가입 버튼 */}
             <button
-              className="w-full py-4 border border-gray-300 text-gray-400 rounded-md cursor-not-allowed text-xl"
-              disabled
+              className="w-full py-4 border border-gray-300 text-gray-400 rounded-md text-xl hover:bg-gray-100 transition"
+              onClick={() => navigate('/signup')}
             >
               {t('loginPage.signupButton')}
             </button>

@@ -3,6 +3,7 @@
     "login": "登录",
     "signup": "注册",
     "search": "搜索",
+    "logout": "退出登录",
     "currentLanguage": "当前语言",
     "close": "关闭",
     "tteokbokki": "炒年糕",
@@ -50,13 +51,90 @@
 
     "resetPassword": {
     "title": "重置密码",
-    "idPlaceholder": "请输入您的账号。",
-    "emailPlaceholder": "请输入您的邮箱。",
+    "idPlaceholder": "请输入账号",
+    "emailPlaceholder": "请输入邮箱",
     "resetButton": "重置密码",
-    "success": "临时密码已发送至您的邮箱。登录后请尽快修改密码。",
+    "submitting": "处理中...",
+    "success": "临时密码已发送至您的邮箱。登录后请务必修改密码",
     "goLogin": "前往登录",
-    "errorEmpty": "请同时输入账号和邮箱。",
-    "errorNotFound": "未找到匹配的信息。",
-    "errorServer": "服务器错误，请稍后重试。"
+    "errorEmpty": "请输入账号和邮箱",
+    "errorInvalidId": "账号必须为4-20位字母数字组合",
+    "errorInvalidEmail": "邮箱格式不正确",
+    "errorNotFound": "未找到匹配的账号和邮箱",
+    "errorEmailSend": "邮件发送失败，请稍后重试",
+    "errorServer": "服务器错误，请稍后重试"
+    },
+
+    "signupPage": {
+        "title": "注册",
+        "id": "账号",
+        "idPlaceholder": "请输入账号",
+        "email": "邮箱",
+        "emailPlaceholder": "请输入邮箱",
+        "password": "密码",
+        "passwordPlaceholder": "请输入密码",
+        "confirmPassword": "确认密码",
+        "confirmPasswordPlaceholder": "请再次输入密码",
+        "nickname": "昵称",
+        "nicknamePlaceholder": "请输入昵称",
+        "checkDuplicate": "查重",
+        "getVerificationCode": "获取验证码",
+        "verifyEmail": "邮箱验证",
+        "verifyEmailDesc": "请输入发送到您邮箱的验证码",
+        "verificationCodePlaceholder": "请输入验证码",
+        "cancel": "取消",
+        "confirm": "确认",
+        "signupButton": "注册",
+        
+        "errorEmpty": {
+            "id": "请输入账号",
+            "email": "请输入邮箱",
+            "nickname": "请输入昵称"
+        },
+        "errorInvalid": {
+            "id": "账号不能包含空格",
+            "nickname": "昵称不能包含空格",
+            "email": "邮箱格式不正确"
+        },
+        "errorDuplicate": {
+            "id": "该账号已被使用",
+            "email": "该邮箱已被使用",
+            "nickname": "该昵称已被使用"
+        },
+        "success": {
+            "id": "该账号可以使用",
+            "email": "该邮箱可以使用",
+            "nickname": "该昵称可以使用",
+            "emailVerification": "邮箱验证完成"
+        },
+        "passwordValidation": {
+            "valid": "密码可以使用",
+            "invalid": "密码必须为8-20位，包含英文（含大写）+数字+特殊字符(!@^*)，不允许空格/韩文",
+            "match": "密码匹配",
+            "mismatch": "密码不匹配"
+        },
+        "verification": {
+            "sendSuccess": "验证码发送成功",
+            "sendError": "验证码发送失败",
+            "invalidCode": "验证码无效",
+            "error": "验证过程中出现错误"
+        },
+        "submit": {
+            "missingItems": "请完成以下项目：",
+            "idCheck": "账号查重",
+            "emailCheck": "邮箱查重",
+            "emailVerification": "邮箱验证",
+            "passwordCheck": "密码格式检查",
+            "passwordMatch": "密码匹配检查",
+            "nicknameCheck": "昵称查重",
+            "success": "注册成功！",
+            "error": "注册过程中出现错误，请稍后重试"
+        }
+    },
+
+    "signupComplete": {
+        "title": "欢迎！",
+        "message": "注册成功",
+        "loginButton": "登录"
     }
 }
