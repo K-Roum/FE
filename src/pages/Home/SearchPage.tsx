@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback, useMemo } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import SearchResultCard from "../../components/ui/searchPage/SearchResultCard";
 import DetailModal from "../../components/ui/searchPage/DetailModal.tsx";
@@ -13,7 +13,7 @@ declare global {
   }
 }
 
-
+// selectedItem 타입 정의 (detail + summary)
 type SelectedItemType = {
   detail: PlaceDetailModel;
   summary: SearchResultModel;
@@ -25,16 +25,10 @@ const SearchPage = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<SelectedItemType>(null);
-  const [mapInstance, setMapInstance] = useState<any>(null);
-  const [markers, setMarkers] = useState<any[]>([]);
-  const [displayResults, setDisplayResults] = useState<SearchResultModel[]>(results || []);
-  const [isShowingRecommendations, setIsShowingRecommendations] = useState(false);
-  
-
-  const [isLoading, setIsLoading] = useState(false);
-  
-
-  const [detailCache, setDetailCache] = useState<Map<string, PlaceDetailModel>>(new Map());
+  const [mapInstance, setMapInstance] = useState<any>(null); // 지도 인스턴스 상태 추가
+  const [markers, setMarkers] = useState<any[]>([]); // 마커들을 관리하는 상태 추가
+  const [displayResults, setDisplayResults] = useState<SearchResultModel[]>(results || []); // 현재 표시 중인 결과
+  const [isShowingRecommendations, setIsShowingRecommendations] = useState(false); // 추천 장소 표시 여부
 
   useEffect(() => {
     const initMap = () => {
@@ -44,6 +38,8 @@ const SearchPage = () => {
         level: 13,
       };
       const map = new window.kakao.maps.Map(container, options);
+      
+      // 지도 인스턴스를 상태에 저장
       setMapInstance(map);
     };
 
@@ -68,203 +64,157 @@ const SearchPage = () => {
     };
 
     document.head.appendChild(script);
-  }, []);
+  }, []); // 지도는 한 번만 초기화
 
-
-  const updateMapMarkers = useCallback((items: SearchResultModel[]) => {
-    if (!mapInstance || !items || items.length === 0) return;
-
-
-    markers.forEach(marker => marker.setMap(null));
-
-
-    const newMarkers = items.map((item) => {
-      const markerPosition = new window.kakao.maps.LatLng(
-        item.latitude,
-        item.longitude
-      );
-      const marker = new window.kakao.maps.Marker({
-        position: markerPosition,
-      });
-      marker.setMap(mapInstance);
-      return marker;
-    });
-    
-    setMarkers(newMarkers);
-  }, [mapInstance, markers]);
-
-
+  // 지도가 로드된 후 초기 마커들을 추가하는 별도 useEffect
   useEffect(() => {
     if (mapInstance && results && results.length > 0) {
-      updateMapMarkers(results);
+      const newMarkers: any[] = [];
+      results.forEach((item) => {
+        const markerPosition = new window.kakao.maps.LatLng(
+          item.latitude,
+          item.longitude
+        );
+        const marker = new window.kakao.maps.Marker({
+          position: markerPosition,
+        });
+        marker.setMap(mapInstance);
+        newMarkers.push(marker);
+      });
+      setMarkers(newMarkers);
     }
-  }, [mapInstance, results, updateMapMarkers]);
+  }, [mapInstance, results]); // mapInstance가 생성된 후 실행
 
+  // 기존 마커들을 제거하는 함수
+  const clearMarkers = () => {
+    markers.forEach(marker => {
+      marker.setMap(null);
+    });
+    setMarkers([]);
+  };
 
-  const centerMapOnLocation = useCallback((latitude: number, longitude: number) => {
+  // 지도 마커를 업데이트하는 함수
+  const updateMapMarkers = (items: SearchResultModel[]) => {
+    if (mapInstance && items && items.length > 0) {
+      // 기존 마커들 제거
+      clearMarkers();
+
+      // 새로운 마커들 추가
+      const newMarkers: any[] = [];
+      items.forEach((item) => {
+        const markerPosition = new window.kakao.maps.LatLng(
+          item.latitude,
+          item.longitude
+        );
+        const marker = new window.kakao.maps.Marker({
+          position: markerPosition,
+        });
+        marker.setMap(mapInstance);
+        newMarkers.push(marker);
+      });
+      setMarkers(newMarkers);
+    }
+  };
+
+  // Recommendation을 SearchResultModel 형태로 변환하는 함수
+  const convertRecommendationToSearchResult = (recommendation: Recommendation): SearchResultModel => {
+    return recommendation.place; 
+  };
+
+  // 지도 중심을 특정 위치로 이동시키는 함수
+  const centerMapOnLocation = (latitude: number, longitude: number) => {
     if (mapInstance) {
       const moveLatLon = new window.kakao.maps.LatLng(latitude, longitude);
       mapInstance.setCenter(moveLatLon);
-      mapInstance.setLevel(5);
+      mapInstance.setLevel(5); // 더 가까운 줌 레벨로 설정 (1-14, 숫자가 작을수록 확대)
     }
-  }, [mapInstance]);
+  };
 
-
-  const fetchPlaceDetail = useCallback(async (placeId: number, languageCode: string): Promise<PlaceDetailModel> => {
-
-    const cacheKey = `${placeId}_${languageCode}`;
-    if (detailCache.has(cacheKey)) {
-      return detailCache.get(cacheKey)!;
-    }
-
-
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 10000); // 10초 타임아웃
+  const handleCardClick = async (item: SearchResultModel) => {
+    const currentLang = i18n.language.toLowerCase();
 
     try {
+      // 먼저 지도 중심을 클릭한 장소로 이동
+      centerMapOnLocation(item.latitude, item.longitude);
+
       const response = await fetch(
-        `http://localhost:8080/places/${placeId}/with-everything?languageCode=${languageCode}`,
+        `http://localhost:8080/places/${item.placeId}/with-everything?languageCode=${currentLang}`,
         {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
             accept: "*/*",
           },
-          signal: controller.signal,
         }
       );
-
-      clearTimeout(timeoutId);
-
+      const parsedResponse: PlaceDetailModel = await response.json();
       if (!response.ok) {
         throw new Error(`HTTP 오류, 상태 코드: ${response.status}`);
       }
 
-      const data: PlaceDetailModel = await response.json();
-      
-
-      setDetailCache(prev => new Map(prev).set(cacheKey, data));
-      
-      return data;
-    } catch (error) {
-      clearTimeout(timeoutId);
-      throw error;
-    }
-  }, [detailCache]);
-
-  const handleCardClick = useCallback(async (item: SearchResultModel) => {
-    if (isLoading) return;
-    
-    setIsLoading(true);
-    const currentLang = i18n.language.toLowerCase();
-
-    try {
-
-      centerMapOnLocation(item.latitude, item.longitude);
-      setSelectedItem({
-        detail: null as any, // 임시로 null 설정
-        summary: item,
-      });
-      setIsModalOpen(true);
-
-      const parsedResponse = await fetchPlaceDetail(item.placeId, currentLang);
-
+      // detail과 summary를 객체로 묶어서 상태에 저장
       setSelectedItem({
         detail: parsedResponse,
         summary: item,
       });
 
+      // 추천 장소 리스트로 변경
       if (parsedResponse.recommendations && parsedResponse.recommendations.length > 0) {
         const recommendationResults = parsedResponse.recommendations.map(rec => rec.place);
         setDisplayResults(recommendationResults);
         setIsShowingRecommendations(true);
-        setTimeout(() => {
-          updateMapMarkers(recommendationResults);
-        }, 0);
+        
+        // 지도 마커 업데이트
+        updateMapMarkers(recommendationResults);
       }
 
+      setIsModalOpen(true);
     } catch (error) {
       console.error("장소 상세 정보 요청 실패:", error);
-      setIsModalOpen(false);
-      setSelectedItem(null);
-    } finally {
-      setIsLoading(false);
     }
-  }, [isLoading, centerMapOnLocation, fetchPlaceDetail, updateMapMarkers]);
+  };
 
-  const handleCloseModal = useCallback(() => {
+  const handleCloseModal = () => {
     setIsModalOpen(false);
     setSelectedItem(null);
-    
-    if (isShowingRecommendations && results) {
-      setDisplayResults(results);
-      setIsShowingRecommendations(false);
-      updateMapMarkers(results);
-    }
-  }, [isShowingRecommendations, results, updateMapMarkers]);
-
-  const searchResultsList = useMemo(() => {
-    if (!displayResults || displayResults.length === 0) {
-      return (
-        <div className="bg-white p-8 rounded-lg shadow-md text-center">
-          <p className="text-gray-500 text-lg">결과가 없습니다.</p>
-        </div>
-      );
-    }
-
-    return (
-      <>
-        <div className="mb-4">
-          <h2 className="text-xl font-semibold text-gray-800">
-            {isShowingRecommendations ? "추천 장소" : "검색 결과"}
-          </h2>
-          {isLoading && (
-            <div className="mt-2 text-sm text-blue-600">
-              로딩 중...
-            </div>
-          )}
-        </div>
-        <ul className="space-y-6">
-          {displayResults.map((item, index) => (
-            <li key={`${item.placeId}-${index}`}>
-              <SearchResultCard 
-                item={item} 
-                onCardClick={handleCardClick}
-                disabled={isLoading} 
-              />
-            </li>
-          ))}
-        </ul>
-      </>
-    );
-  }, [displayResults, isShowingRecommendations, isLoading, handleCardClick]);
+  };
 
   return (
     <div className="flex h-screen">
       {/* 지도 영역 */}
-      <div className="w-1/2 bg-gray-100 relative">
+      <div className="w-1/2 bg-gray-100">
         <div id="map" style={{ width: "100%", height: "100%" }}></div>
-        {isLoading && (
-          <div className="absolute top-4 left-4 bg-white px-3 py-2 rounded-lg shadow-md">
-            <div className="flex items-center space-x-2">
-              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600"></div>
-              <span className="text-sm text-gray-600">위치 정보 로딩 중...</span>
+      </div>
+
+      {/* 검색 결과 리스트 */}
+      <div className="w-1/2 p-8 overflow-y-auto">        
+        {displayResults && displayResults.length > 0 ? (
+          <>
+            <div className="mb-4">
+              <h2 className="text-xl font-semibold text-gray-800">
+                {isShowingRecommendations ? "추천 장소" : "검색 결과"}
+              </h2>
             </div>
+            <ul className="space-y-6">
+              {displayResults.map((item, index) => (
+                <li key={index}>
+                  <SearchResultCard item={item} onCardClick={handleCardClick} />
+                </li>
+              ))}
+            </ul>
+          </>
+        ) : (
+          <div className="bg-white p-8 rounded-lg shadow-md text-center">
+            <p className="text-gray-500 text-lg">결과가 없습니다.</p>
           </div>
         )}
       </div>
 
-
-      <div className="w-1/2 p-8 overflow-y-auto">        
-        {searchResultsList}
-      </div>
-
-
+      {/* 상세 모달 */}
       <DetailModal
         isOpen={isModalOpen}
         item={selectedItem}
         onClose={handleCloseModal}
-        isLoading={isLoading} 
       />
     </div>
   );

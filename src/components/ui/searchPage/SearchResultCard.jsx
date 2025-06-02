@@ -1,33 +1,25 @@
 import React, { useState } from "react";
 
-const SearchResultCard = ({ item, onCardClick, disabled = false }) => {
+const SearchResultCard = ({ item, onCardClick }) => {
   const [isBookmarked, setisBookmarked] = useState(false);
 
   const handleCardClick = () => {
-    if (!disabled) {
-      onCardClick(item);
-    }
+    onCardClick(item);
   };
 
   const handleBookmarkClick = (e) => {
     e.stopPropagation(); // 부모 클릭 방지
-    if (!disabled) {
-      setisBookmarked(!isBookmarked);
-    }
+    setisBookmarked(!isBookmarked);
   };
 
   return (
     <div
-      className={`bg-white border rounded-lg shadow-md overflow-hidden h-40 transition-all duration-200 ${
-        disabled 
-          ? 'opacity-50 cursor-not-allowed' 
-          : 'cursor-pointer hover:shadow-lg transform hover:-translate-y-1'
-      }`}
+      className="bg-white border rounded-lg shadow-md overflow-hidden h-40 cursor-pointer"
       onClick={handleCardClick}
     >
       <div className="flex flex-col md:flex-row h-full">
         {/* 이미지 영역 */}
-        <div className="w-full md:w-2/5 h-40 md:h-full relative">
+        <div className="w-full md:w-2/5 h-40 md:h-full">
           {item.firstImageUrl ? (
             <img
               src={item.firstImageUrl}
@@ -37,13 +29,6 @@ const SearchResultCard = ({ item, onCardClick, disabled = false }) => {
           ) : (
             <div className="w-full h-full bg-gray-200 flex items-center justify-center">
               <span className="text-gray-400">이미지 없음</span>
-            </div>
-          )}
-          
-          {/* 로딩 중일 때 오버레이 */}
-          {disabled && (
-            <div className="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center">
-              <div className="animate-spin rounded-full h-6 w-6 border-2 border-white border-t-transparent"></div>
             </div>
           )}
         </div>
@@ -60,12 +45,9 @@ const SearchResultCard = ({ item, onCardClick, disabled = false }) => {
               <div className="flex space-x-2 ml-2">
                 <button
                   onClick={handleBookmarkClick}
-                  disabled={disabled}
-                  className={`p-2 rounded-full transition-colors focus:outline-none focus:ring-0 ${
-                    disabled 
-                      ? 'text-gray-300 cursor-not-allowed' 
-                      : `hover:bg-gray-100 ${isBookmarked ? "text-red-500" : "text-gray-400"}`
-                  }`}
+                  className={`p-2 rounded-full hover:bg-gray-100 transition-colors 
+                    ${isBookmarked ? "text-red-500" : "text-gray-400"} 
+                    focus:outline-none focus:ring-0`}
                   aria-label={isBookmarked ? "찜 취소" : "찜하기"}
                 >
                   <svg
