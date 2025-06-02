@@ -8,7 +8,7 @@ import './i18n/index.js';
 import HomePage from './pages/Home/HomePage.jsx';
 import LandingPage from './pages/LandingPage';
 import LanguageSelect from './pages/LanguageSelect';
-import SearchPage from './pages/Home/SearchPage.jsx';
+import SearchPage from './pages/Home/SearchPage.tsx';
 import LoginPage from './pages/Login/LoginPage.jsx';
 import FindAccountPage from './pages/Login/FindAccountPage.jsx';
 import FindIdPage from './pages/Login/FindIdPage.jsx';
