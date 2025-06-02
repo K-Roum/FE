@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { PlaceDetailModel } from '../../../model/PlaceDetailModel';
 import { SearchResultModel } from '../../../model/SearchResultModel';
 
+
+
+
 type DetailModalProps = {
   isOpen: boolean;
   item: {
@@ -13,7 +16,7 @@ type DetailModalProps = {
 
 const DetailModal = ({ isOpen, item, onClose }: DetailModalProps) => {
   const [isBookmarked, setIsBookmarked] = useState(false);
-
+const [showAllReviews, setShowAllReviews] = useState(false);
   if (!isOpen || !item) return null;
 
   const { detail, summary } = item;
@@ -113,14 +116,54 @@ const DetailModal = ({ isOpen, item, onClose }: DetailModalProps) => {
               {summary.description || "설명 정보가 없습니다."}
             </p>
           </div>
+{/* 리뷰 섹션 */}
+<div className="border-t pt-6">
+  <h3 className="font-semibold text-lg mb-4 text-gray-900">리뷰</h3>
 
-          {/* 리뷰 섹션 (비워둠) */}
-          <div className="border-t pt-6">
-            <h3 className="font-semibold text-lg mb-4 text-gray-900">리뷰</h3>
-            <div className="space-y-4">
-              {/* 리뷰 내용은 나중에 작성 */}
+  {/* 평균 평점 */}
+  <div className="flex items-center mb-4 text-gray-700">
+    <div className="text-yellow-500 mr-2 text-lg">⭐</div>
+    <div className="text-sm">
+      평균 평점 <span className="font-semibold">{detail.details.reviews.averageRating?.toFixed(1) ?? "?"}</span> / 5.0
+    </div>
+  </div>
+
+  {/* 리뷰 목록 */}
+  <div className="space-y-4">
+    {detail.details.reviews.placesReviews && detail.details.reviews.placesReviews.length > 0 ? (
+      <>
+        {detail.details.reviews.placesReviews
+          .slice(0, showAllReviews ? detail.details.reviews.placesReviews.length : 3)
+          .map((review: any, index: number) => (
+            <div key={index} className="bg-gray-100 rounded-lg p-4">
+              <div className="flex justify-between items-center mb-2">
+                <div className="font-medium text-gray-800">{review.author || "익명 사용자"}</div>
+                <div className="text-sm text-gray-500">{review.date || "날짜 정보 없음"}</div>
+              </div>
+              <div className="flex items-center mb-2">
+                <div className="text-yellow-500 mr-2">⭐ {review.rating ?? "?"}/5</div>
+              </div>
+              <p className="text-gray-700 text-sm">{review.comment || "내용 없음"}</p>
             </div>
-          </div>
+          ))}
+
+        {/* 더보기 버튼 */}
+        {detail.details.reviews.placesReviews.length > 3 && !showAllReviews && (
+          <button
+            onClick={() => setShowAllReviews(true)}
+            className="text-blue-600 text-sm mt-2 hover:underline focus:outline-none"
+          >
+            리뷰 더보기
+          </button>
+        )}
+      </>
+    ) : (
+      <p className="text-gray-500 text-sm">등록된 리뷰가 없습니다.</p>
+    )}
+  </div>
+</div>
+
+
           
         </div>
       </div>
