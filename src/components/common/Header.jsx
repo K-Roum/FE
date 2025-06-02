@@ -1,14 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Globe } from 'lucide-react';
+import { Globe, User } from 'lucide-react';
 import LanguageDropdown from '../../components/common/LanguageDropdown';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+
+// 로그인 상태 관리를 위한 커스텀 이벤트
+export const loginStatusChange = new Event('loginStatusChange');
 
 const Header = () => {
   const { t, i18n } = useTranslation();
   const currentLang = i18n.language || 'ko';
   const [showLangSelector, setShowLangSelector] = useState(false);
   const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const location = useLocation();
 
   const LANGUAGES = {
    ko: { label: '한국어' },
@@ -19,6 +24,54 @@ const Header = () => {
    de: { label: 'Deutsch' },
    es: { label: 'Español' },
    ru: { label: 'Русский' },
+  };
+  
+  // 로그인 상태 확인 함수
+  const checkLoginStatus = () => {
+    const token = localStorage.getItem('token');
+    setIsLoggedIn(!!token);
+  };
+
+  useEffect(() => {
+    // 초기 로그인 상태 확인
+    checkLoginStatus();
+
+    // 로그인 상태 변경 이벤트 리스너
+    const handleLoginChange = () => {
+      checkLoginStatus();
+    };
+
+    // storage 이벤트 (다른 탭/창에서의 변경 감지)
+    const handleStorageChange = (e) => {
+      if (e.key === 'token') {
+        checkLoginStatus();
+      }
+    };
+
+    window.addEventListener('loginStatusChange', handleLoginChange);
+    window.addEventListener('storage', handleStorageChange);
+
+    return () => {
+      window.removeEventListener('loginStatusChange', handleLoginChange);
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, []);
+
+  // location 변경 감지
+  useEffect(() => {
+    checkLoginStatus();
+  }, [location]);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('nickname');
+    localStorage.removeItem('languageCode');
+    localStorage.removeItem('sessionId');
+    localStorage.removeItem('rememberMe');
+    setIsLoggedIn(false);
+    window.dispatchEvent(loginStatusChange);
+    navigate('/login');
   };
 
   return (
@@ -37,10 +90,27 @@ const Header = () => {
         <button onClick={() => navigate('/home')} className="hover:text-black-600">
           {t('search')}
         </button>
-        <button onClick={() => navigate('/login')} className="hover:text-black-600">
-          {t('login')}
-        </button>
-        <button className="hover:text-black-600">{t('signup')}</button>
+
+      {isLoggedIn ? (
+        <>
+          <button onClick={handleLogout} className="hover:text-black-600">
+            {t('logout')}
+          </button>
+          <button onClick={() => navigate('/mypage')} className="hover:text-black-600 flex items-center space-x-1">
+            <User size={16} />
+            <span>MY</span>
+          </button>
+        </>
+      ) : (
+        <>
+          <button onClick={() => navigate('/login')} className="hover:text-black-600">
+            {t('login')}
+          </button>
+          <button onClick={() => navigate('/signup')} className="hover:text-black-600">
+            {t('signup')}
+          </button>
+        </>
+      )}
 
         {/* 언어 선택 드롭다운 */}
         <div className="relative">
@@ -64,3 +134,4 @@ const Header = () => {
 };
 
 export default Header;
+

@@ -1,17 +1,141 @@
 {
-    "language.select": "Choisir la langue",
-    "login": "Connexion",
-    "signup": "Créer un compte",
-    "search": "Recherche",
-    "currentLanguage": "Langue actuelle",
-    "close": "Fermer",
-    "tteokbokki": "Tteokbokki",
-    "kpop": "K-pop",
-    "bts": "BTS",
-    "bibimbap": "Bibimbap",
-    "amusementpark": "Parc d'attractions",
-    "cherryblossom": "Fleur de cerisier",
-    "movie": "Film",
-    "searchPrompt": "Veuillez entrer un mot-clé de recherche."
+  "language.select": "Sélectionner la langue",
+  "login": "Connexion",
+  "signup": "Inscription",
+  "search": "Rechercher",
+  "logout": "Déconnexion",
+  "currentLanguage": "Langue actuelle",
+  "close": "Fermer",
+  "tteokbokki": "Tteokbokki",
+  "kpop": "K-pop",
+  "bts": "BTS",
+  "bibimbap": "Bibimbap",
+  "amusementpark": "Parc d'attractions",
+  "cherryblossom": "Fleurs de cerisier",
+  "movie": "Film",
+  "searchPrompt": "Entrez un terme de recherche",
+
+  "loginPage": {
+    "title": "Connexion",
+    "idPlaceholder": "Identifiant",
+    "pwPlaceholder": "Mot de passe",
+    "rememberMe": "Se souvenir de moi",
+    "findAccount": "Retrouver ID/Mot de passe",
+    "loginButton": "Se connecter",
+    "signupButton": "S'inscrire",
+    "errorEmpty": "Veuillez saisir l'identifiant et le mot de passe",
+    "errorInvalid": "Échec de la connexion. Vérifiez votre identifiant et mot de passe",
+    "success": "Bienvenue, {{nickname}} !"
+  },
+
+  "findAccount": {
+    "title": "Retrouver ID/Mot de passe",
+    "idTitle": "Retrouver ID",
+    "idDesc": "Retrouvez votre ID par vérification email",
+    "idButton": "Retrouver ID",
+    "pwTitle": "Réinitialiser le mot de passe",
+    "pwDesc": "Réinitialisez votre mot de passe en saisissant votre ID et email",
+    "pwButton": "Réinitialiser"
+  },
+
+  "findId": {
+    "title": "Retrouver ID",
+    "emailPlaceholder": "Entrez votre email",
+    "findButton": "Retrouver ID",
+    "success": "Votre ID a été envoyé à votre email",
+    "goLogin": "Aller à la connexion",
+    "errorEmpty": "Veuillez saisir votre email",
+    "errorNotFound": "Aucun ID trouvé pour cet email",
+    "errorServer": "Erreur serveur. Veuillez réessayer plus tard"
+  },
+
+  "resetPassword": {
+    "title": "Réinitialiser le mot de passe",
+    "idPlaceholder": "Entrez votre identifiant",
+    "emailPlaceholder": "Entrez votre email",
+    "resetButton": "Réinitialiser",
+    "submitting": "Traitement en cours...",
+    "success": "Un mot de passe temporaire a été envoyé à votre email. Veuillez le modifier après la connexion",
+    "goLogin": "Aller à la connexion",
+    "errorEmpty": "Veuillez saisir l'identifiant et l'email",
+    "errorInvalidId": "L'identifiant doit contenir 4 à 20 caractères alphanumériques",
+    "errorInvalidEmail": "Format d'email invalide",
+    "errorNotFound": "Aucun utilisateur trouvé avec l'identifiant et l'email fournis",
+    "errorEmailSend": "Échec de l'envoi de l'email. Veuillez réessayer plus tard",
+    "errorServer": "Erreur serveur. Veuillez réessayer plus tard"
+  },
+
+  "signupPage": {
+    "title": "Inscription",
+    "id": "Identifiant",
+    "idPlaceholder": "Entrez votre identifiant",
+    "email": "Email",
+    "emailPlaceholder": "Entrez votre email",
+    "password": "Mot de passe",
+    "passwordPlaceholder": "Entrez votre mot de passe",
+    "confirmPassword": "Confirmer le mot de passe",
+    "confirmPasswordPlaceholder": "Entrez à nouveau votre mot de passe",
+    "nickname": "Pseudo",
+    "nicknamePlaceholder": "Entrez votre pseudo",
+    "checkDuplicate": "Vérifier",
+    "getVerificationCode": "Obtenir le code",
+    "verifyEmail": "Vérification email",
+    "verifyEmailDesc": "Veuillez entrer le code de vérification envoyé à votre email",
+    "verificationCodePlaceholder": "Entrez le code de vérification",
+    "cancel": "Annuler",
+    "confirm": "Confirmer",
+    "signupButton": "S'inscrire",
+    
+    "errorEmpty": {
+      "id": "Veuillez entrer votre identifiant",
+      "email": "Veuillez entrer votre email",
+      "nickname": "Veuillez entrer votre pseudo"
+    },
+    "errorInvalid": {
+      "id": "L'identifiant ne peut pas contenir d'espaces",
+      "nickname": "Le pseudo ne peut pas contenir d'espaces",
+      "email": "Format d'email invalide"
+    },
+    "errorDuplicate": {
+      "id": "Cet identifiant est déjà utilisé",
+      "email": "Cet email est déjà utilisé",
+      "nickname": "Ce pseudo est déjà utilisé"
+    },
+    "success": {
+      "id": "Cet identifiant est disponible",
+      "email": "Cet email est disponible",
+      "nickname": "Ce pseudo est disponible",
+      "emailVerification": "Vérification email terminée"
+    },
+    "passwordValidation": {
+      "valid": "Mot de passe valide",
+      "invalid": "8-20 caractères, doit inclure lettres (avec majuscules) + chiffres + caractères spéciaux (!@^*), pas d'espaces/coréen",
+      "match": "Les mots de passe correspondent",
+      "mismatch": "Les mots de passe ne correspondent pas"
+    },
+    "verification": {
+      "sendSuccess": "Code de vérification envoyé",
+      "sendError": "Échec de l'envoi du code",
+      "invalidCode": "Code de vérification invalide",
+      "error": "Une erreur est survenue lors de la vérification"
+    },
+    "submit": {
+      "missingItems": "Veuillez compléter les éléments suivants :",
+      "idCheck": "Vérification de l'identifiant",
+      "emailCheck": "Vérification de l'email",
+      "emailVerification": "Vérification email",
+      "passwordCheck": "Vérification du format du mot de passe",
+      "passwordMatch": "Vérification de la correspondance des mots de passe",
+      "nicknameCheck": "Vérification du pseudo",
+      "success": "Inscription terminée !",
+      "error": "Une erreur est survenue lors de l'inscription. Veuillez réessayer plus tard"
+    }
+  },
+
+  "signupComplete": {
+    "title": "BIENVENUE !",
+    "message": "Inscription terminée avec succès",
+    "loginButton": "Connexion"
   }
+}
 

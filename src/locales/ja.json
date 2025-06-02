@@ -3,6 +3,7 @@
   "login": "ログイン",
   "signup": "新規登録",
   "search": "検索",
+  "logout": "ログアウト",
   "currentLanguage": "現在の言語",
   "close": "閉じる",
   "tteokbokki": "トッポッキ",
@@ -12,5 +13,128 @@
   "amusementpark": "遊園地",
   "cherryblossom": "桜",
   "movie": "映画",
-  "searchPrompt": "検索語を入力してください。"
+  "searchPrompt": "検索語を入力してください。",
+
+  "loginPage": {
+    "title": "ログイン",
+    "idPlaceholder": "ユーザーID",
+    "pwPlaceholder": "パスワード",
+    "rememberMe": "ログイン状態を保持する",
+    "findAccount": "ID/パスワードをお忘れですか？",
+    "loginButton": "ログイン",
+    "signupButton": "新規登録",
+    "errorEmpty": "IDとパスワードを入力してください。",
+    "errorInvalid": "ログインに失敗しました。IDまたはパスワードを確認してください。",
+    "success": "{{nickname}}さん、ようこそ！"
+  },
+
+  "findAccount": {
+    "title": "ID・パスワードの検索",
+    "idTitle": "IDを探す",
+    "idDesc": "メール認証でIDを見つけましょう。",
+    "idButton": "IDを探す",
+    "pwTitle": "パスワードのリセット",
+    "pwDesc": "IDとメールアドレスを入力してパスワードをリセットします。",
+    "pwButton": "パスワードをリセット"
+  },
+
+  "findId": {
+    "title": "IDを探す",
+    "emailPlaceholder": "メールアドレスを入力してください。",
+    "findButton": "IDを探す",
+    "success": "入力したメールアドレスにIDを送信しました。",
+    "goLogin": "ログインページへ",
+    "errorEmpty": "メールアドレスを入力してください。",
+    "errorNotFound": "そのメールアドレスで登録されたIDは見つかりません。",
+    "errorServer": "サーバーエラーが発生しました。再度お試しください。"
+  },
+
+  "resetPassword": {
+    "title": "パスワード再設定",
+    "idPlaceholder": "IDを入力してください",
+    "emailPlaceholder": "メールアドレスを入力してください",
+    "resetButton": "パスワードを再設定する",
+    "submitting": "処理中...",
+    "success": "仮パスワードをメールに送信しました。ログイン後、必ずパスワードを変更してください",
+    "goLogin": "ログインページへ",
+    "errorEmpty": "IDとメールアドレスを両方入力してください",
+    "errorInvalidId": "IDは半角英数字4-20文字で入力してください",
+    "errorInvalidEmail": "メールアドレスの形式が正しくありません",
+    "errorNotFound": "一致する情報が見つかりませんでした",
+    "errorEmailSend": "メール送信に失敗しました。後でもう一度お試しください",
+    "errorServer": "サーバーエラーが発生しました。もう一度お試しください"
+  },
+
+  "signupPage": {
+    "title": "新規登録",
+    "id": "ID",
+    "idPlaceholder": "IDを入力してください",
+    "email": "メールアドレス",
+    "emailPlaceholder": "メールアドレスを入力してください",
+    "password": "パスワード",
+    "passwordPlaceholder": "パスワードを入力してください",
+    "confirmPassword": "パスワード（確認）",
+    "confirmPasswordPlaceholder": "パスワードをもう一度入力してください",
+    "nickname": "ニックネーム",
+    "nicknamePlaceholder": "ニックネームを入力してください",
+    "checkDuplicate": "重複確認",
+    "getVerificationCode": "認証コードを取得",
+    "verifyEmail": "メール認証",
+    "verifyEmailDesc": "メールに送信された認証コードを入力してください",
+    "verificationCodePlaceholder": "認証コードを入力",
+    "cancel": "キャンセル",
+    "confirm": "確認",
+    "signupButton": "登録する",
+    
+    "errorEmpty": {
+      "id": "IDを入力してください",
+      "email": "メールアドレスを入力してください",
+      "nickname": "ニックネームを入力してください"
+    },
+    "errorInvalid": {
+      "id": "IDにスペースは使用できません",
+      "nickname": "ニックネームにスペースは使用できません",
+      "email": "メールアドレスの形式が正しくありません"
+    },
+    "errorDuplicate": {
+      "id": "このIDは既に使用されています",
+      "email": "このメールアドレスは既に使用されています",
+      "nickname": "このニックネームは既に使用されています"
+    },
+    "success": {
+      "id": "このIDは使用可能です",
+      "email": "このメールアドレスは使用可能です",
+      "nickname": "このニックネームは使用可能です",
+      "emailVerification": "メール認証が完了しました"
+    },
+    "passwordValidation": {
+      "valid": "パスワードは使用可能です",
+      "invalid": "8-20文字で、英字（大文字含む）+数字+記号(!@^*)を含める必要があります。スペース/韓国語は使用できません",
+      "match": "パスワードが一致します",
+      "mismatch": "パスワードが一致しません"
+    },
+    "verification": {
+      "sendSuccess": "認証コードを送信しました",
+      "sendError": "認証コードの送信に失敗しました",
+      "invalidCode": "認証コードが正しくありません",
+      "error": "認証中にエラーが発生しました"
+    },
+    "submit": {
+      "missingItems": "以下の項目を完了してください：",
+      "idCheck": "ID重複確認",
+      "emailCheck": "メールアドレス重複確認",
+      "emailVerification": "メール認証",
+      "passwordCheck": "パスワード形式確認",
+      "passwordMatch": "パスワード一致確認",
+      "nicknameCheck": "ニックネーム重複確認",
+      "success": "登録が完了しました！",
+      "error": "登録処理中にエラーが発生しました。後でもう一度お試しください"
+    }
+  },
+
+  "signupComplete": {
+    "title": "ようこそ！",
+    "message": "登録が完了しました",
+    "loginButton": "ログイン"
+  }
 }

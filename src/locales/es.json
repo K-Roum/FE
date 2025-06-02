@@ -1,17 +1,141 @@
 {
-    "language.select": "Seleccionar idioma",
-    "login": "Iniciar sesión",
-    "signup": "Registrarse",
-    "search": "Buscar",
-    "currentLanguage": "Idioma actual",
-    "close": "Cerrar",
-    "tteokbokki": "Tteokbokki",
-    "kpop": "K-pop",
-    "bts": "BTS",
-    "bibimbap": "Bibimbap",
-    "amusementpark": "Parque de atracciones",
-    "cherryblossom": "Flor de cerezo",
-    "movie": "Película",
-    "searchPrompt": "Por favor, introduzca una palabra clave."
+  "language.select": "Seleccionar idioma",
+  "login": "Iniciar sesión",
+  "signup": "Registrarse",
+  "search": "Buscar",
+  "logout": "Cerrar sesión",
+  "currentLanguage": "Idioma actual",
+  "close": "Cerrar",
+  "tteokbokki": "Tteokbokki",
+  "kpop": "K-pop",
+  "bts": "BTS",
+  "bibimbap": "Bibimbap",
+  "amusementpark": "Parque de atracciones",
+  "cherryblossom": "Flor de cerezo",
+  "movie": "Película",
+  "searchPrompt": "Ingrese término de búsqueda",
+
+  "loginPage": {
+    "title": "Iniciar sesión",
+    "idPlaceholder": "Usuario",
+    "pwPlaceholder": "Contraseña",
+    "rememberMe": "Mantener sesión iniciada",
+    "findAccount": "Buscar Usuario/Contraseña",
+    "loginButton": "Iniciar sesión",
+    "signupButton": "Registrarse",
+    "errorEmpty": "Por favor, ingrese usuario y contraseña",
+    "errorInvalid": "Error al iniciar sesión. Verifique su usuario y contraseña",
+    "success": "¡Bienvenido, {{nickname}}!"
+  },
+
+  "findAccount": {
+    "title": "Buscar Usuario/Contraseña",
+    "idTitle": "Buscar Usuario",
+    "idDesc": "Encuentre su usuario mediante verificación por correo",
+    "idButton": "Buscar Usuario",
+    "pwTitle": "Restablecer Contraseña",
+    "pwDesc": "Restablezca su contraseña ingresando usuario y correo",
+    "pwButton": "Restablecer"
+  },
+
+  "findId": {
+    "title": "Buscar Usuario",
+    "emailPlaceholder": "Ingrese su correo",
+    "findButton": "Buscar Usuario",
+    "success": "Su usuario ha sido enviado a su correo",
+    "goLogin": "Ir a inicio de sesión",
+    "errorEmpty": "Por favor, ingrese su correo",
+    "errorNotFound": "No se encontró usuario para este correo",
+    "errorServer": "Error del servidor. Por favor, intente más tarde"
+  },
+
+  "resetPassword": {
+    "title": "Restablecer Contraseña",
+    "idPlaceholder": "Ingrese su usuario",
+    "emailPlaceholder": "Ingrese su correo",
+    "resetButton": "Restablecer",
+    "submitting": "Procesando...",
+    "success": "Se ha enviado una contraseña temporal a su correo. Por favor, cámbiela después de iniciar sesión",
+    "goLogin": "Ir a inicio de sesión",
+    "errorEmpty": "Por favor, ingrese usuario y correo",
+    "errorInvalidId": "El usuario debe tener entre 4 y 20 caracteres alfanuméricos",
+    "errorInvalidEmail": "Formato de correo inválido",
+    "errorNotFound": "No se encontró usuario con los datos proporcionados",
+    "errorEmailSend": "Error al enviar el correo. Por favor, intente más tarde",
+    "errorServer": "Error del servidor. Por favor, intente más tarde"
+  },
+
+  "signupPage": {
+    "title": "Registro",
+    "id": "Usuario",
+    "idPlaceholder": "Ingrese su usuario",
+    "email": "Correo",
+    "emailPlaceholder": "Ingrese su correo",
+    "password": "Contraseña",
+    "passwordPlaceholder": "Ingrese su contraseña",
+    "confirmPassword": "Confirmar Contraseña",
+    "confirmPasswordPlaceholder": "Ingrese nuevamente su contraseña",
+    "nickname": "Apodo",
+    "nicknamePlaceholder": "Ingrese su apodo",
+    "checkDuplicate": "Verificar",
+    "getVerificationCode": "Obtener código",
+    "verifyEmail": "Verificación de correo",
+    "verifyEmailDesc": "Por favor, ingrese el código de verificación enviado a su correo",
+    "verificationCodePlaceholder": "Ingrese el código de verificación",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar",
+    "signupButton": "Registrarse",
+    
+    "errorEmpty": {
+      "id": "Por favor, ingrese su usuario",
+      "email": "Por favor, ingrese su correo",
+      "nickname": "Por favor, ingrese su apodo"
+    },
+    "errorInvalid": {
+      "id": "El usuario no puede contener espacios",
+      "nickname": "El apodo no puede contener espacios",
+      "email": "Formato de correo inválido"
+    },
+    "errorDuplicate": {
+      "id": "Este usuario ya está en uso",
+      "email": "Este correo ya está en uso",
+      "nickname": "Este apodo ya está en uso"
+    },
+    "success": {
+      "id": "Este usuario está disponible",
+      "email": "Este correo está disponible",
+      "nickname": "Este apodo está disponible",
+      "emailVerification": "Verificación de correo completada"
+    },
+    "passwordValidation": {
+      "valid": "Contraseña válida",
+      "invalid": "8-20 caracteres, debe incluir letras (con mayúsculas) + números + caracteres especiales (!@^*), sin espacios/coreano",
+      "match": "Las contraseñas coinciden",
+      "mismatch": "Las contraseñas no coinciden"
+    },
+    "verification": {
+      "sendSuccess": "Código de verificación enviado",
+      "sendError": "Error al enviar el código",
+      "invalidCode": "Código de verificación inválido",
+      "error": "Ocurrió un error durante la verificación"
+    },
+    "submit": {
+      "missingItems": "Por favor, complete los siguientes elementos:",
+      "idCheck": "Verificación de usuario",
+      "emailCheck": "Verificación de correo",
+      "emailVerification": "Verificación de correo",
+      "passwordCheck": "Verificación de formato de contraseña",
+      "passwordMatch": "Verificación de coincidencia de contraseñas",
+      "nicknameCheck": "Verificación de apodo",
+      "success": "¡Registro completado!",
+      "error": "Ocurrió un error durante el registro. Por favor, intente más tarde"
+    }
+  },
+
+  "signupComplete": {
+    "title": "¡BIENVENIDO!",
+    "message": "Registro completado exitosamente",
+    "loginButton": "Iniciar sesión"
   }
+}
 
