@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { PlaceDetailModel } from '../../../model/PlaceDetailModel';
 import { SearchResultModel } from '../../../model/SearchResultModel';
-
-
-
+import ReviewForm from './ReviewForm.tsx';
+import i18n from "../../../i18n";
 
 type DetailModalProps = {
   isOpen: boolean;
@@ -16,7 +15,9 @@ type DetailModalProps = {
 
 const DetailModal = ({ isOpen, item, onClose }: DetailModalProps) => {
   const [isBookmarked, setIsBookmarked] = useState(false);
-const [showAllReviews, setShowAllReviews] = useState(false);
+  const [showAllReviews, setShowAllReviews] = useState(false);
+  const [showReviewForm, setShowReviewForm] = useState(false);
+    const currentLang = i18n.language.toLowerCase();
   if (!isOpen || !item) return null;
 
   const { detail, summary } = item;
@@ -29,6 +30,43 @@ const [showAllReviews, setShowAllReviews] = useState(false);
 
   const handleBookmarkClick = () => {
     setIsBookmarked(!isBookmarked);
+  };
+const handleReviewSubmit = async (review: { rating: number; comment: string }) => {
+  const response = await fetch(
+    `http://localhost:8080/reviews/${item.summary.placeId}?languageCode=${currentLang}`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        accept: "*/*",
+      },
+      body: JSON.stringify({
+        rating: review.rating,
+        comment: review.comment,
+      }),
+    }
+  );
+
+  // 응답 처리 로직이 필요하다면 여기에 추가
+  const result = await response.json();
+  console.log(result);
+};
+
+  const handleReviewCancel = () => {
+    setShowReviewForm(false);
+  };
+
+  const renderStars = (rating: number) => {
+    return Array.from({ length: 5 }, (_, index) => (
+      <span
+        key={index}
+        className={`text-xl ${
+          index < rating ? 'text-yellow-500' : 'text-gray-400'
+        }`}
+      >
+        {index < rating ? '★' : '☆'}
+      </span>
+    ));
   };
 
   return (
@@ -67,7 +105,7 @@ const [showAllReviews, setShowAllReviews] = useState(false);
           {/* 제목&찜 */}
           <div className="flex justify-between items-start mb-4">
             <h1 className="text-2xl font-bold text-gray-900 flex-1">
-              {summary.placeName }
+              {summary.placeName}
             </h1>
             <button
               onClick={handleBookmarkClick}
@@ -90,10 +128,12 @@ const [showAllReviews, setShowAllReviews] = useState(false);
               </svg>
             </button>
           </div>
-<div className="flex items-center text-sm text-gray-500 mb-4 space-x-4">
-  <div>❤️ 좋아요 {detail.details.bookmark.bookmarkCount}</div>
-  <div>📝 리뷰 {detail.details.reviews.totalCount}</div>
-</div>
+
+          <div className="flex items-center text-sm text-gray-500 mb-4 space-x-4">
+            <div>❤️ 좋아요 {detail.details.bookmark.bookmarkCount}</div>
+            <div>📝 리뷰 {detail.details.reviews.totalCount}</div>
+          </div>
+
           {/* 정보 카드 */}
           <div className="bg-gray-50 rounded-lg p-4 mb-6">
             <div className="flex items-start">
@@ -116,55 +156,75 @@ const [showAllReviews, setShowAllReviews] = useState(false);
               {summary.description || "설명 정보가 없습니다."}
             </p>
           </div>
-{/* 리뷰 섹션 */}
-<div className="border-t pt-6">
-  <h3 className="font-semibold text-lg mb-4 text-gray-900">리뷰</h3>
 
-  {/* 평균 평점 */}
-  <div className="flex items-center mb-4 text-gray-700">
-    <div className="text-yellow-500 mr-2 text-lg">⭐</div>
-    <div className="text-sm">
-      평균 평점 <span className="font-semibold">{detail.details.reviews.averageRating?.toFixed(1) ?? "?"}</span> / 5.0
-    </div>
-  </div>
+          {/* 리뷰 섹션 */}
+          <div className="border-t pt-6">
+            <h3 className="font-semibold text-lg mb-4 text-gray-900">리뷰</h3>
 
-  {/* 리뷰 목록 */}
-  <div className="space-y-4">
-    {detail.details.reviews.placesReviews && detail.details.reviews.placesReviews.length > 0 ? (
-      <>
-        {detail.details.reviews.placesReviews
-          .slice(0, showAllReviews ? detail.details.reviews.placesReviews.length : 3)
-          .map((review: any, index: number) => (
-            <div key={index} className="bg-gray-100 rounded-lg p-4">
-              <div className="flex justify-between items-center mb-2">
-                <div className="font-medium text-gray-800">{review.author || "익명 사용자"}</div>
-                <div className="text-sm text-gray-500">{review.date || "날짜 정보 없음"}</div>
+            {/* 평균 평점과 리뷰 쓰기 버튼 */}
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center text-gray-700">
+                <div className="text-yellow-500 mr-2 text-lg">⭐</div>
+                <div className="text-sm">
+                  평균 평점 <span className="font-semibold">{detail.details.reviews.averageRating?.toFixed(1) ?? "?"}</span> / 5.0
+                </div>
               </div>
-              <div className="flex items-center mb-2">
-                <div className="text-yellow-500 mr-2">⭐ {review.rating ?? "?"}/5</div>
-              </div>
-              <p className="text-gray-700 text-sm">{review.comment || "내용 없음"}</p>
+              
+              {/* 리뷰 쓰기 버튼 */}
+              <button
+                onClick={() => setShowReviewForm(!showReviewForm)}
+                className="p-2 bg-gray-200 hover:bg-gray-300 text-gray-600 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                </svg>
+              </button>
             </div>
-          ))}
 
-        {/* 더보기 버튼 */}
-        {detail.details.reviews.placesReviews.length > 3 && !showAllReviews && (
-          <button
-            onClick={() => setShowAllReviews(true)}
-            className="text-blue-600 text-sm mt-2 hover:underline focus:outline-none"
-          >
-            리뷰 더보기
-          </button>
-        )}
-      </>
-    ) : (
-      <p className="text-gray-500 text-sm">등록된 리뷰가 없습니다.</p>
-    )}
-  </div>
-</div>
+            {/* 리뷰 작성 폼 */}
+            <ReviewForm 
+              isVisible={showReviewForm}
+              onSubmit={handleReviewSubmit}
+              onCancel={handleReviewCancel}
+            />
 
+            {/* 리뷰 목록 */}
+            <div className="space-y-4">
+              {detail.details.reviews.placesReviews && detail.details.reviews.placesReviews.length > 0 ? (
+                <>
+                  {detail.details.reviews.placesReviews
+                    .slice(0, showAllReviews ? detail.details.reviews.placesReviews.length : 3)
+                    .map((review: any, index: number) => (
+                      <div key={index} className="bg-gray-100 rounded-lg p-4">
+                        <div className="flex justify-between items-center mb-2">
+                          <div className="font-medium text-gray-800">{review.author || "익명 사용자"}</div>
+                          <div className="text-sm text-gray-500">{review.date || "날짜 정보 없음"}</div>
+                        </div>
+                        <div className="flex items-center mb-2">
+                          <div className="flex items-center">
+                            {renderStars(review.rating || 0)}
+                            <span className="ml-2 text-sm text-gray-600">({review.rating ?? "?"}/5)</span>
+                          </div>
+                        </div>
+                        <p className="text-gray-700 text-sm">{review.comment || "내용 없음"}</p>
+                      </div>
+                    ))}
 
-          
+                  {/* 더보기 버튼 */}
+                  {detail.details.reviews.placesReviews.length > 3 && !showAllReviews && (
+                    <button
+                      onClick={() => setShowAllReviews(true)}
+                      className="text-blue-600 text-sm mt-2 hover:underline focus:outline-none"
+                    >
+                      리뷰 더보기
+                    </button>
+                  )}
+                </>
+              ) : (
+                <p className="text-gray-500 text-sm">등록된 리뷰가 없습니다.</p>
+              )}
+            </div>
+          </div>
         </div>
       </div>
     </div>
