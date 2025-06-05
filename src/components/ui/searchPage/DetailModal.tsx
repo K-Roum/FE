@@ -28,9 +28,37 @@ const DetailModal = ({ isOpen, item, onClose }: DetailModalProps) => {
     }
   };
 
-  const handleBookmarkClick = () => {
+const handleBookmarkClick = async () => {
+  try {
+    const endpoint = isBookmarked 
+      ? `http://localhost:8080/bookmarks/${item.summary.placeId}` // 북마크 취소
+      : `http://localhost:8080/bookmarks/${item.summary.placeId}`; // 북마크 추가
+
+    const method = isBookmarked ? 'DELETE' : 'POST';
+
+    const response = await fetch(endpoint, {
+      method: method,
+      headers: {
+        "Content-Type": "application/json",
+        accept: "*/*",
+      },
+    });
+
+    if (!response.ok) {
+      console.error(`북마크 ${isBookmarked ? '취소' : '추가'} 실패:`, response.statusText);
+      return;
+    }
+
+    // API 호출이 성공하면 상태 업데이트
     setIsBookmarked(!isBookmarked);
-  };
+    
+    // 성공 메시지 (선택사항)
+    console.log(`북마크가 ${isBookmarked ? '취소' : '추가'}되었습니다.`);
+    
+  } catch (error) {
+    console.error('북마크 API 호출 중 오류 발생:', error);
+  }
+};
 const handleReviewSubmit = async (review: { rating: number; comment: string }) => {
   const response = await fetch(
     `http://localhost:8080/reviews/${item.summary.placeId}?languageCode=${currentLang}`,
@@ -47,9 +75,11 @@ const handleReviewSubmit = async (review: { rating: number; comment: string }) =
     }
   );
 
-  // 응답 처리 로직이 필요하다면 여기에 추가
+  if (!response.ok) {
+    console.error("리뷰 제출 실패:", response.statusText);
+    return;
+  } 
   const result = await response.json();
-  console.log(result);
 };
 
   const handleReviewCancel = () => {
