@@ -1,22 +1,49 @@
-import React, { useState, FormEvent } from 'react';
+import React, { useState, useEffect, FormEvent, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { SearchResultModel } from '../../../model/SearchResultModel'; 
+import { SearchResultModel } from '../../../model/SearchResultModel';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const SearchSection: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [recentSearches, setRecentSearches] = useState<{ searchText: string; createdAt: string }[]>([]);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
 
-  const handleSearch = async (e: FormEvent) => {
-    e.preventDefault();
+  useEffect(() => {
+    const fetchRecentSearches = async () => {
+      try {
+        const response = await fetch('http://localhost:8080/search-history');
+        if (!response.ok) {
+          throw new Error(`서버 오류: ${response.status}`);
+        }
+        const data = await response.json();
+        setRecentSearches(data);
+      } catch (error) {
+        console.error('최근 검색어 불러오기 실패:', error);
+      }
+    };
 
-    if (!searchQuery.trim()) {
-      alert(t('searchPrompt'));
-      return;
-    }
+    fetchRecentSearches();
+  }, []);
 
-    const currentLang = i18n.language.toLowerCase(); // 예: "ko"
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousemove', handleMouseMove);
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
+
+  const performSearch = async (query: string) => {
+    const currentLang = i18n.language.toLowerCase();
 
     try {
       const response = await fetch('http://localhost:8080/places/search', {
@@ -26,7 +53,7 @@ const SearchSection: React.FC = () => {
           accept: '*/*',
         },
         body: JSON.stringify({
-          query: searchQuery,
+          query: query,
           languageCode: currentLang,
         }),
       });
@@ -37,11 +64,8 @@ const SearchSection: React.FC = () => {
 
       const data: SearchResultModel[] = await response.json();
 
-      console.log('Response:', response);
-      console.log('Data:', data);
-
       navigate('/searchPage', {
-        state: { query: searchQuery, results: data },
+        state: { query: query, results: data },
       });
     } catch (error) {
       console.error('검색 중 오류 발생:', error);
@@ -49,11 +73,29 @@ const SearchSection: React.FC = () => {
     }
   };
 
+  const handleSearch = (e?: FormEvent) => {
+    if (e) e.preventDefault();
+    if (!searchQuery.trim()) {
+      alert(t('searchPrompt'));
+      return;
+    }
+    performSearch(searchQuery);
+  };
+
+  const handleRecentSearchClick = (text: string) => {
+    setSearchQuery(text);
+    setIsDropdownOpen(false);
+    performSearch(text);
+  };
+
   return (
     <div className="flex justify-center mt-16 mb-8">
-      <div className="relative w-full max-w-[609px]">
+      <div className="relative w-full max-w-[609px]" ref={containerRef}>
         <form onSubmit={handleSearch} className="w-full">
-          <div className="flex items-center h-[80px] w-full bg-white rounded-[40px] shadow-[0px_4px_30px_rgba(0,0,0,0.25)]">
+          <div
+            className="flex items-center h-[80px] w-full bg-white rounded-[40px] shadow-[0px_4px_30px_rgba(0,0,0,0.25)]"
+            onMouseEnter={() => setIsDropdownOpen(true)}
+          >
             <input
               type="text"
               placeholder={t('searchPrompt')}
@@ -79,6 +121,30 @@ const SearchSection: React.FC = () => {
             </button>
           </div>
         </form>
+
+        <AnimatePresence>
+          {isDropdownOpen && recentSearches.length > 0 && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
+              className="absolute z-10 w-full bg-white rounded-b-[20px] shadow-lg max-h-60 overflow-y-auto"
+            >
+              <ul>
+                {recentSearches.map((item, index) => (
+                  <li
+                    key={index}
+                    className="px-4 py-2 cursor-pointer hover:bg-gray-100 text-gray-700 text-base"
+                    onMouseDown={() => handleRecentSearchClick(item.searchText)}
+                  >
+                    {item.searchText}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );
