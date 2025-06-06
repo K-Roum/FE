@@ -6,7 +6,6 @@ export const hashtagKeys = [
   "amusementpark",
   "cherryblossom",
   "movie",
-  "searchPrompt",
   "hanbok",
   "kdrama",
   "blackpink",
