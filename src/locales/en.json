@@ -7,6 +7,8 @@
   "currentLanguage": "Current Language",
   "close": "Close",
   "searchPrompt": "Enter search term",
+
+    "hashtag": {
   "tteokbokki": "Tteokbokki",
   "kpop": "K-pop",
   "bts": "BTS",
@@ -63,7 +65,8 @@
   "cafestreet": "Cafe Street",
   "beautysalon": "Beauty Salon",
   "kpopconcert": "K-pop Concert",
-  "nightmarket": "Night Market",
+  "nightmarket": "Night Market"}
+  ,
   
   "loginPage": {
     "title": "Login",

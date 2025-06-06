@@ -6,6 +6,8 @@
   "logout": "Déconnexion",
   "currentLanguage": "Langue actuelle",
   "close": "Fermer",
+
+    "hashtag": {
   "tteokbokki": "Tteokbokki",
   "kpop": "K-pop",
   "bts": "BTS",
@@ -67,7 +69,7 @@
   "cafestreet": "Rue des cafés",
   "beautysalon": "Salon de beauté",
   "kpopconcert": "Concert de K-pop",
-  "nightmarket": "Marché de nuit",
+  "nightmarket": "Marché de nuit"},
   
   "loginPage": {
     "title": "Connexion",

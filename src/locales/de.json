@@ -6,6 +6,8 @@
   "logout": "Abmelden",
   "currentLanguage": "Aktuelle Sprache",
   "close": "Schließen",
+
+  "hashtag": {
   "tteokbokki": "Tteokbokki",
   "kpop": "K-pop",
   "bts": "BTS",
@@ -67,8 +69,8 @@
   "cafestreet": "Café-Straße",
   "beautysalon": "Schönheitssalon",
   "kpopconcert": "K-Pop-Konzert",
-  "nightmarket": "Nachtmarkt",
-
+  "nightmarket": "Nachtmarkt"}
+,
   "loginPage": {
     "title": "Anmelden",
     "idPlaceholder": "Benutzername",

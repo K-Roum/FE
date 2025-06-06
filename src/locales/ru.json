@@ -6,6 +6,8 @@
    "logout": "Выйти",
    "currentLanguage": "Текущий язык",
    "close": "Закрыть",
+
+     "hashtag": {
    "tteokbokki": "Ттокпокки",
    "kpop": "K-pop",
    "bts": "BTS",
@@ -67,7 +69,7 @@
   "cafestreet": "улица кафе",
   "beautysalon": "салон красоты",
   "kpopconcert": "K-pop концерт",
-  "nightmarket": "ночной рынок",
+  "nightmarket": "ночной рынок"},
   "loginPage": {
     "title": "Вход",
     "idPlaceholder": "Логин",
