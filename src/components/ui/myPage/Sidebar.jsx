@@ -11,7 +11,7 @@ export default function Sidebar() {
       <div>
         <h2
             className="text-2xl font-bold mb-8 cursor-pointer hover:underline"
-            onClick={() => navigate('/my-page')}
+            onClick={() => navigate('/mypage')}
         >
             마이 페이지
         </h2>
