@@ -12,7 +12,7 @@ const getRandomItems = (arr, count) => {
 const TrendingHashtags = () => {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
-  const randomKeys = getRandomItems(hashtagKeys, 6);
+  const randomKeys = getRandomItems(hashtagKeys, 7);
   const hashtags = randomKeys.map((key) => ({
     key,
     label: t(`hashtag.${key}`),
@@ -50,21 +50,22 @@ const TrendingHashtags = () => {
   };
 
   return (
-    <div className="flex justify-center mb-12">
-      <div className="w-full max-w-[609px]">
-        <div className="flex flex-wrap text-[24px] font-['LG_PC'] leading-[28px]">
-          {hashtags.map(({ key, label }, index) => (
-            <button
-              key={index}
-              className="mr-2 mb-2 hover:text-[#0050ff] transition-colors duration-200"
-              onClick={() => handleClick(label)}
-            >
-              #{label}
-            </button>
-          ))}
-        </div>
-      </div>
+   <div className="flex justify-center mb-12">
+  <div className="w-full flex justify-center">
+    <div className="flex text-[24px] font-['LG_PC'] leading-[28px] whitespace-nowrap">
+      {hashtags.map(({ key, label }, index) => (
+        <button
+          key={index}
+          className="mr-2 hover:text-[#0050ff] transition-colors duration-200"
+          onClick={() => handleClick(label)}
+        >
+          #{label}
+        </button>
+      ))}
     </div>
+  </div>
+</div>
+
   );
 };
 
