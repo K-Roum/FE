@@ -27,9 +27,9 @@ export interface LoginRequest {
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: 'include', // ✅ 세션 유지에 반드시 필요
         body: JSON.stringify({ loginId, password }),
       });
-  
       const data = await response.json();
       console.log('서버 응답:', data);
 
