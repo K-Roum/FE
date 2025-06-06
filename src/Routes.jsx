@@ -15,6 +15,10 @@ import FindIdPage from './pages/Login/FindIdPage.jsx';
 import ResetPasswordPage from './pages/Login/ResetPasswordPage.jsx';
 import SignupPage from './pages/Signup/SignupPage.jsx';
 import SignupCompletePage from './pages/Signup/SignupCompletePage.jsx';
+import MyPage from './pages/MyPage/MyPage.jsx';
+import WishlistPage from './pages/MyPage/WishlistPage.jsx';
+import ReviewListPage from './pages/MyPage/ReviewListPage.jsx';
+import ProfileEditPage from './pages/MyPage/ProfileEditPage.jsx';
 
 const AppRoutes = () => {
   return (
@@ -31,6 +35,10 @@ const AppRoutes = () => {
         <Route path="/reset-password" element={<ResetPasswordPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/signup-complete" element={<SignupCompletePage />} />
+        <Route path="/mypage" element={<MyPage />} />
+        <Route path="/mypage/wishlist" element={<WishlistPage />} />
+        <Route path="/mypage/review-list" element={<ReviewListPage />} />
+        <Route path="/mypage/profile-edit" element={<ProfileEditPage />} />
       </Routes>
       <Footer />
     </Router>

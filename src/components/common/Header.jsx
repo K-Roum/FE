@@ -62,7 +62,19 @@ const Header = () => {
     checkLoginStatus();
   }, [location]);
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    try {
+      await fetch('http://localhost:8080/users/logout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          accept: '*/*',
+        },
+        credentials: 'include',
+      });
+    } catch (e) {
+      // 서버 에러 등 무시하고 클라이언트 상태만 정리
+    }
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
     localStorage.removeItem('nickname');
