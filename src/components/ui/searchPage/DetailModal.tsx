@@ -41,7 +41,7 @@ const handleBookmarkClick = async () => {
       headers: {
         "Content-Type": "application/json",
         accept: "*/*",
-      },
+      },   credentials: 'include',
     });
 
     console.log(item.summary.placeId);
@@ -69,7 +69,7 @@ const handleReviewSubmit = async (review: { rating: number; comment: string }) =
       headers: {
         "Content-Type": "application/json",
         accept: "*/*",
-      },
+      },   credentials: 'include',
       body: JSON.stringify({
         rating: review.rating,
         comment: review.comment,
