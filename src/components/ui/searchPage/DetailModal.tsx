@@ -44,6 +44,8 @@ const handleBookmarkClick = async () => {
       },
     });
 
+    console.log(item.summary.placeId);
+
     if (!response.ok) {
       console.error(`북마크 ${isBookmarked ? '취소' : '추가'} 실패:`, response.statusText);
       return;
