@@ -1,6 +1,6 @@
 import React from 'react';
 import SearchSection from '../../components/ui/homePage/SearchSection.tsx';
-import TrendingHashtags from '../../components/ui/homePage/TrendingHashtags';
+import TrendingHashtags from '../../components/ui/homePage/TrendingHashtags.tsx';
 import FeaturedContent from '../../components/ui/homePage/FeaturedContent';
 
 const HomePage = () => {
