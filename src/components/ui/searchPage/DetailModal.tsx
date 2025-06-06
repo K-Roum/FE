@@ -3,6 +3,7 @@ import { PlaceDetailModel } from '../../../model/PlaceDetailModel';
 import { SearchResultModel } from '../../../model/SearchResultModel';
 import ReviewForm from './ReviewForm.tsx';
 import i18n from "../../../i18n";
+import { b, body } from 'framer-motion/client';
 
 type DetailModalProps = {
   isOpen: boolean;
@@ -14,6 +15,7 @@ type DetailModalProps = {
 };
 
 const DetailModal = ({ isOpen, item, onClose }: DetailModalProps) => {
+  
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [showAllReviews, setShowAllReviews] = useState(false);
   const [showReviewForm, setShowReviewForm] = useState(false);
@@ -21,7 +23,7 @@ const DetailModal = ({ isOpen, item, onClose }: DetailModalProps) => {
   if (!isOpen || !item) return null;
 
   const { detail, summary } = item;
-
+console.log(item.summary.placeId);
   const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
       onClose();
@@ -41,7 +43,7 @@ const handleBookmarkClick = async () => {
       headers: {
         "Content-Type": "application/json",
         accept: "*/*",
-      },   credentials: 'include',
+      }, credentials: 'include',
     });
 
     console.log(item.summary.placeId);
@@ -61,6 +63,7 @@ const handleBookmarkClick = async () => {
     console.error('북마크 API 호출 중 오류 발생:', error);
   }
 };
+
 const handleReviewSubmit = async (review: { rating: number; comment: string }) => {
   const response = await fetch(
     `http://localhost:8080/reviews/${item.summary.placeId}?languageCode=${currentLang}`,
@@ -72,9 +75,11 @@ const handleReviewSubmit = async (review: { rating: number; comment: string }) =
       },   credentials: 'include',
       body: JSON.stringify({
         rating: review.rating,
-        comment: review.comment,
+        content: review.comment,
       }),
+
     }
+
   );
 
   if (!response.ok) {
@@ -229,8 +234,8 @@ const handleReviewSubmit = async (review: { rating: number; comment: string }) =
                     .map((review: any, index: number) => (
                       <div key={index} className="bg-gray-100 rounded-lg p-4">
                         <div className="flex justify-between items-center mb-2">
-                          <div className="font-medium text-gray-800">{review.author || "익명 사용자"}</div>
-                          <div className="text-sm text-gray-500">{review.date || "날짜 정보 없음"}</div>
+                          <div className="font-medium text-gray-800">{review.nickName || "익명 사용자"}</div>
+                          <div className="text-sm text-gray-500">{review.createdAt || "날짜 정보 없음"}</div>
                         </div>
                         <div className="flex items-center mb-2">
                           <div className="flex items-center">
@@ -238,7 +243,7 @@ const handleReviewSubmit = async (review: { rating: number; comment: string }) =
                             <span className="ml-2 text-sm text-gray-600">({review.rating ?? "?"}/5)</span>
                           </div>
                         </div>
-                        <p className="text-gray-700 text-sm">{review.comment || "내용 없음"}</p>
+                        <p className="text-gray-700 text-sm">{review.content || "내용 없음"}</p>
                       </div>
                     ))}
 

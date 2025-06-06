@@ -28,7 +28,7 @@ const SearchResultCard = ({ item, onCardClick }) => {
         headers: {
           "Content-Type": "application/json",
           accept: "*/*",
-        },   credentials: 'include',
+        }, credentials: 'include',
       });
 
       console.log(item.placeId);
