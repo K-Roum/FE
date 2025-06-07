@@ -3,7 +3,7 @@ export interface PlaceDetailModel {
     reviews: {
       totalCount: number;
       averageRating: number;
-      placesReviews: any[]; // 리뷰 객체 정의 시 타입 추가
+      placesReviews: PlaceReview[];
     };
     bookmark: {
       bookmarkCount: number;
@@ -26,3 +26,8 @@ export interface Recommendation {
   };
   distance: number;
 }
+export interface PlaceReview {
+  nickName: string;
+  content: string;
+  rating: number;
+  createdAt: string;}

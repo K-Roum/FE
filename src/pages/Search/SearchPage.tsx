@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import SearchResultCard from "../../components/ui/searchPage/SearchResultCard";
+import SearchResultCard from "../../components/ui/searchPage/SearchResultCard.jsx";
 import DetailModal from "../../components/ui/searchPage/DetailModal.tsx";
-import { SearchResultModel } from "../../model/SearchResultModel";
+import { SearchResultModel } from "../../model/SearchResultModel.ts";
 import { PlaceDetailModel, Recommendation } from "../../model/PlaceDetailModel.ts";
-import i18n from "../../i18n";
+import i18n from "../../i18n/index.js";
 
 // Declare kakao property on the Window interface
 declare global {
