@@ -351,6 +351,12 @@ import {
             </div>
           </div>
 
+          {passwordValidMessage && (
+            <p className={`text-sm mt-1 ${isPasswordValid ? 'text-green-600' : 'text-red-500'}`}>
+                {passwordValidMessage}
+            </p>
+          )}
+
           {/* 비밀번호 확인 */}
           <div className="h-[85px]">
             <label className="font-bold text-lg">{t('signupPage.confirmPassword')}</label>
@@ -370,12 +376,6 @@ import {
               </p>
             )}
           </div>
-
-          {passwordValidMessage && (
-            <p className={`text-sm mt-1 ${isPasswordValid ? 'text-green-600' : 'text-red-500'}`}>
-                {passwordValidMessage}
-            </p>
-          )}
 
           {/* 닉네임 */}
           <div className="h-[85px]">

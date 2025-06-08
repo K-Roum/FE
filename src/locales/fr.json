@@ -7,7 +7,16 @@
   "currentLanguage": "Langue actuelle",
   "close": "Fermer",
 
-    "hashtag": {
+  "sidebar": {
+    "myPageTitle": "Ma page",
+    "myCategoryTitle": "Mes catégories",
+    "wishlist": "Liste de souhaits",
+    "reviewList": "Liste des avis",
+    "accountManagementTitle": "Gestion du compte",
+    "profileEdit": "Modifier le profil"
+  },
+
+  "hashtag": {
   "tteokbokki": "Tteokbokki",
   "kpop": "K-pop",
   "bts": "BTS",
@@ -41,7 +50,7 @@
   "gyeongbokgung": "Palais Gyeongbokgung",
   "bukchon": "Village hanok de Bukchon",
   "jongmyo": "Sanctuaire Jongmyo",
-  "andong": "Village Hahoe d’Andong",
+  "andong": "Village Hahoe d'Andong",
   "jeonju": "Village hanok de Jeonju",
   "templestay": "Séjour en temple",
   "dmz": "Visite de la DMZ",
@@ -58,7 +67,7 @@
   "hanriver": "Rivière Han",
   "boseong": "Champs de thé vert de Boseong",
   "suncheon": "Baie de Suncheon",
-  "autumnleaves": "Feuilles d’automne",
+  "autumnleaves": "Feuilles d'automne",
 
   "karaoke": "Karaoké",
   "pcbang": "PC Bang (salle de jeux en réseau)",

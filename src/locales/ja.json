@@ -6,7 +6,17 @@
   "logout": "ログアウト",
   "currentLanguage": "現在の言語",
   "close": "閉じる",
-    "hashtag": {
+
+  "sidebar": {
+    "myPageTitle": "マイページ",
+    "myCategoryTitle": "マイカテゴリー",
+    "wishlist": "お気に入りリスト",
+    "reviewList": "レビューリスト",
+    "accountManagementTitle": "アカウント管理",
+    "profileEdit": "プロフィール編集"
+  },
+
+  "hashtag": {
   "tteokbokki": "トッポッキ",
   "kpop": "K-POP",
   "bts": "BTS",

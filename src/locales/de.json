@@ -7,6 +7,15 @@
   "currentLanguage": "Aktuelle Sprache",
   "close": "Schließen",
 
+  "sidebar": {
+    "myPageTitle": "Meine Seite",
+    "myCategoryTitle": "Meine Kategorien",
+    "wishlist": "Wunschliste",
+    "reviewList": "Bewertungsliste",
+    "accountManagementTitle": "Kontoverwaltung",
+    "profileEdit": "Profil bearbeiten"
+  },
+
   "hashtag": {
   "tteokbokki": "Tteokbokki",
   "kpop": "K-pop",

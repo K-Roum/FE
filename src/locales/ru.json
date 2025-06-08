@@ -7,6 +7,15 @@
    "currentLanguage": "Текущий язык",
    "close": "Закрыть",
 
+  "sidebar": {
+    "myPageTitle": "Моя страница",
+    "myCategoryTitle": "Мои категории",
+    "wishlist": "Список желаний",
+    "reviewList": "Список отзывов",
+    "accountManagementTitle": "Управление аккаунтом",
+    "profileEdit": "Редактировать профиль"
+  },
+
      "hashtag": {
    "tteokbokki": "Ттокпокки",
    "kpop": "K-pop",
