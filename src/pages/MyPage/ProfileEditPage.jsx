@@ -132,6 +132,7 @@ export default function ProfileEditPage() {
           headers: {
             'Content-Type': 'application/json',
             accept: '*/*',
+            credentials: 'include'
           },
           credentials: 'include',
           body: JSON.stringify({

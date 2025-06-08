@@ -6,6 +6,14 @@
   "logout": "Logout",
   "currentLanguage": "Current Language",
   "close": "Close",
+  "sidebar": {
+    "myPageTitle": "My Page",
+    "myCategoryTitle": "My Category",
+    "wishlist": "Wishlist",
+    "reviewList": "Review List",
+    "accountManagementTitle": "Account Management",
+    "profileEdit": "Profile Edit"
+  },
   "searchPrompt": "Enter search term",
   "hashtag": {
     "tteokbokki": "Tteokbokki",
@@ -71,12 +79,22 @@
     "idPlaceholder": "ID",
     "pwPlaceholder": "Password",
     "rememberMe": "Remember Me",
-    "findAccount": "Find ID/Password",
+    "findAccount": "Find Account",
     "loginButton": "Login",
     "signupButton": "Sign Up",
     "errorEmpty": "Please enter both ID and password.",
     "errorInvalid": "Login failed. Please check your ID and password.",
     "success": "Welcome, {{nickname}}!"
+  },
+
+  "reviewPreview": {
+    "title": "Reviews",
+    "noReviews": "No reviews registered yet."
+  },
+
+  "wishlistPreview": {
+    "title": "Wishlist",
+    "noWishlist": "No bookmarked places yet."
   },
 
   "findAccount": {

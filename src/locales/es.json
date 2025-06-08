@@ -7,7 +7,16 @@
   "currentLanguage": "Idioma actual",
   "close": "Cerrar",
 
-    "hashtag": {
+  "sidebar": {
+    "myPageTitle": "Mi página",
+    "myCategoryTitle": "Mis categorías",
+    "wishlist": "Lista de deseos",
+    "reviewList": "Lista de reseñas",
+    "accountManagementTitle": "Gestión de cuenta",
+    "profileEdit": "Editar perfil"
+  },
+
+  "hashtag": {
   "tteokbokki": "Tteokbokki",
   "kpop": "K-pop",
   "bts": "BTS",
