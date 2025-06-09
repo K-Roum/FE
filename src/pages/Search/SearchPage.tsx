@@ -22,7 +22,6 @@ type SelectedItemType = {
 const SearchPage = () => {
   const location = useLocation();
   const { results }: { results: SearchResultModel[] } = location.state || {};
-
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<SelectedItemType>(null);
   const [mapInstance, setMapInstance] = useState<any>(null); // 지도 인스턴스 상태 추가
@@ -144,7 +143,7 @@ const SearchPage = () => {
           headers: {
             "Content-Type": "application/json",
             accept: "*/*",
-          },
+          },credentials: 'include',
         }
       );
       const parsedResponse: PlaceDetailModel = await response.json();
