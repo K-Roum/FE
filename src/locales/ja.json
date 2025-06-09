@@ -7,6 +7,23 @@
   "currentLanguage": "現在の言語",
   "close": "閉じる",
 
+  "common": {
+    "noImage": "画像なし",
+    "address": "住所",
+    "noAddressInfo": "住所情報なし",
+    "details": "詳細",
+    "noDescriptionInfo": "説明情報なし",
+    "viewAll": "すべて見る",
+    "loading": "読み込み中...",
+    "likes": "いいね",
+    "reviews": "レビュー",
+    "averageRating": "平均評価",
+    "anonymousUser": "匿名ユーザー",
+    "noDateInfo": "日付情報なし",
+    "noContent": "内容なし",
+    "delete": "削除"
+  },
+
   "sidebar": {
     "myPageTitle": "マイページ",
     "myCategoryTitle": "マイカテゴリー",
@@ -201,5 +218,25 @@
     "title": "ようこそ！",
     "message": "登録が完了しました",
     "loginButton": "ログイン"
+  },
+
+  "wishlistPage": {
+    "title": "お気に入りリスト"
+  },
+
+  "reviewListPage": {
+    "title": "レビューリスト",
+    "noReviews": "まだレビューがありません",
+    "confirmDelete": "本当に削除しますか？"
+  },
+
+  "wishlistPreview": {
+    "title": "お気に入り",
+    "noWishlist": "お気に入りの場所はまだありません"
+  },
+
+  "reviewPreview": {
+    "title": "レビュー",
+    "noReviews": "まだレビューがありません"
   }
 }

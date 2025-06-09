@@ -7,6 +7,23 @@
    "currentLanguage": "Текущий язык",
    "close": "Закрыть",
 
+  "common": {
+    "noImage": "Нет изображения",
+    "address": "Адрес",
+    "noAddressInfo": "Нет информации об адресе",
+    "details": "Детали",
+    "noDescriptionInfo": "Нет описания",
+    "viewAll": "Показать все",
+    "loading": "Загрузка...",
+    "likes": "Нравится",
+    "reviews": "Отзывы",
+    "averageRating": "Средний рейтинг",
+    "anonymousUser": "Анонимный пользователь",
+    "noDateInfo": "Нет информации о дате",
+    "noContent": "Нет содержимого",
+    "delete": "Удалить"
+  },
+
   "sidebar": {
     "myPageTitle": "Моя страница",
     "myCategoryTitle": "Мои категории",
@@ -200,5 +217,25 @@
     "title": "ДОБРО ПОЖАЛОВАТЬ!",
     "message": "Регистрация успешно завершена",
     "loginButton": "Войти"
+  },
+
+  "wishlistPage": {
+    "title": "Список желаний"
+  },
+
+  "reviewListPage": {
+    "title": "Список отзывов",
+    "noReviews": "Пока нет отзывов",
+    "confirmDelete": "Вы уверены, что хотите удалить это?"
+  },
+
+  "wishlistPreview": {
+    "title": "Избранное",
+    "noWishlist": "Нет избранных мест"
+  },
+
+  "reviewPreview": {
+    "title": "Отзывы",
+    "noReviews": "Нет отзывов"
   }
 }

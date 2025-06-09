@@ -4,9 +4,8 @@ import MyPageLayout from './MyPageLayout';
 import WishlistPreview from '../../components/ui/myPage/WishlistPreview';
 import ReviewPreview from '../../components/ui/myPage/ReviewPreview';
 import ProfileInfo from '../../components/ui/myPage/ProfileInfo';
-import DetailModal from '../../components/ui/searchPage/DetailModal.tsx';
-// import { SearchResultModel } from '../../model/SearchResultModel';
-// import { PlaceDetailModel } from '../../model/PlaceDetailModel';
+import MyPageDetailModal from '../../components/ui/myPage/myPageDetailModal.tsx';
+
 import { useTranslation } from 'react-i18next';
 
 export default function MyPage() {
@@ -48,39 +47,48 @@ export default function MyPage() {
 
   // 아이템 클릭 핸들러 (찜 목록, 리뷰 목록 공통)
   const handleItemClick = async (item) => {
-    const currentLang = i18n.language.toLowerCase();
     try {
       const response = await fetch(
-        `http://localhost:8080/places/${item.placeId}/with-everything?languageCode=${currentLang}`,
+        `http://localhost:8080/users/${item.placeId}/details`,
         {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
             accept: '*/*',
           },
+          credentials: 'include',
         }
       );
       const parsedResponse = await response.json();
+      console.log("API 원본 응답:", parsedResponse);
 
       if (!response.ok) {
         throw new Error(`HTTP 오류, 상태 코드: ${response.status}`);
       }
 
-      // DetailModal에 필요한 summary 데이터 구조 생성
-      const summaryData = {
+      // 백엔드 DTO에 따라 placeDetails 객체 접근
+      const placeDetailsFromApi = parsedResponse.placeDetails;
+      console.log("placeDetailsFromApi 객체:", placeDetailsFromApi);
+
+      // placeDetails가 유효한지 확인
+      if (!placeDetailsFromApi) {
+        console.error('API 응답에 placeDetails 객체가 없습니다:', parsedResponse);
+        return; // 함수 실행 중단
+      }
+
+      // MyPageDetailModal에 필요한 item 데이터 구조 생성 (새 API 응답 및 DTO에 맞춤)
+      const itemForModal = {
         placeId: parsedResponse.placeId,
         placeName: parsedResponse.placeName,
-        firstImageUrl: parsedResponse.firstImageUrl || '', // 이미지 없으면 빈 문자열
-        address: parsedResponse.details.address || '', // 주소 정보
-        description: parsedResponse.details.description || '', // 설명 정보
-        latitude: parsedResponse.latitude || 0,
-        longitude: parsedResponse.longitude || 0,
+        firstImageUrl: parsedResponse.firstImageUrl || '',
+        address: parsedResponse.address || '',
+        description: parsedResponse.description || '',
+        bookmarked: parsedResponse.bookmarked,
+        reviews: placeDetailsFromApi.reviews, // placeDetails 내부의 reviews 사용
+        bookmark: placeDetailsFromApi.bookmark, // placeDetails 내부의 bookmark 사용
       };
 
-      setSelectedItem({
-        detail: parsedResponse,
-        summary: summaryData,
-      });
+      setSelectedItem(itemForModal);
       setIsModalOpen(true);
     } catch (error) {
       console.error('장소 상세 정보 요청 실패:', error);
@@ -105,7 +113,7 @@ export default function MyPage() {
       )}
 
       {/* 상세 모달 */}
-      <DetailModal
+      <MyPageDetailModal
         isOpen={isModalOpen}
         item={selectedItem}
         onClose={handleCloseModal}

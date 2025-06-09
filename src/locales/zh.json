@@ -7,6 +7,23 @@
     "currentLanguage": "当前语言",
     "close": "关闭",
 
+    "common": {
+        "noImage": "无图片",
+        "address": "地址",
+        "noAddressInfo": "无地址信息",
+        "details": "详情",
+        "noDescriptionInfo": "无描述信息",
+        "viewAll": "查看全部",
+        "loading": "加载中...",
+        "likes": "喜欢",
+        "reviews": "评论",
+        "averageRating": "平均评分",
+        "anonymousUser": "匿名用户",
+        "noDateInfo": "无日期信息",
+        "noContent": "无内容",
+        "delete": "删除"
+    },
+
     "sidebar": {
         "myPageTitle": "我的页面",
         "myCategoryTitle": "我的分类",
@@ -198,5 +215,25 @@
         "title": "欢迎！",
         "message": "注册成功",
         "loginButton": "登录"
+    },
+
+    "wishlistPage": {
+        "title": "收藏列表"
+    },
+
+    "reviewListPage": {
+        "title": "评论列表",
+        "noReviews": "暂无评论",
+        "confirmDelete": "确定要删除吗？"
+    },
+
+    "wishlistPreview": {
+        "title": "收藏",
+        "noWishlist": "暂无收藏地点"
+    },
+
+    "reviewPreview": {
+        "title": "评论",
+        "noReviews": "暂无评论"
     }
 }
