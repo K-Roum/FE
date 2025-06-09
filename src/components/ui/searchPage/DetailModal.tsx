@@ -4,6 +4,7 @@ import { SearchResultModel } from "../../../model/SearchResultModel";
 import ReviewForm from "./ReviewForm.tsx";
 import i18n from "../../../i18n";
 import { b, body } from "framer-motion/client";
+import { useEffect } from "react";
 
 type DetailModalProps = {
   isOpen: boolean;
@@ -15,10 +16,18 @@ type DetailModalProps = {
 };
 
 const DetailModal = ({ isOpen, item, onClose }: DetailModalProps) => {
-  const [isBookmarked, setIsBookmarked] = useState(false);
+  const [isBookmarked, setIsBookmarked] = useState(item?.detail.details.bookmark.bookmarked || false);
+  console.log("북마크 상태:", isBookmarked);
   const [showAllReviews, setShowAllReviews] = useState(false);
   const [showReviewForm, setShowReviewForm] = useState(false);
   const currentLang = i18n.language.toLowerCase();
+
+  useEffect(() => {
+  if (item) {
+    setIsBookmarked(item.detail.details.bookmark.bookmarked);
+  }
+}, [item]);
+
   if (!isOpen || !item) return null;
 
   const { detail, summary } = item;

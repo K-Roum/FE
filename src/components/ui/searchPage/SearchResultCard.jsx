@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 
-const SearchResultCard = ({ item, onCardClick }) => {
+const SearchResultCard = ({item, onCardClick }) => {
   const [isBookmarked, setIsBookmarked] = useState(item.bookmarked ?? false);
-
+  console.log("여기야");
+  console.log(item.placeId);
+console.log(item.bookmarked);
+console.log(isBookmarked);
+console.log(item);
   useEffect(() => {
     if (item.bookmarked !== isBookmarked) {
       setIsBookmarked(item.bookmarked ?? false);
@@ -46,6 +50,7 @@ const SearchResultCard = ({ item, onCardClick }) => {
 
       // 성공 메시지 (선택사항)
       console.log(`북마크가 ${isBookmarked ? "취소" : "추가"}되었습니다.`);
+      console.log(isBookmarked);
     } catch (error) {
       console.error("북마크 API 호출 중 오류 발생:", error);
     }

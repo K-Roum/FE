@@ -15,7 +15,7 @@ const SearchSection: React.FC = () => {
   useEffect(() => {
     const fetchRecentSearches = async () => {
       try {
-        const response = await fetch('http://localhost:8080/search-history');
+        const response = await fetch('http://localhost:8080/search-history',{credentials: 'include'});
         if (!response.ok) {
           throw new Error(`서버 오류: ${response.status}`);
         }
@@ -51,7 +51,7 @@ const SearchSection: React.FC = () => {
         headers: {
           'Content-Type': 'application/json',
           accept: '*/*',
-        },
+        },credentials: 'include',
         body: JSON.stringify({
           query: query,
           languageCode: currentLang,
