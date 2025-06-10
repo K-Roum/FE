@@ -3,6 +3,7 @@ import SearchSection from '../../components/ui/homePage/SearchSection.tsx';
 import TrendingHashtags from '../../components/ui/homePage/TrendingHashtags.tsx';
 import FeaturedContent from '../../components/ui/homePage/FeaturedContent';
 import i18n from '../../i18n';
+
 const HomePage = () => {
   const [imagePreviewData, setImagePreviewData] = useState(null);
   const currentLang = i18n.language.toLowerCase();
@@ -23,7 +24,7 @@ const HomePage = () => {
       }
     };
     fetchImagePreview();
-  }, []);
+  }, [currentLang]); 
 
   return (
     <div className="min-h-screen bg-white">

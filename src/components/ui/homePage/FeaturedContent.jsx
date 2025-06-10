@@ -1,6 +1,47 @@
 import React from 'react';
+import i18n from '../../../i18n';
+import { useNavigate } from 'react-router-dom';
 
 const FeaturedContent = ({ data }) => {
+  const navigate = useNavigate();
+  const currentLang = i18n.language?.toLowerCase() || 'ko';
+
+  const handleImageClick = async (placeId) => {
+    try {
+      const response = await fetch(
+        `http://localhost:8080/places/${placeId}/with-everything-by-image?languageCode=${currentLang}`,
+        { credentials: 'include' }
+      );
+      if (!response.ok) {
+        throw new Error(`서버 오류: ${response.status}`);
+      }
+
+      const result = await response.json();
+console.log(result);
+      // SearchResultModel 형태로 변환
+      const searchResultModel = {
+          latitude: result.placeDto.latitude,
+  longitude: result.placeDto.longitude,
+  firstImageUrl: result.placeDto.firstImageUrl,
+  placeName: result.placeDto.placeName,
+  description: result.placeDto.description,
+  address:  result.placeDto.address,
+  bookmarked: result.placeDto.bookmarked,
+  placeId: result.placeDto.placeId,
+       
+        // 필요한 경우 추가 필드 작성
+      };
+console.log(searchResultModel);
+      // 배열로 전달 (SearchPage에서 results로 받기 위함)
+      navigate('/searchPage', {
+        state: { results: [searchResultModel] },
+      });
+
+    } catch (error) {
+      console.error('상세 정보 불러오기 실패:', error);
+    }
+  };
+
   if (!data || !Array.isArray(data) || data.length === 0) {
     return (
       <div className="text-center text-gray-400 py-12">
@@ -12,7 +53,11 @@ const FeaturedContent = ({ data }) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
       {data.map((item, idx) => (
-        <div key={item.id || idx} className="cursor-pointer transform transition-transform hover:scale-105">
+        <div
+          key={item.id || idx}
+          className="cursor-pointer transform transition-transform hover:scale-105"
+          onClick={() => handleImageClick(item.placeId)}
+        >
           <img
             src={item.image || item.imageUrl}
             alt={item.alt || item.title || '추천 이미지'}
