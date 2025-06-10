@@ -7,6 +7,23 @@
   "currentLanguage": "Aktuelle Sprache",
   "close": "Schließen",
 
+  "common": {
+    "noImage": "Kein Bild",
+    "address": "Adresse",
+    "noAddressInfo": "Keine Adressinformationen",
+    "details": "Details",
+    "noDescriptionInfo": "Keine Beschreibung verfügbar",
+    "viewAll": "Alle anzeigen",
+    "loading": "Wird geladen...",
+    "likes": "Gefällt mir",
+    "reviews": "Bewertungen",
+    "averageRating": "Durchschnittliche Bewertung",
+    "anonymousUser": "Anonymer Benutzer",
+    "noDateInfo": "Keine Datumsinformationen",
+    "noContent": "Kein Inhalt",
+    "delete": "Löschen"
+  },
+
   "sidebar": {
     "myPageTitle": "Meine Seite",
     "myCategoryTitle": "Meine Kategorien",
@@ -193,5 +210,25 @@
     "title": "WILLKOMMEN!",
     "message": "Registrierung erfolgreich abgeschlossen",
     "loginButton": "Anmelden"
+  },
+
+  "wishlistPage": {
+    "title": "Wunschliste"
+  },
+
+  "reviewListPage": {
+    "title": "Bewertungsliste",
+    "noReviews": "Noch keine Bewertungen",
+    "confirmDelete": "Möchten Sie dies wirklich löschen?"
+  },
+
+  "wishlistPreview": {
+    "title": "Favoriten",
+    "noWishlist": "Noch keine Orte in den Favoriten"
+  },
+
+  "reviewPreview": {
+    "title": "Bewertungen",
+    "noReviews": "Noch keine Bewertungen"
   }
 }
