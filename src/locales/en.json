@@ -6,6 +6,24 @@
   "logout": "Logout",
   "currentLanguage": "Current Language",
   "close": "Close",
+
+  "common": {
+    "noImage": "No Image",
+    "address": "Address",
+    "noAddressInfo": "No address information",
+    "details": "Details",
+    "noDescriptionInfo": "No description available",
+    "viewAll": "View All",
+    "loading": "Loading...",
+    "likes": "Likes",
+    "reviews": "Reviews",
+    "averageRating": "Average Rating",
+    "anonymousUser": "Anonymous User",
+    "noDateInfo": "No date information",
+    "noContent": "No content",
+    "delete": "Delete"
+  },
+
   "sidebar": {
     "myPageTitle": "My Page",
     "myCategoryTitle": "My Category",
@@ -31,15 +49,11 @@
     "kfashion": "K-Fashion",
     "hallyu": "Hallyu",
     "kpopdance": "K-pop Dance",
-    "webtoon": "Webtoon",
     "idol": "Idol",
     "kimchi": "Kimchi",
     "samgyeopsal": "Samgyeopsal",
     "bulgogi": "Bulgogi",
     "japchae": "Japchae",
-    "soju": "Soju",
-    "makgeolli": "Makgeolli",
-    "hotteok": "Hotteok",
     "koreanbbq": "Korean BBQ",
     "ramyeon": "Ramyeon",
     "streetfood": "Street Food",
@@ -53,22 +67,17 @@
     "palace": "Palace",
     "hanok": "Hanok",
     "seochon": "Seochon",
-    "nseoultower": "N Seoul Tower",
     "jeju": "Jeju Island",
     "busan": "Busan",
     "seoraksan": "Seoraksan",
     "namiisland": "Nami Island",
-    "gardenofthemorningcalm": "Garden of the Morning Calm",
     "hanriver": "Han River",
     "boseong": "Boseong Green Tea Fields",
     "suncheon": "Suncheon Bay",
     "autumnleaves": "Autumn Leaves",
-    "karaoke": "Karaoke",
-    "pcbang": "PC Bang",
     "jjimjilbang": "Jjimjilbang",
     "koreanmart": "Korean Mart",
     "themepark": "Theme Park",
-    "noraebang": "Noraebang",
     "cafestreet": "Cafe Street",
     "beautysalon": "Beauty Salon",
     "kpopconcert": "K-pop Concert",
@@ -89,12 +98,12 @@
 
   "reviewPreview": {
     "title": "Reviews",
-    "noReviews": "No reviews registered yet."
+    "noReviews": "No reviews yet"
   },
 
   "wishlistPreview": {
     "title": "Wishlist",
-    "noWishlist": "No bookmarked places yet."
+    "noWishlist": "No places in wishlist yet"
   },
 
   "findAccount": {
@@ -205,5 +214,15 @@
     "title": "WELCOME!",
     "message": "Sign up completed successfully.",
     "loginButton": "Login"
+  },
+
+  "wishlistPage": {
+    "title": "Wishlist"
+  },
+
+  "reviewListPage": {
+    "title": "Review List",
+    "noReviews": "No reviews registered yet.",
+    "confirmDelete": "Are you sure you want to delete this?"
   }
 }

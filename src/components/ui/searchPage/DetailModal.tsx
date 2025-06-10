@@ -55,7 +55,6 @@ const DetailModal = ({ isOpen, item, onClose }: DetailModalProps) => {
         credentials: "include",
       });
 
-      console.log(item.summary.placeId);
 
       if (!response.ok) {
         console.error(
@@ -70,6 +69,7 @@ const DetailModal = ({ isOpen, item, onClose }: DetailModalProps) => {
 
       // 성공 메시지 (선택사항)
       console.log(`북마크가 ${isBookmarked ? "취소" : "추가"}되었습니다.`);
+      console.log(response);
     } catch (error) {
       console.error("북마크 API 호출 중 오류 발생:", error);
     }
@@ -94,12 +94,21 @@ const DetailModal = ({ isOpen, item, onClose }: DetailModalProps) => {
         }),
       }
     );
+    const responseBody = await response.json();
+    console.log(responseBody);
 
     if (!response.ok) {
       console.error("리뷰 제출 실패:", response.statusText);
       return;
     }
-    const result = await response.json();
+
+    // 리뷰 목록 새로고침: detail.details.reviews를 responseBody로 교체
+    item.detail.details.reviews = responseBody;
+    // 상태 업데이트를 위해 강제로 리렌더링
+    setShowReviewForm(false);
+    setShowAllReviews(true); // 필요하다면 전체 리뷰 보기로 전환
+
+    // 또는 상태를 새로 만들어서 setState로 갱신하는 방식도 가능
   };
 
   const handleReviewCancel = () => {
@@ -287,6 +296,8 @@ const DetailModal = ({ isOpen, item, onClose }: DetailModalProps) => {
               detail.details.reviews.placesReviews.length > 0 ? (
                 <>
                   {detail.details.reviews.placesReviews
+                    .slice() // 원본 배열 복사
+                    .reverse() // 최신순 정렬
                     .slice(
                       0,
                       showAllReviews
@@ -326,7 +337,7 @@ const DetailModal = ({ isOpen, item, onClose }: DetailModalProps) => {
                     !showAllReviews && (
                       <button
                         onClick={() => setShowAllReviews(true)}
-                        className="text-blue-600 text-sm mt-2 hover:underline focus:outline-none"
+                        className="text-black-600 text-sm mt-2 hover:underline focus:outline-none"
                       >
                         리뷰 더보기
                       </button>

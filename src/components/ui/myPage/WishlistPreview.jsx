@@ -7,7 +7,7 @@ export default function WishlistPreview({ bookmarks = [], isFull = false, onItem
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-  const displayList = isFull ? bookmarks : bookmarks.slice(0, 4);
+  const displayList = isFull ? bookmarks : bookmarks.slice(0, 5);
 
   return (
     <section className="mb-12 pb-8">
@@ -29,30 +29,29 @@ export default function WishlistPreview({ bookmarks = [], isFull = false, onItem
       {bookmarks.length === 0 ? (
         <p className="text-gray-500 text-center mt-20">{t('wishlistPreview.noWishlist')}</p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
           {displayList.map((item, index) => (
             <div
               key={index}
-              className="flex flex-col items-center border rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow cursor-pointer"
+              className="flex flex-col items-center border rounded-xl shadow-sm hover:shadow-md transition-shadow cursor-pointer"
               onClick={() => onItemClick && onItemClick(item)}
             >
-              {item.firstImageUrl ? (
-                <img
-                  src={item.firstImageUrl}
-                  alt={item.placeName}
-                  className="w-32 h-32 object-cover rounded mb-2"
-                  onError={e => { e.target.onerror = null; e.target.src = '/default-image.png'; }}
-                />
-              ) : (
-                <img
-                  src={'/default-image.png'}
-                  alt="no-img"
-                  className="w-32 h-32 object-cover rounded mb-2"
-                />
-              )}
-              <div className="flex items-center gap-2">
-                <p className="font-medium text-center">{item.placeName}</p>
-                <span role="img" aria-label="찜">❤️</span>
+              <div className="w-full h-40 rounded-t-xl overflow-hidden">
+                {item.firstImageUrl ? (
+                  <img
+                    src={item.firstImageUrl}
+                    alt={item.placeName}
+                    className="w-full h-full object-cover"
+                    onError={e => { e.target.onerror = null; e.target.src = '/default-image.png'; }}
+                  />
+                ) : (
+                  <div className="w-full h-full bg-gray-200 flex items-center justify-center rounded-t-xl text-gray-400">
+                    <span>{t('common.noImage')}</span>
+                  </div>
+                )}
+              </div>
+              <div className="flex justify-between items-center w-full p-4">
+                <p className="font-medium text-left flex-1 truncate text-lg">{item.placeName}</p>
               </div>
             </div>
           ))}
