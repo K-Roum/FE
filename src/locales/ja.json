@@ -6,7 +6,7 @@
   "logout": "ログアウト",
   "currentLanguage": "現在の言語",
   "close": "閉じる",
-
+  "searchPrompt": "検索語を入力してください。",
   "sidebar": {
     "myPageTitle": "マイページ",
     "myCategoryTitle": "マイカテゴリー",
@@ -24,7 +24,7 @@
   "amusementpark": "遊園地",
   "cherryblossom": "桜",
   "movie": "映画",
-  "searchPrompt": "検索語を入力してください。",
+
 "hanbok": "ハンボク (韓服)",
   "kdrama": "韓国ドラマ",
   "blackpink": "BLACKPINK",

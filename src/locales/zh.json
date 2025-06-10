@@ -6,7 +6,7 @@
     "logout": "退出登录",
     "currentLanguage": "当前语言",
     "close": "关闭",
-
+        "searchPrompt": "请输入搜索词",
     "sidebar": {
         "myPageTitle": "我的页面",
         "myCategoryTitle": "我的分类",
@@ -24,7 +24,7 @@
         "amusementpark": "游乐园",
         "cherryblossom": "樱花",
         "movie": "电影",
-        "searchPrompt": "请输入搜索词",
+
         "hanbok": "韩服",
         "kdrama": "韩剧",
         "blackpink": "BLACKPINK",

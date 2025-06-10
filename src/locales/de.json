@@ -6,7 +6,7 @@
   "logout": "Abmelden",
   "currentLanguage": "Aktuelle Sprache",
   "close": "Schließen",
-
+  "searchPrompt": "Suchbegriff eingeben", 
   "sidebar": {
     "myPageTitle": "Meine Seite",
     "myCategoryTitle": "Meine Kategorien",

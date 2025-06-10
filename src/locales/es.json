@@ -6,7 +6,7 @@
   "logout": "Cerrar sesión",
   "currentLanguage": "Idioma actual",
   "close": "Cerrar",
-
+  "searchPrompt": "Ingrese término de búsqueda",
   "sidebar": {
     "myPageTitle": "Mi página",
     "myCategoryTitle": "Mis categorías",
@@ -24,7 +24,7 @@
   "amusementpark": "Parque de atracciones",
   "cherryblossom": "Flor de cerezo",
   "movie": "Película",
-  "searchPrompt": "Ingrese término de búsqueda",
+
   "hanbok": "Hanbok",
   "kdrama": "K-Drama",
   "blackpink": "BLACKPINK",
