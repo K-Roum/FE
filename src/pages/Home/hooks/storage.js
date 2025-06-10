@@ -18,7 +18,6 @@ export const hashtagKeys = [
   "kimchi",
   "samgyeopsal",
   "bulgogi",
-  "japchae",
   "makgeolli",
   "koreanbbq",
   "ramyeon",
