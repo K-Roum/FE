@@ -13,9 +13,10 @@ type DetailModalProps = {
     summary: SearchResultModel;
   } | null;
   onClose: () => void;
+  handleBookmarkClick: () => void;
 };
 
-const DetailModal = ({ isOpen, item, onClose }: DetailModalProps) => {
+const DetailModal = ({ isOpen, item, onClose,handleBookmarkClick }: DetailModalProps) => {
   const [isBookmarked, setIsBookmarked] = useState(item?.detail.details.bookmark.bookmarked || false);
   console.log("북마크 상태:", isBookmarked);
   const [showAllReviews, setShowAllReviews] = useState(false);
@@ -35,43 +36,6 @@ const DetailModal = ({ isOpen, item, onClose }: DetailModalProps) => {
   const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
       onClose();
-    }
-  };
-
-  const handleBookmarkClick = async () => {
-    try {
-      const endpoint = isBookmarked
-        ? `http://localhost:8080/bookmarks/${item.summary.placeId}` // 북마크 취소
-        : `http://localhost:8080/bookmarks/${item.summary.placeId}`; // 북마크 추가
-
-      const method = isBookmarked ? "DELETE" : "POST";
-
-      const response = await fetch(endpoint, {
-        method: method,
-        headers: {
-          "Content-Type": "application/json",
-          accept: "*/*",
-        },
-        credentials: "include",
-      });
-
-
-      if (!response.ok) {
-        console.error(
-          `북마크 ${isBookmarked ? "취소" : "추가"} 실패:`,
-          response.statusText
-        );
-        return;
-      }
-
-      // API 호출이 성공하면 상태 업데이트
-      setIsBookmarked(!isBookmarked);
-
-      // 성공 메시지 (선택사항)
-      console.log(`북마크가 ${isBookmarked ? "취소" : "추가"}되었습니다.`);
-      console.log(response);
-    } catch (error) {
-      console.error("북마크 API 호출 중 오류 발생:", error);
     }
   };
 

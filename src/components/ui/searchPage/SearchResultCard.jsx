@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const SearchResultCard = ({item, onCardClick }) => {
+const SearchResultCard = ({ item, onCardClick,handleBookmarkClick }) => {
   const [isBookmarked, setIsBookmarked] = useState(item.bookmarked ?? false);
 
   useEffect(() => {
@@ -11,48 +11,6 @@ const SearchResultCard = ({item, onCardClick }) => {
 
   const handleCardClick = async () => {
     onCardClick(item);
-  };
-
-  const handleBookmarkClick = async (e) => {
-    e.stopPropagation(); // 부모 클릭 방지
-
-    try {
-      const endpoint = isBookmarked
-        ? `http://localhost:8080/bookmarks/${item.placeId}` // 북마크 취소
-        : `http://localhost:8080/bookmarks/${item.placeId}`; // 북마크 추가
-
-      const method = isBookmarked ? "DELETE" : "POST";
-
-      const response = await fetch(endpoint, {
-        method: method,
-        headers: {
-          "Content-Type": "application/json",
-          accept: "*/*",
-        }, credentials: 'include',
-      });
- console.log("냥냥냥");
-console.log(response);
-const responseBody = await response.json();
-console.log(responseBody);
-console.log(item.placeId);
-      if (!response.ok) {
-        console.error(
-          `북마크 ${isBookmarked ? "취소" : "추가"} 실패:`,
-          response.statusText
-        );
-        return;
-      }
-
-      // API 호출이 성공하면 상태 업데이트
-      setIsBookmarked(!isBookmarked);
-
-      // 성공 메시지 (선택사항)
-      console.log(`북마크가 ${isBookmarked ? "취소" : "추가"}되었습니다.`);
- 
-      console.log(isBookmarked);
-    } catch (error) {
-      console.error("북마크 API 호출 중 오류 발생:", error);
-    }
   };
 
   return (

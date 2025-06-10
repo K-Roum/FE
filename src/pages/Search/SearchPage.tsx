@@ -13,7 +13,7 @@ declare global {
   }
 }
 
-// selectedItem 타입 정의 (detail + summary)
+// selectedItem 타입 정의
 type SelectedItemType = {
   detail: PlaceDetailModel;
   summary: SearchResultModel;
@@ -28,9 +28,7 @@ const SearchPage = () => {
   const [markers, setMarkers] = useState<any[]>([]); // 마커들을 관리하는 상태 추가
   const [displayResults, setDisplayResults] = useState<SearchResultModel[]>(results || []); // 현재 표시 중인 결과
   const [isShowingRecommendations, setIsShowingRecommendations] = useState(false); // 추천 장소 표시 여부
-
-  useEffect(() => {
-    const initMap = () => {
+ const initMap = () => {
       const container = document.getElementById("map");
       const options = {
         center: new window.kakao.maps.LatLng(36, 127.5),
@@ -41,7 +39,7 @@ const SearchPage = () => {
       // 지도 인스턴스를 상태에 저장
       setMapInstance(map);
     };
-
+  useEffect(() => {
     if (window.kakao && window.kakao.maps) {
       initMap();
       return;
@@ -177,6 +175,41 @@ const SearchPage = () => {
     setIsModalOpen(false);
     setSelectedItem(null);
   };
+  
+  const handleBookmarkClick = async (e) => {
+    e.stopPropagation(); // 부모 클릭 방지
+
+    try {
+      const endpoint = selectedItem?.summary.placeId
+        ? `http://localhost:8080/bookmarks/${selectedItem?.summary.placeId}` // 북마크 취소
+        : `http://localhost:8080/bookmarks/${selectedItem?.summary.placeId}`; // 북마크 추가
+
+      const method = selectedItem?.detail.details.bookmark ? "DELETE" : "POST";
+
+      const response = await fetch(endpoint, {
+        method: method,
+        headers: {
+          "Content-Type": "application/json",
+          accept: "*/*",
+        },
+        credentials: "include",
+      });
+      const responseBody = await response.json();
+      console.log(responseBody);
+      console.log(selectedItem?.summary.placeId);
+      if (!response.ok) {
+        console.error(
+          `북마크 ${selectedItem?.detail.details.bookmark ? "취소" : "추가"} 실패:`,
+          response.statusText
+        );
+        return;
+      }
+      console.log(`북마크가 ${selectedItem?.detail.details.bookmark ? "취소" : "추가"}되었습니다.`);
+    } catch (error) {
+      console.error("북마크 API 호출 중 오류 발생:", error);
+    }
+  };
+
 
   return (
     <div className="flex h-screen">
@@ -197,7 +230,7 @@ const SearchPage = () => {
             <ul className="space-y-6">
               {displayResults.map((item, index) => (
                 <li key={index}>
-                  <SearchResultCard item={item} onCardClick={handleCardClick} />
+                  <SearchResultCard item={item} onCardClick={handleCardClick} handleBookmarkClick={handleBookmarkClick}/>
                 </li>
               ))}
             </ul>
@@ -214,6 +247,7 @@ const SearchPage = () => {
         isOpen={isModalOpen}
         item={selectedItem}
         onClose={handleCloseModal}
+        handleBookmarkClick={handleBookmarkClick}
       />
     </div>
   );
