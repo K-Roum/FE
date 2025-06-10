@@ -7,6 +7,9 @@
     "currentLanguage": "当前语言",
     "close": "关闭",
 
+        "searchPrompt": "请输入搜索词",
+
+
     "common": {
         "noImage": "无图片",
         "address": "地址",
@@ -23,6 +26,7 @@
         "noContent": "无内容",
         "delete": "删除"
     },
+
 
     "sidebar": {
         "myPageTitle": "我的页面",
@@ -41,7 +45,7 @@
         "amusementpark": "游乐园",
         "cherryblossom": "樱花",
         "movie": "电影",
-        "searchPrompt": "请输入搜索词",
+
         "hanbok": "韩服",
         "kdrama": "韩剧",
         "blackpink": "BLACKPINK",

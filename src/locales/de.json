@@ -7,6 +7,9 @@
   "currentLanguage": "Aktuelle Sprache",
   "close": "Schließen",
 
+  "searchPrompt": "Suchbegriff eingeben", 
+
+
   "common": {
     "noImage": "Kein Bild",
     "address": "Adresse",

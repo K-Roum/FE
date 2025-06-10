@@ -7,6 +7,9 @@
    "currentLanguage": "Текущий язык",
    "close": "Закрыть",
 
+   "searchPrompt": "Введите поисковый запрос",
+
+
   "common": {
     "noImage": "Нет изображения",
     "address": "Адрес",
@@ -41,7 +44,7 @@
    "amusementpark": "Парк развлечений",
    "cherryblossom": "Цветение сакуры",
    "movie": "Фильм",
-   "searchPrompt": "Введите поисковый запрос",
+
  "hanbok": "ханбок",
   "kdrama": "корейская драма",
   "blackpink": "BLACKPINK",
