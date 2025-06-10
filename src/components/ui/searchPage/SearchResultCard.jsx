@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 
-const SearchResultCard = ({ item, onCardClick,handleBookmarkClick }) => {
-  const [isBookmarked, setIsBookmarked] = useState(item.bookmarked ?? false);
-
+const SearchResultCard = ({ item, onCardClick, handleBookmarkClick }) => {
+  const [isBookmarked, setIsBookmarked] = useState(item.bookmarked);
   useEffect(() => {
     if (item.bookmarked !== isBookmarked) {
       setIsBookmarked(item.bookmarked ?? false);
     }
-  }, [item.bookmarked]);
+  }, [item.bookmarked, isBookmarked]);
 
   const handleCardClick = async () => {
     onCardClick(item);
@@ -45,7 +44,7 @@ const SearchResultCard = ({ item, onCardClick,handleBookmarkClick }) => {
               {/* 찜 버튼 */}
               <div className="flex space-x-2 ml-2">
                 <button
-                  onClick={handleBookmarkClick}
+                  onClick={(e) => handleBookmarkClick(e, item)}
                   className={`p-2 rounded-full hover:bg-gray-100 transition-colors 
                     ${isBookmarked ? "text-red-500" : "text-gray-400"} 
                     focus:outline-none focus:ring-0`}

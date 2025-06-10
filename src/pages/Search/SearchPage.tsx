@@ -6,6 +6,7 @@ import MapComponent, { MapComponentRef } from "../../components/ui/searchPage/Ma
 import { SearchResultModel } from "../../model/SearchResultModel.ts";
 import { PlaceDetailModel } from "../../model/PlaceDetailModel.ts";
 import i18n from "../../i18n/index.js";
+import { fetchPlaceDetail, toggleBookmark } from "../../services/SearchApi.ts";
 
 // selectedItem 타입 정의
 type SelectedItemType = {
@@ -30,22 +31,9 @@ const SearchPage = () => {
     try {
       // 먼저 지도 중심을 클릭한 장소로 이동
       mapRef.current?.centerMapOnLocation(item.latitude, item.longitude);
-      
-      const response = await fetch(
-        `http://localhost:8080/places/${item.placeId}/with-everything?languageCode=${currentLang}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            accept: "*/*",
-          },
-          credentials: 'include',
-        }
-      );
-      const parsedResponse: PlaceDetailModel = await response.json();
-      if (!response.ok) {
-        throw new Error(`HTTP 오류, 상태 코드: ${response.status}`);
-      }
+
+      const parsedResponse = await fetchPlaceDetail(item.placeId, currentLang);
+
       setSelectedItem({
         detail: parsedResponse,
         summary: item,
@@ -79,28 +67,14 @@ const SearchPage = () => {
     e.stopPropagation(); // 부모 클릭 방지
 
     try {
-      const endpoint = item.placeId
-        ? `http://localhost:8080/bookmarks/${item.placeId}` // 북마크 취소
-        : `http://localhost:8080/bookmarks/${item.placeId}`; // 북마크 추가
-
-      const method = item.bookmarked ? "DELETE" : "POST";
-
-      const response = await fetch(endpoint, {
-        method: method,
-        headers: {
-          "Content-Type": "application/json",
-          accept: "*/*",
-        },
-        credentials: "include",
-      });
-      const responseBody = await response.json();
-      console.log(responseBody);
-      console.log(item.placeId);
-      if (!response.ok) {
-        console.error(
-          `북마크 ${item.bookmarked ? "취소" : "추가"} 실패:`,
-        );
-      }
+      await toggleBookmark(item.placeId, item.bookmarked);
+      //성공일 때만 하도록 로직 변경
+      const updatedResults = displayResults.map(result => 
+    result.placeId === item.placeId 
+      ? { ...result, bookmarked: !result.bookmarked }
+      : result
+  );
+  setDisplayResults(updatedResults);
     } catch (error) {
       console.error("북마크 처리 중 오류:", error);
     }

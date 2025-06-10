@@ -5,6 +5,7 @@ import ReviewForm from "./ReviewForm.tsx";
 import i18n from "../../../i18n";
 import { b, body } from "framer-motion/client";
 import { useEffect } from "react";
+import { submitReview } from "../../../services/reviewApi.ts";
 
 type DetailModalProps = {
   isOpen: boolean;
@@ -13,21 +14,12 @@ type DetailModalProps = {
     summary: SearchResultModel;
   } | null;
   onClose: () => void;
-  handleBookmarkClick: () => void;
+  handleBookmarkClick: (e: React.MouseEvent, item: SearchResultModel) => Promise<void>;
 };
-
-const DetailModal = ({ isOpen, item, onClose,handleBookmarkClick }: DetailModalProps) => {
-  const [isBookmarked, setIsBookmarked] = useState(item?.detail.details.bookmark.bookmarked || false);
-  console.log("북마크 상태:", isBookmarked);
+const DetailModal = ({ isOpen, item, onClose, handleBookmarkClick }: DetailModalProps) => {
   const [showAllReviews, setShowAllReviews] = useState(false);
   const [showReviewForm, setShowReviewForm] = useState(false);
   const currentLang = i18n.language.toLowerCase();
-
-  useEffect(() => {
-  if (item) {
-    setIsBookmarked(item.detail.details.bookmark.bookmarked);
-  }
-}, [item]);
 
   if (!isOpen || !item) return null;
 
@@ -39,40 +31,27 @@ const DetailModal = ({ isOpen, item, onClose,handleBookmarkClick }: DetailModalP
     }
   };
 
-  const handleReviewSubmit = async (review: {
+  const handleReviewSubmit = async ({
+    rating,
+    comment,
+  }: {
     rating: number;
     comment: string;
   }) => {
-    const response = await fetch(
-      `http://localhost:8080/reviews/${item.summary.placeId}?languageCode=${currentLang}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          accept: "*/*",
-        },
-        credentials: "include",
-        body: JSON.stringify({
-          rating: review.rating,
-          content: review.comment,
-        }),
-      }
-    );
-    const responseBody = await response.json();
-    console.log(responseBody);
-
-    if (!response.ok) {
-      console.error("리뷰 제출 실패:", response.statusText);
-      return;
+    try {
+      const responseBody = await submitReview(
+        summary.placeId,
+        currentLang,
+        rating,
+        comment
+      );
+      // 리뷰 목록 새로고침: detail.details.reviews를 responseBody로 교체
+      item.detail.details.reviews = responseBody;
+      setShowReviewForm(false);
+      setShowAllReviews(true);
+    } catch (error) {
+      console.error(error);
     }
-
-    // 리뷰 목록 새로고침: detail.details.reviews를 responseBody로 교체
-    item.detail.details.reviews = responseBody;
-    // 상태 업데이트를 위해 강제로 리렌더링
-    setShowReviewForm(false);
-    setShowAllReviews(true); // 필요하다면 전체 리뷰 보기로 전환
-
-    // 또는 상태를 새로 만들어서 setState로 갱신하는 방식도 가능
   };
 
   const handleReviewCancel = () => {
@@ -139,18 +118,17 @@ const DetailModal = ({ isOpen, item, onClose,handleBookmarkClick }: DetailModalP
               {summary.placeName}
             </h1>
             <button
-              onClick={handleBookmarkClick}
+              onClick={(e) => handleBookmarkClick(e, summary)}
               className={`ml-4 p-2 rounded-full hover:bg-gray-100 transition-colors
-                ${
-                  isBookmarked ? "text-red-500" : "text-gray-400"
-                } focus:outline-none`}
+                ${summary.bookmarked ? "text-red-500" : "text-gray-400"}
+                focus:outline-none`}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="w-7 h-7"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
-                fill={isBookmarked ? "currentColor" : "none"}
+                fill={summary.bookmarked ? "currentColor" : "none"}
                 strokeWidth="2"
               >
                 <path
