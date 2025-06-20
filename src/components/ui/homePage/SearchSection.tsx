@@ -93,7 +93,7 @@ console.log(response);
       <div className="relative w-full max-w-[609px]" ref={containerRef}>
         <form onSubmit={handleSearch} className="w-full">
           <div
-            className="flex items-center h-[80px] w-full bg-white rounded-[40px] shadow-[0px_4px_30px_rgba(0,0,0,0.25)]"
+            className="flex items-center h-[80px] w-full bg-white rounded-[5px] shadow-[0px_4px_30px_rgba(0,0,0,0.25)]"
             onMouseEnter={() => setIsDropdownOpen(true)}
           >
             <input
