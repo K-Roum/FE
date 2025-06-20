@@ -15,7 +15,10 @@ const SearchSection: React.FC = () => {
   useEffect(() => {
     const fetchRecentSearches = async () => {
       try {
-        const response = await fetch('http://localhost:8080/search-history',{credentials: 'include'});
+        const response = await fetch('http://localhost:8080/search-history', {
+          method: 'GET',
+          credentials: 'include'
+        });
         if (!response.ok) {
           throw new Error(`서버 오류: ${response.status}`);
         }
@@ -93,7 +96,7 @@ console.log(response);
       <div className="relative w-full max-w-[609px]" ref={containerRef}>
         <form onSubmit={handleSearch} className="w-full">
           <div
-            className="flex items-center h-[80px] w-full bg-white rounded-[5px] shadow-[0px_4px_30px_rgba(0,0,0,0.25)]"
+            className="flex items-center h-[80px] w-full bg-white rounded-[15px] shadow-[0px_4px_30px_rgba(0,0,0,0.25)]"
             onMouseEnter={() => setIsDropdownOpen(true)}
           >
             <input

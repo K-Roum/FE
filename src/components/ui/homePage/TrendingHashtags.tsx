@@ -25,11 +25,12 @@ const TrendingHashtags = () => {
       const response = await fetch('http://localhost:8080/places/search', 
         {
           method: "POST",
+                    credentials: 'include',
           headers: {
             "Content-Type": "application/json",
             accept: "*/*",
           },   body: JSON.stringify({
-          query: `#${hashtagKey}`,
+          query: `${hashtagKey}`,
           languageCode: currentLang,
         }),
         }

@@ -7,7 +7,7 @@ import { SearchResultModel } from "../../model/SearchResultModel.ts";
 import { PlaceDetailModel } from "../../model/PlaceDetailModel.ts";
 import i18n from "../../i18n/index.js";
 import { fetchPlaceDetail, toggleBookmark } from "../../services/SearchApi.ts";
-
+import SearchSection from "../../components/ui/homePage/SearchSection.tsx";
 // selectedItem 타입 정의
 type SelectedItemType = {
   detail: PlaceDetailModel;
