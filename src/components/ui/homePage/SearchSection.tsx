@@ -15,7 +15,10 @@ const SearchSection: React.FC = () => {
   useEffect(() => {
     const fetchRecentSearches = async () => {
       try {
-        const response = await fetch('http://localhost:8080/search-history',{credentials: 'include'});
+        const response = await fetch('http://localhost:8080/search-history', {
+          method: 'GET',
+          credentials: 'include'
+        });
         if (!response.ok) {
           throw new Error(`서버 오류: ${response.status}`);
         }
@@ -61,7 +64,7 @@ const SearchSection: React.FC = () => {
       if (!response.ok) {
         throw new Error(`서버 오류: ${response.status}`);
       }
-
+      console.log(response);
       const data: SearchResultModel[] = await response.json();
 
       navigate('/searchPage', {
@@ -90,10 +93,10 @@ const SearchSection: React.FC = () => {
 
   return (
     <div className="flex justify-center mt-16 mb-8">
-      <div className="relative w-full max-w-[609px]" ref={containerRef}>
+      <div className="relative w-full max-w-[824px]" ref={containerRef}>
         <form onSubmit={handleSearch} className="w-full">
           <div
-            className="flex items-center h-[80px] w-full bg-white rounded-[40px] shadow-[0px_4px_30px_rgba(0,0,0,0.25)]"
+            className="flex items-center h-[80px] w-full bg-white rounded-[15px] shadow-[0px_4px_30px_rgba(0,0,0,0.25)]"
             onMouseEnter={() => setIsDropdownOpen(true)}
           >
             <input

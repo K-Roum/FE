@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { PlaceDetailModel } from "../../../model/PlaceDetailModel";
 import { SearchResultModel } from "../../../model/SearchResultModel";
 import ReviewForm from "./ReviewForm.tsx";
 import i18n from "../../../i18n";
-import { b, body } from "framer-motion/client";
-import { useEffect } from "react";
+import { submitReview } from "../../../services/reviewApi.ts";
 
 type DetailModalProps = {
   isOpen: boolean;
@@ -13,102 +12,56 @@ type DetailModalProps = {
     summary: SearchResultModel;
   } | null;
   onClose: () => void;
+  handleBookmarkClick: (e: React.MouseEvent, item: SearchResultModel) => Promise<void>;
 };
 
-const DetailModal = ({ isOpen, item, onClose }: DetailModalProps) => {
-  const [isBookmarked, setIsBookmarked] = useState(item?.detail.details.bookmark.bookmarked || false);
-  console.log("북마크 상태:", isBookmarked);
+const DetailModal = ({ isOpen, item, onClose, handleBookmarkClick }: DetailModalProps) => {
   const [showAllReviews, setShowAllReviews] = useState(false);
   const [showReviewForm, setShowReviewForm] = useState(false);
   const currentLang = i18n.language.toLowerCase();
+const [isBookmarked, setIsBookmarked] = useState(item?.summary.bookmarked ?? false);
+const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
 
-  useEffect(() => {
+
+useEffect(() => {
   if (item) {
-    setIsBookmarked(item.detail.details.bookmark.bookmarked);
+    setIsBookmarked(item.summary.bookmarked);
   }
 }, [item]);
 
-  if (!isOpen || !item) return null;
+if (!isOpen || !item) return null;
 
-  const { detail, summary } = item;
-  console.log(item.summary.placeId);
+const { detail, summary } = item;
+
   const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
       onClose();
     }
   };
 
-  const handleBookmarkClick = async () => {
-    try {
-      const endpoint = isBookmarked
-        ? `http://localhost:8080/bookmarks/${item.summary.placeId}` // 북마크 취소
-        : `http://localhost:8080/bookmarks/${item.summary.placeId}`; // 북마크 추가
-
-      const method = isBookmarked ? "DELETE" : "POST";
-
-      const response = await fetch(endpoint, {
-        method: method,
-        headers: {
-          "Content-Type": "application/json",
-          accept: "*/*",
-        },
-        credentials: "include",
-      });
-
-
-      if (!response.ok) {
-        console.error(
-          `북마크 ${isBookmarked ? "취소" : "추가"} 실패:`,
-          response.statusText
-        );
-        return;
-      }
-
-      // API 호출이 성공하면 상태 업데이트
-      setIsBookmarked(!isBookmarked);
-
-      // 성공 메시지 (선택사항)
-      console.log(`북마크가 ${isBookmarked ? "취소" : "추가"}되었습니다.`);
-      console.log(response);
-    } catch (error) {
-      console.error("북마크 API 호출 중 오류 발생:", error);
+  const handleBookmarkToggle = async (e: React.MouseEvent) => {
+    await handleBookmarkClick(e, summary);
+    setIsBookmarked((prev) => !prev);
+    if( detail.details.bookmark) {
+      detail.details.bookmark.bookmarkCount += isBookmarked ? -1 : 1;
     }
   };
 
-  const handleReviewSubmit = async (review: {
+  const handleReviewSubmit = async ({
+    rating,
+    comment,
+  }: {
     rating: number;
     comment: string;
   }) => {
-    const response = await fetch(
-      `http://localhost:8080/reviews/${item.summary.placeId}?languageCode=${currentLang}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          accept: "*/*",
-        },
-        credentials: "include",
-        body: JSON.stringify({
-          rating: review.rating,
-          content: review.comment,
-        }),
-      }
-    );
-    const responseBody = await response.json();
-    console.log(responseBody);
-
-    if (!response.ok) {
-      console.error("리뷰 제출 실패:", response.statusText);
-      return;
+    try {
+      const responseBody = await submitReview(summary.placeId, currentLang, rating, comment);
+      item.detail.details.reviews = responseBody;
+      setShowReviewForm(false);
+      setShowAllReviews(true);
+    } catch (error) {
+      console.error(error);
     }
-
-    // 리뷰 목록 새로고침: detail.details.reviews를 responseBody로 교체
-    item.detail.details.reviews = responseBody;
-    // 상태 업데이트를 위해 강제로 리렌더링
-    setShowReviewForm(false);
-    setShowAllReviews(true); // 필요하다면 전체 리뷰 보기로 전환
-
-    // 또는 상태를 새로 만들어서 setState로 갱신하는 방식도 가능
   };
 
   const handleReviewCancel = () => {
@@ -119,14 +72,15 @@ const DetailModal = ({ isOpen, item, onClose }: DetailModalProps) => {
     return Array.from({ length: 5 }, (_, index) => (
       <span
         key={index}
-        className={`text-xl ${
-          index < rating ? "text-yellow-500" : "text-gray-400"
-        }`}
+        className={`text-xl ${index < rating ? "text-yellow-500" : "text-gray-400"}`}
       >
         {index < rating ? "★" : "☆"}
       </span>
     ));
   };
+
+
+
 
   return (
     <div
@@ -169,17 +123,13 @@ const DetailModal = ({ isOpen, item, onClose }: DetailModalProps) => {
 
         {/* 본문 */}
         <div className="p-6">
-          {/* 제목&찜 */}
+          {/* 제목 & 찜 */}
           <div className="flex justify-between items-start mb-4">
-            <h1 className="text-2xl font-bold text-gray-900 flex-1">
-              {summary.placeName}
-            </h1>
+            <h1 className="text-2xl font-bold text-gray-900 flex-1">{summary.placeName}</h1>
             <button
-              onClick={handleBookmarkClick}
+              onClick={handleBookmarkToggle}
               className={`ml-4 p-2 rounded-full hover:bg-gray-100 transition-colors
-                ${
-                  isBookmarked ? "text-red-500" : "text-gray-400"
-                } focus:outline-none`}
+                ${isBookmarked ? "text-red-500" : "text-gray-400"} focus:outline-none`}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -225,31 +175,40 @@ const DetailModal = ({ isOpen, item, onClose }: DetailModalProps) => {
                   d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                 />
               </svg>
-
               <div>
                 <span className="font-medium text-gray-700">주소</span>
-                <p className="text-gray-600 text-sm mt-1">
-                  {summary.address || "주소 정보 없음"}
-                </p>
+                <p className="text-gray-600 text-sm mt-1">{summary.address || "주소 정보 없음"}</p>
               </div>
             </div>
           </div>
 
           {/* 설명 */}
-          <div className="mb-6">
-            <h3 className="font-semibold text-lg mb-3 text-gray-900">
-              상세 정보
-            </h3>
-            <p className="text-gray-600 leading-relaxed">
-              {summary.description || "설명 정보가 없습니다."}
-            </p>
-          </div>
+     <div className="mb-6">
+  <h3 className="font-semibold text-lg mb-3 text-gray-900">상세 정보</h3>
+  <div>
+    <p
+      className={`text-gray-600 leading-relaxed transition-all duration-300 ${
+        isDescriptionExpanded ? "" : "line-clamp-3"
+      }`}
+    >
+      {summary.description || "설명 정보가 없습니다."}
+    </p>
+    {summary.description && (
+      <button
+        onClick={() => setIsDescriptionExpanded((prev) => !prev)}
+        className="text-blue-500 text-sm mt-1 hover:underline focus:outline-none"
+      >
+        {isDescriptionExpanded ? "접기" : "더보기"}
+      </button>
+    )}
+  </div>
+</div>
 
-          {/* 리뷰 섹션 */}
+
+          {/* 리뷰 */}
           <div className="border-t pt-6">
             <h3 className="font-semibold text-lg mb-4 text-gray-900">리뷰</h3>
 
-            {/* 평균 평점과 리뷰 쓰기 버튼 */}
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center text-gray-700">
                 <div className="text-yellow-500 mr-2 text-lg">⭐</div>
@@ -262,7 +221,6 @@ const DetailModal = ({ isOpen, item, onClose }: DetailModalProps) => {
                 </div>
               </div>
 
-              {/* 리뷰 쓰기 버튼 */}
               <button
                 onClick={() => setShowReviewForm(!showReviewForm)}
                 className="p-2 bg-gray-200 hover:bg-gray-300 text-gray-600 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50"
@@ -296,8 +254,8 @@ const DetailModal = ({ isOpen, item, onClose }: DetailModalProps) => {
               detail.details.reviews.placesReviews.length > 0 ? (
                 <>
                   {detail.details.reviews.placesReviews
-                    .slice() // 원본 배열 복사
-                    .reverse() // 최신순 정렬
+                    .slice()
+                    .reverse()
                     .slice(
                       0,
                       showAllReviews
@@ -312,9 +270,7 @@ const DetailModal = ({ isOpen, item, onClose }: DetailModalProps) => {
                           </div>
                           <div className="text-sm text-gray-500">
                             {review.createdAt
-                              ? new Date(review.createdAt)
-                                  .toISOString()
-                                  .slice(0, 10)
+                              ? new Date(review.createdAt).toISOString().slice(0, 10)
                               : "날짜 정보 없음"}
                           </div>
                         </div>
@@ -331,17 +287,14 @@ const DetailModal = ({ isOpen, item, onClose }: DetailModalProps) => {
                         </p>
                       </div>
                     ))}
-
-                  {/* 더보기 버튼 */}
-                  {detail.details.reviews.placesReviews.length > 3 &&
-                    !showAllReviews && (
-                      <button
-                        onClick={() => setShowAllReviews(true)}
-                        className="text-black-600 text-sm mt-2 hover:underline focus:outline-none"
-                      >
-                        리뷰 더보기
-                      </button>
-                    )}
+                  {detail.details.reviews.placesReviews.length > 3 && !showAllReviews && (
+                    <button
+                      onClick={() => setShowAllReviews(true)}
+                      className="text-black-600 text-sm mt-2 hover:underline focus:outline-none"
+                    >
+                      리뷰 더보기
+                    </button>
+                  )}
                 </>
               ) : (
                 <p className="text-gray-500 text-sm">등록된 리뷰가 없습니다.</p>

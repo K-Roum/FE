@@ -1,67 +1,34 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { SearchResultModel } from "../../../model/SearchResultModel.ts";
 
-const SearchResultCard = ({item, onCardClick }) => {
-  const [isBookmarked, setIsBookmarked] = useState(item.bookmarked ?? false);
+interface Props {
+  item: SearchResultModel;
+  isBookmarked: boolean;
+  onCardClick: (item: SearchResultModel) => void;
+  handleBookmarkClick: (e: React.MouseEvent, item: SearchResultModel) => void;
+}
 
-  useEffect(() => {
-    if (item.bookmarked !== isBookmarked) {
-      setIsBookmarked(item.bookmarked ?? false);
-    }
-  }, [item.bookmarked]);
-
-  const handleCardClick = async () => {
+const SearchResultCard = ({
+  item,
+  isBookmarked,
+  onCardClick,
+  handleBookmarkClick,
+}: Props) => {
+  const handleCardClick = () => {
     onCardClick(item);
   };
 
-  const handleBookmarkClick = async (e) => {
-    e.stopPropagation(); // 부모 클릭 방지
-
-    try {
-      const endpoint = isBookmarked
-        ? `http://localhost:8080/bookmarks/${item.placeId}` // 북마크 취소
-        : `http://localhost:8080/bookmarks/${item.placeId}`; // 북마크 추가
-
-      const method = isBookmarked ? "DELETE" : "POST";
-
-      const response = await fetch(endpoint, {
-        method: method,
-        headers: {
-          "Content-Type": "application/json",
-          accept: "*/*",
-        }, credentials: 'include',
-      });
- console.log("냥냥냥");
-console.log(response);
-const responseBody = await response.json();
-console.log(responseBody);
-console.log(item.placeId);
-      if (!response.ok) {
-        console.error(
-          `북마크 ${isBookmarked ? "취소" : "추가"} 실패:`,
-          response.statusText
-        );
-        return;
-      }
-
-      // API 호출이 성공하면 상태 업데이트
-      setIsBookmarked(!isBookmarked);
-
-      // 성공 메시지 (선택사항)
-      console.log(`북마크가 ${isBookmarked ? "취소" : "추가"}되었습니다.`);
- 
-      console.log(isBookmarked);
-    } catch (error) {
-      console.error("북마크 API 호출 중 오류 발생:", error);
-    }
+  const onBookmarkClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    handleBookmarkClick(e, item);
   };
-
   return (
     <div
       className="bg-white border rounded-lg shadow-md overflow-hidden h-40 cursor-pointer"
       onClick={handleCardClick}
     >
       <div className="flex flex-col md:flex-row h-full">
-        {/* 이미지 영역 */}
+        {/* 이미지 */}
         <div className="w-full md:w-2/5 h-40 md:h-full">
           {item.firstImageUrl ? (
             <img
@@ -76,7 +43,7 @@ console.log(item.placeId);
           )}
         </div>
 
-        {/* 정보 영역 */}
+        {/* 정보 */}
         <div className="w-full md:w-3/5 p-4 flex flex-col">
           <div>
             <div className="flex justify-between items-center mb-2">
@@ -87,9 +54,9 @@ console.log(item.placeId);
               {/* 찜 버튼 */}
               <div className="flex space-x-2 ml-2">
                 <button
-                  onClick={handleBookmarkClick}
-                  className={`p-2 rounded-full hover:bg-gray-100 transition-colors 
-                    ${isBookmarked ? "text-red-500" : "text-gray-400"} 
+                  onClick={onBookmarkClick}
+                  className={`p-2 rounded-full hover:bg-gray-100 transition-colors
+                    ${isBookmarked ? "text-red-500" : "text-gray-400"}
                     focus:outline-none focus:ring-0`}
                   aria-label={isBookmarked ? "찜 취소" : "찜하기"}
                 >
@@ -132,14 +99,14 @@ console.log(item.placeId);
                   d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                 />
               </svg>
-              <p className="text-gray-500 text-sm">
+              <p className="text-gray-500 text-sm line-clamp-1 mt-1">
                 {item.address || "주소 정보 없음"}
               </p>
             </div>
           </div>
 
-          {/* 설명 줄임 처리 */}
-          <p className="text-gray-600 text-sm line-clamp-3 mt-1">
+          {/* 설명 줄임 */}
+          <p className="text-gray-600 text-sm line-clamp-2 mt-1">
             {item.description || "설명 정보 없음"}
           </p>
         </div>
