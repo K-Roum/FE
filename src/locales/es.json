@@ -307,7 +307,11 @@
     "회원 탈퇴 실패": "Error al darse de baja.",
     "회원 탈퇴가 완료되었습니다.": "La baja se ha completado.",
     "비밀번호를 입력해주세요.": "Por favor, ingrese la contraseña.",
-    "정말로 회원 탈퇴하시겠습니까?": "¿Está seguro de que desea darse de baja?"
+    "정말로 회원 탈퇴하시겠습니까?": "¿Está seguro de que desea darse de baja?",
+    "myInfo": "Mi información",
+    "edit": "Editar",
+    "email": "Correo electrónico",
+    "nickname": "Apodo"
   }
 }
 

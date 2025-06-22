@@ -305,7 +305,11 @@
     "회원 탈퇴 실패": "Échec de la désinscription.",
     "회원 탈퇴가 완료되었습니다.": "La désinscription est terminée.",
     "비밀번호를 입력해주세요.": "Veuillez entrer le mot de passe.",
-    "정말로 회원 탈퇴하시겠습니까?": "Êtes-vous sûr de vouloir vous désinscrire ?"
+    "정말로 회원 탈퇴하시겠습니까?": "Êtes-vous sûr de vouloir vous désinscrire ?",
+    "myInfo": "Mes informations",
+    "edit": "Modifier",
+    "email": "E-mail",
+    "nickname": "Pseudo"
   }
 }
 

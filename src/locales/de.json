@@ -296,6 +296,10 @@
     "회원 탈퇴 실패": "Kündigung fehlgeschlagen.",
     "회원 탈퇴가 완료되었습니다.": "Mitgliedschaft wurde gekündigt.",
     "비밀번호를 입력해주세요.": "Bitte geben Sie Ihr Passwort ein.",
-    "정말로 회원 탈퇴하시겠습니까?": "Möchten Sie Ihre Mitgliedschaft wirklich kündigen?"
+    "정말로 회원 탈퇴하시겠습니까?": "Möchten Sie Ihre Mitgliedschaft wirklich kündigen?",
+    "myInfo": "Meine Informationen",
+    "edit": "Bearbeiten",
+    "email": "E-Mail",
+    "nickname": "Spitzname"
   }
 }

@@ -43,12 +43,15 @@ function formatDateTime(dateString: string) {
 }
 
 const MyPageDetailModal = ({ isOpen, item, onClose }: MyPageDetailModalProps) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [bookmarkCount, setBookmarkCount] = useState(0);
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [editingReview, setEditingReview] = useState<{rating: number, content: string} | null>(null);
   const [reviews, setReviews] = useState(item?.reviews?.placesReviews || []);
+  const [writeModalOpen, setWriteModalOpen] = useState(false);
+  const [reviewsCount, setReviewsCount] = useState(item?.reviews?.totalCount || 0);
+  const [averageRating, setAverageRating] = useState(item?.reviews?.averageRating || 0);
 
   useEffect(() => {
     if (item) {
@@ -56,6 +59,8 @@ const MyPageDetailModal = ({ isOpen, item, onClose }: MyPageDetailModalProps) =>
       setIsBookmarked(item.bookmarked ?? false);
       setBookmarkCount(item.bookmark?.bookmarkCount ?? 0);
       setReviews(item.reviews?.placesReviews || []);
+      setReviewsCount(item.reviews?.totalCount || 0);
+      setAverageRating(item.reviews?.averageRating || 0);
     }
   }, [item]);
 
@@ -124,6 +129,8 @@ const MyPageDetailModal = ({ isOpen, item, onClose }: MyPageDetailModalProps) =>
       setEditModalOpen(false);
       setEditingReview(null);
       setReviews(updated.placesReviews || []);
+      setReviewsCount(updated.totalCount || (updated.placesReviews?.length ?? 0));
+      setAverageRating(updated.averageRating || 0);
     } catch (err) {
       alert('리뷰 수정 중 오류 발생: ' + err.message);
     }
@@ -133,6 +140,46 @@ const MyPageDetailModal = ({ isOpen, item, onClose }: MyPageDetailModalProps) =>
   const handleEditCancel = () => {
     setEditModalOpen(false);
     setEditingReview(null);
+  };
+
+  // 리뷰 작성 버튼 클릭
+  const handleWriteClick = () => {
+    setWriteModalOpen(true);
+  };
+
+  // 리뷰 작성 제출
+  const handleWriteSubmit = async (form: {rating: number, comment: string}) => {
+    try {
+      const token = localStorage.getItem('token');
+      const lang = i18n.language || 'ko';
+      const res = await fetch(`http://localhost:8080/reviews/${item.placeId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          accept: '*/*',
+          'Authorization': `Bearer ${token}`,
+        },
+        credentials: 'include',
+        body: JSON.stringify({
+          rating: form.rating,
+          content: form.comment,
+          languageCode: lang,
+        }),
+      });
+      if (!res.ok) throw new Error('리뷰 등록 실패');
+      const updated = await res.json();
+      setWriteModalOpen(false);
+      setReviews(updated.placesReviews || []);
+      setReviewsCount(updated.totalCount || (updated.placesReviews?.length ?? 0));
+      setAverageRating(updated.averageRating || 0);
+    } catch (err) {
+      alert('리뷰 등록 중 오류 발생: ' + err.message);
+    }
+  };
+
+  // 리뷰 작성 취소
+  const handleWriteCancel = () => {
+    setWriteModalOpen(false);
   };
 
   return (
@@ -198,7 +245,7 @@ const MyPageDetailModal = ({ isOpen, item, onClose }: MyPageDetailModalProps) =>
           {/* 찜 및 리뷰 수 표시 추가 */}
           <div className="flex items-center text-sm text-gray-500 mb-4 space-x-4">
             <div>❤️ {t('common.likes')} {bookmarkCount}</div>
-            <div>📝 {t('common.reviews')} {item.reviews.totalCount}</div>
+            <div>📝 {t('common.reviews')} {reviewsCount}</div>
           </div>
 
           {/* 정보 카드 */}
@@ -226,12 +273,20 @@ const MyPageDetailModal = ({ isOpen, item, onClose }: MyPageDetailModalProps) =>
 
           {/* 리뷰 섹션 (간단하게 평균 평점만 표시) */}
           <div className="border-t pt-6">
-            <h3 className="font-semibold text-lg mb-4 text-gray-900">{t('common.reviews')}</h3>
+            <h3 className="font-semibold text-lg mb-4 text-gray-900 flex items-center justify-between">
+              {t('common.reviews')}
+              <button
+                onClick={handleWriteClick}
+                className="ml-2 px-4 py-1 bg-blue-500 hover:bg-blue-600 text-white rounded-full text-sm font-semibold transition-colors"
+              >
+                {t('reviewForm.submit')}
+              </button>
+            </h3>
 
             <div className="flex items-center text-gray-700 mb-4">
               <div className="text-yellow-500 mr-2 text-lg">⭐</div>
               <div className="text-sm">
-                {t('common.averageRating')} <span className="font-semibold">{item.reviews.averageRating?.toFixed(1) ?? "?"}</span> / 5.0
+                {t('common.averageRating')} <span className="font-semibold">{averageRating?.toFixed(1) ?? "?"}</span> / 5.0
               </div>
             </div>
 
@@ -290,6 +345,25 @@ const MyPageDetailModal = ({ isOpen, item, onClose }: MyPageDetailModalProps) =>
               onCancel={handleEditCancel}
               initialRating={editingReview?.rating}
               initialComment={editingReview?.content}
+            />
+          </div>
+        </div>
+      )}
+      {writeModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
+          <div className="bg-white rounded-xl shadow-xl p-10 w-full max-w-2xl relative">
+            <button
+              onClick={handleWriteCancel}
+              className="absolute top-2 right-2 text-gray-500 hover:text-red-500 text-xl font-bold p-1 rounded-full bg-white bg-opacity-75 hover:bg-opacity-100 transition-colors"
+              aria-label="close"
+            >
+              ×
+            </button>
+            <h2 className="text-xl font-bold mb-4">{t('reviewForm.submit')}</h2>
+            <ReviewForm
+              isVisible={true}
+              onSubmit={handleWriteSubmit}
+              onCancel={handleWriteCancel}
             />
           </div>
         </div>
