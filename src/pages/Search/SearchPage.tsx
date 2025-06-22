@@ -127,7 +127,7 @@ const handlePinClick = async (item: SearchResultModel) => {
  return (
   <div className="flex h-screen relative">
     {/* 지도 위에 올라갈 검색 바 */}
-    <div className="absolute left-8 z-10 w-full max-w-[609px]">
+    <div className="absolute left-8 z-10 w-full max-w-[740px]">
       <SearchSection />
     </div>
 
