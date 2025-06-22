@@ -20,6 +20,8 @@ const DetailModal = ({ isOpen, item, onClose, handleBookmarkClick }: DetailModal
   const [showReviewForm, setShowReviewForm] = useState(false);
   const currentLang = i18n.language.toLowerCase();
 const [isBookmarked, setIsBookmarked] = useState(item?.summary.bookmarked ?? false);
+const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
+
 
 useEffect(() => {
   if (item) {
@@ -181,12 +183,27 @@ const { detail, summary } = item;
           </div>
 
           {/* 설명 */}
-          <div className="mb-6">
-            <h3 className="font-semibold text-lg mb-3 text-gray-900">상세 정보</h3>
-            <p className="text-gray-600 leading-relaxed">
-              {summary.description || "설명 정보가 없습니다."}
-            </p>
-          </div>
+     <div className="mb-6">
+  <h3 className="font-semibold text-lg mb-3 text-gray-900">상세 정보</h3>
+  <div>
+    <p
+      className={`text-gray-600 leading-relaxed transition-all duration-300 ${
+        isDescriptionExpanded ? "" : "line-clamp-3"
+      }`}
+    >
+      {summary.description || "설명 정보가 없습니다."}
+    </p>
+    {summary.description && (
+      <button
+        onClick={() => setIsDescriptionExpanded((prev) => !prev)}
+        className="text-blue-500 text-sm mt-1 hover:underline focus:outline-none"
+      >
+        {isDescriptionExpanded ? "접기" : "더보기"}
+      </button>
+    )}
+  </div>
+</div>
+
 
           {/* 리뷰 */}
           <div className="border-t pt-6">

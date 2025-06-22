@@ -12,10 +12,8 @@ const SearchResultCard = ({
   item,
   isBookmarked,
   onCardClick,
-  handleBookmarkClick
+  handleBookmarkClick,
 }: Props) => {
-
-
   const handleCardClick = () => {
     onCardClick(item);
   };
@@ -101,14 +99,14 @@ const SearchResultCard = ({
                   d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                 />
               </svg>
-              <p className="text-gray-500 text-sm">
+              <p className="text-gray-500 text-sm line-clamp-1 mt-1">
                 {item.address || "주소 정보 없음"}
               </p>
             </div>
           </div>
 
           {/* 설명 줄임 */}
-          <p className="text-gray-600 text-sm line-clamp-3 mt-1">
+          <p className="text-gray-600 text-sm line-clamp-2 mt-1">
             {item.description || "설명 정보 없음"}
           </p>
         </div>
