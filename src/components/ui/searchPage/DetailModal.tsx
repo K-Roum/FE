@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { PlaceDetailModel } from "../../../model/PlaceDetailModel";
 import { SearchResultModel } from "../../../model/SearchResultModel";
 import ReviewForm from "./ReviewForm.tsx";
 import i18n from "../../../i18n";
-import { b, body } from "framer-motion/client";
-import { useEffect } from "react";
 import { submitReview } from "../../../services/reviewApi.ts";
 
 type DetailModalProps = {
@@ -16,18 +14,34 @@ type DetailModalProps = {
   onClose: () => void;
   handleBookmarkClick: (e: React.MouseEvent, item: SearchResultModel) => Promise<void>;
 };
+
 const DetailModal = ({ isOpen, item, onClose, handleBookmarkClick }: DetailModalProps) => {
   const [showAllReviews, setShowAllReviews] = useState(false);
   const [showReviewForm, setShowReviewForm] = useState(false);
   const currentLang = i18n.language.toLowerCase();
+const [isBookmarked, setIsBookmarked] = useState(item?.summary.bookmarked ?? false);
 
-  if (!isOpen || !item) return null;
+useEffect(() => {
+  if (item) {
+    setIsBookmarked(item.summary.bookmarked);
+  }
+}, [item]);
 
-  const { detail, summary } = item;
-  console.log(item.summary.placeId);
+if (!isOpen || !item) return null;
+
+const { detail, summary } = item;
+
   const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
       onClose();
+    }
+  };
+
+  const handleBookmarkToggle = async (e: React.MouseEvent) => {
+    await handleBookmarkClick(e, summary);
+    setIsBookmarked((prev) => !prev);
+    if( detail.details.bookmark) {
+      detail.details.bookmark.bookmarkCount += isBookmarked ? -1 : 1;
     }
   };
 
@@ -39,13 +53,7 @@ const DetailModal = ({ isOpen, item, onClose, handleBookmarkClick }: DetailModal
     comment: string;
   }) => {
     try {
-      const responseBody = await submitReview(
-        summary.placeId,
-        currentLang,
-        rating,
-        comment
-      );
-      // 리뷰 목록 새로고침: detail.details.reviews를 responseBody로 교체
+      const responseBody = await submitReview(summary.placeId, currentLang, rating, comment);
       item.detail.details.reviews = responseBody;
       setShowReviewForm(false);
       setShowAllReviews(true);
@@ -62,14 +70,15 @@ const DetailModal = ({ isOpen, item, onClose, handleBookmarkClick }: DetailModal
     return Array.from({ length: 5 }, (_, index) => (
       <span
         key={index}
-        className={`text-xl ${
-          index < rating ? "text-yellow-500" : "text-gray-400"
-        }`}
+        className={`text-xl ${index < rating ? "text-yellow-500" : "text-gray-400"}`}
       >
         {index < rating ? "★" : "☆"}
       </span>
     ));
   };
+
+
+
 
   return (
     <div
@@ -112,23 +121,20 @@ const DetailModal = ({ isOpen, item, onClose, handleBookmarkClick }: DetailModal
 
         {/* 본문 */}
         <div className="p-6">
-          {/* 제목&찜 */}
+          {/* 제목 & 찜 */}
           <div className="flex justify-between items-start mb-4">
-            <h1 className="text-2xl font-bold text-gray-900 flex-1">
-              {summary.placeName}
-            </h1>
+            <h1 className="text-2xl font-bold text-gray-900 flex-1">{summary.placeName}</h1>
             <button
-              onClick={(e) => handleBookmarkClick(e, summary)}
+              onClick={handleBookmarkToggle}
               className={`ml-4 p-2 rounded-full hover:bg-gray-100 transition-colors
-                ${summary.bookmarked ? "text-red-500" : "text-gray-400"}
-                focus:outline-none`}
+                ${isBookmarked ? "text-red-500" : "text-gray-400"} focus:outline-none`}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="w-7 h-7"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
-                fill={summary.bookmarked ? "currentColor" : "none"}
+                fill={isBookmarked ? "currentColor" : "none"}
                 strokeWidth="2"
               >
                 <path
@@ -167,31 +173,25 @@ const DetailModal = ({ isOpen, item, onClose, handleBookmarkClick }: DetailModal
                   d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                 />
               </svg>
-
               <div>
                 <span className="font-medium text-gray-700">주소</span>
-                <p className="text-gray-600 text-sm mt-1">
-                  {summary.address || "주소 정보 없음"}
-                </p>
+                <p className="text-gray-600 text-sm mt-1">{summary.address || "주소 정보 없음"}</p>
               </div>
             </div>
           </div>
 
           {/* 설명 */}
           <div className="mb-6">
-            <h3 className="font-semibold text-lg mb-3 text-gray-900">
-              상세 정보
-            </h3>
+            <h3 className="font-semibold text-lg mb-3 text-gray-900">상세 정보</h3>
             <p className="text-gray-600 leading-relaxed">
               {summary.description || "설명 정보가 없습니다."}
             </p>
           </div>
 
-          {/* 리뷰 섹션 */}
+          {/* 리뷰 */}
           <div className="border-t pt-6">
             <h3 className="font-semibold text-lg mb-4 text-gray-900">리뷰</h3>
 
-            {/* 평균 평점과 리뷰 쓰기 버튼 */}
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center text-gray-700">
                 <div className="text-yellow-500 mr-2 text-lg">⭐</div>
@@ -204,7 +204,6 @@ const DetailModal = ({ isOpen, item, onClose, handleBookmarkClick }: DetailModal
                 </div>
               </div>
 
-              {/* 리뷰 쓰기 버튼 */}
               <button
                 onClick={() => setShowReviewForm(!showReviewForm)}
                 className="p-2 bg-gray-200 hover:bg-gray-300 text-gray-600 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50"
@@ -238,8 +237,8 @@ const DetailModal = ({ isOpen, item, onClose, handleBookmarkClick }: DetailModal
               detail.details.reviews.placesReviews.length > 0 ? (
                 <>
                   {detail.details.reviews.placesReviews
-                    .slice() // 원본 배열 복사
-                    .reverse() // 최신순 정렬
+                    .slice()
+                    .reverse()
                     .slice(
                       0,
                       showAllReviews
@@ -254,9 +253,7 @@ const DetailModal = ({ isOpen, item, onClose, handleBookmarkClick }: DetailModal
                           </div>
                           <div className="text-sm text-gray-500">
                             {review.createdAt
-                              ? new Date(review.createdAt)
-                                  .toISOString()
-                                  .slice(0, 10)
+                              ? new Date(review.createdAt).toISOString().slice(0, 10)
                               : "날짜 정보 없음"}
                           </div>
                         </div>
@@ -273,17 +270,14 @@ const DetailModal = ({ isOpen, item, onClose, handleBookmarkClick }: DetailModal
                         </p>
                       </div>
                     ))}
-
-                  {/* 더보기 버튼 */}
-                  {detail.details.reviews.placesReviews.length > 3 &&
-                    !showAllReviews && (
-                      <button
-                        onClick={() => setShowAllReviews(true)}
-                        className="text-black-600 text-sm mt-2 hover:underline focus:outline-none"
-                      >
-                        리뷰 더보기
-                      </button>
-                    )}
+                  {detail.details.reviews.placesReviews.length > 3 && !showAllReviews && (
+                    <button
+                      onClick={() => setShowAllReviews(true)}
+                      className="text-black-600 text-sm mt-2 hover:underline focus:outline-none"
+                    >
+                      리뷰 더보기
+                    </button>
+                  )}
                 </>
               ) : (
                 <p className="text-gray-500 text-sm">등록된 리뷰가 없습니다.</p>

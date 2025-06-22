@@ -1,24 +1,36 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { SearchResultModel } from "../../../model/SearchResultModel.ts";
 
-const SearchResultCard = ({ item, onCardClick, handleBookmarkClick }) => {
-  const [isBookmarked, setIsBookmarked] = useState(item.bookmarked);
-  useEffect(() => {
-    if (item.bookmarked !== isBookmarked) {
-      setIsBookmarked(item.bookmarked ?? false);
-    }
-  }, [item.bookmarked, isBookmarked]);
+interface Props {
+  item: SearchResultModel;
+  isBookmarked: boolean;
+  onCardClick: (item: SearchResultModel) => void;
+  handleBookmarkClick: (e: React.MouseEvent, item: SearchResultModel) => void;
+}
 
-  const handleCardClick = async () => {
+const SearchResultCard = ({
+  item,
+  isBookmarked,
+  onCardClick,
+  handleBookmarkClick
+}: Props) => {
+
+
+  const handleCardClick = () => {
     onCardClick(item);
   };
 
+  const onBookmarkClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    handleBookmarkClick(e, item);
+  };
   return (
     <div
       className="bg-white border rounded-lg shadow-md overflow-hidden h-40 cursor-pointer"
       onClick={handleCardClick}
     >
       <div className="flex flex-col md:flex-row h-full">
-        {/* 이미지 영역 */}
+        {/* 이미지 */}
         <div className="w-full md:w-2/5 h-40 md:h-full">
           {item.firstImageUrl ? (
             <img
@@ -33,7 +45,7 @@ const SearchResultCard = ({ item, onCardClick, handleBookmarkClick }) => {
           )}
         </div>
 
-        {/* 정보 영역 */}
+        {/* 정보 */}
         <div className="w-full md:w-3/5 p-4 flex flex-col">
           <div>
             <div className="flex justify-between items-center mb-2">
@@ -44,9 +56,9 @@ const SearchResultCard = ({ item, onCardClick, handleBookmarkClick }) => {
               {/* 찜 버튼 */}
               <div className="flex space-x-2 ml-2">
                 <button
-                  onClick={(e) => handleBookmarkClick(e, item)}
-                  className={`p-2 rounded-full hover:bg-gray-100 transition-colors 
-                    ${isBookmarked ? "text-red-500" : "text-gray-400"} 
+                  onClick={onBookmarkClick}
+                  className={`p-2 rounded-full hover:bg-gray-100 transition-colors
+                    ${isBookmarked ? "text-red-500" : "text-gray-400"}
                     focus:outline-none focus:ring-0`}
                   aria-label={isBookmarked ? "찜 취소" : "찜하기"}
                 >
@@ -95,7 +107,7 @@ const SearchResultCard = ({ item, onCardClick, handleBookmarkClick }) => {
             </div>
           </div>
 
-          {/* 설명 줄임 처리 */}
+          {/* 설명 줄임 */}
           <p className="text-gray-600 text-sm line-clamp-3 mt-1">
             {item.description || "설명 정보 없음"}
           </p>

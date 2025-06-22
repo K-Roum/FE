@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
-import SearchResultCard from "../../components/ui/searchPage/SearchResultCard.jsx";
+import SearchResultCard from "../../components/ui/searchPage/SearchResultCard.tsx";
 import DetailModal from "../../components/ui/searchPage/DetailModal.tsx";
 import MapComponent, { MapComponentRef } from "../../components/ui/searchPage/MapComponent.tsx";
 import { SearchResultModel } from "../../model/SearchResultModel.ts";
@@ -61,25 +61,41 @@ const SearchPage = () => {
     setSelectedItem(null);
   };
   
-  const handleBookmarkClick = async (
-    e: React.MouseEvent,
-    item: SearchResultModel
-  ) => {
-    e.stopPropagation(); // 부모 클릭 방지
+const handleBookmarkClick = async (
+  e: React.MouseEvent,
+  item: SearchResultModel
+) => {
+  e.stopPropagation();
 
-    try {
-      await toggleBookmark(item.placeId, item.bookmarked);
-      //성공일 때만 하도록 로직 변경
-      const updatedResults = displayResults.map(result => 
-    result.placeId === item.placeId 
-      ? { ...result, bookmarked: !result.bookmarked }
-      : result
-  );
-  setDisplayResults(updatedResults);
-    } catch (error) {
-      console.error("북마크 처리 중 오류:", error);
+  try {
+    await toggleBookmark(item.placeId, item.bookmarked);
+
+    const updatedResults = displayResults.map((result) =>
+      result.placeId === item.placeId
+        ? { ...result, bookmarked: !result.bookmarked }
+        : result
+    );
+    setDisplayResults(updatedResults);
+
+    // 만약 상세 모달이 열려 있고 해당 item과 같다면 그것도 같이 반영
+    if (selectedItem?.summary.placeId === item.placeId) {
+      setSelectedItem((prev) =>
+        prev
+          ? {
+              ...prev,
+              summary: {
+                ...prev.summary,
+                bookmarked: !prev.summary.bookmarked,
+              },
+            }
+          : null
+      );
     }
-  };
+  } catch (error) {
+    console.error("북마크 처리 중 오류:", error);
+  }
+};
+
 const handlePinClick = async (item: SearchResultModel) => {
   const currentLang = i18n.language.toLowerCase();
 
@@ -133,6 +149,7 @@ const handlePinClick = async (item: SearchResultModel) => {
                 <SearchResultCard
                   item={item}
                   onCardClick={handleCardClick}
+                  isBookmarked={item.bookmarked}
                   handleBookmarkClick={handleBookmarkClick}
                 />
               </li>

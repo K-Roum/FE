@@ -64,7 +64,7 @@ const SearchSection: React.FC = () => {
       if (!response.ok) {
         throw new Error(`서버 오류: ${response.status}`);
       }
-console.log(response);
+      console.log(response);
       const data: SearchResultModel[] = await response.json();
 
       navigate('/searchPage', {
