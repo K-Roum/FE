@@ -265,5 +265,37 @@
     "placeholder": "Schreiben Sie hier Ihre Rezension",
     "submit": "Rezension absenden",
     "cancel": "Abbrechen"
+  },
+
+  "profileEdit": {
+    "title": "Profilverwaltung",
+    "changeNickname": "Spitznamen ändern",
+    "changePassword": "Passwort ändern",
+    "resign": "Mitgliedschaft kündigen",
+    "nicknamePlaceholder": "Neuen Spitznamen eingeben",
+    "checkDuplicate": "Duplikat prüfen",
+    "currentPassword": "Aktuelles Passwort",
+    "newPassword": "Neues Passwort",
+    "confirmPassword": "Neues Passwort bestätigen",
+    "passwordPlaceholder": "Passwort eingeben",
+    "사용 가능한 닉네임입니다.": "Spitzname ist verfügbar.",
+    "이미 사용 중인 닉네임입니다.": "Spitzname wird bereits verwendet.",
+    "닉네임 확인 중 오류 발생": "Fehler bei der Überprüfung des Spitznamens.",
+    "닉네임 중복 확인을 해주세요.": "Bitte prüfen Sie die Spitznamen-Duplikate.",
+    "닉네임이 변경되었습니다.": "Spitzname wurde geändert.",
+    "닉네임 변경 실패": "Spitzname konnte nicht geändert werden.",
+    "모든 항목을 입력해주세요.": "Bitte füllen Sie alle Felder aus.",
+    "비밀번호가 일치합니다.": "Passwörter stimmen überein.",
+    "비밀번호가 일치하지 않습니다.": "Passwörter stimmen nicht überein.",
+    "안전한 비밀번호입니다.": "Passwort ist sicher.",
+    "비밀번호는 대/소문자, 숫자, 특수문자 포함 8~20자여야 합니다.": "Das Passwort muss 8-20 Zeichen lang sein und Groß-/Kleinbuchstaben, Zahlen und Sonderzeichen enthalten.",
+    "비밀번호 변경 실패": "Passwortänderung fehlgeschlagen.",
+    "비밀번호 변경": "Passwort ändern",
+    "비밀번호가 변경되었습니다.": "Passwort wurde geändert.",
+    "현재 비밀번호가 올바르지 않습니다.": "Das aktuelle Passwort ist falsch.",
+    "회원 탈퇴 실패": "Kündigung fehlgeschlagen.",
+    "회원 탈퇴가 완료되었습니다.": "Mitgliedschaft wurde gekündigt.",
+    "비밀번호를 입력해주세요.": "Bitte geben Sie Ihr Passwort ein.",
+    "정말로 회원 탈퇴하시겠습니까?": "Möchten Sie Ihre Mitgliedschaft wirklich kündigen?"
   }
 }

@@ -41,6 +41,19 @@ import {
     const [verificationCode, setVerificationCode] = useState('');
     const [verifyMessage, setVerifyMessage] = useState('');
   
+    // 언어 선택 상태 추가
+    const LANGUAGES = [
+      { code: 'ko', label: '한국어' },
+      { code: 'en', label: 'English' },
+      { code: 'zh', label: '中文' },
+      { code: 'ja', label: '日本語' },
+      { code: 'fr', label: 'Français' },
+      { code: 'de', label: 'Deutsch' },
+      { code: 'es', label: 'Español' },
+      { code: 'ru', label: 'Русский' },
+    ];
+    const [selectedLang, setSelectedLang] = useState('ko');
+  
     const handleChange = (e) => {
       const { name, value } = e.target;
       if (name === 'loginId' || name === 'nickname') {
@@ -221,7 +234,8 @@ import {
           email: form.email,
           nickname: form.nickname
         });
-        
+        // 회원가입 시 선택한 언어 저장
+        localStorage.setItem('lang', selectedLang);
         alert(t('signupPage.submit.success'));
         navigate('/signup-complete');
       } catch (err) {
@@ -270,71 +284,7 @@ import {
             )}
           </div>
 
-          {/* 이메일 */}
-          <div className="h-[85px]">
-            <label className="font-bold text-lg">{t('signupPage.email')}</label>
-            <div className="flex justify-between items-center border-b border-gray-300">
-              <input
-                type="email"
-                name="email"
-                value={form.email}
-                onChange={(e) => {
-                  handleChange(e);
-                  setIsEmailChecked(false);
-                  setEmailCheckMessage('');
-                }}
-                placeholder={t('signupPage.emailPlaceholder')}
-                className="w-full py-3 text-lg focus:outline-none"
-              />
-              {!isEmailChecked ? (
-                <button
-                  type="button"
-                  onClick={handleEmailCheck}
-                  className="text-base text-gray-500 whitespace-nowrap ml-2 hover:text-blue-600"
-                >
-                  {t('signupPage.checkDuplicate')}
-                </button>
-              ) : (
-                <button
-                  type="button"
-                  onClick={handleSendVerificationCode}
-                  className="text-base text-blue-600 whitespace-nowrap ml-2 hover:underline"
-                >
-                  {t('signupPage.getVerificationCode')}
-                </button>
-              )}
-            </div>
-            {emailCheckMessage && (
-              <p className={`text-sm mt-1 ${isEmailChecked ? 'text-green-600' : 'text-red-500'}`}>
-                {emailCheckMessage}
-              </p>
-            )}
-          </div>
-
-          {showVerificationModal && (
-            <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-                <div className="bg-white p-8 rounded-lg shadow-lg w-96">
-                <h3 className="text-xl font-bold mb-4">{t('signupPage.verifyEmail')}</h3>
-                <p className="mb-2">{t('signupPage.verifyEmailDesc')}</p>
-                <input
-                    type="text"
-                    placeholder={t('signupPage.verificationCodePlaceholder')}
-                    value={verificationCode}
-                    onChange={(e) => setVerificationCode(e.target.value)}
-                    className="w-full border px-3 py-2 mb-4"
-                />
-                {verifyMessage && <p className="text-sm text-red-500 mb-2">{verifyMessage}</p>}
-                <div className="flex justify-end gap-2">
-                    <button onClick={() => setShowVerificationModal(false)} className="px-4 py-2 text-gray-600 hover:underline">
-                    {t('signupPage.cancel')}
-                    </button>
-                    <button onClick={handleVerifyCode} className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-                    {t('signupPage.confirm')}
-                    </button>
-                </div>
-                </div>
-            </div>
-          )}
+          
 
           {/* 비밀번호 */}
           <div className="h-[85px]">
@@ -406,6 +356,86 @@ import {
                 {nicknameCheckMessage}
               </p>
             )}
+          </div>
+
+{/* 이메일 */}
+<div className="h-[85px]">
+            <label className="font-bold text-lg">{t('signupPage.email')}</label>
+            <div className="flex justify-between items-center border-b border-gray-300">
+              <input
+                type="email"
+                name="email"
+                value={form.email}
+                onChange={(e) => {
+                  handleChange(e);
+                  setIsEmailChecked(false);
+                  setEmailCheckMessage('');
+                }}
+                placeholder={t('signupPage.emailPlaceholder')}
+                className="w-full py-3 text-lg focus:outline-none"
+              />
+              {!isEmailChecked ? (
+                <button
+                  type="button"
+                  onClick={handleEmailCheck}
+                  className="text-base text-gray-500 whitespace-nowrap ml-2 hover:text-blue-600"
+                >
+                  {t('signupPage.checkDuplicate')}
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={handleSendVerificationCode}
+                  className="text-base text-blue-600 whitespace-nowrap ml-2 hover:underline"
+                >
+                  {t('signupPage.getVerificationCode')}
+                </button>
+              )}
+            </div>
+            {emailCheckMessage && (
+              <p className={`text-sm mt-1 ${isEmailChecked ? 'text-green-600' : 'text-red-500'}`}>
+                {emailCheckMessage}
+              </p>
+            )}
+          </div>
+
+          {showVerificationModal && (
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+                <div className="bg-white p-8 rounded-lg shadow-lg w-96">
+                <h3 className="text-xl font-bold mb-4">{t('signupPage.verifyEmail')}</h3>
+                <p className="mb-2">{t('signupPage.verifyEmailDesc')}</p>
+                <input
+                    type="text"
+                    placeholder={t('signupPage.verificationCodePlaceholder')}
+                    value={verificationCode}
+                    onChange={(e) => setVerificationCode(e.target.value)}
+                    className="w-full border px-3 py-2 mb-4"
+                />
+                {verifyMessage && <p className="text-sm text-red-500 mb-2">{verifyMessage}</p>}
+                <div className="flex justify-end gap-2">
+                    <button onClick={() => setShowVerificationModal(false)} className="px-4 py-2 text-gray-600 hover:underline">
+                    {t('signupPage.cancel')}
+                    </button>
+                    <button onClick={handleVerifyCode} className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+                    {t('signupPage.confirm')}
+                    </button>
+                </div>
+                </div>
+            </div>
+          )}
+
+          {/* 언어 선택 */}
+          <div className="h-[85px]">
+            <label className="font-bold text-lg">{t('language.select')}</label>
+            <select
+              className="w-full py-3 text-lg border-b border-gray-300 focus:outline-none"
+              value={selectedLang}
+              onChange={e => setSelectedLang(e.target.value)}
+            >
+              {LANGUAGES.map(lang => (
+                <option key={lang.code} value={lang.code}>{lang.label}</option>
+              ))}
+            </select>
           </div>
 
           {/* 가입 버튼 */}
