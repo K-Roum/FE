@@ -224,5 +224,13 @@
     "title": "Review List",
     "noReviews": "No reviews registered yet.",
     "confirmDelete": "Are you sure you want to delete this?"
+  },
+
+  "reviewForm": {
+    "rating": "Rating",
+    "content": "Review Content",
+    "placeholder": "Write your review here",
+    "submit": "Submit Review",
+    "cancel": "Cancel"
   }
 }

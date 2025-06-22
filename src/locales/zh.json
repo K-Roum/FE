@@ -231,5 +231,13 @@
     "reviewPreview": {
         "title": "评论",
         "noReviews": "暂无评论"
+    },
+
+    "reviewForm": {
+        "rating": "评分",
+        "content": "评论内容",
+        "placeholder": "请在此处填写您的评论",
+        "submit": "提交评论",
+        "cancel": "取消"
     }
 }
