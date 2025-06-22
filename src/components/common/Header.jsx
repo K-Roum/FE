@@ -26,6 +26,18 @@ const Header = () => {
    ru: { label: 'Русский' },
   };
   
+  // 언어별 로고 파일 매핑
+  const LOGO_MAP = {
+    ko: '/assets/kroumLogo.png',
+    en: '/assets/enLogo.png',
+    ja: '/assets/jaLogo.png',
+    zh: '/assets/zhLogo.png',
+    fr: '/assets/frLogo.png',
+    de: '/assets/deLogo.png',
+    es: '/assets/esLogo.png',
+    ru: '/assets/ruLogo.png',
+  };
+  
   // 로그인 상태 확인 함수
   const checkLoginStatus = () => {
     const token = localStorage.getItem('token');
@@ -91,7 +103,7 @@ const Header = () => {
       {/* 로고 */}
       <div className="flex items-center space-x-2 cursor-pointer" onClick={() => navigate('/home')}>
         <img
-          src="/assets/kroumLogo.png"
+          src={LOGO_MAP[currentLang] || '/assets/kroumLogo.png'}
           alt="Kroum Logo"
           className="h-10 w-auto object-contain"
         />
