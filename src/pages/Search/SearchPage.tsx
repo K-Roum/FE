@@ -80,48 +80,54 @@ const SearchPage = () => {
     }
   };
 
-  return (
-    <div className="flex h-screen">
-      {/* 지도 컴포넌트 */}
-      <MapComponent ref={mapRef} results={displayResults} />
-
-      {/* 검색 결과 리스트 */}
-      <div className="w-1/2 p-8 overflow-y-auto">        
-        {displayResults && displayResults.length > 0 ? (
-          <>
-            <div className="mb-4">
-              <h2 className="text-xl font-semibold text-gray-800">
-                {isShowingRecommendations ? "추천 장소" : "검색 결과"}
-              </h2>
-            </div>
-            <ul className="space-y-6">
-              {displayResults.map((item, index) => (
-                <li key={index}>
-                  <SearchResultCard
-                    item={item}
-                    onCardClick={handleCardClick}
-                    handleBookmarkClick={handleBookmarkClick} 
-                  />
-                </li>
-              ))}
-            </ul>
-          </>
-        ) : (
-          <div className="bg-white p-8 rounded-lg shadow-md text-center">
-            <p className="text-gray-500 text-lg">결과가 없습니다.</p>
-          </div>
-        )}
-      </div>
-
-      {/* 상세 모달 */}
-      <DetailModal
-        isOpen={isModalOpen}
-        item={selectedItem}
-        onClose={handleCloseModal}
-        handleBookmarkClick={handleBookmarkClick}
-      />
+ return (
+  <div className="flex h-screen relative">
+    {/* 지도 위에 올라갈 검색 바 */}
+    <div className="absolute left-8 z-10 w-full max-w-[609px]">
+      <SearchSection />
     </div>
-  );
+
+    {/* 지도 컴포넌트 */}
+    <MapComponent ref={mapRef} results={displayResults} />
+
+    {/* 검색 결과 리스트 */}
+    <div className="w-1/2 p-8 overflow-y-auto">
+      {displayResults && displayResults.length > 0 ? (
+        <>
+          <div className="mb-4">
+            <h2 className="text-xl font-semibold text-gray-800">
+              {isShowingRecommendations ? "추천 장소" : "검색 결과"}
+            </h2>
+          </div>
+          <ul className="space-y-6">
+            {displayResults.map((item, index) => (
+              <li key={index}>
+                <SearchResultCard
+                  item={item}
+                  onCardClick={handleCardClick}
+                  handleBookmarkClick={handleBookmarkClick}
+                />
+              </li>
+            ))}
+          </ul>
+        </>
+      ) : (
+        <div className="bg-white p-8 rounded-lg shadow-md text-center">
+          <p className="text-gray-500 text-lg">결과가 없습니다.</p>
+        </div>
+      )}
+    </div>
+
+    {/* 상세 모달 */}
+    <DetailModal
+      isOpen={isModalOpen}
+      item={selectedItem}
+      onClose={handleCloseModal}
+      handleBookmarkClick={handleBookmarkClick}
+    />
+  </div>
+);
+
 };
 
 export default SearchPage;
