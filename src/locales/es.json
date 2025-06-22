@@ -244,6 +244,14 @@
   "reviewPreview": {
     "title": "Reseñas",
     "noReviews": "No hay reseñas"
+  },
+
+  "reviewForm": {
+    "rating": "Calificación",
+    "content": "Contenido de la reseña",
+    "placeholder": "Escribe tu reseña aquí",
+    "submit": "Enviar reseña",
+    "cancel": "Cancelar"
   }
 }
 

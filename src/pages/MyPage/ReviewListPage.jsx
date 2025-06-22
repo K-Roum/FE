@@ -2,11 +2,14 @@
 import React, { useEffect, useState } from 'react';
 import MyPageLayout from './MyPageLayout';
 import { useTranslation } from 'react-i18next';
+import ReviewForm from '../../components/ui/searchPage/ReviewForm.tsx';
 
 export default function ReviewListPage() {
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
   const { t } = useTranslation();
+  const [editModalOpen, setEditModalOpen] = useState(false);
+  const [editingReview, setEditingReview] = useState(null);
 
   const fetchReviews = async () => {
     try {
@@ -60,6 +63,46 @@ export default function ReviewListPage() {
     }
   };
 
+  const handleEditClick = (review) => {
+    setEditingReview({
+      placeId: review.placeId,
+      rating: review.rating || review.averageRating || 0,
+      content: review.content || '',
+    });
+    setEditModalOpen(true);
+  };
+
+  const handleEditSubmit = async (form) => {
+    if (!editingReview) return;
+    try {
+      const token = localStorage.getItem('token');
+      const res = await fetch(`http://localhost:8080/reviews/${editingReview.placeId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          accept: '*/*',
+          'Authorization': `Bearer ${token}`,
+        },
+        credentials: 'include',
+        body: JSON.stringify({
+          rating: form.rating,
+          content: form.comment,
+        }),
+      });
+      if (!res.ok) throw new Error('리뷰 수정 실패');
+      setEditModalOpen(false);
+      setEditingReview(null);
+      fetchReviews();
+    } catch (err) {
+      alert('리뷰 수정 중 오류 발생: ' + err.message);
+    }
+  };
+
+  const handleEditCancel = () => {
+    setEditModalOpen(false);
+    setEditingReview(null);
+  };
+
   return (
     <MyPageLayout>
       <div className="w-full px-4 md:px-8 lg:px-12">
@@ -80,6 +123,13 @@ export default function ReviewListPage() {
                     aria-label={t('common.delete')}
                   >
                     X
+                  </button>
+                  <button
+                    onClick={() => handleEditClick(review)}
+                    className="absolute top-2 right-10 text-gray-500 hover:text-blue-500 text-lg font-bold p-1 rounded-full bg-white bg-opacity-75 hover:bg-opacity-100 transition-colors"
+                    aria-label={t('common.edit')}
+                  >
+                    ✎
                   </button>
                   <div className="flex-shrink-0 w-80">
                     <div className="w-full h-40 rounded-t-xl overflow-hidden">
@@ -125,6 +175,27 @@ export default function ReviewListPage() {
                 </div>
               ))
             )}
+          </div>
+        )}
+        {editModalOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
+            <div className="bg-white rounded-xl shadow-xl p-10 w-full max-w-2xl relative">
+              <button
+                onClick={handleEditCancel}
+                className="absolute top-2 right-2 text-gray-500 hover:text-red-500 text-xl font-bold p-1 rounded-full bg-white bg-opacity-75 hover:bg-opacity-100 transition-colors"
+                aria-label="close"
+              >
+                ×
+              </button>
+              <h2 className="text-xl font-bold mb-4">{t('리뷰 수정')}</h2>
+              <ReviewForm
+                isVisible={true}
+                onSubmit={handleEditSubmit}
+                onCancel={handleEditCancel}
+                initialRating={editingReview?.rating}
+                initialComment={editingReview?.content}
+              />
+            </div>
           </div>
         )}
       </div>
