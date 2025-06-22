@@ -289,6 +289,10 @@
     "회원 탈퇴 실패": "Failed to resign membership.",
     "회원 탈퇴가 완료되었습니다.": "Membership resignation completed.",
     "비밀번호를 입력해주세요.": "Please enter your password.",
-    "정말로 회원 탈퇴하시겠습니까?": "Are you sure you want to resign your membership?"
+    "정말로 회원 탈퇴하시겠습니까?": "Are you sure you want to resign your membership?",
+    "myInfo": "My Info",
+    "edit": "Edit",
+    "email": "Email",
+    "nickname": "Nickname"
   }
 }
