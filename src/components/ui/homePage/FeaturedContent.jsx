@@ -48,7 +48,7 @@ const FeaturedContent = ({ data }) => {
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mt-6 sm:mt-8">
       {data.map((item, idx) => (
         <div
           key={item.id || idx}
@@ -58,10 +58,22 @@ const FeaturedContent = ({ data }) => {
           <img
             src={item.image || item.imageUrl}
             alt={item.alt || item.title || t('Recommended Images')}
-            className="w-full h-[363px] object-cover rounded-[30px]"
+            className="
+            w-full
+            h-48
+            sm:h-64
+            md:h-72
+            lg:h-[363px]
+            object-cover
+            rounded-[20px]
+            sm:rounded-[24px]
+            md:rounded-[28px]
+            lg:rounded-[30px]
+            transition-all
+          "
           />
           <div className="mt-2 text-center">
-            <h3 className="text-xl font-medium">{item.title || ""}</h3>
+            <h3 className="text-base sm:text-lg md:text-xl font-medium">{item.title || ""}</h3>
           </div>
         </div>
       ))}
