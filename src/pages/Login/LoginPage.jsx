@@ -37,6 +37,10 @@ export default function LoginPage() {
         localStorage.removeItem('rememberMe');
       }
 
+      // 로그인 성공 시 언어 적용
+      const lang = localStorage.getItem('lang') || 'ko';
+      i18n.changeLanguage(lang);
+
       // 로그인 상태 변경 이벤트 발생
       window.dispatchEvent(loginStatusChange);
 
@@ -137,6 +141,7 @@ export default function LoginPage() {
 
             {/* 회원가입 버튼 */}
             <button
+              type="button"
               className="w-full py-4 border border-gray-300 text-gray-400 rounded-md text-xl hover:bg-gray-100 transition"
               onClick={() => navigate('/signup')}
             >

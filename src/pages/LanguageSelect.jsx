@@ -31,17 +31,18 @@ const LanguageSelect = () => {
           </p>
           <hr className="mb-6 border-gray-300" />
           <ul className="space-y-5 text-center text-lg">
-            {Object.entries(LANGUAGES).map(([code, { label, name }]) =>
-              code !== currentLang ? (
-                <li
-                  key={code}
-                  onClick={() => changeLang(code)}
-                  className="cursor-pointer hover:text-blue-600 transition py-1"
-                >
-                  {`${label} (${name})`}
-                </li>
-              ) : null
-            )}
+            {Object.entries(LANGUAGES).map(([code, { label, name }]) => (
+              <li
+                key={code}
+                onClick={() => changeLang(code)}
+                className={`cursor-pointer transition py-1 flex items-center justify-center gap-2 ${
+                  currentLang === code ? 'font-bold text-blue-600' : 'hover:text-blue-600'
+                }`}
+              >
+                {label} ({name})
+                {currentLang === code && <span className="ml-2">✓</span>}
+              </li>
+            ))}
           </ul>
         </div>
       </div>
