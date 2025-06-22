@@ -70,7 +70,6 @@ const MapComponent = forwardRef<MapComponentRef, MapComponentProps>(
             position: markerPosition,
           });
 
-          // 🔥 마커 클릭 시 핸들러 호출
           if (onPinClick) {
             window.kakao.maps.event.addListener(marker, "click", () => {
               onPinClick(item);
@@ -105,7 +104,7 @@ const MapComponent = forwardRef<MapComponentRef, MapComponentProps>(
             position: markerPosition,
           });
 
-          // 🔥 다시 한 번 마커 클릭 핸들링
+
           if (onPinClick) {
             window.kakao.maps.event.addListener(marker, "click", () => {
               onPinClick(item);
@@ -135,9 +134,9 @@ const MapComponent = forwardRef<MapComponentRef, MapComponentProps>(
     }));
 
     return (
-      <div className="w-1/2 bg-gray-100">
+
         <div id="map" style={{ width: "100%", height: "100%" }}></div>
-      </div>
+
     );
   }
 );
