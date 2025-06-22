@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { PlaceDetailModel } from "../../../model/PlaceDetailModel";
 import { SearchResultModel } from "../../../model/SearchResultModel";
 import ReviewForm from "./ReviewForm.tsx";
-import i18n from "../../../i18n";
 import { submitReview } from "../../../services/reviewApi.ts";
+import { useTranslation } from 'react-i18next';
 
 type DetailModalProps = {
   isOpen: boolean;
@@ -18,20 +18,21 @@ type DetailModalProps = {
 const DetailModal = ({ isOpen, item, onClose, handleBookmarkClick }: DetailModalProps) => {
   const [showAllReviews, setShowAllReviews] = useState(false);
   const [showReviewForm, setShowReviewForm] = useState(false);
+  const { t, i18n } = useTranslation();
   const currentLang = i18n.language.toLowerCase();
-const [isBookmarked, setIsBookmarked] = useState(item?.summary.bookmarked ?? false);
-const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
 
+  const [isBookmarked, setIsBookmarked] = useState(item?.summary.bookmarked ?? false);
+  const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
 
-useEffect(() => {
-  if (item) {
-    setIsBookmarked(item.summary.bookmarked);
-  }
-}, [item]);
+  useEffect(() => {
+    if (item) {
+      setIsBookmarked(item.summary.bookmarked);
+    }
+  }, [item]);
 
-if (!isOpen || !item) return null;
+  if (!isOpen || !item) return null;
 
-const { detail, summary } = item;
+  const { detail, summary } = item;
 
   const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
@@ -42,7 +43,7 @@ const { detail, summary } = item;
   const handleBookmarkToggle = async (e: React.MouseEvent) => {
     await handleBookmarkClick(e, summary);
     setIsBookmarked((prev) => !prev);
-    if( detail.details.bookmark) {
+    if (detail.details.bookmark) {
       detail.details.bookmark.bookmarkCount += isBookmarked ? -1 : 1;
     }
   };
@@ -78,9 +79,6 @@ const { detail, summary } = item;
       </span>
     ));
   };
-
-
-
 
   return (
     <div
@@ -149,8 +147,8 @@ const { detail, summary } = item;
           </div>
 
           <div className="flex items-center text-sm text-gray-500 mb-4 space-x-4">
-            <div>❤️ 좋아요 {detail.details.bookmark.bookmarkCount}</div>
-            <div>📝 리뷰 {detail.details.reviews.totalCount}</div>
+            <div>❤️ {t('likes')} {detail.details.bookmark.bookmarkCount}</div>
+            <div>📝 {t('reviews')} {detail.details.reviews.totalCount}</div>
           </div>
 
           {/* 정보 카드 */}
@@ -176,44 +174,43 @@ const { detail, summary } = item;
                 />
               </svg>
               <div>
-                <span className="font-medium text-gray-700">주소</span>
-                <p className="text-gray-600 text-sm mt-1">{summary.address || "주소 정보 없음"}</p>
+                <span className="font-medium text-gray-700">{t('address')}</span>
+                <p className="text-gray-600 text-sm mt-1">{summary.address || t('no_address_info')}</p>
               </div>
             </div>
           </div>
 
           {/* 설명 */}
-     <div className="mb-6">
-  <h3 className="font-semibold text-lg mb-3 text-gray-900">상세 정보</h3>
-  <div>
-    <p
-      className={`text-gray-600 leading-relaxed transition-all duration-300 ${
-        isDescriptionExpanded ? "" : "line-clamp-3"
-      }`}
-    >
-      {summary.description || "설명 정보가 없습니다."}
-    </p>
-    {summary.description && (
-      <button
-        onClick={() => setIsDescriptionExpanded((prev) => !prev)}
-        className="text-blue-500 text-sm mt-1 hover:underline focus:outline-none"
-      >
-        {isDescriptionExpanded ? "접기" : "더보기"}
-      </button>
-    )}
-  </div>
-</div>
-
+          <div className="mb-6">
+            <h3 className="font-semibold text-lg mb-3 text-gray-900">{t('detailed_info')}</h3>
+            <div>
+              <p
+                className={`text-gray-600 leading-relaxed transition-all duration-300 ${
+                  isDescriptionExpanded ? "" : "line-clamp-3"
+                }`}
+              >
+                {summary.description || t('no_description')}
+              </p>
+              {summary.description && (
+                <button
+                  onClick={() => setIsDescriptionExpanded((prev) => !prev)}
+                  className="text-blue-500 text-sm mt-1 hover:underline focus:outline-none"
+                >
+                  {isDescriptionExpanded ? t('collapse') : t('read_more')}
+                </button>
+              )}
+            </div>
+          </div>
 
           {/* 리뷰 */}
           <div className="border-t pt-6">
-            <h3 className="font-semibold text-lg mb-4 text-gray-900">리뷰</h3>
+            <h3 className="font-semibold text-lg mb-4 text-gray-900">{t('reviews')}</h3>
 
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center text-gray-700">
                 <div className="text-yellow-500 mr-2 text-lg">⭐</div>
                 <div className="text-sm">
-                  평균 평점{" "}
+                  {t('average_rating')}{" "}
                   <span className="font-semibold">
                     {detail.details.reviews.averageRating?.toFixed(1) ?? "?"}
                   </span>{" "}
@@ -224,6 +221,7 @@ const { detail, summary } = item;
               <button
                 onClick={() => setShowReviewForm(!showReviewForm)}
                 className="p-2 bg-gray-200 hover:bg-gray-300 text-gray-600 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50"
+                aria-label={t('write_review')}
               >
                 <svg
                   className="w-5 h-5"
@@ -266,12 +264,12 @@ const { detail, summary } = item;
                       <div key={index} className="bg-gray-100 rounded-lg p-4">
                         <div className="flex justify-between items-center mb-2">
                           <div className="font-medium text-gray-800">
-                            {review.nickName || "익명 사용자"}
+                            {review.nickName || t('anonymous_user')}
                           </div>
                           <div className="text-sm text-gray-500">
                             {review.createdAt
                               ? new Date(review.createdAt).toISOString().slice(0, 10)
-                              : "날짜 정보 없음"}
+                              : t('no_date_info')}
                           </div>
                         </div>
                         <div className="flex items-center mb-2">
@@ -283,7 +281,7 @@ const { detail, summary } = item;
                           </div>
                         </div>
                         <p className="text-gray-700 text-sm">
-                          {review.content || "내용 없음"}
+                          {review.content || t('no_content')}
                         </p>
                       </div>
                     ))}
@@ -292,12 +290,12 @@ const { detail, summary } = item;
                       onClick={() => setShowAllReviews(true)}
                       className="text-black-600 text-sm mt-2 hover:underline focus:outline-none"
                     >
-                      리뷰 더보기
+                      {t('load_more_reviews')}
                     </button>
                   )}
                 </>
               ) : (
-                <p className="text-gray-500 text-sm">등록된 리뷰가 없습니다.</p>
+                <p className="text-gray-500 text-sm">{t('no_registered_reviews')}</p>
               )}
             </div>
           </div>

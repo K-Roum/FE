@@ -8,7 +8,7 @@ import { PlaceDetailModel } from "../../model/PlaceDetailModel.ts";
 import i18n from "../../i18n/index.js";
 import { fetchPlaceDetail, toggleBookmark } from "../../services/SearchApi.ts";
 import SearchSection from "../../components/ui/homePage/SearchSection.tsx";
-
+import { useTranslation } from 'react-i18next';
 type SelectedItemType = {
   detail: PlaceDetailModel;
   summary: SearchResultModel;
@@ -24,7 +24,7 @@ const SearchPage = () => {
   const [selectedItem, setSelectedItem] = useState<SelectedItemType>(null);
   const [isShowingRecommendations, setIsShowingRecommendations] = useState(false);
   const [loading, setLoading] = useState(false);
-
+  const { t, i18n } = useTranslation();
 
   const queryParams = new URLSearchParams(location.search);
   const query = queryParams.get("query") ?? "";
@@ -160,19 +160,26 @@ const SearchPage = () => {
       <div className="absolute left-8 z-10 w-full max-w-[740px]">
         <SearchSection />
       </div>
+            {/* 지도 컴포넌트 */}
+<div style={{ width: '50%', height: '600px', padding: '32px', overflowY: 'auto' }}>
+  <MapComponent ref={mapRef} results={fetchedResults} onPinClick={handlePinClick} />
+</div>
 
-      {/* 지도 컴포넌트 */}
-      <MapComponent ref={mapRef} results={fetchedResults} onPinClick={handlePinClick} />
+            {/* <MapComponent ref={mapRef} results={fetchedResults} onPinClick={handlePinClick} /> */}
+      
+      {/* </div> */}
+
+
 
       {/* 검색 결과 리스트 */}
       <div className="w-1/2 p-8 overflow-y-auto">
         {loading ? (
-          <div className="text-center text-gray-600 mt-8">검색 중...</div>
+          <div className="text-center text-gray-600 mt-8">{t('Searching...')}</div>
         ) : fetchedResults.length > 0 ? (
           <>
             <div className="mb-4">
               <h2 className="text-xl font-semibold text-gray-800">
-                {isShowingRecommendations ? "추천 장소" : "검색 결과"}
+                {isShowingRecommendations ? t('Recommended Places') : t('Search Results')}
               </h2>
             </div>
             <ul className="space-y-6">
@@ -190,7 +197,7 @@ const SearchPage = () => {
           </>
         ) : (
           <div className="bg-white p-8 rounded-lg shadow-md text-center">
-            <p className="text-gray-500 text-lg">결과가 없습니다.</p>
+            <p className="text-gray-500 text-lg">{t('No Results')}</p>
           </div>
         )}
       </div>
