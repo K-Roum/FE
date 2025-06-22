@@ -233,5 +233,13 @@
   "reviewPreview": {
     "title": "Bewertungen",
     "noReviews": "Noch keine Bewertungen"
+  },
+
+  "reviewForm": {
+    "rating": "Bewertung",
+    "content": "Rezension Inhalt",
+    "placeholder": "Schreiben Sie hier Ihre Rezension",
+    "submit": "Rezension absenden",
+    "cancel": "Abbrechen"
   }
 }

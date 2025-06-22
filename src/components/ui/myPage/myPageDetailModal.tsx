@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { PlaceReview } from '../../../model/PlaceDetailModel'; // 경로 수정
+import ReviewForm from '../searchPage/ReviewForm.tsx';
 
 // 백엔드 DTO에 정의된 reviews와 bookmark 구조에 맞춰 인터페이스 정의
 interface PlaceBookmarkDetail {
@@ -32,14 +33,29 @@ type MyPageDetailModalProps = {
   onClose: () => void;
 };
 
+// 날짜 포맷 함수 추가
+function formatDateTime(dateString: string) {
+  if (!dateString) return '';
+  const d = new Date(dateString);
+  if (isNaN(d.getTime())) return dateString;
+  const pad = (n: number) => n.toString().padStart(2, '0');
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+}
+
 const MyPageDetailModal = ({ isOpen, item, onClose }: MyPageDetailModalProps) => {
   const { t } = useTranslation();
   const [isBookmarked, setIsBookmarked] = useState(false);
+  const [bookmarkCount, setBookmarkCount] = useState(0);
+  const [editModalOpen, setEditModalOpen] = useState(false);
+  const [editingReview, setEditingReview] = useState<{rating: number, content: string} | null>(null);
+  const [reviews, setReviews] = useState(item?.reviews?.placesReviews || []);
 
   useEffect(() => {
     if (item) {
       console.log("myPageDetailModal item:", item); // 디버깅 로그 유지
-      setIsBookmarked(item.bookmarked ?? false); 
+      setIsBookmarked(item.bookmarked ?? false);
+      setBookmarkCount(item.bookmark?.bookmarkCount ?? 0);
+      setReviews(item.reviews?.placesReviews || []);
     }
   }, [item]);
 
@@ -53,32 +69,70 @@ const MyPageDetailModal = ({ isOpen, item, onClose }: MyPageDetailModalProps) =>
 
   const handleBookmarkClick = async () => {
     try {
-      const endpoint = isBookmarked
-        ? `http://localhost:8080/bookmarks/${item.placeId}` // 북마크 취소
-        : `http://localhost:8080/bookmarks/${item.placeId}`; // 북마크 추가
-
+      const endpoint = `http://localhost:8080/bookmarks/${item.placeId}`;
       const method = isBookmarked ? 'DELETE' : 'POST';
-
       const response = await fetch(endpoint, {
-        method: method,
+        method,
         headers: {
-          "Content-Type": "application/json",
-          accept: "*/*",
+          'Content-Type': 'application/json',
+          accept: '*/*',
         },
         credentials: 'include',
       });
-
       if (!response.ok) {
         console.error(`북마크 ${isBookmarked ? '취소' : '추가'} 실패:`, response.statusText);
         return;
       }
-
-      setIsBookmarked(!isBookmarked);
-      console.log(`북마크가 ${isBookmarked ? '취소' : '추가'}되었습니다.`);
-
+      const data = await response.json();
+      setIsBookmarked(data.bookmarked);
+      setBookmarkCount(data.bookmarkCount);
     } catch (error) {
       console.error('북마크 API 호출 중 오류 발생:', error);
     }
+  };
+
+  // 리뷰 편집 버튼 클릭
+  const handleEditClick = (review: PlaceReview) => {
+    setEditingReview({
+      rating: review.rating,
+      content: review.content,
+    });
+    setEditModalOpen(true);
+  };
+
+  // 리뷰 편집 제출
+  const handleEditSubmit = async (form: {rating: number, comment: string}) => {
+    if (!editingReview) return;
+    try {
+      const token = localStorage.getItem('token');
+      const res = await fetch(`http://localhost:8080/reviews/${item.placeId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          accept: '*/*',
+          'Authorization': `Bearer ${token}`,
+        },
+        credentials: 'include',
+        body: JSON.stringify({
+          rating: form.rating,
+          content: form.comment,
+        }),
+      });
+      if (!res.ok) throw new Error('리뷰 수정 실패');
+      // 리뷰 목록 갱신
+      const updated = await res.json();
+      setEditModalOpen(false);
+      setEditingReview(null);
+      setReviews(updated.placesReviews || []);
+    } catch (err) {
+      alert('리뷰 수정 중 오류 발생: ' + err.message);
+    }
+  };
+
+  // 리뷰 편집 취소
+  const handleEditCancel = () => {
+    setEditModalOpen(false);
+    setEditingReview(null);
   };
 
   return (
@@ -143,7 +197,7 @@ const MyPageDetailModal = ({ isOpen, item, onClose }: MyPageDetailModalProps) =>
 
           {/* 찜 및 리뷰 수 표시 추가 */}
           <div className="flex items-center text-sm text-gray-500 mb-4 space-x-4">
-            <div>❤️ {t('common.likes')} {item.bookmark.bookmarkCount}</div>
+            <div>❤️ {t('common.likes')} {bookmarkCount}</div>
             <div>📝 {t('common.reviews')} {item.reviews.totalCount}</div>
           </div>
 
@@ -181,41 +235,65 @@ const MyPageDetailModal = ({ isOpen, item, onClose }: MyPageDetailModalProps) =>
               </div>
             </div>
 
-            {item.reviews.placesReviews && item.reviews.placesReviews.length > 0 && (
-              <div className="space-y-4">
-                {item.reviews.placesReviews.map((review: PlaceReview, index: number) => (
-                  <div key={index} className="bg-gray-100 rounded-lg p-4">
-                    <div className="flex justify-between items-center mb-2">
-                      <div className="font-medium text-gray-800">{review.nickName || t('common.anonymousUser')}</div>
-                      <div className="text-sm text-gray-500">{review.createdAt || t('common.noDateInfo')}</div>
-                    </div>
-                    <div className="flex items-center mb-2">
-                      <div className="flex items-center">
-                        {Array.from({ length: 5 }, (_, starIndex) => (
-                          <span
-                            key={starIndex}
-                            className={`text-xl ${
-                              starIndex < review.rating ? 'text-yellow-500' : 'text-gray-400'
-                            }`}
-                          >
-                            {starIndex < review.rating ? '★' : '☆'}
-                          </span>
-                        ))}
-                        <span className="ml-2 text-sm text-gray-600">({review.rating ?? "?"}/5)</span>
-                      </div>
-                    </div>
-                    <p className="text-gray-700 text-sm">{review.content || t('common.noContent')}</p>
+            {reviews.map((review: PlaceReview, index: number) => (
+              <div key={index} className="bg-gray-100 rounded-lg p-4">
+                <div className="flex justify-between items-center mb-2">
+                  <div className="font-medium text-gray-800">{review.nickName || t('common.anonymousUser')}</div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm text-gray-500">{review.createdAt ? formatDateTime(review.createdAt) : t('common.noDateInfo')}</span>
+                    <button
+                      onClick={() => handleEditClick(review)}
+                      className="text-gray-500 hover:text-blue-500 text-base font-bold p-1 rounded-full bg-white bg-opacity-75 hover:bg-opacity-100 transition-colors"
+                      aria-label={t('common.edit')}
+                    >
+                      ✎
+                    </button>
                   </div>
-                ))}
+                </div>
+                <div className="flex items-center mb-2">
+                  <div className="flex items-center">
+                    {Array.from({ length: 5 }, (_, starIndex) => (
+                      <span
+                        key={starIndex}
+                        className={`text-xl ${starIndex < review.rating ? 'text-yellow-500' : 'text-gray-400'}`}
+                      >
+                        {starIndex < review.rating ? '★' : '☆'}
+                      </span>
+                    ))}
+                    <span className="ml-2 text-sm text-gray-600">({review.rating ?? '?'}/5)</span>
+                  </div>
+                </div>
+                <p className="text-gray-700 text-sm">{review.content || t('common.noContent')}</p>
               </div>
-            )}
+            ))}
             
-            {item.reviews.placesReviews && item.reviews.placesReviews.length === 0 && (
+            {reviews.length === 0 && (
               <p className="text-gray-500 text-center mt-4">{t('reviewPreview.noReviews')}</p>
             )}
           </div>
         </div>
       </div>
+      {editModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
+          <div className="bg-white rounded-xl shadow-xl p-10 w-full max-w-2xl relative">
+            <button
+              onClick={handleEditCancel}
+              className="absolute top-2 right-2 text-gray-500 hover:text-red-500 text-xl font-bold p-1 rounded-full bg-white bg-opacity-75 hover:bg-opacity-100 transition-colors"
+              aria-label="close"
+            >
+              ×
+            </button>
+            <h2 className="text-xl font-bold mb-4">{t('리뷰 수정')}</h2>
+            <ReviewForm
+              isVisible={true}
+              onSubmit={handleEditSubmit}
+              onCancel={handleEditCancel}
+              initialRating={editingReview?.rating}
+              initialComment={editingReview?.content}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

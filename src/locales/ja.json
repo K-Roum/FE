@@ -246,5 +246,13 @@
   "reviewPreview": {
     "title": "レビュー",
     "noReviews": "まだレビューがありません"
+  },
+
+  "reviewForm": {
+    "rating": "評価",
+    "content": "レビュー内容",
+    "placeholder": "ここにレビューを入力してください",
+    "submit": "レビューを登録",
+    "cancel": "キャンセル"
   }
 }

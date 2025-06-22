@@ -242,6 +242,14 @@
   "reviewPreview": {
     "title": "Avis",
     "noReviews": "Pas encore d'avis"
+  },
+
+  "reviewForm": {
+    "rating": "Note",
+    "content": "Contenu de l'avis",
+    "placeholder": "Écrivez votre avis ici",
+    "submit": "Envoyer l'avis",
+    "cancel": "Annuler"
   }
 }
 

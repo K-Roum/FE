@@ -228,5 +228,13 @@
   "reviewPreview": {
     "title": "Отзывы",
     "noReviews": "Нет отзывов"
+  },
+
+  "reviewForm": {
+    "rating": "Оценка",
+    "content": "Содержание отзыва",
+    "placeholder": "Напишите свой отзыв здесь",
+    "submit": "Отправить отзыв",
+    "cancel": "Отмена"
   }
 }
