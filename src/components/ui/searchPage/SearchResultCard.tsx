@@ -1,5 +1,6 @@
 import React from "react";
 import { SearchResultModel } from "../../../model/SearchResultModel.ts";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   item: SearchResultModel;
@@ -14,6 +15,8 @@ const SearchResultCard = ({
   onCardClick,
   handleBookmarkClick,
 }: Props) => {
+  const { t } = useTranslation();
+
   const handleCardClick = () => {
     onCardClick(item);
   };
@@ -38,7 +41,7 @@ const SearchResultCard = ({
             />
           ) : (
             <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-              <span className="text-gray-400">이미지 없음</span>
+              <span className="text-gray-400">{t("noImage")}</span>
             </div>
           )}
         </div>
@@ -48,7 +51,7 @@ const SearchResultCard = ({
           <div>
             <div className="flex justify-between items-center mb-2">
               <h2 className="text-xl font-semibold text-gray-800 truncate flex-1">
-                {item.placeName || "제목 없음"}
+                {item.placeName || t("noTitle")}
               </h2>
 
               {/* 찜 버튼 */}
@@ -58,7 +61,7 @@ const SearchResultCard = ({
                   className={`p-2 rounded-full hover:bg-gray-100 transition-colors
                     ${isBookmarked ? "text-red-500" : "text-gray-400"}
                     focus:outline-none focus:ring-0`}
-                  aria-label={isBookmarked ? "찜 취소" : "찜하기"}
+                  aria-label={isBookmarked ? t("removeBookmark") : t("addBookmark")}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -100,14 +103,14 @@ const SearchResultCard = ({
                 />
               </svg>
               <p className="text-gray-500 text-sm line-clamp-1 mt-1">
-                {item.address || "주소 정보 없음"}
+                {item.address || t("noAddress")}
               </p>
             </div>
           </div>
 
           {/* 설명 줄임 */}
           <p className="text-gray-600 text-sm line-clamp-2 mt-1">
-            {item.description || "설명 정보 없음"}
+            {item.description || t("noDescription")}
           </p>
         </div>
       </div>
