@@ -24,6 +24,7 @@ const SearchPage = () => {
   
   // MapComponent의 ref
   const mapRef = useRef<MapComponentRef>(null);
+  
 
   const handleCardClick = async (item: SearchResultModel) => {
     const currentLang = i18n.language.toLowerCase();
@@ -79,7 +80,34 @@ const SearchPage = () => {
       console.error("북마크 처리 중 오류:", error);
     }
   };
+const handlePinClick = async (item: SearchResultModel) => {
+  const currentLang = i18n.language.toLowerCase();
 
+  try {
+    // 지도 중심 이동
+    mapRef.current?.centerMapOnLocation(item.latitude, item.longitude);
+
+    // 장소 상세 API 호출
+    const parsedResponse = await fetchPlaceDetail(item.placeId, currentLang);
+
+    setSelectedItem({
+      detail: parsedResponse,
+      summary: item,
+    });
+
+    // 추천 장소 있으면 리스트 변경, 마커 업데이트
+    if (parsedResponse.recommendations && parsedResponse.recommendations.length > 0) {
+      const recommendationResults = parsedResponse.recommendations.map(rec => rec.place);
+      setDisplayResults(recommendationResults);
+      setIsShowingRecommendations(true);
+      mapRef.current?.updateMapMarkers(recommendationResults);
+    }
+
+    setIsModalOpen(true);
+  } catch (error) {
+    console.error("장소 상세 정보 요청 실패:", error);
+  }
+};
  return (
   <div className="flex h-screen relative">
     {/* 지도 위에 올라갈 검색 바 */}
@@ -88,7 +116,7 @@ const SearchPage = () => {
     </div>
 
     {/* 지도 컴포넌트 */}
-    <MapComponent ref={mapRef} results={displayResults} />
+    <MapComponent ref={mapRef} results={displayResults} onPinClick={handlePinClick} />
 
     {/* 검색 결과 리스트 */}
     <div className="w-1/2 p-8 overflow-y-auto">

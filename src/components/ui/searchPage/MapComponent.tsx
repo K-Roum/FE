@@ -1,14 +1,12 @@
 import { useEffect, useState, useImperativeHandle, forwardRef } from "react";
 import { SearchResultModel } from "../../../model/SearchResultModel.ts";
 
-// Declare kakao property on the Window interface
 declare global {
   interface Window {
     kakao: any;
   }
 }
 
-// MapComponent가 외부에서 호출할 수 있는 메서드들의 타입 정의
 export interface MapComponentRef {
   centerMapOnLocation: (latitude: number, longitude: number) => void;
   updateMapMarkers: (items: SearchResultModel[]) => void;
@@ -17,10 +15,11 @@ export interface MapComponentRef {
 
 interface MapComponentProps {
   results?: SearchResultModel[];
+  onPinClick?: (item: SearchResultModel) => void;
 }
 
 const MapComponent = forwardRef<MapComponentRef, MapComponentProps>(
-  ({ results }, ref) => {
+  ({ results, onPinClick }, ref) => {
     const [mapInstance, setMapInstance] = useState<any>(null);
     const [markers, setMarkers] = useState<any[]>([]);
 
@@ -31,12 +30,9 @@ const MapComponent = forwardRef<MapComponentRef, MapComponentProps>(
         level: 13,
       };
       const map = new window.kakao.maps.Map(container, options);
-      
-      // 지도 인스턴스를 상태에 저장
       setMapInstance(map);
     };
 
-    // 카카오맵 스크립트 로드 및 지도 초기화
     useEffect(() => {
       if (window.kakao && window.kakao.maps) {
         initMap();
@@ -61,7 +57,7 @@ const MapComponent = forwardRef<MapComponentRef, MapComponentProps>(
       document.head.appendChild(script);
     }, []);
 
-    // 지도가 로드된 후 초기 마커들을 추가하는 useEffect
+    // 초기 마커 로딩
     useEffect(() => {
       if (mapInstance && results && results.length > 0) {
         const newMarkers: any[] = [];
@@ -73,14 +69,21 @@ const MapComponent = forwardRef<MapComponentRef, MapComponentProps>(
           const marker = new window.kakao.maps.Marker({
             position: markerPosition,
           });
+
+          // 🔥 마커 클릭 시 핸들러 호출
+          if (onPinClick) {
+            window.kakao.maps.event.addListener(marker, "click", () => {
+              onPinClick(item);
+            });
+          }
+
           marker.setMap(mapInstance);
           newMarkers.push(marker);
         });
         setMarkers(newMarkers);
       }
-    }, [mapInstance, results]);
+    }, [mapInstance, results, onPinClick]);
 
-    // 기존 마커들을 제거하는 함수
     const clearMarkers = () => {
       markers.forEach(marker => {
         marker.setMap(null);
@@ -88,13 +91,10 @@ const MapComponent = forwardRef<MapComponentRef, MapComponentProps>(
       setMarkers([]);
     };
 
-    // 지도 마커를 업데이트하는 함수
     const updateMapMarkers = (items: SearchResultModel[]) => {
       if (mapInstance && items && items.length > 0) {
-        // 기존 마커들 제거
         clearMarkers();
 
-        // 새로운 마커들 추가
         const newMarkers: any[] = [];
         items.forEach((item) => {
           const markerPosition = new window.kakao.maps.LatLng(
@@ -104,23 +104,30 @@ const MapComponent = forwardRef<MapComponentRef, MapComponentProps>(
           const marker = new window.kakao.maps.Marker({
             position: markerPosition,
           });
+
+          // 🔥 다시 한 번 마커 클릭 핸들링
+          if (onPinClick) {
+            window.kakao.maps.event.addListener(marker, "click", () => {
+              onPinClick(item);
+            });
+          }
+
           marker.setMap(mapInstance);
           newMarkers.push(marker);
         });
+
         setMarkers(newMarkers);
       }
     };
 
-    // 지도 중심을 특정 위치로 이동시키는 함수
     const centerMapOnLocation = (latitude: number, longitude: number) => {
       if (mapInstance) {
         const moveLatLon = new window.kakao.maps.LatLng(latitude, longitude);
         mapInstance.setCenter(moveLatLon);
-        mapInstance.setLevel(5); // 더 가까운 줌 레벨로 설정 (1-14, 숫자가 작을수록 확대)
+        mapInstance.setLevel(5);
       }
     };
 
-    // ref를 통해 외부에서 접근할 수 있는 메서드들을 노출
     useImperativeHandle(ref, () => ({
       centerMapOnLocation,
       updateMapMarkers,
@@ -136,5 +143,4 @@ const MapComponent = forwardRef<MapComponentRef, MapComponentProps>(
 );
 
 MapComponent.displayName = "MapComponent";
-
 export default MapComponent;
