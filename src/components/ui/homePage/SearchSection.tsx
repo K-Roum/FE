@@ -67,9 +67,8 @@ const SearchSection: React.FC = () => {
       console.log(response);
       const data: SearchResultModel[] = await response.json();
 
-      navigate('/searchPage', {
-        state: { query: query, results: data },
-      });
+     navigate(`/searchPage?query=${encodeURIComponent(query)}`);
+
     } catch (error) {
       console.error('검색 중 오류 발생:', error);
       alert('검색에 실패했습니다.');
