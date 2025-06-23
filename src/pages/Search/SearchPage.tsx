@@ -2,12 +2,9 @@ import { useRef, useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import SearchResultCard from "../../components/ui/searchPage/SearchResultCard.tsx";
 import DetailModal from "../../components/ui/searchPage/DetailModal.tsx";
-import MapComponent, {
-  MapComponentRef,
-} from "../../components/ui/searchPage/MapComponent.tsx";
+import MapComponent, { MapComponentRef } from "../../components/ui/searchPage/MapComponent.tsx";
 import { SearchResultModel } from "../../model/SearchResultModel.ts";
 import { PlaceDetailModel } from "../../model/PlaceDetailModel.ts";
-import i18n from "../../i18n/index.js";
 import { fetchPlaceDetail, toggleBookmark } from "../../services/SearchApi.ts";
 import SearchSection from "../../components/ui/homePage/SearchSection.tsx";
 import { useTranslation } from "react-i18next";
@@ -36,38 +33,43 @@ const SearchPage = () => {
   const mapRef = useRef<MapComponentRef>(null);
 
   useEffect(() => {
-    const fetchResults = async () => {
-      if (!query.trim()) return;
+  const fetchResults = async () => {
+    if (!query.trim()) return;
 
-      setLoading(true);
-      try {
-        const res = await fetch("http://localhost:8080/places/search", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            accept: "*/*",
-          },
-          credentials: "include",
-          body: JSON.stringify({
-            query: query,
-            languageCode: i18n.language.toLowerCase(),
-          }),
-        });
+    setLoading(true);
+    try {
+      const res = await fetch("http://localhost:8080/places/search", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          accept: "*/*",
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          query: query,
+          languageCode: i18n.language.toLowerCase(),
+        }),
+      });
 
-        if (!res.ok) throw new Error("서버 오류");
-        const data = await res.json();
-        setFetchedResults(data);
-        setIsShowingRecommendations(false); // 기본 검색 결과로 초기화
-      } catch (err) {
-        console.error("검색 실패:", err);
-        setFetchedResults([]);
-      } finally {
-        setLoading(false);
-      }
-    };
+      if (!res.ok) throw new Error("서버 오류");
+      const data = await res.json();
 
-    fetchResults();
-  }, [query]);
+      setFetchedResults(data);
+      setIsShowingRecommendations(false);
+
+      // 🛠️ 여기 추가!
+      mapRef.current?.updateMapMarkers(data);
+    } catch (err) {
+      console.error("검색 실패:", err);
+      setFetchedResults([]);
+      mapRef.current?.clearMarkers(); // 에러 시 마커도 초기화
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchResults();
+}, [query]);
 
   const handleCardClick = async (item: SearchResultModel) => {
     const currentLang = i18n.language.toLowerCase();

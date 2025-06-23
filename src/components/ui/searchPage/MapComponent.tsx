@@ -57,66 +57,40 @@ const MapComponent = forwardRef<MapComponentRef, MapComponentProps>(
       document.head.appendChild(script);
     }, []);
 
-    // 초기 마커 로딩
-    useEffect(() => {
-      if (mapInstance && results && results.length > 0) {
-        const newMarkers: any[] = [];
-        results.forEach((item) => {
-          const markerPosition = new window.kakao.maps.LatLng(
-            item.latitude,
-            item.longitude
-          );
-          const marker = new window.kakao.maps.Marker({
-            position: markerPosition,
-          });
-
-          if (onPinClick) {
-            window.kakao.maps.event.addListener(marker, "click", () => {
-              onPinClick(item);
-            });
-          }
-
-          marker.setMap(mapInstance);
-          newMarkers.push(marker);
-        });
-        setMarkers(newMarkers);
-      }
-    }, [mapInstance, results, onPinClick]);
-
     const clearMarkers = () => {
-      markers.forEach(marker => {
+      markers.forEach((marker) => {
         marker.setMap(null);
       });
       setMarkers([]);
     };
 
     const updateMapMarkers = (items: SearchResultModel[]) => {
-      if (mapInstance && items && items.length > 0) {
-        clearMarkers();
+      if (!mapInstance) return;
 
-        const newMarkers: any[] = [];
-        items.forEach((item) => {
-          const markerPosition = new window.kakao.maps.LatLng(
-            item.latitude,
-            item.longitude
-          );
-          const marker = new window.kakao.maps.Marker({
-            position: markerPosition,
-          });
+      clearMarkers();
 
+      const newMarkers: any[] = [];
 
-          if (onPinClick) {
-            window.kakao.maps.event.addListener(marker, "click", () => {
-              onPinClick(item);
-            });
-          }
-
-          marker.setMap(mapInstance);
-          newMarkers.push(marker);
+      items.forEach((item) => {
+        const markerPosition = new window.kakao.maps.LatLng(
+          item.latitude,
+          item.longitude
+        );
+        const marker = new window.kakao.maps.Marker({
+          position: markerPosition,
         });
 
-        setMarkers(newMarkers);
-      }
+        if (onPinClick) {
+          window.kakao.maps.event.addListener(marker, "click", () => {
+            onPinClick(item);
+          });
+        }
+
+        marker.setMap(mapInstance);
+        newMarkers.push(marker);
+      });
+
+      setMarkers(newMarkers);
     };
 
     const centerMapOnLocation = (latitude: number, longitude: number) => {
@@ -133,13 +107,9 @@ const MapComponent = forwardRef<MapComponentRef, MapComponentProps>(
       clearMarkers,
     }));
 
-    return (
-
-        <div id="map" style={{ width: "100%", height: "100%" }}></div>
-
-    );
+    return <div id="map" style={{ width: "100%", height: "100%" }}></div>;
   }
 );
 
-MapComponent.displayName = "MapComponent";
+
 export default MapComponent;
