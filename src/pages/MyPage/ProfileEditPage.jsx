@@ -264,8 +264,6 @@ export default function ProfileEditPage() {
         )}
         <button className="w-full py-2 mb-4 bg-gray-800 text-white rounded hover:bg-gray-900" onClick={handleChange}>{t('profileEdit.changePassword')}</button>
         {message && <div className="mt-2 text-center text-sm text-red-500">{t(`profileEdit.${message}`) || message}</div>}
-        <button className="w-full py-2 bg-gray-800 text-white rounded hover:bg-gray-900" onClick={handleChange}>{t('profileEdit.changePassword')}</button>
-        {message && <div className="mt-3 text-center text-sm text-red-500">{t(`profileEdit.${message}`) || message}</div>}
       </Modal>
     );
   };
