@@ -191,7 +191,11 @@ export default function ProfileEditPage() {
         <input className="w-full border rounded px-3 py-2 mb-4" value={nickname} onChange={e => { setNickname(e.target.value); setIsChecked(false); setMessage(''); }} placeholder={t('profileEdit.nicknamePlaceholder')} />
         <button className="w-full py-2 mb-4 bg-gray-200 hover:bg-gray-400 text-gray-800 rounded" onClick={handleCheck}>{t('profileEdit.checkDuplicate')}</button>
         <button className="w-full py-2 mb-4 bg-gray-800 text-white rounded hover:bg-gray-900" onClick={handleChange}>{t('profileEdit.changeNickname')}</button>
-        {message && <div className="mt-2 text-center text-sm text-red-500">{t(`profileEdit.${message}`) || message}</div>}
+        {message && (
+          <div className={`mt-2 text-center text-sm ${message === '사용 가능한 닉네임입니다.' ? 'text-blue-600' : 'text-red-500'}`}>
+            {t(`profileEdit.${message}`) || message}
+          </div>
+        )}
       </Modal>
     );
   };
