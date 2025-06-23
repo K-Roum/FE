@@ -17,31 +17,32 @@ export default function MyPage() {
   const [loading, setLoading] = useState(true);
   const [selectedItem, setSelectedItem] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [reviewChanged, setReviewChanged] = useState(false);
   const { i18n, t } = useTranslation();
 
+  const fetchMyPage = async () => {
+    try {
+      const res = await fetch('http://localhost:8080/users/mypage', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          accept: '*/*',
+        },
+        credentials: 'include',
+      });
+
+      if (!res.ok) throw new Error('마이페이지 정보 조회 실패');
+
+      const result = await res.json();
+      setData(result);
+    } catch (err) {
+      console.error(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const fetchMyPage = async () => {
-      try {
-        const res = await fetch('http://localhost:8080/users/mypage', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            accept: '*/*',
-          },
-          credentials: 'include',
-        });
-
-        if (!res.ok) throw new Error('마이페이지 정보 조회 실패');
-
-        const result = await res.json();
-        setData(result);
-      } catch (err) {
-        console.error(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchMyPage();
   }, []);
 
@@ -98,6 +99,10 @@ export default function MyPage() {
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setSelectedItem(null);
+    if (reviewChanged) {
+      fetchMyPage();
+      setReviewChanged(false);
+    }
   };
 
   const handleBookmarkChange = (placeId, isBookmarked) => {
@@ -127,6 +132,7 @@ export default function MyPage() {
         item={selectedItem}
         onClose={handleCloseModal}
         onBookmarkChange={handleBookmarkChange}
+        onReviewChange={setReviewChanged}
       />
     </MyPageLayout>
   );

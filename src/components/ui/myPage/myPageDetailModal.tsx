@@ -32,6 +32,7 @@ type MyPageDetailModalProps = {
   item: MyPageDetailModalItem | null; // MyPageDetailModalItem으로 타입 변경
   onClose: () => void;
   onBookmarkChange?: (placeId: number, isBookmarked: boolean) => void;
+  onReviewChange?: (changed: boolean) => void;
 };
 
 // 날짜 포맷 함수 추가
@@ -43,7 +44,7 @@ function formatDateTime(dateString: string) {
   return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
 }
 
-const MyPageDetailModal = ({ isOpen, item, onClose, onBookmarkChange }: MyPageDetailModalProps) => {
+const MyPageDetailModal = ({ isOpen, item, onClose, onBookmarkChange, onReviewChange }: MyPageDetailModalProps) => {
   const { t, i18n } = useTranslation();
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [bookmarkCount, setBookmarkCount] = useState(0);
@@ -129,13 +130,13 @@ const MyPageDetailModal = ({ isOpen, item, onClose, onBookmarkChange }: MyPageDe
         }),
       });
       if (!res.ok) throw new Error('리뷰 수정 실패');
-      // 리뷰 목록 갱신
       const updated = await res.json();
       setEditModalOpen(false);
       setEditingReview(null);
       setReviews(updated.placesReviews || []);
       setReviewsCount(updated.totalCount || (updated.placesReviews?.length ?? 0));
       setAverageRating(updated.averageRating || 0);
+      if (typeof onReviewChange === 'function') onReviewChange(true);
     } catch (err) {
       alert('리뷰 수정 중 오류 발생: ' + err.message);
     }
@@ -177,6 +178,7 @@ const MyPageDetailModal = ({ isOpen, item, onClose, onBookmarkChange }: MyPageDe
       setReviews(updated.placesReviews || []);
       setReviewsCount(updated.totalCount || (updated.placesReviews?.length ?? 0));
       setAverageRating(updated.averageRating || 0);
+      if (typeof onReviewChange === 'function') onReviewChange(true);
     } catch (err) {
       alert('리뷰 등록 중 오류 발생: ' + err.message);
     }

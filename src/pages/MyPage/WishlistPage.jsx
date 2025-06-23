@@ -10,33 +10,35 @@ export default function WishlistPage() {
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
+  const [wishlistChanged, setWishlistChanged] = useState(false);
   const { t } = useTranslation();
 
+  const fetchBookmarks = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const res = await fetch('http://localhost:8080/bookmarks', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          accept: '*/*'
+        },
+        credentials: 'include'
+      });
+
+      if (!res.ok) throw new Error('찜 목록 조회 실패');
+
+      const data = await res.json();
+      setWishlist(data || []);
+    } catch (err) {
+      console.error(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const fetchBookmarks = async () => {
-      try {
-        const token = localStorage.getItem('token');
-        const res = await fetch('http://localhost:8080/bookmarks', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            accept: '*/*'
-          },
-          credentials: 'include'
-        });
-
-        if (!res.ok) throw new Error('찜 목록 조회 실패');
-
-        const data = await res.json();
-        setWishlist(data || []);
-      } catch (err) {
-        console.error(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchBookmarks();
+    // eslint-disable-next-line
   }, []);
 
   const handleItemClick = async (item) => {
@@ -67,7 +69,7 @@ export default function WishlistPage() {
           placeName: parsedResponse.placeName,
           address: parsedResponse.address,
           description: parsedResponse.description,
-          imageUrl: parsedResponse.firstImageUrl,
+          firstImageUrl: parsedResponse.firstImageUrl,
           bookmark: placeDetails.bookmark,
           reviews: placeDetails.reviews,
           bookmarked: placeDetails.bookmark?.bookmarked ?? false,
@@ -83,9 +85,21 @@ export default function WishlistPage() {
     }
   };
 
+  const handleBookmarkChange = (placeId, isBookmarked) => {
+    setWishlistChanged(true);
+    if (!isBookmarked) {
+      // 찜 해제된 경우 해당 아이템을 목록에서 제거
+      setWishlist(prev => prev.filter(item => item.placeId !== placeId));
+    }
+  };
+
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setSelectedItem(null);
+    if (wishlistChanged) {
+      fetchBookmarks();
+      setWishlistChanged(false);
+    }
   };
 
   return (
@@ -104,6 +118,7 @@ export default function WishlistPage() {
           isOpen={isModalOpen}
           item={selectedItem}
           onClose={handleCloseModal}
+          onBookmarkChange={handleBookmarkChange}
         />
       )}
     </MyPageLayout>

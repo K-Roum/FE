@@ -70,14 +70,18 @@ import {
 
       if (name === 'password') validatePassword(value);
 
-      if ((name === 'password' && form.confirmPassword !== '') ||
-          (name === 'confirmPassword' && form.password !== '')) {
-        const matched = value === (name === 'password' ? form.confirmPassword : form.password);
-        setIsPasswordMatched(matched);
-        setPasswordMatchMessage(matched ? t('signupPage.passwordValidation.match') : t('signupPage.passwordValidation.mismatch'));
-      } else {
-        setIsPasswordMatched(null);
-        setPasswordMatchMessage('');
+      // 비밀번호/비밀번호 확인 필드가 변경될 때만 일치 여부 갱신
+      if (name === 'password' || name === 'confirmPassword') {
+        const pw = name === 'password' ? value : form.password;
+        const confirmPw = name === 'confirmPassword' ? value : form.confirmPassword;
+        if (pw !== '' && confirmPw !== '') {
+          const matched = pw === confirmPw;
+          setIsPasswordMatched(matched);
+          setPasswordMatchMessage(matched ? t('signupPage.passwordValidation.match') : t('signupPage.passwordValidation.mismatch'));
+        } else {
+          setIsPasswordMatched(null);
+          setPasswordMatchMessage('');
+        }
       }
 
       if (name === 'loginId') setIsIdChecked(null);
@@ -156,11 +160,12 @@ import {
       try {
         const verified = await verifyEmailCode(form.email, verificationCode);
         if (verified) {
-          setIsEmailVerified(true);
-          setShowVerificationModal(false);
-          setVerifyMessage(t('signupPage.success.emailVerification'));
-          setEmailCheckMessage(t('signupPage.success.emailVerification'));
-        } else {
+        setIsEmailVerified(true);
+        setShowVerificationModal(false);
+        setVerifyMessage(t('signupPage.success.emailVerification'));
+        setEmailCheckMessage(t('signupPage.success.emailVerification'));
+        alert(t('signupPage.success.emailVerification'));
+      }  else {
           setVerifyMessage(t('signupPage.verification.invalidCode'));
           setIsEmailVerified(false);
         }
@@ -283,11 +288,10 @@ import {
               </p>
             )}
           </div>
-
           
 
           {/* 비밀번호 */}
-          <div className="h-[85px]">
+          <div className="mb-4">
             <label className="font-bold text-lg">{t('signupPage.password')}</label>
             <div className="border-b border-gray-300">
               <input
@@ -299,16 +303,15 @@ import {
                 className="w-full py-3 text-lg focus:outline-none"
               />
             </div>
+            {passwordValidMessage && (
+              <p className={`text-sm mt-1 ${isPasswordValid ? 'text-green-600' : 'text-red-500'}`}>
+                {passwordValidMessage}
+              </p>
+            )}
           </div>
 
-          {passwordValidMessage && (
-            <p className={`text-sm mt-1 ${isPasswordValid ? 'text-green-600' : 'text-red-500'}`}>
-                {passwordValidMessage}
-            </p>
-          )}
-
           {/* 비밀번호 확인 */}
-          <div className="h-[85px]">
+          <div className="mb-4">
             <label className="font-bold text-lg">{t('signupPage.confirmPassword')}</label>
             <div className="border-b border-gray-300">
               <input
@@ -328,7 +331,7 @@ import {
           </div>
 
           {/* 닉네임 */}
-          <div className="h-[85px]">
+          <div className="mb-4">
             <label className="font-bold text-lg">{t('signupPage.nickname')}</label>
             <div className="flex justify-between items-center border-b border-gray-300">
               <input
@@ -410,14 +413,24 @@ import {
                     value={verificationCode}
                     onChange={(e) => setVerificationCode(e.target.value)}
                     className="w-full border px-3 py-2 mb-4"
+                    onKeyDown={e => {
+                      if (e.key === 'Enter') {
+                        e.preventDefault();
+                        handleVerifyCode();
+                      }
+                    }}
                 />
                 {verifyMessage && <p className="text-sm text-red-500 mb-2">{verifyMessage}</p>}
                 <div className="flex justify-end gap-2">
                     <button onClick={() => setShowVerificationModal(false)} className="px-4 py-2 text-gray-600 hover:underline">
                     {t('signupPage.cancel')}
                     </button>
-                    <button onClick={handleVerifyCode} className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-                    {t('signupPage.confirm')}
+                    <button
+                      type="button"  // ✅ 핵심: submit 차단!
+                      onClick={handleVerifyCode}
+                      className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                    >
+                      {t('signupPage.confirm')}
                     </button>
                 </div>
                 </div>
