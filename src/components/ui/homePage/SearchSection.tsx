@@ -1,12 +1,14 @@
-import React, { useState, useEffect, FormEvent, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import { SearchResultModel } from '../../../model/SearchResultModel';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect, FormEvent, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { SearchResultModel } from "../../../model/SearchResultModel";
+import { motion, AnimatePresence } from "framer-motion";
 
 const SearchSection: React.FC = () => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [recentSearches, setRecentSearches] = useState<{ searchText: string; createdAt: string }[]>([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [recentSearches, setRecentSearches] = useState<
+    { searchText: string; createdAt: string }[]
+  >([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
@@ -15,9 +17,9 @@ const SearchSection: React.FC = () => {
   useEffect(() => {
     const fetchRecentSearches = async () => {
       try {
-        const response = await fetch('http://localhost:8080/search-history', {
-          method: 'GET',
-          credentials: 'include'
+        const response = await fetch("http://localhost:8080/search-history", {
+          method: "GET",
+          credentials: "include",
         });
         if (!response.ok) {
           throw new Error(`서버 오류: ${response.status}`);
@@ -25,7 +27,7 @@ const SearchSection: React.FC = () => {
         const data = await response.json();
         setRecentSearches(data);
       } catch (error) {
-        console.error('최근 검색어 불러오기 실패:', error);
+        console.error("최근 검색어 불러오기 실패:", error);
       }
     };
 
@@ -34,14 +36,17 @@ const SearchSection: React.FC = () => {
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(e.target as Node)
+      ) {
         setIsDropdownOpen(false);
       }
     };
 
-    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener("mousemove", handleMouseMove);
     return () => {
-      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener("mousemove", handleMouseMove);
     };
   }, []);
 
@@ -49,12 +54,13 @@ const SearchSection: React.FC = () => {
     const currentLang = i18n.language.toLowerCase();
 
     try {
-      const response = await fetch('http://localhost:8080/places/search', {
-        method: 'POST',
+      const response = await fetch("http://localhost:8080/places/search", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
-          accept: '*/*',
-        },credentials: 'include',
+          "Content-Type": "application/json",
+          accept: "*/*",
+        },
+        credentials: "include",
         body: JSON.stringify({
           query: query,
           languageCode: currentLang,
@@ -66,19 +72,19 @@ const SearchSection: React.FC = () => {
       }
       console.log(response);
       const data: SearchResultModel[] = await response.json();
-
-     navigate(`/searchPage?query=${encodeURIComponent(query)}`);
-
+      navigate(`/searchPage?query=${encodeURIComponent(query)}`, {
+        state: { results: data },
+      });
     } catch (error) {
-      console.error('검색 중 오류 발생:', error);
-      alert('검색에 실패했습니다.');
+      console.error("검색 중 오류 발생:", error);
+      alert("검색에 실패했습니다.");
     }
   };
 
   const handleSearch = (e?: FormEvent) => {
     if (e) e.preventDefault();
     if (!searchQuery.trim()) {
-      alert(t('searchPrompt'));
+      alert(t("searchPrompt"));
       return;
     }
     performSearch(searchQuery);
@@ -100,7 +106,7 @@ const SearchSection: React.FC = () => {
           >
             <input
               type="text"
-              placeholder={t('searchPrompt')}
+              placeholder={t("searchPrompt")}
               className="h-full flex-grow px-4 pl-8 text-[28px] text-[#919191] font-['LG_PC'] focus:outline-none rounded-[40px]"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}

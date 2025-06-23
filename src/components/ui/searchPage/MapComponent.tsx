@@ -11,6 +11,7 @@ export interface MapComponentRef {
   centerMapOnLocation: (latitude: number, longitude: number) => void;
   updateMapMarkers: (items: SearchResultModel[]) => void;
   clearMarkers: () => void;
+  resetCenter: () => void;
 }
 
 interface MapComponentProps {
@@ -22,20 +23,35 @@ const MapComponent = forwardRef<MapComponentRef, MapComponentProps>(
   ({ results, onPinClick }, ref) => {
     const [mapInstance, setMapInstance] = useState<any>(null);
     const [markers, setMarkers] = useState<any[]>([]);
-
+    const defaultCenter = { lat: 36, lng: 127.5 };
+    const defaultLevel = 13;
     const initMap = () => {
       const container = document.getElementById("map");
       const options = {
-        center: new window.kakao.maps.LatLng(36, 127.5),
+        center: new window.kakao.maps.LatLng(
+          defaultCenter.lat,
+          defaultCenter.lng
+        ),
         level: 13,
       };
       const map = new window.kakao.maps.Map(container, options);
       setMapInstance(map);
     };
+    const resetCenter = () => {
+      if (mapInstance) {
+        const center = new window.kakao.maps.LatLng(
+          defaultCenter.lat,
+          defaultCenter.lng
+        );
+        mapInstance.setCenter(center);
+        mapInstance.setLevel(defaultLevel);
+      }
+    };
 
     useEffect(() => {
       if (window.kakao && window.kakao.maps) {
         initMap();
+
         return;
       }
 
@@ -56,7 +72,11 @@ const MapComponent = forwardRef<MapComponentRef, MapComponentProps>(
 
       document.head.appendChild(script);
     }, []);
-
+    useEffect(() => {
+      if (mapInstance && results) {
+        updateMapMarkers(results);
+      }
+    }, [mapInstance, results]);
     const clearMarkers = () => {
       markers.forEach((marker) => {
         marker.setMap(null);
@@ -65,8 +85,9 @@ const MapComponent = forwardRef<MapComponentRef, MapComponentProps>(
     };
 
     const updateMapMarkers = (items: SearchResultModel[]) => {
+      console.log("Updating map markers with items:", items);
       if (!mapInstance) return;
-
+      console.log("통과?");
       clearMarkers();
 
       const newMarkers: any[] = [];
@@ -105,11 +126,11 @@ const MapComponent = forwardRef<MapComponentRef, MapComponentProps>(
       centerMapOnLocation,
       updateMapMarkers,
       clearMarkers,
+      resetCenter,
     }));
 
     return <div id="map" style={{ width: "100%", height: "100%" }}></div>;
   }
 );
-
 
 export default MapComponent;
