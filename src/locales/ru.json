@@ -34,6 +34,7 @@
   "addBookmark": "Добавить закладку",
   "noAddress": "Адрес не указан",
   "noDescription": "Описание отсутствует",
+  "Selected Place": "Выбранное место",
   "common": {
     "noImage": "Нет изображения",
     "address": "Адрес",

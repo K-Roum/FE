@@ -34,6 +34,7 @@
   "addBookmark": "ブックマーク追加",
   "noAddress": "住所情報なし",
   "noDescription": "説明情報なし",
+   "Selected Place": "選択された場所",
   "common": {
     "noImage": "画像なし",
     "address": "住所",
