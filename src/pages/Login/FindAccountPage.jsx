@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import { getLoginLogoPath } from '../../utils/languageUtils';
 
 export default function FindAccountPage() {
   const { t, i18n } = useTranslation();
@@ -11,8 +12,8 @@ export default function FindAccountPage() {
       {/* 좌측 로고 영역 */}
       <div className="w-[48%] flex flex-col items-center justify-center -mr-6">
         <img
-          src="/assets/kroumLoginLogo.png"
-          alt="K로움 로고"
+          src={getLoginLogoPath(i18n.language)}
+          alt={t('common.logo')}
           className="w-72 h-80 mb-4"
         />
       </div>

@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 export default function SignupCompletePage() {
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    const lang = localStorage.getItem('lang') || 'ko';
+    if (i18n.language !== lang) {
+      i18n.changeLanguage(lang);
+    }
+  }, [i18n]);
 
   const handleLoginRedirect = () => {
     navigate('/login');

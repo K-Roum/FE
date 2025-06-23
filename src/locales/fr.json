@@ -48,7 +48,10 @@
     "anonymousUser": "Utilisateur anonyme",
     "noDateInfo": "Pas d'informations de date",
     "noContent": "Pas de contenu",
-    "delete": "Supprimer"
+    "delete": "Supprimer",
+    "cancel": "Annuler",
+    "readMore": "Voir plus",
+    "collapse": "Réduire"
   },
 
 
@@ -156,7 +159,8 @@
     "goLogin": "Aller à la connexion",
     "errorEmpty": "Veuillez saisir votre email",
     "errorNotFound": "Aucun ID trouvé pour cet email",
-    "errorServer": "Erreur serveur. Veuillez réessayer plus tard"
+    "errorServer": "Erreur serveur. Veuillez réessayer plus tard",
+    "foundId": "Votre identifiant : {{id}}"
   },
 
   "resetPassword": {
@@ -165,7 +169,7 @@
     "emailPlaceholder": "Entrez votre email",
     "resetButton": "Réinitialiser",
     "submitting": "Traitement en cours...",
-    "success": "Un mot de passe temporaire a été envoyé à votre email. Veuillez le modifier après la connexion",
+    "success": "Un mot de passe temporaire a été envoyé à votre email. \nVeuillez le modifier après la connexion",
     "goLogin": "Aller à la connexion",
     "errorEmpty": "Veuillez saisir l'identifiant et l'email",
     "errorInvalidId": "L'identifiant doit contenir 4 à 20 caractères alphanumériques",
@@ -255,7 +259,8 @@
   "reviewListPage": {
     "title": "Liste des avis",
     "noReviews": "Pas encore d'avis",
-    "confirmDelete": "Êtes-vous sûr de vouloir supprimer ceci ?"
+    "confirmDelete": "Êtes-vous sûr de vouloir supprimer ceci ?",
+    "editTitle": "Modifier l'avis"
   },
 
   "wishlistPreview": {

@@ -17,31 +17,32 @@ export default function MyPage() {
   const [loading, setLoading] = useState(true);
   const [selectedItem, setSelectedItem] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [reviewChanged, setReviewChanged] = useState(false);
   const { i18n, t } = useTranslation();
 
+  const fetchMyPage = async () => {
+    try {
+      const res = await fetch('http://localhost:8080/users/mypage', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          accept: '*/*',
+        },
+        credentials: 'include',
+      });
+
+      if (!res.ok) throw new Error('마이페이지 정보 조회 실패');
+
+      const result = await res.json();
+      setData(result);
+    } catch (err) {
+      console.error(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const fetchMyPage = async () => {
-      try {
-        const res = await fetch('http://localhost:8080/users/mypage', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            accept: '*/*',
-          },
-          credentials: 'include',
-        });
-
-        if (!res.ok) throw new Error('마이페이지 정보 조회 실패');
-
-        const result = await res.json();
-        setData(result);
-      } catch (err) {
-        console.error(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchMyPage();
   }, []);
 
@@ -98,12 +99,20 @@ export default function MyPage() {
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setSelectedItem(null);
+    if (reviewChanged) {
+      fetchMyPage();
+      setReviewChanged(false);
+    }
+  };
+
+  const handleBookmarkChange = () => {
+    fetchMyPage();
   };
 
   return (
     <MyPageLayout>
       {loading ? (
-        <p className="text-center">불러오는 중...</p>
+        <p className="text-center">{t('common.loading')}</p>
       ) : (
         <>
           <WishlistPreview bookmarks={data.bookmarks} onItemClick={handleItemClick} />
@@ -117,6 +126,8 @@ export default function MyPage() {
         isOpen={isModalOpen}
         item={selectedItem}
         onClose={handleCloseModal}
+        onBookmarkChange={handleBookmarkChange}
+        onReviewChange={setReviewChanged}
       />
     </MyPageLayout>
   );

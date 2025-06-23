@@ -48,7 +48,10 @@
     "anonymousUser": "Usuario anónimo",
     "noDateInfo": "Sin información de fecha",
     "noContent": "Sin contenido",
-    "delete": "Eliminar"
+    "delete": "Eliminar",
+    "cancel": "Cancelar",
+    "readMore": "Ver más",
+    "collapse": "Colapsar"
   },
 
 
@@ -154,11 +157,11 @@
     "title": "Buscar Usuario",
     "emailPlaceholder": "Ingrese su correo",
     "findButton": "Buscar Usuario",
-    "success": "Su usuario ha sido enviado a su correo",
     "goLogin": "Ir a inicio de sesión",
     "errorEmpty": "Por favor, ingrese su correo",
     "errorNotFound": "No se encontró usuario para este correo",
-    "errorServer": "Error del servidor. Por favor, intente más tarde"
+    "errorServer": "Error del servidor. Por favor, intente más tarde",
+    "foundId": "Su ID : {{id}}"
   },
 
   "resetPassword": {
@@ -167,7 +170,7 @@
     "emailPlaceholder": "Ingrese su correo",
     "resetButton": "Restablecer",
     "submitting": "Procesando...",
-    "success": "Se ha enviado una contraseña temporal a su correo. Por favor, cámbiela después de iniciar sesión",
+    "success": "Se ha enviado una contraseña temporal a su correo. Por favor, \ncámbiela después de iniciar sesión",
     "goLogin": "Ir a inicio de sesión",
     "errorEmpty": "Por favor, ingrese usuario y correo",
     "errorInvalidId": "El usuario debe tener entre 4 y 20 caracteres alfanuméricos",
@@ -257,7 +260,8 @@
   "reviewListPage": {
     "title": "Lista de reseñas",
     "noReviews": "Aún no hay reseñas",
-    "confirmDelete": "¿Estás seguro de que quieres eliminar esto?"
+    "confirmDelete": "¿Estás seguro de que quieres eliminar esto?",
+    "editTitle": "Editar reseña"
   },
 
   "wishlistPreview": {

@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { resetPasswordRequest } from '../../components/ui/loginPage/resetPasswordApi.ts';
+import { getLoginLogoPath } from '../../utils/languageUtils';
 
 export default function ResetPasswordPage() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
 
   const [loginId, setLoginId] = useState('');
@@ -90,7 +91,11 @@ export default function ResetPasswordPage() {
     <div className="flex min-h-screen bg-gray-100">
       {/* 좌측 로고 영역 */}
       <div className="w-[48%] flex flex-col items-center justify-center -mr-6">
-        <img src="/assets/kroumLoginLogo.png" alt="K로움 로고" className="w-72 h-80 mb-4" />
+        <img 
+          src={getLoginLogoPath(i18n.language)} 
+          alt={t('common.logo')} 
+          className="w-72 h-80 mb-4" 
+        />
       </div>
 
       {/* 우측 입력 영역 */}
@@ -136,7 +141,7 @@ export default function ResetPasswordPage() {
           {/* 성공 메시지 + 로그인 이동 */}
           {successMessage && (
             <>
-              <div className="text-center mt-6 text-green-600 font-medium">{successMessage}</div>
+              <div className="text-center mt-6 text-green-600 font-medium" style={{ whiteSpace: 'pre-line' }}>{successMessage}</div>
               <div className="mt-6 flex justify-center">
                 <button
                   onClick={() => navigate('/login')}

@@ -1,4 +1,4 @@
-export async function findUserIdByEmail(email) {
+export async function findUserIdByEmail(email: string): Promise<string | null> {
     try {
       const response = await fetch('http://localhost:8080/users/find-id', {
         method: 'POST',
@@ -9,9 +9,14 @@ export async function findUserIdByEmail(email) {
         body: JSON.stringify({ email }),
       });
   
-      return response.ok; // 성공 여부만 반환
+      if (response.ok) {
+        const data = await response.json();
+        return data.loginId || null;
+      } else {
+        return null;
+      }
     } catch (err) {
-      throw new Error('API error');
+      return null;
     }
   }
   

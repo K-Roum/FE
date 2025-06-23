@@ -2,33 +2,39 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { findUserIdByEmail } from '../../components/ui/loginPage/findIdApi.ts';
 import { useNavigate } from 'react-router-dom';
+import { getLoginLogoPath } from '../../utils/languageUtils';
 
 export default function FindIdPage() {
   const { t, i18n } = useTranslation();
   const [email, setEmail] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [foundId, setFoundId] = useState('');
   const navigate = useNavigate();
 
   const handleFindId = async () => {
     if (!email) {
       setErrorMessage(t('findId.errorEmpty'));
       setSuccessMessage('');
+      setFoundId('');
       return;
     }
   
     try {
-      const ok = await findUserIdByEmail(email); // 백엔드 성공 여부만
-      if (ok) {
-        setSuccessMessage(t('findId.success'));
+      const loginId = await findUserIdByEmail(email);
+      if (loginId) {
+
+        setFoundId(loginId);
         setErrorMessage('');
       } else {
         setErrorMessage(t('findId.errorNotFound'));
         setSuccessMessage('');
+        setFoundId('');
       }
     } catch (error) {
       setErrorMessage(t('findId.errorServer'));
       setSuccessMessage('');
+      setFoundId('');
     }
   };
 
@@ -36,7 +42,11 @@ export default function FindIdPage() {
     <div className="flex min-h-screen bg-gray-100">
       {/* 좌측 로고 영역 */}
       <div className="w-[48%] flex flex-col items-center justify-center -mr-6">
-        <img src="/assets/kroumLoginLogo.png" alt="K로움 로고" className="w-72 h-80 mb-4" />
+        <img 
+          src={getLoginLogoPath(i18n.language)} 
+          alt={t('common.logo')} 
+          className="w-72 h-80 mb-4" 
+        />
       </div>
 
       {/* 우측 입력 영역 */}
@@ -63,12 +73,11 @@ export default function FindIdPage() {
                 </button>
             </form>
 
-            {successMessage && (
+            {foundId && (
                 <>
-                    <div className="text-center mt-6 text-green-600 font-medium">
-                        {successMessage}
+                    <div className="text-center mt-6 text-black-700 font-bold text-xl">
+                        {t('findId.foundId', { id: foundId })}
                     </div>
-
                     <div className="mt-6 flex justify-center">
                         <button
                             onClick={() => navigate('/login')}

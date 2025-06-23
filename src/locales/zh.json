@@ -48,7 +48,10 @@
         "anonymousUser": "匿名用户",
         "noDateInfo": "无日期信息",
         "noContent": "无内容",
-        "delete": "删除"
+        "delete": "删除",
+        "cancel": "取消",
+        "readMore": "查看更多",
+        "collapse": "收起"
     },
 
 
@@ -145,7 +148,8 @@
         "goLogin": "前往登录",
         "errorEmpty": "请输入邮箱地址。",
         "errorNotFound": "该邮箱没有注册的账号。",
-        "errorServer": "服务器错误，请稍后再试。"
+        "errorServer": "服务器错误，请稍后再试。",
+        "foundId": "您的用戶ID：{{id}}"
     },
 
     "resetPassword": {
@@ -154,7 +158,7 @@
         "emailPlaceholder": "请输入邮箱",
         "resetButton": "重置密码",
         "submitting": "处理中...",
-        "success": "临时密码已发送至您的邮箱。登录后请务必修改密码",
+        "success": "临时密码已发送至您的邮箱。\n登录后请务必修改密码",
         "goLogin": "前往登录",
         "errorEmpty": "请输入账号和邮箱",
         "errorInvalidId": "账号必须为4-20位字母数字组合",
@@ -244,7 +248,8 @@
     "reviewListPage": {
         "title": "评论列表",
         "noReviews": "暂无评论",
-        "confirmDelete": "确定要删除吗？"
+        "confirmDelete": "确定要删除吗？",
+        "editTitle": "编辑评论"
     },
 
     "wishlistPreview": {
