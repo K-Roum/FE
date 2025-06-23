@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { data, useLocation } from "react-router-dom";
 import SearchResultCard from "../../components/ui/searchPage/SearchResultCard.tsx";
 import DetailModal from "../../components/ui/searchPage/DetailModal.tsx";
 import MapComponent, { MapComponentRef } from "../../components/ui/searchPage/MapComponent.tsx";
@@ -28,16 +28,73 @@ const SearchPage = () => {
   const { t, i18n } = useTranslation();
 
   const queryParams = new URLSearchParams(location.search);
-  const query = queryParams.get("query") ?? "";
+const query = location.state?.query ?? queryParams.get("query") ?? "";
 
   const mapRef = useRef<MapComponentRef>(null);
 
-  useEffect(() => {
+//   useEffect(() => {
+//   const fetchResults = async () => {
+//     if (!query.trim()) return;
+
+//     setLoading(true);
+//     try {
+//       const res = await fetch("http://localhost:8080/places/search", {
+//         method: "POST",
+//         headers: {
+//           "Content-Type": "application/json",
+//           accept: "*/*",
+//         },
+//         credentials: "include",
+//         body: JSON.stringify({
+//           query: query,
+//           languageCode: i18n.language.toLowerCase(),
+//         }),
+//       });
+
+//       if (!res.ok) throw new Error("서버 오류");
+//       const data = await res.json();
+
+//       setFetchedResults(data);
+      
+//       setIsShowingRecommendations(false);
+//       console.log("검색 결과:", data);
+//       console.log(data);
+//       mapRef.current?.updateMapMarkers(data);
+//     } catch (err) {
+//       console.error("검색 실패:", err);
+//       setFetchedResults([]);
+//       mapRef.current?.clearMarkers(); // 에러 시 마커도 초기화
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   fetchResults();
+// }, [query]);
+useEffect(() => {
+
   const fetchResults = async () => {
     if (!query.trim()) return;
 
+    // 만약 state에 넘어온 결과가 있다면 fetch 생략
+    if (location.state?.results) {
+
+      setFetchedResults(location.state.results);
+      setIsShowingRecommendations(false);
+      mapRef.current?.updateMapMarkers(location.state.results);
+      console.log("검색 결과:", location.state.results);
+       const  data = location.state.results;
+       setFetchedResults(data);
+      setIsShowingRecommendations(false);
+       mapRef.current?.resetCenter();
+      mapRef.current?.updateMapMarkers(data);
+      return;
+    }
+
+    // 직접 API 호출
     setLoading(true);
     try {
+
       const res = await fetch("http://localhost:8080/places/search", {
         method: "POST",
         headers: {
@@ -56,20 +113,21 @@ const SearchPage = () => {
 
       setFetchedResults(data);
       setIsShowingRecommendations(false);
-
-      // 🛠️ 여기 추가!
+      mapRef.current?.resetCenter(); // 검색 후 지도 중심 재설정
       mapRef.current?.updateMapMarkers(data);
+
     } catch (err) {
       console.error("검색 실패:", err);
       setFetchedResults([]);
-      mapRef.current?.clearMarkers(); // 에러 시 마커도 초기화
+      mapRef.current?.clearMarkers();
     } finally {
       setLoading(false);
     }
   };
-
+   
   fetchResults();
 }, [query]);
+
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
@@ -131,7 +189,7 @@ const SearchPage = () => {
         (rec) => rec.place
       );
 
-      // 🛠️ 클릭한 장소를 맨 앞에 고정
+
       const filteredRecommendations = recommendationResults.filter(
         (place) => place.placeId !== item.placeId
       );
@@ -287,3 +345,4 @@ const handlePinClick = async (item: SearchResultModel) => {
 };
 
 export default SearchPage;
+
