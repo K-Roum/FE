@@ -12,7 +12,7 @@ const getRandomItems = (arr, count) => {
 const TrendingHashtags = () => {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
-  const randomKeys = getRandomItems(hashtagKeys, 7);
+  const randomKeys = getRandomItems(hashtagKeys, 9);
   const hashtags = randomKeys.map((key) => ({
     key,
     label: t(`hashtag.${key}`),
@@ -53,7 +53,7 @@ const TrendingHashtags = () => {
   return (
    <div className="flex justify-center mb-12">
   <div className="w-full flex justify-center">
-    <div className="flex text-[24px] font-['LG_PC'] leading-[28px] whitespace-nowrap">
+    <div className="flex text-[28px] font-['LG_PC'] leading-[28px] whitespace-nowrap">
       {hashtags.map(({ key, label }, index) => (
         <button
           key={index}
