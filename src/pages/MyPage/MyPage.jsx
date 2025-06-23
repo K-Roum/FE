@@ -105,13 +105,8 @@ export default function MyPage() {
     }
   };
 
-  const handleBookmarkChange = (placeId, isBookmarked) => {
-    setData(prev => ({
-      ...prev,
-      bookmarks: isBookmarked
-        ? prev.bookmarks
-        : prev.bookmarks.filter(b => b.placeId !== placeId)
-    }));
+  const handleBookmarkChange = () => {
+    fetchMyPage();
   };
 
   return (
