@@ -48,7 +48,7 @@ const FeaturedContent = ({ data }) => {
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mt-6 sm:mt-8">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-12 mt-6 sm:mt-8">
       {data.map((item, idx) => (
         <div
           key={item.id || idx}
@@ -59,18 +59,18 @@ const FeaturedContent = ({ data }) => {
             src={item.image || item.imageUrl}
             alt={item.alt || item.title || t('Recommended Images')}
             className="
-            w-full
-            h-48
-            sm:h-64
-            md:h-72
-            lg:h-[363px]
-            object-cover
-            rounded-[20px]
-            sm:rounded-[24px]
-            md:rounded-[28px]
-            lg:rounded-[30px]
-            transition-all
-          "
+              w-full
+              h-[246.4px]        // 224px * 1.1 = 246.4px (기존 h-56)
+              sm:h-[281.6px]     // 256px * 1.1 = 281.6px (기존 sm:h-64)
+              md:h-[316.8px]     // 288px * 1.1 = 316.8px (기존 md:h-72)
+              lg:h-[399.3px]     // 363px * 1.1 = 399.3px (기존 lg:h-[363px])
+              object-cover
+              rounded-[20px]
+              sm:rounded-[24px]
+              md:rounded-[28px]
+              lg:rounded-[30px]
+              transition-all
+            "
           />
           <div className="mt-2 text-center">
             <h3 className="text-base sm:text-lg md:text-xl font-medium">{item.title || ""}</h3>

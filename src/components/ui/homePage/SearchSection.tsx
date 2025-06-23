@@ -101,7 +101,7 @@ const SearchSection: React.FC = () => {
             <input
               type="text"
               placeholder={t('searchPrompt')}
-              className="h-full flex-grow px-4 pl-8 text-[24px] text-[#919191] font-['LG_PC'] focus:outline-none rounded-[40px]"
+              className="h-full flex-grow px-4 pl-8 text-[28px] text-[#919191] font-['LG_PC'] focus:outline-none rounded-[40px]"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
@@ -137,7 +137,7 @@ const SearchSection: React.FC = () => {
                 {recentSearches.map((item, index) => (
                   <li
                     key={index}
-                    className="px-4 py-2 cursor-pointer hover:bg-gray-100 text-gray-700 text-base"
+                    className="px-4 pl-8 py-2 cursor-pointer hover:bg-gray-100 text-gray-700 text-xl font-['LG_PC']"
                     onMouseDown={() => handleRecentSearchClick(item.searchText)}
                   >
                     {item.searchText}

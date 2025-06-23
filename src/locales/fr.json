@@ -34,6 +34,7 @@
   "addBookmark": "Ajouter aux favoris",
   "noAddress": "Pas d'adresse",
   "noDescription": "Pas de description",
+   "Selected Place": "Lieu sélectionné",
   "common": {
     "noImage": "Pas d'image",
     "address": "Adresse",

@@ -27,8 +27,8 @@ const HomePage = () => {
   }, [currentLang]); 
 
   return (
-    <div className="min-h-screen bg-white">
-      <main className="container mx-auto px-4 py-8">
+    <div className="min-h-screen bg-white flex flex-col">
+      <main className="flex-1 container mx-auto px-4 py-20 flex flex-col gap-4 justify-start">
         <SearchSection />
         <TrendingHashtags />
         <FeaturedContent data={imagePreviewData} />
