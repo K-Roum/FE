@@ -44,9 +44,6 @@ export default function LoginPage() {
       // 로그인 상태 변경 이벤트 발생
       window.dispatchEvent(loginStatusChange);
 
-      // 환영 메시지 및 이동
-      alert(t('loginPage.success', { nickname: loginId }));
-      
       // 페이지 이동
       navigate('/home');
     } else {

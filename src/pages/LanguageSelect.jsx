@@ -27,7 +27,7 @@ const LanguageSelect = () => {
       <div className="bg-white rounded-2xl shadow-2xl w-[1100px] h-[1000px] flex items-center justify-center">
         <div className="bg-gray-200 rounded-xl shadow-md p-8 w-full max-w-[400px]">
           <p className="text-2xl font-medium text-center mb-6">
-            현재 언어 : 한국어
+            현재 언어 : {LANGUAGES[currentLang]?.label || '한국어'}
           </p>
           <hr className="mb-6 border-gray-300" />
           <ul className="space-y-5 text-center text-lg">
