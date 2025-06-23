@@ -70,6 +70,7 @@ export default function WishlistPage() {
           imageUrl: parsedResponse.firstImageUrl,
           bookmark: placeDetails.bookmark,
           reviews: placeDetails.reviews,
+          bookmarked: placeDetails.bookmark?.bookmarked ?? false,
         });
         setIsModalOpen(true);
       } else {

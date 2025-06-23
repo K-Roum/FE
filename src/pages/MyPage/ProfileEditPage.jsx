@@ -188,10 +188,10 @@ export default function ProfileEditPage() {
     };
     return (
       <Modal onClose={() => setModalType(null)} title={t('profileEdit.changeNickname')}>
-        <input className="w-full border rounded px-3 py-2 mb-3" value={nickname} onChange={e => { setNickname(e.target.value); setIsChecked(false); setMessage(''); }} placeholder={t('profileEdit.nicknamePlaceholder')} />
-        <button className="w-full py-2 mb-2 bg-gray-200 hover:bg-gray-400 text-gray-800 rounded" onClick={handleCheck}>{t('profileEdit.checkDuplicate')}</button>
-        <button className="w-full py-2 bg-gray-800 text-white rounded hover:bg-gray-900" onClick={handleChange}>{t('profileEdit.changeNickname')}</button>
-        {message && <div className="mt-3 text-center text-sm text-red-500">{t(`profileEdit.${message}`) || message}</div>}
+        <input className="w-full border rounded px-3 py-2 mb-4" value={nickname} onChange={e => { setNickname(e.target.value); setIsChecked(false); setMessage(''); }} placeholder={t('profileEdit.nicknamePlaceholder')} />
+        <button className="w-full py-2 mb-4 bg-gray-200 hover:bg-gray-400 text-gray-800 rounded" onClick={handleCheck}>{t('profileEdit.checkDuplicate')}</button>
+        <button className="w-full py-2 mb-4 bg-gray-800 text-white rounded hover:bg-gray-900" onClick={handleChange}>{t('profileEdit.changeNickname')}</button>
+        {message && <div className="mt-2 text-center text-sm text-red-500">{t(`profileEdit.${message}`) || message}</div>}
       </Modal>
     );
   };
@@ -253,15 +253,17 @@ export default function ProfileEditPage() {
     };
     return (
       <Modal onClose={() => setModalType(null)} title={t('profileEdit.changePassword')}>
-        <input className="w-full border rounded px-3 py-2 mb-3" type="password" value={currentPassword} onChange={e => setCurrentPassword(e.target.value)} placeholder={t('profileEdit.currentPassword')} />
-        <input className="w-full border rounded px-3 py-2 mb-1" type="password" value={newPassword} onChange={handleNewPassword} placeholder={t('profileEdit.newPassword')} />
+        <input className="w-full border rounded px-3 py-2 mb-2" type="password" value={currentPassword} onChange={e => setCurrentPassword(e.target.value)} placeholder={t('profileEdit.currentPassword')} />
+        <input className="w-full border rounded px-3 py-2 mb-2" type="password" value={newPassword} onChange={handleNewPassword} placeholder={t('profileEdit.newPassword')} />
         {passwordValidMessage && (
-          <p className={`text-sm mb-1 ${passwordValidMessage.includes('안전') ? 'text-blue-600' : 'text-red-500'}`}>{t(`profileEdit.${passwordValidMessage}`) || passwordValidMessage}</p>
+          <p className={`text-sm mb-2 ${passwordValidMessage.includes('안전') ? 'text-blue-600' : 'text-red-500'}`}>{t(`profileEdit.${passwordValidMessage}`) || passwordValidMessage}</p>
         )}
-        <input className="w-full border rounded px-3 py-2 mb-1" type="password" value={confirmPassword} onChange={handleConfirmPassword} placeholder={t('profileEdit.confirmPassword')} />
+        <input className="w-full border rounded px-3 py-2 mb-2" type="password" value={confirmPassword} onChange={handleConfirmPassword} placeholder={t('profileEdit.confirmPassword')} />
         {passwordMatchMessage && (
-          <p className={`text-sm mb-2 ${passwordMatchMessage.includes('일치합니다') ? 'text-blue-600' : 'text-red-500'}`}>{t(`profileEdit.${passwordMatchMessage}`) || passwordMatchMessage}</p>
+          <p className={`text-sm mb-4 ${passwordMatchMessage.includes('일치합니다') ? 'text-blue-600' : 'text-red-500'}`}>{t(`profileEdit.${passwordMatchMessage}`) || passwordMatchMessage}</p>
         )}
+        <button className="w-full py-2 mb-4 bg-gray-800 text-white rounded hover:bg-gray-900" onClick={handleChange}>{t('profileEdit.changePassword')}</button>
+        {message && <div className="mt-2 text-center text-sm text-red-500">{t(`profileEdit.${message}`) || message}</div>}
         <button className="w-full py-2 bg-gray-800 text-white rounded hover:bg-gray-900" onClick={handleChange}>{t('profileEdit.changePassword')}</button>
         {message && <div className="mt-3 text-center text-sm text-red-500">{t(`profileEdit.${message}`) || message}</div>}
       </Modal>

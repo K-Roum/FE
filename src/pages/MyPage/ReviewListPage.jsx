@@ -10,6 +10,8 @@ export default function ReviewListPage() {
   const { t } = useTranslation();
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [editingReview, setEditingReview] = useState(null);
+  const [deleteTarget, setDeleteTarget] = useState(null);
+  const [showConfirm, setShowConfirm] = useState(false);
 
   const fetchReviews = async () => {
     try {
@@ -37,30 +39,37 @@ export default function ReviewListPage() {
     fetchReviews();
   }, []);
 
-  const handleDeleteReview = async (placeId) => {
-    if (window.confirm(t('reviewListPage.confirmDelete'))) {
-      try {
-        const token = localStorage.getItem('token');
-        const res = await fetch(`http://localhost:8080/reviews/${placeId}`, {
-          method: 'DELETE',
-          headers: {
-            'Content-Type': 'application/json',
-            accept: '*/*',
-            'Authorization': `Bearer ${token}`,
-          },
-          credentials: 'include',
-        });
+  const handleDeleteReview = (placeId) => {
+    setDeleteTarget(placeId);
+    setShowConfirm(true);
+  };
 
-        if (!res.ok) {
-          throw new Error('리뷰 삭제 실패');
-        }
-
-        // 삭제 성공 후 리뷰 목록 새로고침
-        fetchReviews();
-      } catch (err) {
-        console.error('리뷰 삭제 중 오류 발생:', err.message);
-      }
+  const confirmDelete = async () => {
+    if (!deleteTarget) return;
+    try {
+      const token = localStorage.getItem('token');
+      const res = await fetch(`http://localhost:8080/reviews/${deleteTarget}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          accept: '*/*',
+          'Authorization': `Bearer ${token}`,
+        },
+        credentials: 'include',
+      });
+      if (!res.ok) throw new Error('리뷰 삭제 실패');
+      fetchReviews();
+    } catch (err) {
+      console.error('리뷰 삭제 중 오류 발생:', err.message);
+    } finally {
+      setShowConfirm(false);
+      setDeleteTarget(null);
     }
+  };
+
+  const cancelDelete = () => {
+    setShowConfirm(false);
+    setDeleteTarget(null);
   };
 
   const handleEditClick = (review) => {
@@ -187,7 +196,7 @@ export default function ReviewListPage() {
               >
                 ×
               </button>
-              <h2 className="text-xl font-bold mb-4">{t('리뷰 수정')}</h2>
+              <h2 className="text-xl font-bold mb-4">{t('reviewListPage.editTitle')}</h2>
               <ReviewForm
                 isVisible={true}
                 onSubmit={handleEditSubmit}
@@ -195,6 +204,27 @@ export default function ReviewListPage() {
                 initialRating={editingReview?.rating}
                 initialComment={editingReview?.content}
               />
+            </div>
+          </div>
+        )}
+        {showConfirm && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
+            <div className="bg-white rounded-xl shadow-xl p-8 w-full max-w-sm text-center">
+              <p className="mb-6 text-lg">{t('reviewListPage.confirmDelete') || t('confirmDelete')}</p>
+              <div className="flex justify-center gap-6">
+                <button
+                  onClick={confirmDelete}
+                  className="px-6 py-2 bg-red-600 text-white rounded-md font-semibold hover:bg-red-700"
+                >
+                  {t('common.delete')}
+                </button>
+                <button
+                  onClick={cancelDelete}
+                  className="px-6 py-2 bg-gray-300 text-gray-700 rounded-md font-semibold hover:bg-gray-400"
+                >
+                  {t('common.cancel')}
+                </button>
+              </div>
             </div>
           </div>
         )}

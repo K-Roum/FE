@@ -48,7 +48,10 @@
     "anonymousUser": "匿名ユーザー",
     "noDateInfo": "日付情報なし",
     "noContent": "内容なし",
-    "delete": "削除"
+    "delete": "削除",
+    "cancel": "キャンセル",
+    "readMore": "もっと見る",
+    "collapse": "折りたたむ"
   },
 
 
@@ -156,11 +159,11 @@
     "title": "IDを探す",
     "emailPlaceholder": "メールアドレスを入力してください。",
     "findButton": "IDを探す",
-    "success": "入力したメールアドレスにIDを送信しました。",
     "goLogin": "ログインページへ",
     "errorEmpty": "メールアドレスを入力してください。",
     "errorNotFound": "そのメールアドレスで登録されたIDは見つかりません。",
-    "errorServer": "サーバーエラーが発生しました。再度お試しください。"
+    "errorServer": "サーバーエラーが発生しました。再度お試しください。",
+    "foundId": "あなたのID : {{id}}"
   },
 
   "resetPassword": {
@@ -169,7 +172,7 @@
     "emailPlaceholder": "メールアドレスを入力してください",
     "resetButton": "パスワードを再設定する",
     "submitting": "処理中...",
-    "success": "仮パスワードをメールに送信しました。ログイン後、必ずパスワードを変更してください",
+    "success": "仮パスワードをメールに送信しました。ログイン後、\n必ずパスワードを変更してください",
     "goLogin": "ログインページへ",
     "errorEmpty": "IDとメールアドレスを両方入力してください",
     "errorInvalidId": "IDは半角英数字4-20文字で入力してください",
@@ -259,7 +262,8 @@
   "reviewListPage": {
     "title": "レビューリスト",
     "noReviews": "まだレビューがありません",
-    "confirmDelete": "本当に削除しますか？"
+    "confirmDelete": "本当に削除しますか？",
+    "editTitle": "レビュー編集"
   },
 
   "wishlistPreview": {

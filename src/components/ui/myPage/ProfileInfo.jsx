@@ -43,7 +43,7 @@ export default function ProfileInfo() {
             onClick={() => navigate('/mypage/profile-edit')}
             className="text-sm text-blue-600 hover:underline"
           >
-            {t('profileEdit.edit') || t('편집')} &gt;
+            {t('profileEdit.edit') || t('편집')}
           </button>
         </div>
         <div className="border-b-2 border-black mb-6" />

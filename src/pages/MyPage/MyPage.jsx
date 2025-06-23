@@ -100,10 +100,19 @@ export default function MyPage() {
     setSelectedItem(null);
   };
 
+  const handleBookmarkChange = (placeId, isBookmarked) => {
+    setData(prev => ({
+      ...prev,
+      bookmarks: isBookmarked
+        ? prev.bookmarks
+        : prev.bookmarks.filter(b => b.placeId !== placeId)
+    }));
+  };
+
   return (
     <MyPageLayout>
       {loading ? (
-        <p className="text-center">불러오는 중...</p>
+        <p className="text-center">{t('common.loading')}</p>
       ) : (
         <>
           <WishlistPreview bookmarks={data.bookmarks} onItemClick={handleItemClick} />
@@ -117,6 +126,7 @@ export default function MyPage() {
         isOpen={isModalOpen}
         item={selectedItem}
         onClose={handleCloseModal}
+        onBookmarkChange={handleBookmarkChange}
       />
     </MyPageLayout>
   );

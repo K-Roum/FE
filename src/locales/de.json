@@ -48,7 +48,10 @@
     "anonymousUser": "Anonymer Benutzer",
     "noDateInfo": "Keine Datumsinformationen",
     "noContent": "Kein Inhalt",
-    "delete": "Löschen"
+    "delete": "Löschen",
+    "cancel": "Abbrechen",
+    "readMore": "Mehr anzeigen",
+    "collapse": "Einklappen"
   },
 
   "sidebar": {
@@ -143,11 +146,11 @@
     "title": "Benutzername finden",
     "emailPlaceholder": "E-Mail eingeben",
     "findButton": "Benutzername finden",
-    "success": "Ihr Benutzername wurde an Ihre E-Mail gesendet",
     "goLogin": "Zur Anmeldung",
     "errorEmpty": "Bitte geben Sie Ihre E-Mail ein",
     "errorNotFound": "Kein Benutzername für diese E-Mail gefunden",
-    "errorServer": "Serverfehler aufgetreten. Bitte versuchen Sie es später erneut"
+    "errorServer": "Serverfehler aufgetreten. Bitte versuchen Sie es später erneut",
+    "foundId": "Ihre Benutzer-ID : {{id}}"
   },
 
   "resetPassword": {
@@ -156,7 +159,7 @@
     "emailPlaceholder": "E-Mail eingeben",
     "resetButton": "Zurücksetzen",
     "submitting": "Wird verarbeitet...",
-    "success": "Ein temporäres Passwort wurde an Ihre E-Mail gesendet. Bitte ändern Sie es nach der Anmeldung",
+    "success": "Ein temporäres Passwort wurde an Ihre E-Mail gesendet. \nBitte ändern Sie es nach der Anmeldung",
     "goLogin": "Zur Anmeldung",
     "errorEmpty": "Bitte geben Sie Benutzername und E-Mail ein",
     "errorInvalidId": "Der Benutzername muss 4-20 alphanumerische Zeichen enthalten",
@@ -246,7 +249,8 @@
   "reviewListPage": {
     "title": "Bewertungsliste",
     "noReviews": "Noch keine Bewertungen",
-    "confirmDelete": "Möchten Sie dies wirklich löschen?"
+    "confirmDelete": "Möchten Sie dies wirklich löschen?",
+    "editTitle": "Rezension bearbeiten"
   },
 
   "wishlistPreview": {
@@ -296,10 +300,6 @@
     "회원 탈퇴 실패": "Kündigung fehlgeschlagen.",
     "회원 탈퇴가 완료되었습니다.": "Mitgliedschaft wurde gekündigt.",
     "비밀번호를 입력해주세요.": "Bitte geben Sie Ihr Passwort ein.",
-    "정말로 회원 탈퇴하시겠습니까?": "Möchten Sie Ihre Mitgliedschaft wirklich kündigen?",
-    "myInfo": "Meine Informationen",
-    "edit": "Bearbeiten",
-    "email": "E-Mail",
-    "nickname": "Spitzname"
+    "정말로 회원 탈퇴하시겠습니까?": "Möchten Sie Ihre Mitgliedschaft wirklich kündigen?"
   }
 }
