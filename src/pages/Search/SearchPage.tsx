@@ -37,10 +37,10 @@ const SearchPage = () => {
 
   const mapRef = useRef<MapComponentRef>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const currentLang = i18n.language.toLowerCase();
 
   useEffect(() => {
     const fetchResults = async () => {
-      const currentLang = i18n.language.toLowerCase();
       if (!query.trim()) return;
 
       // 초기 로딩 시 검색어가 있다면 해당 검색어로 결과를 가져옴
@@ -71,13 +71,78 @@ const SearchPage = () => {
       }
     };
     fetchResults();
-  }, [query, location.state, i18n.language]);
+  }, [query, location.state, currentLang]);
 
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setSelectedItem(null);
+  //핀 클릭 핸들러
+  const handlePinClick = async (item: SearchResultModel) => {
+    try {
+      mapRef.current?.centerMapOnLocation(item.latitude, item.longitude);
+      const parsedResponse = await fetchPlaceDetail(item.placeId, currentLang);
+      setSelectedItem({detail: parsedResponse, summary: item});
+        if (parsedResponse.recommendations?.length) {
+          const newResults = reorderResults(
+            item,
+            parsedResponse.recommendations
+          );
+          setFetchedResults(newResults);
+          setIsShowingRecommendations(true);
+          mapRef.current?.updateMapMarkers(newResults);
+      }
+
+      setIsModalOpen(true);
+    } catch (error) {
+      console.error("장소 상세 정보 요청 실패:", error);
+    }
   };
 
+  //추천 장소 재정렬 함수
+  //선택된 장소를 첫번째로 하고, 추천 장소 중 선택된 장소와 중복되지 않는 장소들을 뒤에 이어붙임  
+  function reorderResults(
+    selected: SearchResultModel,
+    recommendations?: { place: SearchResultModel }[]
+  ): SearchResultModel[] {
+    if (!recommendations?.length) return [selected];
+    const recPlaces = recommendations.map((r) => r.place);
+    const filtered = recPlaces.filter((p) => p.placeId !== selected.placeId);
+    return [selected, ...filtered];
+  }
+
+  //카드 클릭 핸들러
+  const handleCardClick = async (item: SearchResultModel) => {
+    try {
+      mapRef.current?.centerMapOnLocation(item.latitude, item.longitude);
+      const parsedResponse = await fetchPlaceDetail(item.placeId, currentLang);
+
+      setSelectedItem({
+        detail: parsedResponse,
+        summary: item,
+      });
+
+      if (
+        parsedResponse.recommendations &&
+        parsedResponse.recommendations.length > 0
+      ) {
+        const recommendationResults = parsedResponse.recommendations.map(
+          (rec) => rec.place
+        );
+
+        const filteredRecommendations = recommendationResults.filter(
+          (place) => place.placeId !== item.placeId
+        );
+        const newResults = [item, ...filteredRecommendations];
+
+        setFetchedResults(newResults);
+        setIsShowingRecommendations(true);
+        mapRef.current?.updateMapMarkers(newResults);
+      }
+
+      setIsModalOpen(true);
+    } catch (error) {
+      console.error("장소 상세 정보 요청 실패:", error);
+    }
+  };
+
+  // 북마크 클릭 핸들러
   const handleBookmarkClick = async (
     e: React.MouseEvent,
     item: SearchResultModel
@@ -112,86 +177,18 @@ const SearchPage = () => {
     }
   };
 
-  const handleCardClick = async (item: SearchResultModel) => {
-    const currentLang = i18n.language.toLowerCase();
-
-    try {
-      mapRef.current?.centerMapOnLocation(item.latitude, item.longitude);
-
-      const parsedResponse = await fetchPlaceDetail(item.placeId, currentLang);
-
-      setSelectedItem({
-        detail: parsedResponse,
-        summary: item,
-      });
-
-      if (
-        parsedResponse.recommendations &&
-        parsedResponse.recommendations.length > 0
-      ) {
-        const recommendationResults = parsedResponse.recommendations.map(
-          (rec) => rec.place
-        );
-
-        const filteredRecommendations = recommendationResults.filter(
-          (place) => place.placeId !== item.placeId
-        );
-        const newResults = [item, ...filteredRecommendations];
-
-        setFetchedResults(newResults);
-        setIsShowingRecommendations(true);
-        mapRef.current?.updateMapMarkers(newResults);
-      }
-
-      setIsModalOpen(true);
-    } catch (error) {
-      console.error("장소 상세 정보 요청 실패:", error);
-    }
-  };
-
-  const handlePinClick = async (item: SearchResultModel) => {
-    const currentLang = i18n.language.toLowerCase();
-
-    try {
-      mapRef.current?.centerMapOnLocation(item.latitude, item.longitude);
-
-      const parsedResponse = await fetchPlaceDetail(item.placeId, currentLang);
-
-      setSelectedItem({
-        detail: parsedResponse,
-        summary: item,
-      });
-
-      if (
-        parsedResponse.recommendations &&
-        parsedResponse.recommendations.length > 0
-      ) {
-        const recommendationResults = parsedResponse.recommendations.map(
-          (rec) => rec.place
-        );
-
-        // 🛠️ 클릭한 장소를 맨 앞에 고정
-        const filteredRecommendations = recommendationResults.filter(
-          (place) => place.placeId !== item.placeId
-        );
-        const newResults = [item, ...filteredRecommendations];
-
-        setFetchedResults(newResults);
-        setIsShowingRecommendations(true);
-        mapRef.current?.updateMapMarkers(newResults);
-      }
-
-      setIsModalOpen(true);
-    } catch (error) {
-      console.error("장소 상세 정보 요청 실패:", error);
-    }
-  };
-
+  //스크롤바 초기화
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = 0;
     }
   }, [fetchedResults]);
+
+  //모달 닫기 핸들러
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedItem(null);
+  };
 
   return (
     <div className="flex h-screen">
