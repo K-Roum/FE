@@ -15,9 +15,6 @@ import {
 import SearchSection from "../../components/ui/homePage/SearchSection.tsx";
 import { useTranslation } from "react-i18next";
 
-
-
-
 type SelectedItemType = {
   detail: PlaceDetailModel;
   summary: SearchResultModel;
@@ -39,7 +36,7 @@ const SearchPage = () => {
   const query = location.state?.query ?? queryParams.get("query") ?? "";
 
   const mapRef = useRef<MapComponentRef>(null);
-const scrollRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const fetchResults = async () => {
@@ -191,11 +188,10 @@ const scrollRef = useRef<HTMLDivElement>(null);
   };
 
   useEffect(() => {
-  if (scrollRef.current) {
-    scrollRef.current.scrollTop = 0;  
-  }
-}, [fetchedResults]);  
-
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = 0;
+    }
+  }, [fetchedResults]);
 
   return (
     <div className="flex h-screen">

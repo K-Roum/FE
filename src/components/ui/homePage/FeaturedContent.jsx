@@ -1,7 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import config from '../../../config';
+import { imageSearch } from "../../../services/SearchApi.ts"; // Assuming this is the correct path to your imageSearch function
+import pick from "lodash/pick";
 
 const FeaturedContent = ({ data }) => {
   const navigate = useNavigate();
@@ -11,26 +12,17 @@ const FeaturedContent = ({ data }) => {
 
   const handleImageClick = async (placeId) => {
     try {
-      const response = await fetch(
-       `${config.apiBaseUrl}/places/${placeId}/with-everything-by-image?languageCode=${currentLang}`,
-        { credentials: "include" }
-      );
-      if (!response.ok) {
-        throw new Error(`서버 오류: ${response.status}`);
-      }
-
-      const result = await response.json();
-
-      const searchResultModel = {
-        latitude: result.placeDto.latitude,
-        longitude: result.placeDto.longitude,
-        firstImageUrl: result.placeDto.firstImageUrl,
-        placeName: result.placeDto.placeName,
-        description: result.placeDto.description,
-        address: result.placeDto.address,
-        bookmarked: result.placeDto.bookmarked,
-        placeId: result.placeDto.placeId,
-      };
+      const result = await imageSearch(placeId, currentLang);
+      const searchResultModel = pick(result.placeDto, [
+        "address",
+        "bookmarked",
+        "description",
+        "firstImageUrl",
+        "latitude",
+        "longitude",
+        "placeName",
+        "placeId",
+      ]);
 
       navigate("/searchPage", {
         state: { results: [searchResultModel] },
@@ -43,7 +35,7 @@ const FeaturedContent = ({ data }) => {
   if (!data || !Array.isArray(data) || data.length === 0) {
     return (
       <div className="text-center text-gray-400 py-12">
-        {t('Loading recommended images...')}
+        {t("Loading recommended images...")}
       </div>
     );
   }
@@ -58,13 +50,13 @@ const FeaturedContent = ({ data }) => {
         >
           <img
             src={item.image || item.imageUrl}
-            alt={item.alt || item.title || t('Recommended Images')}
+            alt={item.alt || item.title || t("Recommended Images")}
             className="
               w-full
-              h-[246.4px]        // 224px * 1.1 = 246.4px (기존 h-56)
-              sm:h-[281.6px]     // 256px * 1.1 = 281.6px (기존 sm:h-64)
-              md:h-[316.8px]     // 288px * 1.1 = 316.8px (기존 md:h-72)
-              lg:h-[399.3px]     // 363px * 1.1 = 399.3px (기존 lg:h-[363px])
+              h-[246.4px]       
+              sm:h-[281.6px]    
+              md:h-[316.8px]    
+              lg:h-[399.3px]     
               object-cover
               rounded-[20px]
               sm:rounded-[24px]
@@ -74,7 +66,9 @@ const FeaturedContent = ({ data }) => {
             "
           />
           <div className="mt-2 text-center">
-            <h3 className="text-base sm:text-lg md:text-xl font-medium">{item.title || ""}</h3>
+            <h3 className="text-base sm:text-lg md:text-xl font-medium">
+              {item.title || ""}
+            </h3>
           </div>
         </div>
       ))}
