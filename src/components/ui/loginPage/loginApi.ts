@@ -1,5 +1,7 @@
 // components/ui/loginPage/loginApi.ts
 
+import config from "../../../config";
+
 export interface LoginRequest {
     loginId: string;
     password: string;
@@ -22,7 +24,7 @@ export interface LoginRequest {
     password,
   }: LoginRequest): Promise<LoginResponse | null> {
     try {
-      const response = await fetch('http://localhost:8080/users/login', {
+      const response = await fetch(`${config.apiBaseUrl}/users/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

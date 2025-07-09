@@ -1,5 +1,7 @@
 // components/ui/resetPasswordPage/resetPasswordApi.ts
 
+import config from "../../../config";
+
 export interface ResetPasswordRequest {
     loginId: string;
     email: string;
@@ -26,7 +28,7 @@ export async function resetPasswordRequest({
         console.log('[비밀번호 재설정] 요청 시작:', { loginId, email });
 
         // 비밀번호 재설정 요청 (단일 엔드포인트로 변경)
-        const response = await fetch('http://localhost:8080/users/reset-password', {
+        const response = await fetch(`${config.apiBaseUrl}users/reset-password`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

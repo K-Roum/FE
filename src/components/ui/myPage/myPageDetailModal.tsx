@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { PlaceReview } from '../../../model/PlaceDetailModel'; // 경로 수정
 import ReviewForm from '../searchPage/ReviewForm.tsx';
+import config from '../../../config.js';
 
 // 백엔드 DTO에 정의된 reviews와 bookmark 구조에 맞춰 인터페이스 정의
 interface PlaceBookmarkDetail {
@@ -77,7 +78,7 @@ const MyPageDetailModal = ({ isOpen, item, onClose, onBookmarkChange, onReviewCh
 
   const handleBookmarkClick = async () => {
     try {
-      const endpoint = `http://localhost:8080/bookmarks/${item.placeId}`;
+      const endpoint = `${config.apiBaseUrl}/bookmarks/${item.placeId}`;
       const method = isBookmarked ? 'DELETE' : 'POST';
       const response = await fetch(endpoint, {
         method,
@@ -116,7 +117,7 @@ const MyPageDetailModal = ({ isOpen, item, onClose, onBookmarkChange, onReviewCh
     if (!editingReview) return;
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch(`http://localhost:8080/reviews/${item.placeId}`, {
+      const res = await fetch(`$API_BASE_/reviews/${item.placeId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -158,7 +159,7 @@ const MyPageDetailModal = ({ isOpen, item, onClose, onBookmarkChange, onReviewCh
     try {
       const token = localStorage.getItem('token');
       const lang = i18n.language || 'ko';
-      const res = await fetch(`http://localhost:8080/reviews/${item.placeId}`, {
+      const res = await fetch(`${config.apiBaseUrl}/reviews/${item.placeId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

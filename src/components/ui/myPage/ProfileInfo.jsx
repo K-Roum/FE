@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-
+import config from '../../../config';
 export default function ProfileInfo() {
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -11,7 +11,7 @@ export default function ProfileInfo() {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const res = await fetch('http://localhost:8080/users/profile', {
+        const res = await fetch(`${config.apiBaseUrl}/users/profile`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

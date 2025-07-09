@@ -4,6 +4,7 @@ import MyPageLayout from './MyPageLayout';
 import WishlistPreview from '../../components/ui/myPage/WishlistPreview';
 import { useTranslation } from 'react-i18next';
 import MyPageDetailModal from '../../components/ui/myPage/myPageDetailModal.tsx';
+import config from '../../config.js';
 
 export default function WishlistPage() {
   const [wishlist, setWishlist] = useState([]);
@@ -16,7 +17,7 @@ export default function WishlistPage() {
   const fetchBookmarks = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch('http://localhost:8080/bookmarks', {
+      const res = await fetch(`${config.apiBaseUrl}/bookmarks`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -45,7 +46,7 @@ export default function WishlistPage() {
     console.log('Clicked item:', item);
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch(`http://localhost:8080/users/${item.placeId}/details`, {
+      const res = await fetch(`${config.apiBaseUrl}/users/${item.placeId}/details`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

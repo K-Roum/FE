@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import config from '../../../config';
 
 const FeaturedContent = ({ data }) => {
   const navigate = useNavigate();
@@ -11,7 +12,7 @@ const FeaturedContent = ({ data }) => {
   const handleImageClick = async (placeId) => {
     try {
       const response = await fetch(
-        `http://localhost:8080/places/${placeId}/with-everything-by-image?languageCode=${currentLang}`,
+       `${config.apiBaseUrl}/places/${placeId}/with-everything-by-image?languageCode=${currentLang}`,
         { credentials: "include" }
       );
       if (!response.ok) {

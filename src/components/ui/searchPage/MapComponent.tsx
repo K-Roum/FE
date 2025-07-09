@@ -37,21 +37,10 @@ const MapComponent = forwardRef<MapComponentRef, MapComponentProps>(
       const map = new window.kakao.maps.Map(container, options);
       setMapInstance(map);
     };
-    const resetCenter = () => {
-      if (mapInstance) {
-        const center = new window.kakao.maps.LatLng(
-          defaultCenter.lat,
-          defaultCenter.lng
-        );
-        mapInstance.setCenter(center);
-        mapInstance.setLevel(defaultLevel);
-      }
-    };
-
+   
     useEffect(() => {
       if (window.kakao && window.kakao.maps) {
         initMap();
-
         return;
       }
 
@@ -72,11 +61,14 @@ const MapComponent = forwardRef<MapComponentRef, MapComponentProps>(
 
       document.head.appendChild(script);
     }, []);
+
     useEffect(() => {
       if (mapInstance && results) {
         updateMapMarkers(results);
       }
     }, [mapInstance, results]);
+
+
     const clearMarkers = () => {
       markers.forEach((marker) => {
         marker.setMap(null);
@@ -87,7 +79,6 @@ const MapComponent = forwardRef<MapComponentRef, MapComponentProps>(
     const updateMapMarkers = (items: SearchResultModel[]) => {
       console.log("Updating map markers with items:", items);
       if (!mapInstance) return;
-      console.log("통과?");
       clearMarkers();
 
       const newMarkers: any[] = [];
@@ -113,6 +104,17 @@ const MapComponent = forwardRef<MapComponentRef, MapComponentProps>(
 
       setMarkers(newMarkers);
     };
+     const resetCenter = () => {
+      if (mapInstance) {
+        const center = new window.kakao.maps.LatLng(
+          defaultCenter.lat,
+          defaultCenter.lng
+        );
+        mapInstance.setCenter(center);
+        mapInstance.setLevel(defaultLevel);
+      }
+    };
+
 
     const centerMapOnLocation = (latitude: number, longitude: number) => {
       if (mapInstance) {

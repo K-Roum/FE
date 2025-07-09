@@ -1,3 +1,4 @@
+import config from "../config";
 import { PlaceDetailModel } from "../model/PlaceDetailModel";
 
 export const submitReview = async (
@@ -7,7 +8,7 @@ export const submitReview = async (
   comment: string
 ): Promise<any> => {
   const response = await fetch(
-    `http://localhost:8080/reviews/${placeId}?languageCode=${languageCode}`,
+    `${config.apiBaseUrl}/reviews/${placeId}?languageCode=${languageCode}`,
     {
       method: "POST",
       headers: {

@@ -8,6 +8,7 @@ import { PlaceDetailModel } from "../../model/PlaceDetailModel.ts";
 import { fetchPlaceDetail, toggleBookmark } from "../../services/SearchApi.ts";
 import SearchSection from "../../components/ui/homePage/SearchSection.tsx";
 import { useTranslation } from "react-i18next";
+import config from "../../config.js";
 type SelectedItemType = {
   detail: PlaceDetailModel;
   summary: SearchResultModel;
@@ -32,45 +33,7 @@ const query = location.state?.query ?? queryParams.get("query") ?? "";
 
   const mapRef = useRef<MapComponentRef>(null);
 
-//   useEffect(() => {
-//   const fetchResults = async () => {
-//     if (!query.trim()) return;
 
-//     setLoading(true);
-//     try {
-//       const res = await fetch("http://localhost:8080/places/search", {
-//         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json",
-//           accept: "*/*",
-//         },
-//         credentials: "include",
-//         body: JSON.stringify({
-//           query: query,
-//           languageCode: i18n.language.toLowerCase(),
-//         }),
-//       });
-
-//       if (!res.ok) throw new Error("서버 오류");
-//       const data = await res.json();
-
-//       setFetchedResults(data);
-      
-//       setIsShowingRecommendations(false);
-//       console.log("검색 결과:", data);
-//       console.log(data);
-//       mapRef.current?.updateMapMarkers(data);
-//     } catch (err) {
-//       console.error("검색 실패:", err);
-//       setFetchedResults([]);
-//       mapRef.current?.clearMarkers(); // 에러 시 마커도 초기화
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-
-//   fetchResults();
-// }, [query]);
 useEffect(() => {
 
   const fetchResults = async () => {
@@ -95,7 +58,7 @@ useEffect(() => {
     setLoading(true);
     try {
 
-      const res = await fetch("http://localhost:8080/places/search", {
+      const res = await fetch(`${config.apiBaseUrl}/places/search`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

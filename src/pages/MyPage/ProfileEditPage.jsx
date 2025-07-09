@@ -9,7 +9,7 @@ import {
   verifyEmailCode,
 } from '../../components/ui/signupPage/userCheckApi.ts';
 import { useTranslation } from 'react-i18next';
-
+import config from '../../config';
 export default function ProfileEditPage() {
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -34,7 +34,7 @@ export default function ProfileEditPage() {
 
   useEffect(() => {
     const fetchProfile = async () => {
-      const res = await fetch('http://localhost:8080/users/profile', {
+      const res = await fetch(`${config.apiBaseUrl}/users/profile`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -118,7 +118,7 @@ export default function ProfileEditPage() {
 
     try {
       // 닉네임/이메일 수정
-      await fetch('http://localhost:8080/users/profile', {
+      await fetch(`${config.apiBaseUrl}/users/profile`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -130,7 +130,7 @@ export default function ProfileEditPage() {
 
       // 비밀번호 변경
       if (form.newPassword) {
-        await fetch('http://localhost:8080/users/change-password', {
+        await fetch(`${config.apiBaseUrl}/users/change-password`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -173,7 +173,7 @@ export default function ProfileEditPage() {
         return;
       }
       try {
-        await fetch('http://localhost:8080/users/profile', {
+        await fetch(`${config.apiBaseUrl}/users/profile`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json', accept: '*/*' },
           credentials: 'include',
@@ -235,7 +235,7 @@ export default function ProfileEditPage() {
         return;
       }
       try {
-        const res = await fetch('http://localhost:8080/users/change-password', {
+        const res = await fetch(`${config.apiBaseUrl}/users/change-password`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json', accept: '*/*' },
           credentials: 'include',
@@ -282,7 +282,7 @@ export default function ProfileEditPage() {
       }
       if (!window.confirm('정말로 회원 탈퇴하시겠습니까?')) return;
       try {
-        await fetch('http://localhost:8080/users', {
+        await fetch(`${config.apiBaseUrl}/users`, {
           method: 'DELETE',
           headers: { 'Content-Type': 'application/json', accept: '*/*' },
           credentials: 'include',

@@ -1,6 +1,7 @@
 // src/api/userCheckApi.ts
 
-const API_BASE_URL = 'http://localhost:8080';
+import config from "../../../config";
+
 
 const fetchWithConfig = async (url: string, options: RequestInit = {}) => {
   const defaultOptions: RequestInit = {
@@ -28,7 +29,7 @@ const fetchWithConfig = async (url: string, options: RequestInit = {}) => {
 
 export async function checkLoginId(loginId: string): Promise<boolean> {
     try {
-      const response = await fetchWithConfig(`${API_BASE_URL}/users/check-loginId?loginId=${encodeURIComponent(loginId)}`, {
+      const response = await fetchWithConfig(`${config.apiBaseUrl}/users/check-loginId?loginId=${encodeURIComponent(loginId)}`, {
         method: 'GET',
         headers: {
           'Origin': 'http://localhost:3000'
@@ -49,7 +50,7 @@ export async function checkLoginId(loginId: string): Promise<boolean> {
   
 export async function checkEmail(email: string): Promise<boolean> {
     try {
-      const response = await fetchWithConfig(`${API_BASE_URL}/users/check-email?email=${encodeURIComponent(email)}`, {
+      const response = await fetchWithConfig(`${config.apiBaseUrl}/users/check-email?email=${encodeURIComponent(email)}`, {
         method: 'GET',
         headers: {
           'Origin': 'http://localhost:3000'
@@ -70,7 +71,7 @@ export async function checkEmail(email: string): Promise<boolean> {
   
 export async function checkNickname(nickname: string): Promise<boolean> {
     try {
-      const response = await fetchWithConfig(`${API_BASE_URL}/users/check-nickname?nickname=${encodeURIComponent(nickname)}`, {
+      const response = await fetchWithConfig(`${config.apiBaseUrl}/users/check-nickname?nickname=${encodeURIComponent(nickname)}`, {
         method: 'GET',
         headers: {
           'Origin': 'http://localhost:3000'
@@ -91,7 +92,7 @@ export async function checkNickname(nickname: string): Promise<boolean> {
   
 export async function sendEmailCode(email: string): Promise<boolean> {
     try {
-      const response = await fetch('http://localhost:8080/email-verification', {
+      const response = await fetch(`${config.apiBaseUrl}/email-verification`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -109,7 +110,7 @@ export async function sendEmailCode(email: string): Promise<boolean> {
   
   export async function verifyEmailCode(email: string, code: string): Promise<boolean> {
     try {
-      const response = await fetch('http://localhost:8080/email-verification/verify', {
+      const response = await fetch(`${config.apiBaseUrl}/email-verification/verify`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -132,7 +133,7 @@ export async function signupUser(userData: {
     nickname: string;
 }): Promise<boolean> {
     try {
-        const response = await fetch('http://localhost:8080/users/signup', {
+        const response = await fetch(`${config.apiBaseUrl}/users/signup`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
