@@ -33,7 +33,7 @@ export interface LoginRequest {
         body: JSON.stringify({ loginId, password }),
       });
       const data = await response.json();
-      console.log('서버 응답:', data);
+
 
       // 기본적인 응답 형식 확인
       if (!data || typeof data !== 'object') {

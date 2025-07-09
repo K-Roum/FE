@@ -32,8 +32,6 @@ export const toggleBookmark = async (placeId: number, bookmarked: boolean): Prom
     credentials: "include",
   });
   const responseBody = await response.json();
-  console.log(method, endpoint);
-  console.log(responseBody);
   if (!response.ok) {
     throw new Error(
       `북마크 ${bookmarked ? "취소" : "추가"} 실패:`
@@ -76,7 +74,6 @@ export const fetchRecentSearches = async () => {
           if (!response.ok) {
             throw new Error(`서버 오류: ${response.status}`);
           }
-          console.log(response);
           const data: SearchResultModel[] = await response.json();
           return data;
         } catch (error) {

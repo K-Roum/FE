@@ -61,7 +61,7 @@ export default function MyPage() {
         }
       );
       const parsedResponse = await response.json();
-      console.log("API 원본 응답:", parsedResponse);
+
 
       if (!response.ok) {
         throw new Error(`HTTP 오류, 상태 코드: ${response.status}`);
@@ -69,7 +69,7 @@ export default function MyPage() {
 
       // 백엔드 DTO에 따라 placeDetails 객체 접근
       const placeDetailsFromApi = parsedResponse.placeDetails;
-      console.log("placeDetailsFromApi 객체:", placeDetailsFromApi);
+  
 
       // placeDetails가 유효한지 확인
       if (!placeDetailsFromApi) {

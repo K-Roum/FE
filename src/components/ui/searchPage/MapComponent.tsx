@@ -77,7 +77,7 @@ const MapComponent = forwardRef<MapComponentRef, MapComponentProps>(
     };
 
     const updateMapMarkers = (items: SearchResultModel[]) => {
-      console.log("Updating map markers with items:", items);
+
       if (!mapInstance) return;
       clearMarkers();
 

@@ -43,7 +43,7 @@ export default function WishlistPage() {
   }, []);
 
   const handleItemClick = async (item) => {
-    console.log('Clicked item:', item);
+
     try {
       const token = localStorage.getItem('token');
       const res = await fetch(`${config.apiBaseUrl}/users/${item.placeId}/details`, {
@@ -61,7 +61,6 @@ export default function WishlistPage() {
       }
 
       const parsedResponse = await res.json();
-      console.log('API 응답:', parsedResponse);
 
       if (parsedResponse && parsedResponse.placeDetails) {
         const placeDetails = parsedResponse.placeDetails;

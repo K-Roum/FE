@@ -59,7 +59,7 @@ const MyPageDetailModal = ({ isOpen, item, onClose, onBookmarkChange, onReviewCh
 
   useEffect(() => {
     if (item) {
-      console.log("myPageDetailModal item:", item); // 디버깅 로그 유지
+
       setIsBookmarked(item.bookmarked ?? false);
       setBookmarkCount(item.bookmark?.bookmarkCount ?? 0);
       setReviews(item.reviews?.placesReviews || []);

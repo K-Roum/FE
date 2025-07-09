@@ -25,7 +25,6 @@ export async function resetPasswordRequest({
     email,
 }: ResetPasswordRequest): Promise<ResetPasswordResponse | null> {
     try {
-        console.log('[비밀번호 재설정] 요청 시작:', { loginId, email });
 
         // 비밀번호 재설정 요청 (단일 엔드포인트로 변경)
         const response = await fetch(`${config.apiBaseUrl}users/reset-password`, {
@@ -40,15 +39,8 @@ export async function resetPasswordRequest({
             }),
         });
 
-        console.log('[비밀번호 재설정] HTTP 응답:', {
-            status: response.status,
-            statusText: response.statusText,
-            headers: Object.fromEntries(response.headers.entries())
-        });
-
         // 응답 텍스트 먼저 받기
         const responseText = await response.text();
-        console.log('[비밀번호 재설정] 응답 텍스트:', responseText);
 
         // 응답이 JSON이 아닌 경우 처리
         let data;
@@ -64,7 +56,7 @@ export async function resetPasswordRequest({
             };
         }
 
-        console.log('[비밀번호 재설정] 파싱된 응답:', data);
+
 
         // 서버 응답 형식 검증
         if (!data || typeof data !== 'object') {
