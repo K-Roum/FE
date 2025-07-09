@@ -1,14 +1,23 @@
 import { useRef, useState, useEffect } from "react";
-import { data, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import SearchResultCard from "../../components/ui/searchPage/SearchResultCard.tsx";
 import DetailModal from "../../components/ui/searchPage/DetailModal.tsx";
-import MapComponent, { MapComponentRef } from "../../components/ui/searchPage/MapComponent.tsx";
+import MapComponent, {
+  MapComponentRef,
+} from "../../components/ui/searchPage/MapComponent.tsx";
 import { SearchResultModel } from "../../model/SearchResultModel.ts";
 import { PlaceDetailModel } from "../../model/PlaceDetailModel.ts";
-import { fetchPlaceDetail, toggleBookmark } from "../../services/SearchApi.ts";
+import {
+  fetchPlaceDetail,
+  toggleBookmark,
+  performSearch,
+} from "../../services/SearchApi.ts";
 import SearchSection from "../../components/ui/homePage/SearchSection.tsx";
 import { useTranslation } from "react-i18next";
-import config from "../../config.js";
+
+
+
+
 type SelectedItemType = {
   detail: PlaceDetailModel;
   summary: SearchResultModel;
@@ -16,9 +25,7 @@ type SelectedItemType = {
 
 const SearchPage = () => {
   const location = useLocation();
-
   const initialResults: SearchResultModel[] = location.state?.results || [];
-
   const [fetchedResults, setFetchedResults] =
     useState<SearchResultModel[]>(initialResults);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -29,68 +36,45 @@ const SearchPage = () => {
   const { t, i18n } = useTranslation();
 
   const queryParams = new URLSearchParams(location.search);
-const query = location.state?.query ?? queryParams.get("query") ?? "";
+  const query = location.state?.query ?? queryParams.get("query") ?? "";
 
   const mapRef = useRef<MapComponentRef>(null);
+const scrollRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    const fetchResults = async () => {
+      const currentLang = i18n.language.toLowerCase();
+      if (!query.trim()) return;
 
-useEffect(() => {
+      // 초기 로딩 시 검색어가 있다면 해당 검색어로 결과를 가져옴
+      //검색page에서 검색하는 경우
 
-  const fetchResults = async () => {
-    if (!query.trim()) return;
-
-    // 만약 state에 넘어온 결과가 있다면 fetch 생략
-    if (location.state?.results) {
-
-      setFetchedResults(location.state.results);
-      setIsShowingRecommendations(false);
-      mapRef.current?.updateMapMarkers(location.state.results);
-      console.log("검색 결과:", location.state.results);
-       const  data = location.state.results;
-       setFetchedResults(data);
-      setIsShowingRecommendations(false);
-       mapRef.current?.resetCenter();
-      mapRef.current?.updateMapMarkers(data);
-      return;
-    }
-
-    // 직접 API 호출
-    setLoading(true);
-    try {
-
-      const res = await fetch(`${config.apiBaseUrl}/places/search`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          accept: "*/*",
-        },
-        credentials: "include",
-        body: JSON.stringify({
-          query: query,
-          languageCode: i18n.language.toLowerCase(),
-        }),
-      });
-
-      if (!res.ok) throw new Error("서버 오류");
-      const data = await res.json();
-
-      setFetchedResults(data);
-      setIsShowingRecommendations(false);
-      mapRef.current?.resetCenter(); // 검색 후 지도 중심 재설정
-      mapRef.current?.updateMapMarkers(data);
-
-    } catch (err) {
-      console.error("검색 실패:", err);
-      setFetchedResults([]);
-      mapRef.current?.clearMarkers();
-    } finally {
-      setLoading(false);
-    }
-  };
-   
-  fetchResults();
-}, [query]);
-
+      if (location.state?.results) {
+        const data = location.state.results;
+        setFetchedResults(data);
+        setIsShowingRecommendations(false);
+        mapRef.current?.resetCenter();
+        mapRef.current?.updateMapMarkers(data);
+        return;
+      }
+      // 직접 API 호출
+      setLoading(true);
+      try {
+        const data = await performSearch(query, currentLang);
+        setFetchedResults(data || []);
+        setIsShowingRecommendations(false);
+        mapRef.current?.resetCenter(); // 검색 후 지도 중심 재설정
+        mapRef.current?.updateMapMarkers(data || []);
+      } catch (err) {
+        console.error("검색 실패:", err);
+        setFetchedResults([]);
+        mapRef.current?.clearMarkers();
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchResults();
+  }, [query, location.state, i18n.language]);
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
@@ -132,80 +116,85 @@ useEffect(() => {
   };
 
   const handleCardClick = async (item: SearchResultModel) => {
-  const currentLang = i18n.language.toLowerCase();
+    const currentLang = i18n.language.toLowerCase();
 
-  try {
-    mapRef.current?.centerMapOnLocation(item.latitude, item.longitude);
+    try {
+      mapRef.current?.centerMapOnLocation(item.latitude, item.longitude);
 
-    const parsedResponse = await fetchPlaceDetail(item.placeId, currentLang);
+      const parsedResponse = await fetchPlaceDetail(item.placeId, currentLang);
 
-    setSelectedItem({
-      detail: parsedResponse,
-      summary: item,
-    });
+      setSelectedItem({
+        detail: parsedResponse,
+        summary: item,
+      });
 
-    if (
-      parsedResponse.recommendations &&
-      parsedResponse.recommendations.length > 0
-    ) {
-      const recommendationResults = parsedResponse.recommendations.map(
-        (rec) => rec.place
-      );
+      if (
+        parsedResponse.recommendations &&
+        parsedResponse.recommendations.length > 0
+      ) {
+        const recommendationResults = parsedResponse.recommendations.map(
+          (rec) => rec.place
+        );
 
+        const filteredRecommendations = recommendationResults.filter(
+          (place) => place.placeId !== item.placeId
+        );
+        const newResults = [item, ...filteredRecommendations];
 
-      const filteredRecommendations = recommendationResults.filter(
-        (place) => place.placeId !== item.placeId
-      );
-      const newResults = [item, ...filteredRecommendations];
+        setFetchedResults(newResults);
+        setIsShowingRecommendations(true);
+        mapRef.current?.updateMapMarkers(newResults);
+      }
 
-      setFetchedResults(newResults);
-      setIsShowingRecommendations(true);
-      mapRef.current?.updateMapMarkers(newResults);
+      setIsModalOpen(true);
+    } catch (error) {
+      console.error("장소 상세 정보 요청 실패:", error);
     }
+  };
 
-    setIsModalOpen(true);
-  } catch (error) {
-    console.error("장소 상세 정보 요청 실패:", error);
-  }
-};
+  const handlePinClick = async (item: SearchResultModel) => {
+    const currentLang = i18n.language.toLowerCase();
 
-const handlePinClick = async (item: SearchResultModel) => {
-  const currentLang = i18n.language.toLowerCase();
+    try {
+      mapRef.current?.centerMapOnLocation(item.latitude, item.longitude);
 
-  try {
-    mapRef.current?.centerMapOnLocation(item.latitude, item.longitude);
+      const parsedResponse = await fetchPlaceDetail(item.placeId, currentLang);
 
-    const parsedResponse = await fetchPlaceDetail(item.placeId, currentLang);
+      setSelectedItem({
+        detail: parsedResponse,
+        summary: item,
+      });
 
-    setSelectedItem({
-      detail: parsedResponse,
-      summary: item,
-    });
+      if (
+        parsedResponse.recommendations &&
+        parsedResponse.recommendations.length > 0
+      ) {
+        const recommendationResults = parsedResponse.recommendations.map(
+          (rec) => rec.place
+        );
 
-    if (
-      parsedResponse.recommendations &&
-      parsedResponse.recommendations.length > 0
-    ) {
-      const recommendationResults = parsedResponse.recommendations.map(
-        (rec) => rec.place
-      );
+        // 🛠️ 클릭한 장소를 맨 앞에 고정
+        const filteredRecommendations = recommendationResults.filter(
+          (place) => place.placeId !== item.placeId
+        );
+        const newResults = [item, ...filteredRecommendations];
 
-      // 🛠️ 클릭한 장소를 맨 앞에 고정
-      const filteredRecommendations = recommendationResults.filter(
-        (place) => place.placeId !== item.placeId
-      );
-      const newResults = [item, ...filteredRecommendations];
+        setFetchedResults(newResults);
+        setIsShowingRecommendations(true);
+        mapRef.current?.updateMapMarkers(newResults);
+      }
 
-      setFetchedResults(newResults);
-      setIsShowingRecommendations(true);
-      mapRef.current?.updateMapMarkers(newResults);
+      setIsModalOpen(true);
+    } catch (error) {
+      console.error("장소 상세 정보 요청 실패:", error);
     }
+  };
 
-    setIsModalOpen(true);
-  } catch (error) {
-    console.error("장소 상세 정보 요청 실패:", error);
+  useEffect(() => {
+  if (scrollRef.current) {
+    scrollRef.current.scrollTop = 0;  
   }
-};
+}, [fetchedResults]);  
 
 
   return (
@@ -223,78 +212,81 @@ const handlePinClick = async (item: SearchResultModel) => {
         />
       </div>
 
-{/* 검색 결과 리스트 */}
-<div className="w-1/2 p-8 overflow-y-auto">
-  {loading ? (
-    <div className="text-center text-gray-600 mt-8">
-      {t("Searching...")}
-    </div>
-  ) : fetchedResults.length > 0 ? (
-    <>
-      {isShowingRecommendations ? (
-        <>
-          {/* 선택 장소 */}
-          <div className="mb-2">
-            <h2 className="text-xl font-semibold text-gray-800">{t('Selected Place')}</h2>
+      {/* 검색 결과 리스트 */}
+      <div ref={scrollRef} className="w-1/2 p-8 overflow-y-auto">
+        {loading ? (
+          <div className="text-center text-gray-600 mt-8">
+            {t("Searching...")}
           </div>
-          <ul className="space-y-6 mb-8">
-            <li key={"selected"}>
-              <SearchResultCard
-                item={fetchedResults[0]}
-                onCardClick={handleCardClick}
-                isBookmarked={fetchedResults[0].bookmarked}
-                handleBookmarkClick={handleBookmarkClick}
-              />
-            </li>
-          </ul>
+        ) : fetchedResults.length > 0 ? (
+          <>
+            {isShowingRecommendations ? (
+              <>
+                {/* 선택 장소 */}
+                <div className="mb-2">
+                  <h2 className="text-xl font-semibold text-gray-800">
+                    {t("Selected Place")}
+                  </h2>
+                </div>
+                <ul className="space-y-6 mb-8">
+                  <li key={"selected"}>
+                    <SearchResultCard
+                      item={fetchedResults[0]}
+                      onCardClick={handleCardClick}
+                      isBookmarked={fetchedResults[0].bookmarked}
+                      handleBookmarkClick={handleBookmarkClick}
+                    />
+                  </li>
+                </ul>
 
-          {/* 추천 장소 */}
-          <div className="mb-2">
-            <h2 className="text-xl font-semibold text-gray-800">{t('Recommended Places')}</h2>
+                {/* 추천 장소 */}
+                <div className="mb-2">
+                  <h2 className="text-xl font-semibold text-gray-800">
+                    {t("Recommended Places")}
+                  </h2>
+                </div>
+                <ul className="space-y-6">
+                  {fetchedResults.slice(1).map((item, index) => (
+                    <li key={index}>
+                      <SearchResultCard
+                        item={item}
+                        onCardClick={handleCardClick}
+                        isBookmarked={item.bookmarked}
+                        handleBookmarkClick={handleBookmarkClick}
+                      />
+                    </li>
+                  ))}
+                </ul>
+              </>
+            ) : (
+              <>
+                {/* 일반 검색 결과 */}
+                <div className="mb-4">
+                  <h2 className="text-xl font-semibold text-gray-800">
+                    {t("Search Results")}
+                  </h2>
+                </div>
+                <ul className="space-y-6">
+                  {fetchedResults.map((item, index) => (
+                    <li key={index}>
+                      <SearchResultCard
+                        item={item}
+                        onCardClick={handleCardClick}
+                        isBookmarked={item.bookmarked}
+                        handleBookmarkClick={handleBookmarkClick}
+                      />
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
+          </>
+        ) : (
+          <div className="bg-white p-8 rounded-lg shadow-md text-center">
+            <p className="text-gray-500 text-lg">{t("No Results")}</p>
           </div>
-          <ul className="space-y-6">
-            {fetchedResults.slice(1).map((item, index) => (
-              <li key={index}>
-                <SearchResultCard
-                  item={item}
-                  onCardClick={handleCardClick}
-                  isBookmarked={item.bookmarked}
-                  handleBookmarkClick={handleBookmarkClick}
-                />
-              </li>
-            ))}
-          </ul>
-        </>
-      ) : (
-        <>
-          {/* 일반 검색 결과 */}
-          <div className="mb-4">
-            <h2 className="text-xl font-semibold text-gray-800">
-              {t("Search Results")}
-            </h2>
-          </div>
-          <ul className="space-y-6">
-            {fetchedResults.map((item, index) => (
-              <li key={index}>
-                <SearchResultCard
-                  item={item}
-                  onCardClick={handleCardClick}
-                  isBookmarked={item.bookmarked}
-                  handleBookmarkClick={handleBookmarkClick}
-                />
-              </li>
-            ))}
-          </ul>
-        </>
-      )}
-    </>
-  ) : (
-    <div className="bg-white p-8 rounded-lg shadow-md text-center">
-      <p className="text-gray-500 text-lg">{t("No Results")}</p>
-    </div>
-  )}
-</div>
-
+        )}
+      </div>
 
       {/* 상세 모달 */}
       <DetailModal
@@ -308,4 +300,3 @@ const handlePinClick = async (item: SearchResultModel) => {
 };
 
 export default SearchPage;
-
