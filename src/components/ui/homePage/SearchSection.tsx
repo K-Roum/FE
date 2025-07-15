@@ -41,6 +41,13 @@ const SearchSection: React.FC = () => {
       document.removeEventListener("mousemove", handleMouseMove);
     };
   }, []);
+  
+ const handleRecentSearchClick = (text: string) => {
+    setSearchQuery(text);
+    setIsDropdownOpen(false);
+    executeSearch(text);
+  };
+
 
   const handleSearch = async (e?: FormEvent) => {
     if (e) e.preventDefault();
@@ -50,6 +57,7 @@ const SearchSection: React.FC = () => {
     }
     executeSearch(searchQuery);
   };
+  
   const executeSearch = async (query: string) => {
     const currentLang = i18n.language.toLowerCase();
     const data = await performSearch(query, currentLang);
@@ -58,12 +66,7 @@ const SearchSection: React.FC = () => {
     });
   };
 
-  const handleRecentSearchClick = (text: string) => {
-    setSearchQuery(text);
-    setIsDropdownOpen(false);
-    executeSearch(text);
-  };
-
+ 
   return (
     <div className="flex justify-center mt-8 mb-8">
       <div className="relative w-full max-w-[824px]" ref={containerRef}>

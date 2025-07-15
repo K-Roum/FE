@@ -94,5 +94,6 @@ export const imageSearch = async (placeId: string, currentLang: string) => {
   if (!response.ok) {
     throw new Error(`서버 오류: ${response.status}`);
   }
-  return response.json();
+  const data: SearchResultModel[] = await response.json();
+    return data;
 };

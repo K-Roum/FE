@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { imageSearch } from "../../../services/SearchApi.ts"; // Assuming this is the correct path to your imageSearch function
-import pick from "lodash/pick";
+
 
 const FeaturedContent = ({ data }) => {
   const navigate = useNavigate();
@@ -13,19 +13,8 @@ const FeaturedContent = ({ data }) => {
   const handleImageClick = async (placeId) => {
     try {
       const result = await imageSearch(placeId, currentLang);
-      const searchResultModel = pick(result.placeDto, [
-        "address",
-        "bookmarked",
-        "description",
-        "firstImageUrl",
-        "latitude",
-        "longitude",
-        "placeName",
-        "placeId",
-      ]);
-
       navigate("/searchPage", {
-        state: { results: [searchResultModel] },
+        state: {  selectedItem: result,results: [result] },
       });
     } catch (error) {
       console.error("상세 정보 불러오기 실패:", error);
