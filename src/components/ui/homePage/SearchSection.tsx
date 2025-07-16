@@ -1,9 +1,7 @@
 import React, { useState, useEffect, FormEvent, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { SearchResultModel } from "../../../model/SearchResultModel";
 import { motion, AnimatePresence } from "framer-motion";
-import config from "../../../config";
 import {
   fetchRecentSearches,
   performSearch,
@@ -19,12 +17,14 @@ const SearchSection: React.FC = () => {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
 
+
   useEffect(() => {
-    const fetchData = async () => {
-      setRecentSearches(await fetchRecentSearches());
-    };
-    fetchData();
-  }, []);
+  const fetchData = async () => {
+    const data = await fetchRecentSearches();
+    setRecentSearches(data || []);
+  };
+  fetchData();
+}, []);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -102,7 +102,7 @@ const SearchSection: React.FC = () => {
         </form>
 
         <AnimatePresence>
-          {isDropdownOpen && recentSearches.length > 0 && (
+          {isDropdownOpen  && (
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
