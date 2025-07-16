@@ -8,7 +8,7 @@ import {
     sendEmailCode,
     verifyEmailCode,
     signupUser,
-  } from '../../components/ui/signupPage/userCheckApi.ts';
+  } from '../../services/userCheckApi.ts';
   
   export default function SignupForm() {
     const { t } = useTranslation();

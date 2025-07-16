@@ -1,5 +1,7 @@
 // components/ui/loginPage/loginApi.ts
 
+import config from "../config";
+
 export interface LoginRequest {
     loginId: string;
     password: string;
@@ -22,7 +24,7 @@ export interface LoginRequest {
     password,
   }: LoginRequest): Promise<LoginResponse | null> {
     try {
-      const response = await fetch('http://localhost:8080/users/login', {
+      const response = await fetch(`${config.apiBaseUrl}/users/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -31,7 +33,7 @@ export interface LoginRequest {
         body: JSON.stringify({ loginId, password }),
       });
       const data = await response.json();
-      console.log('서버 응답:', data);
+
 
       // 기본적인 응답 형식 확인
       if (!data || typeof data !== 'object') {

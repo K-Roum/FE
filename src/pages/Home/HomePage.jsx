@@ -3,6 +3,7 @@ import SearchSection from '../../components/ui/homePage/SearchSection.tsx';
 import TrendingHashtags from '../../components/ui/homePage/TrendingHashtags.tsx';
 import FeaturedContent from '../../components/ui/homePage/FeaturedContent';
 import i18n from '../../i18n';
+import config from '../../config.js';
 
 const HomePage = () => {
   const [imagePreviewData, setImagePreviewData] = useState(null);
@@ -11,7 +12,7 @@ const HomePage = () => {
     const fetchImagePreview = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8080/places/search/image-preview?languageCode=${currentLang}`,
+         `${config.apiBaseUrl}/places/search/image-preview?languageCode=${currentLang}`,
           { credentials: 'include' }
         );
         if (!response.ok) {

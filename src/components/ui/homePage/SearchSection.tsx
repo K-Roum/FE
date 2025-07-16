@@ -3,6 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { SearchResultModel } from "../../../model/SearchResultModel";
 import { motion, AnimatePresence } from "framer-motion";
+import config from "../../../config";
+import {
+  fetchRecentSearches,
+  performSearch,
+} from "../../../services/SearchApi.ts";
 
 const SearchSection: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -15,23 +20,10 @@ const SearchSection: React.FC = () => {
   const { t, i18n } = useTranslation();
 
   useEffect(() => {
-    const fetchRecentSearches = async () => {
-      try {
-        const response = await fetch("http://localhost:8080/search-history", {
-          method: "GET",
-          credentials: "include",
-        });
-        if (!response.ok) {
-          throw new Error(`서버 오류: ${response.status}`);
-        }
-        const data = await response.json();
-        setRecentSearches(data);
-      } catch (error) {
-        console.error("최근 검색어 불러오기 실패:", error);
-      }
+    const fetchData = async () => {
+      setRecentSearches(await fetchRecentSearches());
     };
-
-    fetchRecentSearches();
+    fetchData();
   }, []);
 
   useEffect(() => {
@@ -49,53 +41,32 @@ const SearchSection: React.FC = () => {
       document.removeEventListener("mousemove", handleMouseMove);
     };
   }, []);
-
-  const performSearch = async (query: string) => {
-    const currentLang = i18n.language.toLowerCase();
-
-    try {
-      const response = await fetch("http://localhost:8080/places/search", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          accept: "*/*",
-        },
-        credentials: "include",
-        body: JSON.stringify({
-          query: query,
-          languageCode: currentLang,
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error(`서버 오류: ${response.status}`);
-      }
-      console.log(response);
-      const data: SearchResultModel[] = await response.json();
-      navigate(`/searchPage?query=${encodeURIComponent(query)}`, {
-        state: { results: data },
-      });
-    } catch (error) {
-      console.error("검색 중 오류 발생:", error);
-      alert("검색에 실패했습니다.");
-    }
+  
+ const handleRecentSearchClick = (text: string) => {
+    setSearchQuery(text);
+    setIsDropdownOpen(false);
+    executeSearch(text);
   };
 
-  const handleSearch = (e?: FormEvent) => {
+
+  const handleSearch = async (e?: FormEvent) => {
     if (e) e.preventDefault();
     if (!searchQuery.trim()) {
       alert(t("searchPrompt"));
       return;
     }
-    performSearch(searchQuery);
+    executeSearch(searchQuery);
+  };
+  
+  const executeSearch = async (query: string) => {
+    const currentLang = i18n.language.toLowerCase();
+    const data = await performSearch(query, currentLang);
+    navigate(`/searchPage?query=${encodeURIComponent(query)}`, {
+      state: { results: data },
+    });
   };
 
-  const handleRecentSearchClick = (text: string) => {
-    setSearchQuery(text);
-    setIsDropdownOpen(false);
-    performSearch(text);
-  };
-
+ 
   return (
     <div className="flex justify-center mt-8 mb-8">
       <div className="relative w-full max-w-[824px]" ref={containerRef}>

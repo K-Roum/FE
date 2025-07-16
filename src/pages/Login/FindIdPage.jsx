@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { findUserIdByEmail } from '../../components/ui/loginPage/findIdApi.ts';
+import { findUserIdByEmail } from '../../services/findIdApi.ts';
 import { useNavigate } from 'react-router-dom';
 import { getLoginLogoPath } from '../../utils/languageUtils';
 

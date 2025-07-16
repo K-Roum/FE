@@ -5,7 +5,7 @@ import WishlistPreview from '../../components/ui/myPage/WishlistPreview';
 import ReviewPreview from '../../components/ui/myPage/ReviewPreview';
 import ProfileInfo from '../../components/ui/myPage/ProfileInfo';
 import MyPageDetailModal from '../../components/ui/myPage/myPageDetailModal.tsx';
-
+import config from '../../config';
 import { useTranslation } from 'react-i18next';
 
 export default function MyPage() {
@@ -22,7 +22,7 @@ export default function MyPage() {
 
   const fetchMyPage = async () => {
     try {
-      const res = await fetch('http://localhost:8080/users/mypage', {
+      const res = await fetch(`${config.apiBaseUrl}/users/mypage`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -50,7 +50,7 @@ export default function MyPage() {
   const handleItemClick = async (item) => {
     try {
       const response = await fetch(
-        `http://localhost:8080/users/${item.placeId}/details`,
+        `${config.apiBaseUrl}/users/${item.placeId}/details`,
         {
           method: 'GET',
           headers: {
@@ -61,7 +61,7 @@ export default function MyPage() {
         }
       );
       const parsedResponse = await response.json();
-      console.log("API 원본 응답:", parsedResponse);
+
 
       if (!response.ok) {
         throw new Error(`HTTP 오류, 상태 코드: ${response.status}`);
@@ -69,7 +69,7 @@ export default function MyPage() {
 
       // 백엔드 DTO에 따라 placeDetails 객체 접근
       const placeDetailsFromApi = parsedResponse.placeDetails;
-      console.log("placeDetailsFromApi 객체:", placeDetailsFromApi);
+  
 
       // placeDetails가 유효한지 확인
       if (!placeDetailsFromApi) {

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import MyPageLayout from './MyPageLayout';
 import { useTranslation } from 'react-i18next';
 import ReviewForm from '../../components/ui/searchPage/ReviewForm.tsx';
-
+import config from '../../config';
 export default function ReviewListPage() {
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -15,7 +15,7 @@ export default function ReviewListPage() {
 
   const fetchReviews = async () => {
     try {
-      const res = await fetch('http://localhost:8080/reviews/detail', {
+      const res = await fetch(`${config.apiBaseUrl}/reviews/detail`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -48,7 +48,7 @@ export default function ReviewListPage() {
     if (!deleteTarget) return;
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch(`http://localhost:8080/reviews/${deleteTarget}`, {
+      const res = await fetch(`${config.apiBaseUrl}/reviews/${deleteTarget}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -85,7 +85,7 @@ export default function ReviewListPage() {
     if (!editingReview) return;
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch(`http://localhost:8080/reviews/${editingReview.placeId}`, {
+      const res = await fetch(`${config.apiBaseUrl}/reviews/${editingReview.placeId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

@@ -3,6 +3,8 @@ import { useTranslation } from "react-i18next";
 import { hashtagKeys } from "../../../pages/Home/hooks/storage";
 import { SearchResultModel } from "../../../model/SearchResultModel";
 import { useNavigate } from "react-router-dom";
+import config from "../../../config";
+import { performSearch } from "../../../services/SearchApi.ts";
 
 const getRandomItems = (arr, count) => {
   const shuffled = [...arr].sort(() => 0.5 - Math.random());
@@ -20,33 +22,10 @@ const TrendingHashtags = () => {
 
   const handleClick = async (hashtagKey) => {
     const currentLang = i18n.language;
-
-    try {
-      const response = await fetch('http://localhost:8080/places/search', 
-        {
-          method: "POST",
-                    credentials: 'include',
-          headers: {
-            "Content-Type": "application/json",
-            accept: "*/*",
-          },   body: JSON.stringify({
-          query: `${hashtagKey}`,
-          languageCode: currentLang,
-        }),
-        }
-      );
-
-       if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      const data: SearchResultModel[] = await response.json();
+      const data = await performSearch(hashtagKey, currentLang);
       navigate("/searchPage", {
         state: { query: hashtagKey, results: data },
       });
-     
-    } catch (error) {
-      console.error("Fetch error:", error);
-    }
   };
 
   return (

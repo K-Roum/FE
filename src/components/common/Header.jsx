@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Globe, User } from 'lucide-react';
 import LanguageDropdown from '../../components/common/LanguageDropdown';
 import { useNavigate, useLocation } from 'react-router-dom';
+import config from '../../config';
 
 // 로그인 상태 관리를 위한 커스텀 이벤트
 export const loginStatusChange = new Event('loginStatusChange');
@@ -76,7 +77,7 @@ const Header = () => {
 
   const handleLogout = async () => {
     try {
-      await fetch('http://localhost:8080/users/logout', {
+      await fetch(`${config.apiBaseUrl}/users/logout`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

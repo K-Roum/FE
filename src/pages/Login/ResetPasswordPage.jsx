@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { resetPasswordRequest } from '../../components/ui/loginPage/resetPasswordApi.ts';
+import { resetPasswordRequest } from '../../services/resetPasswordApi.ts';
 import { getLoginLogoPath } from '../../utils/languageUtils';
 
 export default function ResetPasswordPage() {
