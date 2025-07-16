@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { SearchResultModel } from "../../../model/SearchResultModel.ts";
 import { useTranslation } from "react-i18next";
 
@@ -16,7 +16,7 @@ const SearchResultCard = ({
   handleBookmarkClick,
 }: Props) => {
   const { t } = useTranslation();
-
+  const [imgLoading, setImgLoading] = useState(true);
   const handleCardClick = () => {
     onCardClick(item);
   };
@@ -25,6 +25,13 @@ const SearchResultCard = ({
     e.stopPropagation();
     handleBookmarkClick(e, item);
   };
+  const handleImgLoad = () => {
+    setImgLoading(false);
+  };
+  const handleImgError = () => {
+    setImgLoading(false);
+  };
+
   return (
     <div
       className="bg-white border rounded-lg shadow-md overflow-hidden h-40 cursor-pointer"
@@ -32,13 +39,25 @@ const SearchResultCard = ({
     >
       <div className="flex flex-col md:flex-row h-full">
         {/* 이미지 */}
-        <div className="w-full md:w-2/5 h-40 md:h-full">
+        <div className="w-full md:w-2/5 h-40 md:h-full relative">
           {item.firstImageUrl ? (
-            <img
-              src={item.firstImageUrl}
-              alt={item.placeName}
-              className="w-full h-full object-cover"
-            />
+            <>
+              {imgLoading && (
+                <div className="absolute inset-0 bg-gray-200 flex items-center justify-center z-10">
+                  <div className="w-8 h-8 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
+                </div>
+              )}
+
+              <img
+                src={item.firstImageUrl}
+                alt={item.placeName}
+                className={`w-full h-full object-cover ${
+                  imgLoading ? "opacity-0" : "opacity-100"
+                }`}
+                onLoad={() => setImgLoading(false)}
+                onError={() => setImgLoading(false)} // 실패해도 로딩 끝 처리
+              />
+            </>
           ) : (
             <div className="w-full h-full bg-gray-200 flex items-center justify-center">
               <span className="text-gray-400">{t("noImage")}</span>
@@ -61,7 +80,9 @@ const SearchResultCard = ({
                   className={`p-2 rounded-full hover:bg-gray-100 transition-colors
                     ${isBookmarked ? "text-red-500" : "text-gray-400"}
                     focus:outline-none focus:ring-0`}
-                  aria-label={isBookmarked ? t("removeBookmark") : t("addBookmark")}
+                  aria-label={
+                    isBookmarked ? t("removeBookmark") : t("addBookmark")
+                  }
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
