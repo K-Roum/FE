@@ -7,7 +7,7 @@ import {
   checkNickname,
   sendEmailCode,
   verifyEmailCode,
-} from '../../components/ui/signupPage/userCheckApi.ts';
+} from '../../services/userCheckApi.ts';
 import { useTranslation } from 'react-i18next';
 import config from '../../config';
 export default function ProfileEditPage() {

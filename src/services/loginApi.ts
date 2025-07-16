@@ -1,6 +1,6 @@
 // components/ui/loginPage/loginApi.ts
 
-import config from "../../../config";
+import config from "../config";
 
 export interface LoginRequest {
     loginId: string;

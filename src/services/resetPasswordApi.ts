@@ -1,6 +1,6 @@
 // components/ui/resetPasswordPage/resetPasswordApi.ts
 
-import config from "../../../config";
+import config from "../config";
 
 export interface ResetPasswordRequest {
     loginId: string;

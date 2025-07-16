@@ -1,4 +1,4 @@
-import { loginUser } from '../../components/ui/loginPage/loginApi.ts';
+import { loginUser } from '../../services/loginApi.ts';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import React, { useState, useEffect } from 'react';

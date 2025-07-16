@@ -1,6 +1,6 @@
 // src/api/userCheckApi.ts
 
-import config from "../../../config";
+import config from "../config";
 
 
 const fetchWithConfig = async (url: string, options: RequestInit = {}) => {
