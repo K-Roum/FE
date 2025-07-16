@@ -1,0 +1,309 @@
+{
+  "language.select": "언어(language) 선택하기",
+  "login": "로그인",
+  "signup": "회원가입",
+  "search": "검색",
+  "logout": "로그아웃",
+  "currentLanguage": "현재 언어",
+  "close": "닫기",
+"Search Results": "검색 결과",
+  "Recommended Places": "추천 장소",
+ "Searching...": "검색 중...",
+ "No Results": "결과 없음",
+ "Loading recommended images...": "추천 이미지 로딩 중...",
+ "Recommended Images": "추천 이미지",
+ "likes": "좋아요",
+  "reviews": "리뷰",
+  "address": "주소",
+  "no_address_info": "주소 정보 없음",
+  "detailed_info": "상세 정보",
+  "no_description": "설명 정보가 없습니다.",
+  "collapse": "접기",
+  "read_more": "더보기",
+  "average_rating": "평균 평점",
+  "write_review": "리뷰 작성",
+  "anonymous_user": "익명 사용자",
+  "no_date_info": "날짜 정보 없음",
+  "no_content": "내용 없음",
+  "load_more_reviews": "리뷰 더보기",
+  "no_registered_reviews": "등록된 리뷰가 없습니다.",
+   "noImage": "이미지 없음",
+  "noTitle": "제목 없음",
+  "removeBookmark": "찜 취소",
+  "addBookmark": "찜하기",
+  "noAddress": "주소 정보 없음",
+  "noDescription": "설명 정보 없음",
+   "Selected Place": "선택 장소",
+  "common": {
+    "noImage": "이미지 없음",
+    "address": "주소",
+    "noAddressInfo": "주소 정보 없음",
+    "details": "상세 정보",
+    "noDescriptionInfo": "설명 정보가 없습니다.",
+    "viewAll": "모두 보기",
+    "loading": "불러오는 중...",
+    "likes": "좋아요",
+    "reviews": "리뷰",
+    "averageRating": "평균 평점",
+    "anonymousUser": "익명 사용자",
+    "noDateInfo": "날짜 정보 없음",
+    "noContent": "내용 없음",
+    "delete": "삭제",
+    "cancel": "취소",
+    "readMore": "더보기",
+    "collapse" : "접기"
+  },
+
+  "sidebar": {
+    "myPageTitle": "마이 페이지",
+    "myCategoryTitle": "내 카테고리",
+    "wishlist": "찜 목록",
+    "reviewList": "리뷰 목록",
+    "accountManagementTitle": "계정관리",
+    "profileEdit": "프로필 편집"
+  },
+  "searchPrompt": "검색어를 입력해주세요.",
+  "hashtag": {
+    "tteokbokki": "떡볶이",
+    "kpop": "케이팝",
+    "bts": "방탄소년단",
+    "bibimbap": "비빔밥",
+    "amusementpark": "놀이공원",
+    "cherryblossom": "벚꽃",
+    "movie": "영화",
+    "hanbok": "한복",
+    "kdrama": "한국 드라마",
+    "blackpink": "블랙핑크",
+    "exo": "엑소",
+    "kbeauty": "한국 뷰티",
+    "kfashion": "한국 패션",
+    "hallyu": "한류",
+    "kpopdance": "케이팝 댄스",
+    "idol": "아이돌", 
+
+    "kimchi": "김치",
+    "samgyeopsal": "삼겹살",
+    "bulgogi": "불고기",
+    "makgeolli": "막걸리",
+    "koreanbbq": "한국식 바비큐",
+    "ramyeon": "라면",
+    "streetfood": "길거리 음식",
+
+    "gyeongbokgung": "경복궁",
+    "bukchon": "북촌한옥마을",
+    "jongmyo": "종묘",
+    "andong": "안동 하회마을",
+    "jeonju": "전주한옥마을",
+    "templestay": "템플스테이",
+    "dmz": "비무장지대 투어",
+    "palace": "궁궐",
+    "hanok": "한옥",
+    "seochon": "서촌",
+
+
+    "jeju": "제주도",
+    "busan": "부산",
+    "seoraksan": "설악산",
+    "namiisland": "남이섬",
+    "hanriver": "한강",
+    "boseong": "보성 녹차밭",
+    "suncheon": "순천만",
+    "autumnleaves": "단풍",
+    "jjimjilbang": "찜질방",
+    "koreanmart": "한국 마트",
+    "themepark": "테마파크",
+    "cafestreet": "카페거리",
+    "beautysalon": "미용실",
+    "kpopconcert": "케이팝 콘서트",
+    "nightmarket": "야시장"
+  },
+
+  "loginPage": {
+    "title": "로그인",
+    "idPlaceholder": "아이디",
+    "pwPlaceholder": "비밀번호",
+    "rememberMe": "로그인 상태 유지",
+    "findAccount": "아이디/비밀번호 찾기",
+    "loginButton": "로그인",
+    "signupButton": "회원가입",
+    "errorEmpty": "아이디와 비밀번호를 모두 입력해주세요.",
+    "errorInvalid": "로그인에 실패했습니다. 아이디와 비밀번호를 확인해주세요.",
+    "success": "{{nickname}}님 환영합니다!"
+  },
+
+  "findAccount": {
+    "title": "아이디/비밀번호 찾기",
+    "idTitle": "아이디 찾기",
+    "idDesc": "이메일 인증으로 아이디를 찾아보세요.",
+    "idButton": "아이디 찾기",
+    "pwTitle": "비밀번호 재설정",
+    "pwDesc": "아이디와 이메일을 입력하여 비밀번호를 재설정하세요.",
+    "pwButton": "비밀번호 재설정"
+  },
+
+  "findId": {
+    "title": "아이디 찾기",
+    "emailPlaceholder": "이메일을 입력하세요.",
+    "findButton": "아이디 찾기",
+    "goLogin": "로그인하러 가기",
+
+    "errorEmpty": "이메일을 입력해주세요.",
+    "errorNotFound": "해당 이메일로 등록된 아이디가 없습니다.",
+    "errorServer": "서버 오류가 발생했습니다. 다시 시도해주세요.",
+    "foundId": "회원님 아이디 : {{id}}"
+  },
+
+  "resetPassword": {
+    "title": "비밀번호 재설정",
+    "idPlaceholder": "아이디를 입력하세요.",
+    "emailPlaceholder": "이메일을 입력하세요.",
+    "resetButton": "비밀번호 재설정",
+    "submitting": "처리 중...",
+    "success": "입력하신 이메일로 임시 비밀번호를 전송했습니다.\n로그인 후 반드시 비밀번호를 변경해주세요.",
+    "goLogin": "로그인하러 가기",
+    "errorEmpty": "아이디와 이메일을 모두 입력해주세요.",
+    "errorInvalidId": "아이디는 영문과 숫자 조합으로 4~20자 이내로 입력해주세요.",
+    "errorInvalidEmail": "올바른 이메일 형식이 아닙니다.",
+    "errorNotFound": "입력하신 아이디와 이메일이 일치하는 사용자를 찾을 수 없습니다.",
+    "errorEmailSend": "이메일 전송에 실패했습니다. 잠시 후 다시 시도해주세요.",
+    "errorServer": "서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요."
+  },
+
+  "signupPage": {
+    "title": "회원 가입",
+    "id": "아이디",
+    "idPlaceholder": "아이디를 입력하세요.",
+    "email": "이메일",
+    "emailPlaceholder": "이메일을 입력하세요.",
+    "password": "비밀번호",
+    "passwordPlaceholder": "비밀번호를 입력하세요.",
+    "confirmPassword": "비밀번호 확인",
+    "confirmPasswordPlaceholder": "비밀번호를 한번 더 입력하세요.",
+    "nickname": "닉네임",
+    "nicknamePlaceholder": "닉네임을 입력하세요.",
+    "checkDuplicate": "중복 확인",
+    "getVerificationCode": "인증 코드 받기",
+    "verifyEmail": "이메일 인증",
+    "verifyEmailDesc": "입력하신 이메일로 전송된 인증 코드를 입력해주세요.",
+    "verificationCodePlaceholder": "인증 코드 입력",
+    "cancel": "취소",
+    "confirm": "확인",
+    "signupButton": "회원 가입",
+
+    "errorEmpty": {
+      "id": "아이디를 입력해주세요.",
+      "email": "이메일을 입력해주세요.",
+      "nickname": "닉네임을 입력해주세요."
+    },
+    "errorInvalid": {
+      "id": "아이디에는 공백을 포함할 수 없습니다.",
+      "nickname": "닉네임에는 공백을 포함할 수 없습니다.",
+      "email": "올바른 이메일 형식이 아닙니다."
+    },
+    "errorDuplicate": {
+      "id": "이미 사용 중인 아이디입니다.",
+      "email": "이미 사용 중인 이메일입니다.",
+      "nickname": "이미 사용 중인 닉네임입니다."
+    },
+    "success": {
+      "id": "사용 가능한 아이디입니다.",
+      "email": "사용 가능한 이메일입니다.",
+      "nickname": "사용 가능한 닉네임입니다.",
+      "emailVerification": "이메일 인증이 완료되었습니다."
+    },
+    "passwordValidation": {
+      "valid": "사용 가능한 비밀번호입니다.",
+      "invalid": "8~20자, 영문(대문자 포함) + 숫자 + 특수문자(!@^*)를 포함해야 하며 공백/한글은 사용할 수 없습니다.",
+      "match": "비밀번호가 일치합니다.",
+      "mismatch": "비밀번호가 일치하지 않습니다."
+    },
+    "verification": {
+      "sendSuccess": "인증 코드 전송 성공",
+      "sendError": "이메일 인증 코드 전송 실패",
+      "invalidCode": "인증 코드가 올바르지 않습니다.",
+      "error": "인증 과정에서 오류가 발생했습니다."
+    },
+    "submit": {
+      "missingItems": "다음 항목을 완료해주세요:",
+      "idCheck": "아이디 중복 확인",
+      "emailCheck": "이메일 중복 확인",
+      "emailVerification": "이메일 인증",
+      "passwordCheck": "비밀번호 형식 확인",
+      "passwordMatch": "비밀번호 일치 확인",
+      "nicknameCheck": "닉네임 중복 확인",
+      "success": "회원가입이 완료되었습니다!",
+      "error": "회원가입 처리 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요."
+    }
+  },
+
+  "signupComplete": {
+    "title": "WELCOME!",
+    "message": "회원가입이 완료되었습니다.",
+    "loginButton": "로그인"
+  },
+
+  "reviewPreview": {
+    "title": "리뷰",
+    "noReviews": "아직 등록된 리뷰가 없습니다."
+  },
+
+  "wishlistPreview": {
+    "title": "찜 목록",
+    "noWishlist": "아직 찜한 장소가 없습니다."
+  },
+
+  "wishlistPage": {
+    "title": "찜 목록"
+  },
+
+  "reviewListPage": {
+    "title": "리뷰 목록",
+    "noReviews": "아직 등록된 리뷰가 없습니다.",
+    "confirmDelete": "정말로 삭제하시겠습니까?",
+    "editTitle": "리뷰 수정"
+  },
+
+  "reviewForm": {
+    "rating": "평점",
+    "content": "리뷰 내용",
+    "placeholder": "이곳에 대한 리뷰를 작성해주세요",
+    "submit": "리뷰 등록",
+    "cancel": "취소"
+  },
+
+  "profileEdit": {
+    "title": "프로필 관리",
+    "changeNickname": "닉네임 변경",
+    "changePassword": "비밀번호 변경",
+    "resign": "회원 탈퇴",
+    "nicknamePlaceholder": "새 닉네임 입력",
+    "checkDuplicate": "중복 확인",
+    "currentPassword": "현재 비밀번호",
+    "newPassword": "새 비밀번호",
+    "confirmPassword": "새 비밀번호 확인",
+    "passwordPlaceholder": "비밀번호 입력",
+    "사용 가능한 닉네임입니다.": "사용 가능한 닉네임입니다.",
+    "이미 사용 중인 닉네임입니다.": "이미 사용 중인 닉네임입니다.",
+    "닉네임 확인 중 오류 발생": "닉네임 확인 중 오류 발생",
+    "닉네임 중복 확인을 해주세요.": "닉네임 중복 확인을 해주세요.",
+    "닉네임이 변경되었습니다.": "닉네임이 변경되었습니다.",
+    "닉네임 변경 실패": "닉네임 변경 실패",
+    "모든 항목을 입력해주세요.": "모든 항목을 입력해주세요.",
+    "비밀번호가 일치합니다.": "비밀번호가 일치합니다.",
+    "비밀번호가 일치하지 않습니다.": "비밀번호가 일치하지 않습니다.",
+    "안전한 비밀번호입니다.": "안전한 비밀번호입니다.",
+    "비밀번호는 대/소문자, 숫자, 특수문자 포함 8~20자여야 합니다.": "비밀번호는 대/소문자, 숫자, 특수문자 포함 8~20자여야 합니다.",
+    "비밀번호 변경 실패": "비밀번호 변경 실패",
+    "비밀번호 변경": "비밀번호 변경",
+    "비밀번호가 변경되었습니다.": "비밀번호가 변경되었습니다.",
+    "현재 비밀번호가 올바르지 않습니다.": "현재 비밀번호가 올바르지 않습니다.",
+    "회원 탈퇴 실패": "회원 탈퇴 실패",
+    "회원 탈퇴가 완료되었습니다.": "회원 탈퇴가 완료되었습니다.",
+    "비밀번호를 입력해주세요.": "비밀번호를 입력해주세요.",
+    "정말로 회원 탈퇴하시겠습니까?": "정말로 회원 탈퇴하시겠습니까?",
+    "myInfo": "내 정보",
+    "edit": "편집",
+    "email": "이메일",
+    "nickname": "닉네임"
+  }
+}

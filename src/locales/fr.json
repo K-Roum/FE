@@ -1,0 +1,321 @@
+{
+  "language.select": "Sélectionner la langue",
+  "login": "Connexion",
+  "signup": "Inscription",
+  "search": "Rechercher",
+  "logout": "Déconnexion",
+  "currentLanguage": "Langue actuelle",
+  "close": "Fermer",
+"Search Results": "Résultats de la recherche",
+  "searchPrompt": "Entrez un terme de recherche",
+"Recommended Places": "Endroits recommandés",
+ "Searching...": "Recherche en cours...",
+ "No Results": "Aucun résultat trouvé",
+ "Loading recommended images...": "Chargement des images recommandées...",
+ "Recommended Images": "Images recommandées",
+ "likes": "J'aime",
+ "reviews": "Avis",
+ "address": "Adresse",
+  "no_address_info": "Aucune information d'adresse",
+  "detailed_info": "Informations détaillées",
+  "no_description": "Aucune description disponible.",
+  "collapse": "Réduire",
+  "read_more": "Lire la suite",
+  "average_rating": "Note moyenne",
+  "write_review": "Écrire un avis",
+  "anonymous_user": "Utilisateur anonyme",
+  "no_date_info": "Pas d'information sur la date",
+  "no_content": "Pas de contenu",
+  "load_more_reviews": "Charger plus d'avis",
+  "no_registered_reviews": "Aucun avis enregistré.",
+   "noImage": "Pas d'image",
+  "noTitle": "Sans titre",
+  "removeBookmark": "Supprimer le favori",
+  "addBookmark": "Ajouter aux favoris",
+  "noAddress": "Pas d'adresse",
+  "noDescription": "Pas de description",
+   "Selected Place": "Lieu sélectionné",
+  "common": {
+    "noImage": "Pas d'image",
+    "address": "Adresse",
+    "noAddressInfo": "Pas d'informations d'adresse",
+    "details": "Détails",
+    "noDescriptionInfo": "Pas de description disponible",
+    "viewAll": "Voir tout",
+    "loading": "Chargement...",
+    "likes": "J'aime",
+    "reviews": "Avis",
+    "averageRating": "Note moyenne",
+    "anonymousUser": "Utilisateur anonyme",
+    "noDateInfo": "Pas d'informations de date",
+    "noContent": "Pas de contenu",
+    "delete": "Supprimer",
+    "cancel": "Annuler",
+    "readMore": "Voir plus",
+    "collapse": "Réduire"
+  },
+
+
+  "sidebar": {
+    "myPageTitle": "Ma page",
+    "myCategoryTitle": "Mes catégories",
+    "wishlist": "Liste de souhaits",
+    "reviewList": "Liste des avis",
+    "accountManagementTitle": "Gestion du compte",
+    "profileEdit": "Modifier le profil"
+  },
+
+  "hashtag": {
+
+  "tteokbokki": "Tteokbokki",
+  "kpop": "K-pop",
+  "bts": "BTS",
+  "bibimbap": "Bibimbap",
+  "amusementpark": "Parc d'attractions",
+  "cherryblossom": "Fleurs de cerisier",
+  "movie": "Film",
+"hanbok": "Hanbok",
+  "kdrama": "K-Drama",
+  "blackpink": "BLACKPINK",
+  "exo": "EXO",
+  "kbeauty": "Beauté coréenne",
+  "kfashion": "Mode coréenne",
+  "hallyu": "Hallyu (vague coréenne)",
+  "kpopdance": "Danse K-pop",
+  "webtoon": "Webtoon",
+  "idol": "Idole",
+
+  "kimchi": "Kimchi",
+  "samgyeopsal": "Samgyeopsal",
+  "bulgogi": "Bulgogi",
+  "japchae": "Japchae",
+  "soju": "Soju",
+  "makgeolli": "Makgeolli",
+  "hotteok": "Hotteok",
+  "koreanbbq": "Barbecue coréen",
+  "ramyeon": "Ramyeon",
+  "streetfood": "Street food",
+
+  "gyeongbokgung": "Palais Gyeongbokgung",
+  "bukchon": "Village hanok de Bukchon",
+  "jongmyo": "Sanctuaire Jongmyo",
+  "andong": "Village Hahoe d'Andong",
+  "jeonju": "Village hanok de Jeonju",
+  "templestay": "Séjour en temple",
+  "dmz": "Visite de la DMZ",
+  "palace": "Palais",
+  "hanok": "Hanok",
+  "seochon": "Seochon",
+
+  "nseoultower": "Tour N de Séoul",
+  "jeju": "Île de Jeju",
+  "busan": "Busan",
+  "seoraksan": "Mont Seorak",
+  "namiisland": "Île de Nami",
+  "gardenofthemorningcalm": "Jardin du Matin Calme",
+  "hanriver": "Rivière Han",
+  "boseong": "Champs de thé vert de Boseong",
+  "suncheon": "Baie de Suncheon",
+  "autumnleaves": "Feuilles d'automne",
+
+  "karaoke": "Karaoké",
+  "pcbang": "PC Bang (salle de jeux en réseau)",
+  "jjimjilbang": "Jjimjilbang (spa coréen)",
+  "koreanmart": "Marché coréen",
+  "themepark": "Parc d'attractions",
+  "noraebang": "Noraebang (salle de karaoké)",
+  "cafestreet": "Rue des cafés",
+  "beautysalon": "Salon de beauté",
+  "kpopconcert": "Concert de K-pop",
+  "nightmarket": "Marché de nuit"},
+
+  "loginPage": {
+    "title": "Connexion",
+    "idPlaceholder": "Identifiant",
+    "pwPlaceholder": "Mot de passe",
+    "rememberMe": "Se souvenir de moi",
+    "findAccount": "Retrouver ID/Mot de passe",
+    "loginButton": "Se connecter",
+    "signupButton": "S'inscrire",
+    "errorEmpty": "Veuillez saisir l'identifiant et le mot de passe",
+    "errorInvalid": "Échec de la connexion. Vérifiez votre identifiant et mot de passe",
+    "success": "Bienvenue, {{nickname}} !"
+  },
+
+  "findAccount": {
+    "title": "Retrouver ID/Mot de passe",
+    "idTitle": "Retrouver ID",
+    "idDesc": "Retrouvez votre ID par vérification email",
+    "idButton": "Retrouver ID",
+    "pwTitle": "Réinitialiser le mot de passe",
+    "pwDesc": "Réinitialisez votre mot de passe en saisissant votre ID et email",
+    "pwButton": "Réinitialiser"
+  },
+
+  "findId": {
+    "title": "Retrouver ID",
+    "emailPlaceholder": "Entrez votre email",
+    "findButton": "Retrouver ID",
+    "success": "Votre ID a été envoyé à votre email",
+    "goLogin": "Aller à la connexion",
+    "errorEmpty": "Veuillez saisir votre email",
+    "errorNotFound": "Aucun ID trouvé pour cet email",
+    "errorServer": "Erreur serveur. Veuillez réessayer plus tard",
+    "foundId": "Votre identifiant : {{id}}"
+  },
+
+  "resetPassword": {
+    "title": "Réinitialiser le mot de passe",
+    "idPlaceholder": "Entrez votre identifiant",
+    "emailPlaceholder": "Entrez votre email",
+    "resetButton": "Réinitialiser",
+    "submitting": "Traitement en cours...",
+    "success": "Un mot de passe temporaire a été envoyé à votre email. \nVeuillez le modifier après la connexion",
+    "goLogin": "Aller à la connexion",
+    "errorEmpty": "Veuillez saisir l'identifiant et l'email",
+    "errorInvalidId": "L'identifiant doit contenir 4 à 20 caractères alphanumériques",
+    "errorInvalidEmail": "Format d'email invalide",
+    "errorNotFound": "Aucun utilisateur trouvé avec l'identifiant et l'email fournis",
+    "errorEmailSend": "Échec de l'envoi de l'email. Veuillez réessayer plus tard",
+    "errorServer": "Erreur serveur. Veuillez réessayer plus tard"
+  },
+
+  "signupPage": {
+    "title": "Inscription",
+    "id": "Identifiant",
+    "idPlaceholder": "Entrez votre identifiant",
+    "email": "Email",
+    "emailPlaceholder": "Entrez votre email",
+    "password": "Mot de passe",
+    "passwordPlaceholder": "Entrez votre mot de passe",
+    "confirmPassword": "Confirmer le mot de passe",
+    "confirmPasswordPlaceholder": "Entrez à nouveau votre mot de passe",
+    "nickname": "Pseudo",
+    "nicknamePlaceholder": "Entrez votre pseudo",
+    "checkDuplicate": "Vérifier",
+    "getVerificationCode": "Obtenir le code",
+    "verifyEmail": "Vérification email",
+    "verifyEmailDesc": "Veuillez entrer le code de vérification envoyé à votre email",
+    "verificationCodePlaceholder": "Entrez le code de vérification",
+    "cancel": "Annuler",
+    "confirm": "Confirmer",
+    "signupButton": "S'inscrire",
+    
+    "errorEmpty": {
+      "id": "Veuillez entrer votre identifiant",
+      "email": "Veuillez entrer votre email",
+      "nickname": "Veuillez entrer votre pseudo"
+    },
+    "errorInvalid": {
+      "id": "L'identifiant ne peut pas contenir d'espaces",
+      "nickname": "Le pseudo ne peut pas contenir d'espaces",
+      "email": "Format d'email invalide"
+    },
+    "errorDuplicate": {
+      "id": "Cet identifiant est déjà utilisé",
+      "email": "Cet email est déjà utilisé",
+      "nickname": "Ce pseudo est déjà utilisé"
+    },
+    "success": {
+      "id": "Cet identifiant est disponible",
+      "email": "Cet email est disponible",
+      "nickname": "Ce pseudo est disponible",
+      "emailVerification": "Vérification email terminée"
+    },
+    "passwordValidation": {
+      "valid": "Mot de passe valide",
+      "invalid": "8-20 caractères, doit inclure lettres (avec majuscules) + chiffres + caractères spéciaux (!@^*), pas d'espaces/coréen",
+      "match": "Les mots de passe correspondent",
+      "mismatch": "Les mots de passe ne correspondent pas"
+    },
+    "verification": {
+      "sendSuccess": "Code de vérification envoyé",
+      "sendError": "Échec de l'envoi du code",
+      "invalidCode": "Code de vérification invalide",
+      "error": "Une erreur est survenue lors de la vérification"
+    },
+    "submit": {
+      "missingItems": "Veuillez compléter les éléments suivants :",
+      "idCheck": "Vérification de l'identifiant",
+      "emailCheck": "Vérification de l'email",
+      "emailVerification": "Vérification email",
+      "passwordCheck": "Vérification du format du mot de passe",
+      "passwordMatch": "Vérification de la correspondance des mots de passe",
+      "nicknameCheck": "Vérification du pseudo",
+      "success": "Inscription terminée !",
+      "error": "Une erreur est survenue lors de l'inscription. Veuillez réessayer plus tard"
+    }
+  },
+
+  "signupComplete": {
+    "title": "BIENVENUE !",
+    "message": "Inscription terminée avec succès",
+    "loginButton": "Connexion"
+  },
+
+  "wishlistPage": {
+    "title": "Liste de souhaits"
+  },
+
+  "reviewListPage": {
+    "title": "Liste des avis",
+    "noReviews": "Pas encore d'avis",
+    "confirmDelete": "Êtes-vous sûr de vouloir supprimer ceci ?",
+    "editTitle": "Modifier l'avis"
+  },
+
+  "wishlistPreview": {
+    "title": "Favoris",
+    "noWishlist": "Aucun lieu en favoris"
+  },
+
+  "reviewPreview": {
+    "title": "Avis",
+    "noReviews": "Pas encore d'avis"
+  },
+
+  "reviewForm": {
+    "rating": "Note",
+    "content": "Contenu de l'avis",
+    "placeholder": "Écrivez votre avis ici",
+    "submit": "Envoyer l'avis",
+    "cancel": "Annuler"
+  },
+
+  "profileEdit": {
+    "title": "Gestion du profil",
+    "changeNickname": "Changer le pseudo",
+    "changePassword": "Changer le mot de passe",
+    "resign": "Se désinscrire",
+    "nicknamePlaceholder": "Entrez un nouveau pseudo",
+    "checkDuplicate": "Vérifier le doublon",
+    "currentPassword": "Mot de passe actuel",
+    "newPassword": "Nouveau mot de passe",
+    "confirmPassword": "Confirmer le nouveau mot de passe",
+    "passwordPlaceholder": "Entrez le mot de passe",
+    "사용 가능한 닉네임입니다.": "Le pseudo est disponible.",
+    "이미 사용 중인 닉네임입니다.": "Le pseudo est déjà utilisé.",
+    "닉네임 확인 중 오류 발생": "Erreur lors de la vérification du pseudo.",
+    "닉네임 중복 확인을 해주세요.": "Veuillez vérifier le doublon du pseudo.",
+    "닉네임이 변경되었습니다.": "Le pseudo a été changé.",
+    "닉네임 변경 실패": "Échec du changement de pseudo.",
+    "모든 항목을 입력해주세요.": "Veuillez remplir tous les champs.",
+    "비밀번호가 일치합니다.": "Les mots de passe correspondent.",
+    "비밀번호가 일치하지 않습니다.": "Les mots de passe ne correspondent pas.",
+    "안전한 비밀번호입니다.": "Le mot de passe est sécurisé.",
+    "비밀번호는 대/소문자, 숫자, 특수문자 포함 8~20자여야 합니다.": "Le mot de passe doit comporter 8 à 20 caractères, inclure des majuscules/minuscules, des chiffres et des caractères spéciaux.",
+    "비밀번호 변경 실패": "Échec du changement de mot de passe.",
+    "비밀번호 변경": "Changer le mot de passe",
+    "비밀번호가 변경되었습니다.": "Le mot de passe a été changé.",
+    "현재 비밀번호가 올바르지 않습니다.": "Le mot de passe actuel est incorrect.",
+    "회원 탈퇴 실패": "Échec de la désinscription.",
+    "회원 탈퇴가 완료되었습니다.": "La désinscription est terminée.",
+    "비밀번호를 입력해주세요.": "Veuillez entrer le mot de passe.",
+    "정말로 회원 탈퇴하시겠습니까?": "Êtes-vous sûr de vouloir vous désinscrire ?",
+    "myInfo": "Mes informations",
+    "edit": "Modifier",
+    "email": "E-mail",
+    "nickname": "Pseudo"
+  }
+}
+

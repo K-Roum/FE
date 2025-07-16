@@ -1,0 +1,21 @@
+@import './tailwind.css';
+
+
+/* Global styles */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Ensure images display properly */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Focus styles for accessibility */
+:focus {
+  outline: 2px solid #0050ff;
+  outline-offset: 2px;
+}

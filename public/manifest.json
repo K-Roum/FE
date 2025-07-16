@@ -1,0 +1,12 @@
+{
+  "short_name": "K-로움",
+  "name": "K-로움",
+  "icons": [
+  
+ 
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}

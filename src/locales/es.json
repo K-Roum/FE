@@ -1,0 +1,322 @@
+{
+  "language.select": "Seleccionar idioma",
+  "login": "Iniciar sesión",
+  "signup": "Registrarse",
+  "search": "Buscar",
+  "logout": "Cerrar sesión",
+  "currentLanguage": "Idioma actual",
+  "close": "Cerrar",
+"Search Results": "Resultados de búsqueda",
+  "searchPrompt": "Ingrese término de búsqueda",
+"Recommended Places": "Sitios recomendados",
+ "Searching...": "Buscando...",
+ "No Results": "Sin resultados",
+ "Loading recommended images...": "Cargando imágenes recomendadas...",
+ "Recommended Images" : "Imágenes recomendadas",
+ "likes": "Me gusta",
+ "reviews": "Reseñas",
+ "address": "Dirección",
+  "no_address_info": "No hay información de dirección",
+  "detailed_info": "Información detallada",
+  "no_description": "No hay descripción disponible.",
+  "collapse": "Colapsar",
+  "read_more": "Leer más",
+  "average_rating": "Calificación media",
+  "write_review": "Escribir reseña",
+  "anonymous_user": "Usuario anónimo",
+  "no_date_info": "No hay información de fecha",
+  "no_content": "Sin contenido",
+  "load_more_reviews": "Cargar más reseñas",
+  "no_registered_reviews": "No hay reseñas registradas.",
+   "noImage": "Sin imagen",
+  "noTitle": "Sin título",
+  "removeBookmark": "Quitar marcador",
+  "addBookmark": "Agregar marcador",
+  "noAddress": "Sin dirección",
+  "noDescription": "Sin descripción",
+   "Selected Place": "Lugar seleccionado",
+  "common": {
+    "noImage": "Sin imagen",
+    "address": "Dirección",
+    "noAddressInfo": "Sin información de dirección",
+    "details": "Detalles",
+    "noDescriptionInfo": "Sin descripción disponible",
+    "viewAll": "Ver todo",
+    "loading": "Cargando...",
+    "likes": "Me gusta",
+    "reviews": "Reseñas",
+    "averageRating": "Calificación promedio",
+    "anonymousUser": "Usuario anónimo",
+    "noDateInfo": "Sin información de fecha",
+    "noContent": "Sin contenido",
+    "delete": "Eliminar",
+    "cancel": "Cancelar",
+    "readMore": "Ver más",
+    "collapse": "Colapsar"
+  },
+
+
+  "sidebar": {
+    "myPageTitle": "Mi página",
+    "myCategoryTitle": "Mis categorías",
+    "wishlist": "Lista de deseos",
+    "reviewList": "Lista de reseñas",
+    "accountManagementTitle": "Gestión de cuenta",
+    "profileEdit": "Editar perfil"
+  },
+
+  "hashtag": {
+
+  "tteokbokki": "Tteokbokki",
+  "kpop": "K-pop",
+  "bts": "BTS",
+  "bibimbap": "Bibimbap",
+  "amusementpark": "Parque de atracciones",
+  "cherryblossom": "Flor de cerezo",
+  "movie": "Película",
+
+  "hanbok": "Hanbok",
+  "kdrama": "K-Drama",
+  "blackpink": "BLACKPINK",
+  "exo": "EXO",
+  "kbeauty": "Belleza coreana",
+  "kfashion": "Moda coreana",
+  "hallyu": "Hallyu (ola coreana)",
+  "kpopdance": "Baile K-pop",
+  "webtoon": "Webtoon",
+  "idol": "Ídolo",
+
+  "kimchi": "Kimchi",
+  "samgyeopsal": "Samgyeopsal",
+  "bulgogi": "Bulgogi",
+  "japchae": "Japchae",
+  "soju": "Soju",
+  "makgeolli": "Makgeolli",
+  "hotteok": "Hotteok",
+  "koreanbbq": "Barbacoa coreana",
+  "ramyeon": "Ramyeon",
+  "streetfood": "Comida callejera",
+
+  "gyeongbokgung": "Palacio Gyeongbokgung",
+  "bukchon": "Aldea Hanok de Bukchon",
+  "jongmyo": "Santuario Jongmyo",
+  "andong": "Aldea Hahoe de Andong",
+  "jeonju": "Aldea Hanok de Jeonju",
+  "templestay": "Estancia en templo",
+  "dmz": "Tour por la DMZ",
+  "palace": "Palacio",
+  "hanok": "Hanok",
+  "seochon": "Seochon",
+
+  "nseoultower": "Torre N de Seúl",
+  "jeju": "Isla Jeju",
+  "busan": "Busan",
+  "seoraksan": "Monte Seorak",
+  "namiisland": "Isla Nami",
+  "gardenofthemorningcalm": "Jardín de la Calma Matutina",
+  "hanriver": "Río Han",
+  "boseong": "Campos de té verde de Boseong",
+  "suncheon": "Bahía de Suncheon",
+  "autumnleaves": "Hojas de otoño",
+
+  "karaoke": "Karaoke",
+  "pcbang": "PC Bang (café de internet coreano)",
+  "jjimjilbang": "Jjimjilbang (spa coreano)",
+  "koreanmart": "Mercado coreano",
+  "themepark": "Parque temático",
+  "noraebang": "Noraebang (sala de karaoke)",
+  "cafestreet": "Calle de cafés",
+  "beautysalon": "Salón de belleza",
+  "kpopconcert": "Concierto de K-pop",
+  "nightmarket": "Mercado nocturno"},
+
+
+  "loginPage": {
+    "title": "Iniciar sesión",
+    "idPlaceholder": "Usuario",
+    "pwPlaceholder": "Contraseña",
+    "rememberMe": "Mantener sesión iniciada",
+    "findAccount": "Buscar Usuario/Contraseña",
+    "loginButton": "Iniciar sesión",
+    "signupButton": "Registrarse",
+    "errorEmpty": "Por favor, ingrese usuario y contraseña",
+    "errorInvalid": "Error al iniciar sesión. Verifique su usuario y contraseña",
+    "success": "¡Bienvenido, {{nickname}}!"
+  },
+
+  "findAccount": {
+    "title": "Buscar Usuario/Contraseña",
+    "idTitle": "Buscar Usuario",
+    "idDesc": "Encuentre su usuario mediante verificación por correo",
+    "idButton": "Buscar Usuario",
+    "pwTitle": "Restablecer Contraseña",
+    "pwDesc": "Restablezca su contraseña ingresando usuario y correo",
+    "pwButton": "Restablecer"
+  },
+
+  "findId": {
+    "title": "Buscar Usuario",
+    "emailPlaceholder": "Ingrese su correo",
+    "findButton": "Buscar Usuario",
+    "goLogin": "Ir a inicio de sesión",
+    "errorEmpty": "Por favor, ingrese su correo",
+    "errorNotFound": "No se encontró usuario para este correo",
+    "errorServer": "Error del servidor. Por favor, intente más tarde",
+    "foundId": "Su ID : {{id}}"
+  },
+
+  "resetPassword": {
+    "title": "Restablecer Contraseña",
+    "idPlaceholder": "Ingrese su usuario",
+    "emailPlaceholder": "Ingrese su correo",
+    "resetButton": "Restablecer",
+    "submitting": "Procesando...",
+    "success": "Se ha enviado una contraseña temporal a su correo. Por favor, \ncámbiela después de iniciar sesión",
+    "goLogin": "Ir a inicio de sesión",
+    "errorEmpty": "Por favor, ingrese usuario y correo",
+    "errorInvalidId": "El usuario debe tener entre 4 y 20 caracteres alfanuméricos",
+    "errorInvalidEmail": "Formato de correo inválido",
+    "errorNotFound": "No se encontró usuario con los datos proporcionados",
+    "errorEmailSend": "Error al enviar el correo. Por favor, intente más tarde",
+    "errorServer": "Error del servidor. Por favor, intente más tarde"
+  },
+
+  "signupPage": {
+    "title": "Registro",
+    "id": "Usuario",
+    "idPlaceholder": "Ingrese su usuario",
+    "email": "Correo",
+    "emailPlaceholder": "Ingrese su correo",
+    "password": "Contraseña",
+    "passwordPlaceholder": "Ingrese su contraseña",
+    "confirmPassword": "Confirmar Contraseña",
+    "confirmPasswordPlaceholder": "Ingrese nuevamente su contraseña",
+    "nickname": "Apodo",
+    "nicknamePlaceholder": "Ingrese su apodo",
+    "checkDuplicate": "Verificar",
+    "getVerificationCode": "Obtener código",
+    "verifyEmail": "Verificación de correo",
+    "verifyEmailDesc": "Por favor, ingrese el código de verificación enviado a su correo",
+    "verificationCodePlaceholder": "Ingrese el código de verificación",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar",
+    "signupButton": "Registrarse",
+    
+    "errorEmpty": {
+      "id": "Por favor, ingrese su usuario",
+      "email": "Por favor, ingrese su correo",
+      "nickname": "Por favor, ingrese su apodo"
+    },
+    "errorInvalid": {
+      "id": "El usuario no puede contener espacios",
+      "nickname": "El apodo no puede contener espacios",
+      "email": "Formato de correo inválido"
+    },
+    "errorDuplicate": {
+      "id": "Este usuario ya está en uso",
+      "email": "Este correo ya está en uso",
+      "nickname": "Este apodo ya está en uso"
+    },
+    "success": {
+      "id": "Este usuario está disponible",
+      "email": "Este correo está disponible",
+      "nickname": "Este apodo está disponible",
+      "emailVerification": "Verificación de correo completada"
+    },
+    "passwordValidation": {
+      "valid": "Contraseña válida",
+      "invalid": "8-20 caracteres, debe incluir letras (con mayúsculas) + números + caracteres especiales (!@^*), sin espacios/coreano",
+      "match": "Las contraseñas coinciden",
+      "mismatch": "Las contraseñas no coinciden"
+    },
+    "verification": {
+      "sendSuccess": "Código de verificación enviado",
+      "sendError": "Error al enviar el código",
+      "invalidCode": "Código de verificación inválido",
+      "error": "Ocurrió un error durante la verificación"
+    },
+    "submit": {
+      "missingItems": "Por favor, complete los siguientes elementos:",
+      "idCheck": "Verificación de usuario",
+      "emailCheck": "Verificación de correo",
+      "emailVerification": "Verificación de correo",
+      "passwordCheck": "Verificación de formato de contraseña",
+      "passwordMatch": "Verificación de coincidencia de contraseñas",
+      "nicknameCheck": "Verificación de apodo",
+      "success": "¡Registro completado!",
+      "error": "Ocurrió un error durante el registro. Por favor, intente más tarde"
+    }
+  },
+
+  "signupComplete": {
+    "title": "¡BIENVENIDO!",
+    "message": "Registro completado exitosamente",
+    "loginButton": "Iniciar sesión"
+  },
+
+  "wishlistPage": {
+    "title": "Lista de deseos"
+  },
+
+  "reviewListPage": {
+    "title": "Lista de reseñas",
+    "noReviews": "Aún no hay reseñas",
+    "confirmDelete": "¿Estás seguro de que quieres eliminar esto?",
+    "editTitle": "Editar reseña"
+  },
+
+  "wishlistPreview": {
+    "title": "Favoritos",
+    "noWishlist": "No hay lugares favoritos"
+  },
+
+  "reviewPreview": {
+    "title": "Reseñas",
+    "noReviews": "No hay reseñas"
+  },
+
+  "reviewForm": {
+    "rating": "Calificación",
+    "content": "Contenido de la reseña",
+    "placeholder": "Escribe tu reseña aquí",
+    "submit": "Enviar reseña",
+    "cancel": "Cancelar"
+  },
+
+  "profileEdit": {
+    "title": "Gestión de perfil",
+    "changeNickname": "Cambiar apodo",
+    "changePassword": "Cambiar contraseña",
+    "resign": "Darse de baja",
+    "nicknamePlaceholder": "Ingrese nuevo apodo",
+    "checkDuplicate": "Verificar duplicado",
+    "currentPassword": "Contraseña actual",
+    "newPassword": "Nueva contraseña",
+    "confirmPassword": "Confirmar nueva contraseña",
+    "passwordPlaceholder": "Ingrese la contraseña",
+    "사용 가능한 닉네임입니다.": "El apodo está disponible.",
+    "이미 사용 중인 닉네임입니다.": "El apodo ya está en uso.",
+    "닉네임 확인 중 오류 발생": "Error al verificar el apodo.",
+    "닉네임 중복 확인을 해주세요.": "Por favor, verifique la duplicidad del apodo.",
+    "닉네임이 변경되었습니다.": "El apodo ha sido cambiado.",
+    "닉네임 변경 실패": "Error al cambiar el apodo.",
+    "모든 항목을 입력해주세요.": "Por favor, complete todos los campos.",
+    "비밀번호가 일치합니다.": "Las contraseñas coinciden.",
+    "비밀번호가 일치하지 않습니다.": "Las contraseñas no coinciden.",
+    "안전한 비밀번호입니다.": "La contraseña es segura.",
+    "비밀번호는 대/소문자, 숫자, 특수문자 포함 8~20자여야 합니다.": "La contraseña debe tener entre 8 y 20 caracteres, incluir mayúsculas/minúsculas, números y caracteres especiales.",
+    "비밀번호 변경 실패": "Error al cambiar la contraseña.",
+    "비밀번호 변경": "Cambiar contraseña",
+    "비밀번호가 변경되었습니다.": "La contraseña ha sido cambiada.",
+    "현재 비밀번호가 올바르지 않습니다.": "La contraseña actual es incorrecta.",
+    "회원 탈퇴 실패": "Error al darse de baja.",
+    "회원 탈퇴가 완료되었습니다.": "La baja se ha completado.",
+    "비밀번호를 입력해주세요.": "Por favor, ingrese la contraseña.",
+    "정말로 회원 탈퇴하시겠습니까?": "¿Está seguro de que desea darse de baja?",
+    "myInfo": "Mi información",
+    "edit": "Editar",
+    "email": "Correo electrónico",
+    "nickname": "Apodo"
+  }
+}
+

@@ -1,0 +1,303 @@
+{
+  "language.select": "Select Language",
+  "login": "Login",
+  "signup": "Sign Up",
+  "search": "Search",
+  "logout": "Logout",
+  "currentLanguage": "Current Language",
+  "close": "Close",
+"Search Results": "Search Results",
+"Recommended Places": "Recommended Places",
+ "Searching...": "Searching...",
+ "No Results": "No Results Found",
+ "Loading recommended images...": "Loading recommended images...",
+ "Recommended Images": "Recommended Images",
+ "likes": "Likes",
+ "reviews": "Reviews",
+   "address": "Address",
+  "no_address_info": "No address information",
+  "detailed_info": "Detailed Information",
+  "no_description": "No description available.",
+  "collapse": "Collapse",
+  "read_more": "Read More",
+  "average_rating": "Average Rating",
+  "write_review": "Write Review",
+  "anonymous_user": "Anonymous User",
+  "no_date_info": "No date information",
+  "no_content": "No content",
+  "load_more_reviews": "Load More Reviews",
+  "no_registered_reviews": "No registered reviews.",
+   "noImage": "No Image",
+  "noTitle": "No Title",
+  "removeBookmark": "Remove Bookmark",
+  "addBookmark": "Add Bookmark",
+  "noAddress": "No Address",
+  "noDescription": "No Description",
+  "Selected Place": "Selected Place",
+  "common": {
+    "noImage": "No Image",
+    "address": "Address",
+    "noAddressInfo": "No address information",
+    "details": "Details",
+    "noDescriptionInfo": "No description available",
+    "viewAll": "View All",
+    "loading": "Loading...",
+    "likes": "Likes",
+    "reviews": "Reviews",
+    "averageRating": "Average Rating",
+    "anonymousUser": "Anonymous User",
+    "noDateInfo": "No date information",
+    "noContent": "No content",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "readMore": "Read more",
+    "collapse": "Collapse"
+  },
+
+  "sidebar": {
+    "myPageTitle": "My Page",
+    "myCategoryTitle": "My Category",
+    "wishlist": "Wishlist",
+    "reviewList": "Review List",
+    "accountManagementTitle": "Account Management",
+    "profileEdit": "Profile Edit"
+  },
+  "searchPrompt": "Enter search term",
+  "hashtag": {
+    "tteokbokki": "Tteokbokki",
+    "kpop": "K-pop",
+    "bts": "BTS",
+    "bibimbap": "Bibimbap",
+    "amusementpark": "Amusement Park",
+    "cherryblossom": "Cherry Blossom",
+    "movie": "Movie",
+    "hanbok": "Hanbok",
+    "kdrama": "K-Drama",
+    "blackpink": "BLACKPINK",
+    "exo": "EXO",
+    "kbeauty": "K-Beauty",
+    "kfashion": "K-Fashion",
+    "hallyu": "Hallyu",
+    "kpopdance": "K-pop Dance",
+    "idol": "Idol",
+    "kimchi": "Kimchi",
+    "samgyeopsal": "Samgyeopsal",
+    "bulgogi": "Bulgogi",
+    "japchae": "Japchae",
+    "koreanbbq": "Korean BBQ",
+    "ramyeon": "Ramyeon",
+    "streetfood": "Street Food",
+    "gyeongbokgung": "Gyeongbokgung",
+    "bukchon": "Bukchon Hanok Village",
+    "jongmyo": "Jongmyo Shrine",
+    "andong": "Andong Hahoe Village",
+    "jeonju": "Jeonju Hanok Village",
+    "templestay": "Temple Stay",
+    "dmz": "DMZ Tour",
+    "palace": "Palace",
+    "hanok": "Hanok",
+    "seochon": "Seochon",
+    "jeju": "Jeju Island",
+    "busan": "Busan",
+    "seoraksan": "Seoraksan",
+    "namiisland": "Nami Island",
+    "hanriver": "Han River",
+    "boseong": "Boseong Green Tea Fields",
+    "suncheon": "Suncheon Bay",
+    "autumnleaves": "Autumn Leaves",
+    "jjimjilbang": "Jjimjilbang",
+    "koreanmart": "Korean Mart",
+    "themepark": "Theme Park",
+    "cafestreet": "Cafe Street",
+    "beautysalon": "Beauty Salon",
+    "kpopconcert": "K-pop Concert",
+    "nightmarket": "Night Market"
+  },
+  "loginPage": {
+    "title": "Login",
+    "idPlaceholder": "ID",
+    "pwPlaceholder": "Password",
+    "rememberMe": "Remember Me",
+    "findAccount": "Find Account",
+    "loginButton": "Login",
+    "signupButton": "Sign Up",
+    "errorEmpty": "Please enter both ID and password.",
+    "errorInvalid": "Login failed. Please check your ID and password.",
+    "success": "Welcome, {{nickname}}!"
+  },
+
+  "reviewPreview": {
+    "title": "Reviews",
+    "noReviews": "No reviews yet"
+  },
+
+  "wishlistPreview": {
+    "title": "Wishlist",
+    "noWishlist": "No places in wishlist yet"
+  },
+
+  "findAccount": {
+    "title": "Find ID/Password",
+    "idTitle": "Find ID",
+    "idDesc": "Find your ID through email verification.",
+    "idButton": "Find ID",
+    "pwTitle": "Reset Password",
+    "pwDesc": "Reset your password by entering your ID and email.",
+    "pwButton": "Reset Password"
+  },
+
+  "findId": {
+    "title": "Find ID",
+    "emailPlaceholder": "Enter your email",
+    "findButton": "Find ID",
+    "goLogin": "Go to Login",
+    "errorEmpty": "Please enter your email.",
+    "errorNotFound": "No ID found for this email.",
+    "errorServer": "Server error occurred. Please try again.",
+    "foundId": "Your ID : {{id}}"
+  },
+
+  "resetPassword": {
+    "title": "Reset Password",
+    "idPlaceholder": "Enter your ID",
+    "emailPlaceholder": "Enter your email",
+    "resetButton": "Reset Password",
+    "submitting": "Processing...",
+    "success": "A temporary password has been sent to your email. \nPlease change your password after logging in.",
+    "goLogin": "Go to Login",
+    "errorEmpty": "Please enter both ID and email.",
+    "errorInvalidId": "ID must be 4-20 characters long with alphanumeric characters.",
+    "errorInvalidEmail": "Invalid email format.",
+    "errorNotFound": "No user found with the provided ID and email.",
+    "errorEmailSend": "Failed to send email. Please try again later.",
+    "errorServer": "Server error occurred. Please try again later."
+  },
+
+  "signupPage": {
+    "title": "Sign Up",
+    "id": "ID",
+    "idPlaceholder": "Enter your ID",
+    "email": "Email",
+    "emailPlaceholder": "Enter your email",
+    "password": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "confirmPassword": "Confirm Password",
+    "confirmPasswordPlaceholder": "Enter your password again",
+    "nickname": "Nickname",
+    "nicknamePlaceholder": "Enter your nickname",
+    "checkDuplicate": "Check Duplicate",
+    "getVerificationCode": "Get Verification Code",
+    "verifyEmail": "Email Verification",
+    "verifyEmailDesc": "Please enter the verification code sent to your email",
+    "verificationCodePlaceholder": "Enter verification code",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "signupButton": "Sign Up",
+
+    "errorEmpty": {
+      "id": "Please enter your ID.",
+      "email": "Please enter your email.",
+      "nickname": "Please enter your nickname."
+    },
+    "errorInvalid": {
+      "id": "ID cannot contain spaces.",
+      "nickname": "Nickname cannot contain spaces.",
+      "email": "Invalid email format."
+    },
+    "errorDuplicate": {
+      "id": "This ID is already in use.",
+      "email": "This email is already in use.",
+      "nickname": "This nickname is already in use."
+    },
+    "success": {
+      "id": "This ID is available.",
+      "email": "This email is available.",
+      "nickname": "This nickname is available.",
+      "emailVerification": "Email verification completed."
+    },
+    "passwordValidation": {
+      "valid": "Password is valid.",
+      "invalid": "8-20 characters, must include English(with uppercase) + numbers + special characters(!@^*), no spaces/Korean allowed.",
+      "match": "Passwords match.",
+      "mismatch": "Passwords do not match."
+    },
+    "verification": {
+      "sendSuccess": "Verification code sent successfully",
+      "sendError": "Failed to send verification code",
+      "invalidCode": "Invalid verification code.",
+      "error": "An error occurred during verification."
+    },
+    "submit": {
+      "missingItems": "Please complete the following items:",
+      "idCheck": "ID duplicate check",
+      "emailCheck": "Email duplicate check",
+      "emailVerification": "Email verification",
+      "passwordCheck": "Password format check",
+      "passwordMatch": "Password match check",
+      "nicknameCheck": "Nickname duplicate check",
+      "success": "Sign up completed!",
+      "error": "An error occurred during sign up. Please try again later."
+    }
+  },
+
+  "signupComplete": {
+    "title": "WELCOME!",
+    "message": "Sign up completed successfully.",
+    "loginButton": "Login"
+  },
+
+  "wishlistPage": {
+    "title": "Wishlist"
+  },
+
+  "reviewListPage": {
+    "title": "Review List",
+    "noReviews": "No reviews registered yet.",
+    "confirmDelete": "Are you sure you want to delete this?",
+    "editTitle": "Edit Review"
+  },
+
+  "reviewForm": {
+    "rating": "Rating",
+    "content": "Review Content",
+    "placeholder": "Write your review here",
+    "submit": "Submit Review",
+    "cancel": "Cancel"
+  },
+
+  "profileEdit": {
+    "title": "Profile Management",
+    "changeNickname": "Change Nickname",
+    "changePassword": "Change Password",
+    "resign": "Resign Membership",
+    "nicknamePlaceholder": "Enter new nickname",
+    "checkDuplicate": "Check Duplicate",
+    "currentPassword": "Current Password",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm New Password",
+    "passwordPlaceholder": "Enter password",
+    "사용 가능한 닉네임입니다.": "Nickname is available.",
+    "이미 사용 중인 닉네임입니다.": "Nickname is already in use.",
+    "닉네임 확인 중 오류 발생": "Error checking nickname.",
+    "닉네임 중복 확인을 해주세요.": "Please check nickname duplication.",
+    "닉네임이 변경되었습니다.": "Nickname has been changed.",
+    "닉네임 변경 실패": "Failed to change nickname.",
+    "모든 항목을 입력해주세요.": "Please fill in all fields.",
+    "비밀번호가 일치합니다.": "Passwords match.",
+    "비밀번호가 일치하지 않습니다.": "Passwords do not match.",
+    "안전한 비밀번호입니다.": "Password is secure.",
+    "비밀번호는 대/소문자, 숫자, 특수문자 포함 8~20자여야 합니다.": "Password must be 8-20 characters, include upper/lowercase, numbers, and special characters.",
+    "비밀번호 변경 실패": "Failed to change password.",
+    "비밀번호 변경": "Change Password",
+    "비밀번호가 변경되었습니다.": "Password has been changed.",
+    "현재 비밀번호가 올바르지 않습니다.": "Current password is incorrect.",
+    "회원 탈퇴 실패": "Failed to resign membership.",
+    "회원 탈퇴가 완료되었습니다.": "Membership resignation completed.",
+    "비밀번호를 입력해주세요.": "Please enter your password.",
+    "정말로 회원 탈퇴하시겠습니까?": "Are you sure you want to resign your membership?",
+    "myInfo": "My Info",
+    "edit": "Edit",
+    "email": "Email",
+    "nickname": "Nickname"
+  }
+}

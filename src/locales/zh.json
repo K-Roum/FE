@@ -1,0 +1,309 @@
+{
+    "language.select": "选择语言",
+    "login": "登录",
+    "signup": "注册",
+    "search": "搜索",
+    "logout": "退出登录",
+    "currentLanguage": "当前语言",
+    "close": "关闭",
+    "Search Results": "搜索结果",
+    "Recommended Places": "推荐地点",
+        "searchPrompt": "请输入搜索词",
+ "Searching...": "搜索中...",
+"No Results": "未找到结果",
+"Loading recommended images...": "加载推荐图片中...",
+"Recommended Images": "推荐图片",
+"likes": "喜欢",
+"reviews": "评论",
+"address": "地址",
+  "no_address_info": "无地址信息",
+  "detailed_info": "详细信息",
+  "no_description": "无描述信息。",
+  "collapse": "收起",
+  "read_more": "查看更多",
+  "average_rating": "平均评分",
+  "write_review": "撰写评论",
+  "anonymous_user": "匿名用户",
+  "no_date_info": "无日期信息",
+  "no_content": "无内容",
+  "load_more_reviews": "加载更多评论",
+  "no_registered_reviews": "暂无评论。",
+   "noImage": "无图片",
+  "noTitle": "无标题",
+  "removeBookmark": "取消收藏",
+  "addBookmark": "添加收藏",
+  "noAddress": "无地址信息",
+  "noDescription": "无描述信息",
+   "Selected Place": "选定地点",
+    "common": {
+        "noImage": "无图片",
+        "address": "地址",
+        "noAddressInfo": "无地址信息",
+        "details": "详情",
+        "noDescriptionInfo": "无描述信息",
+        "viewAll": "查看全部",
+        "loading": "加载中...",
+        "likes": "喜欢",
+        "reviews": "评论",
+        "averageRating": "平均评分",
+        "anonymousUser": "匿名用户",
+        "noDateInfo": "无日期信息",
+        "noContent": "无内容",
+        "delete": "删除",
+        "cancel": "取消",
+        "readMore": "查看更多",
+        "collapse": "收起"
+    },
+
+
+    "sidebar": {
+        "myPageTitle": "我的页面",
+        "myCategoryTitle": "我的分类",
+        "wishlist": "收藏列表",
+        "reviewList": "评论列表",
+        "accountManagementTitle": "账户管理",
+        "profileEdit": "编辑个人资料"
+    },
+
+    "hashtag": {
+        "tteokbokki": "炒年糕",
+        "kpop": "韩流音乐",
+        "bts": "防弹少年团",
+        "bibimbap": "拌饭",
+        "amusementpark": "游乐园",
+        "cherryblossom": "樱花",
+        "movie": "电影",
+
+        "hanbok": "韩服",
+        "kdrama": "韩剧",
+        "blackpink": "BLACKPINK",
+        "exo": "EXO",
+        "kbeauty": "韩妆",
+        "kfashion": "韩式时尚",
+        "hallyu": "韩流",
+        "kpopdance": "K-pop舞蹈",
+        "idol": "爱豆",
+        "kimchi": "泡菜",
+        "samgyeopsal": "五花肉烤肉",
+        "bulgogi": "韩式烤牛肉",
+        "japchae": "杂菜",
+        "makgeolli": "米酒",
+        "koreanbbq": "韩式烧烤",
+        "ramyeon": "拉面",
+        "streetfood": "街头小吃",
+        "gyeongbokgung": "景福宫",
+        "bukchon": "北村韩屋村",
+        "jongmyo": "宗庙",
+        "andong": "安东河回村",
+        "jeonju": "全州韩屋村",
+        "templestay": "寺庙寄宿体验",
+        "dmz": "非军事区之旅",
+        "palace": "宫殿",
+        "hanok": "韩屋",
+        "seochon": "西村",
+        "jeju": "济州岛",
+        "busan": "釜山",
+        "seoraksan": "雪岳山",
+        "namiisland": "南怡岛",
+        "hanriver": "汉江",
+        "boseong": "宝城绿茶田",
+        "suncheon": "顺天湾",
+        "autumnleaves": "秋叶",
+        "jjimjilbang": "汗蒸房",
+        "koreanmart": "韩国超市",
+        "themepark": "主题公园",
+        "cafestreet": "咖啡街",
+        "beautysalon": "美容院",
+        "kpopconcert": "K-pop演唱会",
+        "nightmarket": "夜市"
+    },
+
+    "loginPage": {
+        "title": "登录",
+        "idPlaceholder": "用户名",
+        "pwPlaceholder": "密码",
+        "rememberMe": "保持登录状态",
+        "findAccount": "找回用户名/密码",
+        "loginButton": "登录",
+        "signupButton": "注册",
+        "errorEmpty": "请输入用户名和密码。",
+        "errorInvalid": "登录失败。请检查您的用户名和密码。",
+        "success": "欢迎，{{nickname}}！"
+    },
+
+    "findAccount": {
+        "title": "找回账号/重置密码",
+        "idTitle": "找回账号",
+        "idDesc": "通过邮箱验证找回您的账号。",
+        "idButton": "找回账号",
+        "pwTitle": "重置密码",
+        "pwDesc": "输入账号和邮箱以重置密码。",
+        "pwButton": "重置密码"
+    },
+
+    "findId": {
+        "title": "找回账号",
+        "emailPlaceholder": "请输入您的邮箱地址。",
+        "findButton": "找回账号",
+        "success": "账号已发送至您输入的邮箱。",
+        "goLogin": "前往登录",
+        "errorEmpty": "请输入邮箱地址。",
+        "errorNotFound": "该邮箱没有注册的账号。",
+        "errorServer": "服务器错误，请稍后再试。",
+        "foundId": "您的用戶ID：{{id}}"
+    },
+
+    "resetPassword": {
+        "title": "重置密码",
+        "idPlaceholder": "请输入账号",
+        "emailPlaceholder": "请输入邮箱",
+        "resetButton": "重置密码",
+        "submitting": "处理中...",
+        "success": "临时密码已发送至您的邮箱。\n登录后请务必修改密码",
+        "goLogin": "前往登录",
+        "errorEmpty": "请输入账号和邮箱",
+        "errorInvalidId": "账号必须为4-20位字母数字组合",
+        "errorInvalidEmail": "邮箱格式不正确",
+        "errorNotFound": "未找到匹配的账号和邮箱",
+        "errorEmailSend": "邮件发送失败，请稍后重试",
+        "errorServer": "服务器错误，请稍后重试"
+    },
+
+    "signupPage": {
+        "title": "注册",
+        "id": "账号",
+        "idPlaceholder": "请输入账号",
+        "email": "邮箱",
+        "emailPlaceholder": "请输入邮箱",
+        "password": "密码",
+        "passwordPlaceholder": "请输入密码",
+        "confirmPassword": "确认密码",
+        "confirmPasswordPlaceholder": "请再次输入密码",
+        "nickname": "昵称",
+        "nicknamePlaceholder": "请输入昵称",
+        "checkDuplicate": "查重",
+        "getVerificationCode": "获取验证码",
+        "verifyEmail": "邮箱验证",
+        "verifyEmailDesc": "请输入发送到您邮箱的验证码",
+        "verificationCodePlaceholder": "请输入验证码",
+        "cancel": "取消",
+        "confirm": "确认",
+        "signupButton": "注册",
+        
+        "errorEmpty": {
+            "id": "请输入账号",
+            "email": "请输入邮箱",
+            "nickname": "请输入昵称"
+        },
+        "errorInvalid": {
+            "id": "账号不能包含空格",
+            "nickname": "昵称不能包含空格",
+            "email": "邮箱格式不正确"
+        },
+        "errorDuplicate": {
+            "id": "该账号已被使用",
+            "email": "该邮箱已被使用",
+            "nickname": "该昵称已被使用"
+        },
+        "success": {
+            "id": "该账号可以使用",
+            "email": "该邮箱可以使用",
+            "nickname": "该昵称可以使用",
+            "emailVerification": "邮箱验证完成"
+        },
+        "passwordValidation": {
+            "valid": "密码可以使用",
+            "invalid": "密码必须为8-20位，包含英文（含大写）+数字+特殊字符(!@^*)，不允许空格/韩文",
+            "match": "密码匹配",
+            "mismatch": "密码不匹配"
+        },
+        "verification": {
+            "sendSuccess": "验证码发送成功",
+            "sendError": "验证码发送失败",
+            "invalidCode": "验证码无效",
+            "error": "验证过程中出现错误"
+        },
+        "submit": {
+            "missingItems": "请完成以下项目：",
+            "idCheck": "账号查重",
+            "emailCheck": "邮箱查重",
+            "emailVerification": "邮箱验证",
+            "passwordCheck": "密码格式检查",
+            "passwordMatch": "密码匹配检查",
+            "nicknameCheck": "昵称查重",
+            "success": "注册成功！",
+            "error": "注册过程中出现错误，请稍后重试"
+        }
+    },
+
+    "signupComplete": {
+        "title": "欢迎！",
+        "message": "注册成功",
+        "loginButton": "登录"
+    },
+
+    "wishlistPage": {
+        "title": "收藏列表"
+    },
+
+    "reviewListPage": {
+        "title": "评论列表",
+        "noReviews": "暂无评论",
+        "confirmDelete": "确定要删除吗？",
+        "editTitle": "编辑评论"
+    },
+
+    "wishlistPreview": {
+        "title": "收藏",
+        "noWishlist": "暂无收藏地点"
+    },
+
+    "reviewPreview": {
+        "title": "评论",
+        "noReviews": "暂无评论"
+    },
+
+    "reviewForm": {
+        "rating": "评分",
+        "content": "评论内容",
+        "placeholder": "请在此处填写您的评论",
+        "submit": "提交评论",
+        "cancel": "取消"
+    },
+
+    "profileEdit": {
+        "title": "个人资料管理",
+        "changeNickname": "更改昵称",
+        "changePassword": "更改密码",
+        "resign": "注销会员",
+        "nicknamePlaceholder": "输入新昵称",
+        "checkDuplicate": "检查重复",
+        "currentPassword": "当前密码",
+        "newPassword": "新密码",
+        "confirmPassword": "确认新密码",
+        "passwordPlaceholder": "输入密码",
+        "사용 가능한 닉네임입니다.": "昵称可用。",
+        "이미 사용 중인 닉네임입니다.": "昵称已被使用。",
+        "닉네임 확인 중 오류 발생": "检查昵称时出错。",
+        "닉네임 중복 확인을 해주세요.": "请检查昵称是否重复。",
+        "닉네임이 변경되었습니다.": "昵称已更改。",
+        "닉네임 변경 실패": "昵称更改失败。",
+        "모든 항목을 입력해주세요.": "请填写所有项目。",
+        "비밀번호가 일치합니다.": "密码一致。",
+        "비밀번호가 일치하지 않습니다.": "密码不一致。",
+        "안전한 비밀번호입니다.": "密码安全。",
+        "비밀번호는 대/소문자, 숫자, 특수문자 포함 8~20자여야 합니다.": "密码必须包含大写/小写字母、数字和特殊字符，长度为8~20位。",
+        "비밀번호 변경 실패": "密码更改失败。",
+        "비밀번호 변경": "更改密码",
+        "비밀번호가 변경되었습니다.": "密码已更改。",
+        "현재 비밀번호가 올바르지 않습니다.": "当前密码不正确。",
+        "회원 탈퇴 실패": "注销失败。",
+        "회원 탈퇴가 완료되었습니다.": "注销已完成。",
+        "비밀번호를 입력해주세요.": "请输入密码。",
+        "정말로 회원 탈퇴하시겠습니까?": "您确定要注销会员吗？",
+        "myInfo": "我的信息",
+        "edit": "编辑",
+        "email": "邮箱",
+        "nickname": "昵称"
+    }
+}
