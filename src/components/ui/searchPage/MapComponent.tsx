@@ -17,10 +17,11 @@ export interface MapComponentRef {
 interface MapComponentProps {
   results?: SearchResultModel[];
   onPinClick?: (item: SearchResultModel) => void;
+   onMapReady?: () => void;
 }
 
 const MapComponent = forwardRef<MapComponentRef, MapComponentProps>(
-  ({ results, onPinClick }, ref) => {
+  ({ results, onPinClick ,onMapReady}, ref) => {
     const [mapInstance, setMapInstance] = useState<any>(null);
     const [markers, setMarkers] = useState<any[]>([]);
     const defaultCenter = { lat: 36, lng: 127.5 };
@@ -36,6 +37,7 @@ const MapComponent = forwardRef<MapComponentRef, MapComponentProps>(
       };
       const map = new window.kakao.maps.Map(container, options);
       setMapInstance(map);
+      onMapReady?.(); // 맵이 준비되면 콜백 호출
     };
    
     useEffect(() => {

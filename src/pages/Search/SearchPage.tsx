@@ -22,11 +22,16 @@ type SelectedItemType = {
 
 const SearchPage = () => {
   const location = useLocation();
+
+  const selectedItemFromState: SearchResultModel | null =
+    location.state?.selectedItem || null;
+
   const initialResults: SearchResultModel[] = location.state?.results || [];
   const [fetchedResults, setFetchedResults] =
     useState<SearchResultModel[]>(initialResults);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<SelectedItemType>(null);
+
   const [isShowingRecommendations, setIsShowingRecommendations] =
     useState(false);
   const [loading, setLoading] = useState(false);
@@ -39,56 +44,67 @@ const SearchPage = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const currentLang = i18n.language.toLowerCase();
 
+  const [isMapReady, setIsMapReady] = useState(false);
+
+  const handleMapReady = () => {
+    setIsMapReady(true);
+  };
+
   useEffect(() => {
     const fetchResults = async () => {
-      if (!query.trim()) return;
-
+      const localResults = location.state?.results;
+      const trimmedQuery = query.trim();
+      if (!trimmedQuery && !localResults && localResults.length > 0) return;
       // 초기 로딩 시 검색어가 있다면 해당 검색어로 결과를 가져옴
       //검색page에서 검색하는 경우
 
-      if (location.state?.results) {
-        const data = location.state.results;
+      let data: SearchResultModel[] = [];
+
+      if (localResults) {
+        data = localResults;
         setFetchedResults(data);
-        setIsShowingRecommendations(false);
-        mapRef.current?.resetCenter();
-        mapRef.current?.updateMapMarkers(data);
-        return;
+      } else {
+        setLoading(true);
+        try {
+          data = (await performSearch(query, currentLang)) ?? [];
+        } catch (error) {
+          console.error("검색 실패:", error);
+          setFetchedResults([]);
+          mapRef.current?.clearMarkers();
+          return;
+        } finally {
+          setLoading(false);
+        }
       }
       // 직접 API 호출
-      setLoading(true);
-      try {
-        const data = await performSearch(query, currentLang);
-        setFetchedResults(data || []);
-        setIsShowingRecommendations(false);
-        mapRef.current?.resetCenter(); // 검색 후 지도 중심 재설정
-        mapRef.current?.updateMapMarkers(data || []);
-      } catch (err) {
-        console.error("검색 실패:", err);
-        setFetchedResults([]);
-        mapRef.current?.clearMarkers();
-      } finally {
-        setLoading(false);
-      }
+
+      setFetchedResults(data || []);
+      setIsShowingRecommendations(false);
+      mapRef.current?.resetCenter(); // 검색 후 지도 중심 재설정
+      mapRef.current?.updateMapMarkers(data || []);
     };
     fetchResults();
   }, [query, location.state, currentLang]);
+
+  // 페이지가 로드될 때, URL의 state에서 선택된 아이템이 있다면 해당 아이템을 클릭한 것처럼 처리
+  useEffect(() => {
+    if (selectedItemFromState && isMapReady) {
+      handleCardClick(selectedItemFromState);
+    }
+  }, [selectedItemFromState?.placeId, isMapReady]);
 
   //핀 클릭 핸들러
   const handlePinClick = async (item: SearchResultModel) => {
     try {
       mapRef.current?.centerMapOnLocation(item.latitude, item.longitude);
       const parsedResponse = await fetchPlaceDetail(item.placeId, currentLang);
-      setSelectedItem({detail: parsedResponse, summary: item});
-        if (parsedResponse.recommendations?.length) {
-          const newResults = reorderResults(
-            item,
-            parsedResponse.recommendations
-          );
-          setFetchedResults(newResults);
-          setIsShowingRecommendations(true);
-          mapRef.current?.updateMapMarkers(newResults);
+      setSelectedItem({ detail: parsedResponse, summary: item });
+      if (parsedResponse.recommendations?.length) {
+        const newResults = reorderResults(item, parsedResponse.recommendations);
+        setFetchedResults(newResults);
+        setIsShowingRecommendations(true);
+        mapRef.current?.updateMapMarkers(newResults);
       }
-
       setIsModalOpen(true);
     } catch (error) {
       console.error("장소 상세 정보 요청 실패:", error);
@@ -96,7 +112,7 @@ const SearchPage = () => {
   };
 
   //추천 장소 재정렬 함수
-  //선택된 장소를 첫번째로 하고, 추천 장소 중 선택된 장소와 중복되지 않는 장소들을 뒤에 이어붙임  
+  //선택된 장소를 첫번째로 하고, 추천 장소 중 선택된 장소와 중복되지 않는 장소들을 뒤에 이어붙임
   function reorderResults(
     selected: SearchResultModel,
     recommendations?: { place: SearchResultModel }[]
@@ -117,20 +133,13 @@ const SearchPage = () => {
         detail: parsedResponse,
         summary: item,
       });
-
-      if (
-        parsedResponse.recommendations &&
-        parsedResponse.recommendations.length > 0
-      ) {
-        const recommendationResults = parsedResponse.recommendations.map(
-          (rec) => rec.place
-        );
-
-        const filteredRecommendations = recommendationResults.filter(
-          (place) => place.placeId !== item.placeId
-        );
+      const recommendations =
+        parsedResponse.recommendations?.map((r) => r.place) || [];
+      const filteredRecommendations = recommendations.filter(
+        (place) => place.placeId !== item.placeId
+      );
+      if (filteredRecommendations.length > 0) {
         const newResults = [item, ...filteredRecommendations];
-
         setFetchedResults(newResults);
         setIsShowingRecommendations(true);
         mapRef.current?.updateMapMarkers(newResults);
@@ -202,6 +211,7 @@ const SearchPage = () => {
           ref={mapRef}
           results={fetchedResults}
           onPinClick={handlePinClick}
+          onMapReady={handleMapReady}
         />
       </div>
 
