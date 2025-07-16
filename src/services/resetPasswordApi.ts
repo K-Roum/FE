@@ -27,7 +27,7 @@ export async function resetPasswordRequest({
     try {
 
         // 비밀번호 재설정 요청 (단일 엔드포인트로 변경)
-        const response = await fetch(`${config.apiBaseUrl}users/reset-password`, {
+        const response = await fetch(`${config.apiBaseUrl}/users/reset-password`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
